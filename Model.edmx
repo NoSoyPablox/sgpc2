@@ -13,7 +13,177 @@
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
         <EntityContainer Name="ModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Customers" EntityType="Model.Customer" />
+          <EntitySet Name="Contacts" EntityType="Model.Contact" />
+          <EntitySet Name="WorkCenters" EntityType="Model.WorkCenter" />
+          <EntitySet Name="CreditRequests" EntityType="Model.CreditRequest" />
+          <AssociationSet Name="CustomerContact" Association="Model.CustomerContact">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Contact" EntitySet="Contacts" />
+          </AssociationSet>
+          <AssociationSet Name="CreditRequestCustomer" Association="Model.CreditRequestCustomer">
+            <End Role="CreditRequest" EntitySet="CreditRequests" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <EntitySet Name="BankAccounts" EntityType="Model.BankAccount" />
+          <EntitySet Name="Payments" EntityType="Model.Payment" />
+          <AssociationSet Name="BankAccountCustomer" Association="Model.BankAccountCustomer">
+            <End Role="BankAccount" EntitySet="BankAccounts" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="BankAccountCreditRequest" Association="Model.BankAccountCreditRequest">
+            <End Role="BankAccount" EntitySet="BankAccounts" />
+            <End Role="CreditRequest" EntitySet="CreditRequests" />
+          </AssociationSet>
+          <AssociationSet Name="PaymentCreditRequest" Association="Model.PaymentCreditRequest">
+            <End Role="Payment" EntitySet="Payments" />
+            <End Role="CreditRequest" EntitySet="CreditRequests" />
+          </AssociationSet>
+          <AssociationSet Name="WorkCenterCustomer" Association="Model.WorkCenterCustomer">
+            <End Role="WorkCenter" EntitySet="WorkCenters" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <EntitySet Name="CustomerContactInfoes" EntityType="Model.CustomerContactInfo" />
+          <AssociationSet Name="CustomerContactInfoCustomer" Association="Model.CustomerContactInfoCustomer">
+            <End Role="CustomerContactInfo" EntitySet="CustomerContactInfoes" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <EntitySet Name="CustomerAddresses" EntityType="Model.CustomerAddress" />
+          <AssociationSet Name="CustomerAddressCustomer" Association="Model.CustomerAddressCustomer">
+            <End Role="CustomerAddress" EntitySet="CustomerAddresses" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustormerId" />
+          </Key>
+          <Property Name="CustormerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="FirstSurname" Type="String" Nullable="false" />
+          <Property Name="SecondSurname" Type="String" Nullable="false" />
+          <Property Name="Curp" Type="String" Nullable="false" />
+          <Property Name="Rfc" Type="String" Nullable="false" />
+          <NavigationProperty Name="Contacts" Relationship="Model.CustomerContact" FromRole="Customer" ToRole="Contact" />
+          <NavigationProperty Name="CreditRequest" Relationship="Model.CreditRequestCustomer" FromRole="Customer" ToRole="CreditRequest" />
+          <NavigationProperty Name="BankAccount" Relationship="Model.BankAccountCustomer" FromRole="Customer" ToRole="BankAccount" />
+          <NavigationProperty Name="WorkCenter" Relationship="Model.WorkCenterCustomer" FromRole="Customer" ToRole="WorkCenter" />
+          <NavigationProperty Name="CustomerContactInfo" Relationship="Model.CustomerContactInfoCustomer" FromRole="Customer" ToRole="CustomerContactInfo" />
+          <NavigationProperty Name="CustomerAddress" Relationship="Model.CustomerAddressCustomer" FromRole="Customer" ToRole="CustomerAddress" />
+        </EntityType>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="ContactId" />
+          </Key>
+          <Property Name="ContactId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="FirstSurname" Type="String" Nullable="false" />
+          <Property Name="SecondSurname" Type="String" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Model.CustomerContact" FromRole="Contact" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="WorkCenter">
+          <Key>
+            <PropertyRef Name="WorkCenterId" />
+          </Key>
+          <Property Name="WorkCenterId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Customer" Relationship="Model.WorkCenterCustomer" FromRole="WorkCenter" ToRole="Customer" />
+          <Property Name="Address" Type="String" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CreditRequest">
+          <Key>
+            <PropertyRef Name="CreditRequestId" />
+          </Key>
+          <Property Name="CreditRequestId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FileNumber" Type="String" Nullable="false" />
+          <Property Name="Amount" Type="Double" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="TimePeriod" Type="String" Nullable="false" />
+          <Property Name="Purpose" Type="String" Nullable="false" />
+          <Property Name="InterestRate" Type="Decimal" Nullable="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Model.CreditRequestCustomer" FromRole="CreditRequest" ToRole="Customer" />
+          <NavigationProperty Name="BankAccounts" Relationship="Model.BankAccountCreditRequest" FromRole="CreditRequest" ToRole="BankAccount" />
+          <NavigationProperty Name="Payments" Relationship="Model.PaymentCreditRequest" FromRole="CreditRequest" ToRole="Payment" />
+        </EntityType>
+        <Association Name="CustomerContact">
+          <End Type="Model.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="Model.Contact" Role="Contact" Multiplicity="*" />
+        </Association>
+        <Association Name="CreditRequestCustomer">
+          <End Type="Model.CreditRequest" Role="CreditRequest" Multiplicity="1" />
+          <End Type="Model.Customer" Role="Customer" Multiplicity="*" />
+        </Association>
+        <EntityType Name="BankAccount">
+          <Key>
+            <PropertyRef Name="BankAccountId" />
+          </Key>
+          <Property Name="BankAccountId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InterbankCode" Type="String" Nullable="false" />
+          <Property Name="CardNumber" Type="Time" Nullable="false" />
+          <Property Name="AccountType" Type="String" Nullable="false" />
+          <Property Name="CardType" Type="String" Nullable="false" />
+          <Property Name="BankName" Type="String" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Model.BankAccountCustomer" FromRole="BankAccount" ToRole="Customer" />
+          <NavigationProperty Name="CreditRequests" Relationship="Model.BankAccountCreditRequest" FromRole="BankAccount" ToRole="CreditRequest" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="PaymentId" />
+          </Key>
+          <Property Name="PaymentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FileNumber" Type="String" Nullable="false" />
+          <Property Name="PaymentDate" Type="DateTime" Nullable="false" />
+          <Property Name="Amount" Type="String" Nullable="false" />
+          <NavigationProperty Name="CreditRequest" Relationship="Model.PaymentCreditRequest" FromRole="Payment" ToRole="CreditRequest" />
+        </EntityType>
+        <Association Name="BankAccountCustomer">
+          <End Type="Model.BankAccount" Role="BankAccount" Multiplicity="*" />
+          <End Type="Model.Customer" Role="Customer" Multiplicity="1" />
+        </Association>
+        <Association Name="BankAccountCreditRequest">
+          <End Type="Model.BankAccount" Role="BankAccount" Multiplicity="*" />
+          <End Type="Model.CreditRequest" Role="CreditRequest" Multiplicity="1" />
+        </Association>
+        <Association Name="PaymentCreditRequest">
+          <End Type="Model.Payment" Role="Payment" Multiplicity="*" />
+          <End Type="Model.CreditRequest" Role="CreditRequest" Multiplicity="1" />
+        </Association>
+        <Association Name="WorkCenterCustomer">
+          <End Type="Model.WorkCenter" Role="WorkCenter" Multiplicity="1" />
+          <End Type="Model.Customer" Role="Customer" Multiplicity="1" />
+        </Association>
+        <EntityType Name="CustomerContactInfo">
+          <Key>
+            <PropertyRef Name="CustomerContactInfoId" />
+          </Key>
+          <Property Name="CustomerContactInfoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="email" Type="String" Nullable="false" />
+          <Property Name="PhoneNumberOne" Type="String" Nullable="false" />
+          <Property Name="PhoneNumberTwo" Type="String" Nullable="false" />
+          <NavigationProperty Name="Customers" Relationship="Model.CustomerContactInfoCustomer" FromRole="CustomerContactInfo" ToRole="Customer" />
+        </EntityType>
+        <Association Name="CustomerContactInfoCustomer">
+          <End Type="Model.CustomerContactInfo" Role="CustomerContactInfo" Multiplicity="1" />
+          <End Type="Model.Customer" Role="Customer" Multiplicity="*" />
+        </Association>
+        <EntityType Name="CustomerAddress">
+          <Key>
+            <PropertyRef Name="CustomerAddressId" />
+          </Key>
+          <Property Name="CustomerAddressId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Street" Type="String" Nullable="false" />
+          <Property Name="ZipCode" Type="String" Nullable="false" />
+          <Property Name="ExternalNumber" Type="String" Nullable="false" />
+          <Property Name="InternalNumber" Type="String" Nullable="false" />
+          <NavigationProperty Name="Customers" Relationship="Model.CustomerAddressCustomer" FromRole="CustomerAddress" ToRole="Customer" />
+        </EntityType>
+        <Association Name="CustomerAddressCustomer">
+          <End Type="Model.CustomerAddress" Role="CustomerAddress" Multiplicity="1" />
+          <End Type="Model.Customer" Role="Customer" Multiplicity="1" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
