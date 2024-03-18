@@ -4,6 +4,96 @@
              xmlns:local="clr-namespace:SGSC"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+
+
+        <ControlTemplate TargetType="TextBox" x:Key="CustomTextBoxTemplate">
+            <Border Background="White" BorderBrush="#BFBFBF" BorderThickness="1.5" CornerRadius="5">
+                <ScrollViewer x:Name="PART_ContentHost"/>
+            </Border>
+        </ControlTemplate>
+
+        <!-- Estilo para aplicar la plantilla personalizada -->
+        <Style TargetType="TextBox" x:Key="CustomTextBoxStyle">
+            <Setter Property="Template" Value="{StaticResource CustomTextBoxTemplate}"/>
+        </Style>
+
+        <Style TargetType="Rectangle" x:Key="RoundedRectangleStyle">
+            <Setter Property="Fill" Value="#DAEFD0"/>
+            <!-- Establecer el color de fondo verde -->
+            <Setter Property="RadiusX" Value="28"/>
+            <!-- Radio horizontal de las esquinas -->
+            <Setter Property="RadiusY" Value="28"/>
+            <!-- Radio vertical de las esquinas -->
+        </Style>
+
+        <Style x:Key="RoundedTextBoxStyle" TargetType="{x:Type TextBox}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border Background="#BFBFBF" CornerRadius="5" BorderBrush="#BFBFBF" BorderThickness="2">
+                            <ScrollViewer x:Name="PART_ContentHost"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+
+        <FontFamily x:Key="FuentePoppins">/Typografic styles/Poppins-SemiBold.otf#Poppins SemiBold</FontFamily>
+        <FontFamily x:Key="FuenteNunito">/Typografic styles/Nunito-Regular.ttf#Nunito</FontFamily>
+        <FontFamily x:Key="FuenteNunitoBold">/Typografic styles/Nunito-Bold.ttf#Nunito</FontFamily>
+        <FontFamily x:Key="FuenteNunitoBoldItalic">/Typografic styles/Nunito-BoldItalic.ttf#Nunito</FontFamily>
+
+
+        <Style TargetType="Button" x:Key="ButtonStyleCancel">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="12">
+                            <Border.Effect>
+                                <DropShadowEffect ShadowDepth="2" Direction="320" Color="Black" Opacity="0.5"/>
+                            </Border.Effect>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <ContentPresenter.Resources>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="FontFamily" Value="{StaticResource FuenteNunitoBold}"/>
+                                    </Style>
+                                </ContentPresenter.Resources>
+                            </ContentPresenter>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+
+
+        <Style TargetType="Button" x:Key="ButtonStyleConfirm">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="#A3D68A" CornerRadius="12">
+                            <Border.Effect>
+                                <DropShadowEffect ShadowDepth="2" Direction="320" Color="Black" Opacity="0.5"/>
+                            </Border.Effect>
+                            <Grid>
+                                <!-- Colocamos el texto a la izquierda -->
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="{TemplateBinding Content}" FontFamily="{StaticResource FuenteNunitoBold}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,10,30,10"/>
+                                <!-- Colocamos la imagen a la derecha -->
+                                <Image Source="Images/Arrow-Icon.png" Width="20" Height="20" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="-15,0,15,0" Grid.Column="1"/>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Application.Resources>
 </Application>
