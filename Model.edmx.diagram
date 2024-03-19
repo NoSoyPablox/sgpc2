@@ -4,15 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="fd44c09dabb944088e7d00c2f8e88b9d" Name="Diagram1" ZoomLevel="77" >
+      <Diagram DiagramId="fd44c09dabb944088e7d00c2f8e88b9d" Name="Diagram1" ZoomLevel="105" >
         <EntityTypeShape EntityType="Model.Customer" Width="1.5" PointX="3.5" PointY="0.5" />
-        <EntityTypeShape EntityType="Model.Contact" Width="1.5" PointX="5.75" PointY="1.625" />
+        <EntityTypeShape EntityType="Model.Contact" Width="1.5" PointX="5.625" PointY="1.375" />
         <EntityTypeShape EntityType="Model.WorkCenter" Width="1.5" PointX="0.5" PointY="3.25" />
         <EntityTypeShape EntityType="Model.CreditRequest" Width="1.5" PointX="5.875" PointY="4.125" />
         <AssociationConnector Association="Model.CustomerContact" />
         <AssociationConnector Association="Model.CreditRequestCustomer" />
         <EntityTypeShape EntityType="Model.BankAccount" Width="1.5" PointX="3" PointY="4.625" />
-        <EntityTypeShape EntityType="Model.Payment" Width="1.5" PointX="9" PointY="3.625" />
+        <EntityTypeShape EntityType="Model.Payment" Width="1.5" PointX="8.625" PointY="3.375" />
         <AssociationConnector Association="Model.BankAccountCustomer" />
         <AssociationConnector Association="Model.BankAccountCreditRequest" />
         <AssociationConnector Association="Model.PaymentCreditRequest" />
@@ -21,6 +21,11 @@
         <AssociationConnector Association="Model.CustomerContactInfoCustomer" />
         <EntityTypeShape EntityType="Model.CustomerAddress" Width="1.5" PointX="7.875" PointY="0.5" />
         <AssociationConnector Association="Model.CustomerAddressCustomer" />
+        <EntityTypeShape EntityType="Model.Employee" Width="1.5" PointX="8.375" PointY="6.375" />
+        <EntityTypeShape EntityType="Model.CreditCondition" Width="1.5" PointX="11" PointY="4" />
+        <EntityTypeShape EntityType="Model.CreditPolicy" Width="1.5" PointX="11" PointY="6.375" />
+        <AssociationConnector Association="Model.CreditRequestEmployee" />
+        <AssociationConnector Association="Model.CreditConditionCreditRequest" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

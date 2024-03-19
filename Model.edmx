@@ -53,6 +53,17 @@
             <End Role="CustomerAddress" EntitySet="CustomerAddresses" />
             <End Role="Customer" EntitySet="Customers" />
           </AssociationSet>
+          <EntitySet Name="Employees" EntityType="Model.Employee" />
+          <EntitySet Name="CreditConditions" EntityType="Model.CreditCondition" />
+          <EntitySet Name="CreditPolicies" EntityType="Model.CreditPolicy" />
+          <AssociationSet Name="CreditRequestEmployee" Association="Model.CreditRequestEmployee">
+            <End Role="CreditRequest" EntitySet="CreditRequests" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="CreditConditionCreditRequest" Association="Model.CreditConditionCreditRequest">
+            <End Role="CreditCondition" EntitySet="CreditConditions" />
+            <End Role="CreditRequest" EntitySet="CreditRequests" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Customer">
           <Key>
@@ -100,13 +111,15 @@
           <Property Name="FileNumber" Type="String" Nullable="false" />
           <Property Name="Amount" Type="Double" Nullable="false" />
           <Property Name="Status" Type="Int32" Nullable="false" />
-          <Property Name="TimePeriod" Type="String" Nullable="false" />
+          <Property Name="TimePeriod" Type="DateTime" Nullable="false" />
           <Property Name="Purpose" Type="String" Nullable="false" />
           <Property Name="InterestRate" Type="Decimal" Nullable="false" />
           <Property Name="CreationDate" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="Customer" Relationship="Model.CreditRequestCustomer" FromRole="CreditRequest" ToRole="Customer" />
           <NavigationProperty Name="BankAccounts" Relationship="Model.BankAccountCreditRequest" FromRole="CreditRequest" ToRole="BankAccount" />
           <NavigationProperty Name="Payments" Relationship="Model.PaymentCreditRequest" FromRole="CreditRequest" ToRole="Payment" />
+          <NavigationProperty Name="Employees" Relationship="Model.CreditRequestEmployee" FromRole="CreditRequest" ToRole="Employee" />
+          <NavigationProperty Name="CreditCondition" Relationship="Model.CreditConditionCreditRequest" FromRole="CreditRequest" ToRole="CreditCondition" />
         </EntityType>
         <Association Name="CustomerContact">
           <End Type="Model.Customer" Role="Customer" Multiplicity="1" />
@@ -160,7 +173,7 @@
             <PropertyRef Name="CustomerContactInfoId" />
           </Key>
           <Property Name="CustomerContactInfoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="email" Type="String" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" />
           <Property Name="PhoneNumberOne" Type="String" Nullable="false" />
           <Property Name="PhoneNumberTwo" Type="String" Nullable="false" />
           <NavigationProperty Name="Customers" Relationship="Model.CustomerContactInfoCustomer" FromRole="CustomerContactInfo" ToRole="Customer" />
@@ -183,6 +196,45 @@
         <Association Name="CustomerAddressCustomer">
           <End Type="Model.CustomerAddress" Role="CustomerAddress" Multiplicity="1" />
           <End Type="Model.Customer" Role="Customer" Multiplicity="1" />
+        </Association>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstSurname" Type="String" Nullable="false" />
+          <Property Name="SecondSurname" Type="String" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="CreditRequest" Relationship="Model.CreditRequestEmployee" FromRole="Employee" ToRole="CreditRequest" />
+        </EntityType>
+        <EntityType Name="CreditCondition">
+          <Key>
+            <PropertyRef Name="CreditConditionId" />
+          </Key>
+          <Property Name="CreditConditionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Iva" Type="Decimal" Nullable="false" />
+          <Property Name="TimePeriod" Type="DateTime" Nullable="false" />
+          <Property Name="InterestRate" Type="Decimal" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CreditRequests" Relationship="Model.CreditConditionCreditRequest" FromRole="CreditCondition" ToRole="CreditRequest" />
+        </EntityType>
+        <EntityType Name="CreditPolicy">
+          <Key>
+            <PropertyRef Name="CreditPolicyId" />
+          </Key>
+          <Property Name="CreditPolicyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="EffectiveDate" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <Association Name="CreditRequestEmployee">
+          <End Type="Model.CreditRequest" Role="CreditRequest" Multiplicity="*" />
+          <End Type="Model.Employee" Role="Employee" Multiplicity="1" />
+        </Association>
+        <Association Name="CreditConditionCreditRequest">
+          <End Type="Model.CreditCondition" Role="CreditCondition" Multiplicity="*" />
+          <End Type="Model.CreditRequest" Role="CreditRequest" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
