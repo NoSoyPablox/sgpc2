@@ -10,9 +10,19 @@
       Title="LogIn">
 
     <Grid Margin="4,0,-4,0">
-        <TextBox Name="tbEmail" HorizontalAlignment="Left" Margin="664,177,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="431" Height="50"/>
-        <PasswordBox Name="tbPassword" HorizontalAlignment="Left" Margin="664,279,0,0" VerticalAlignment="Top" Width="431" Height="50"/>
-        <Button Name="btnLogIn" Content="Iniciar sesión" HorizontalAlignment="Left" Margin="989,396,0,0" VerticalAlignment="Top" Height="31" Width="106"/>
+        <Border BorderBrush="Black" BorderThickness="1" Margin="750,145,109,145">
+            <Grid>
+                <Label Content="Correo electrónico" HorizontalAlignment="Left" Margin="37,44,0,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold"/>
+                <TextBox x:Name="tbEmail" TextWrapping="Wrap" Height="50" Margin="37,82,37,296"/>
+                <TextBlock Name="tblEmailError" HorizontalAlignment="Center" Margin="0,133,0,0" VerticalAlignment="Top" TextAlignment="Right" Width="345" Height="22" Foreground="#FFCE0000" FontStyle="Italic"><Run Language="es-mx" Text="Esto es un mensaje de error."/></TextBlock>
+                <Label Content="Contraseña" HorizontalAlignment="Left" Margin="37,171,0,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold"/>
+                <PasswordBox x:Name="pbPassword" HorizontalAlignment="Center" VerticalAlignment="Top" Width="345" Height="50" Margin="0,205,0,0"/>
+                <TextBlock Name="tblPasswordError" HorizontalAlignment="Center" Margin="0,260,0,0" VerticalAlignment="Top" TextAlignment="Right" Width="345" Height="22" Foreground="#FFCE0000" FontStyle="Italic"><Run Language="es-mx" Text="Esto es un mensaje de error."/></TextBlock>
+                <Label Content="¿Olvidaste tu contraseña? Recupérala aquí" HorizontalAlignment="Center" Margin="0,300,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" Foreground="#FF0031A7" MouseLeftButtonUp="Label_MouseLeftButtonUp"/>
+                <Button x:Name="btnLogIn" Content="Iniciar sesión" HorizontalAlignment="Center" VerticalAlignment="Top" Height="32" Width="106" Margin="0,349,0,0" FontSize="16"/>
+            </Grid>
+        </Border>
+
 
     </Grid>
 </Page>

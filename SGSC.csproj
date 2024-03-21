@@ -99,7 +99,8 @@
     <Compile Include="Payment.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="TextValidator.cs" />
+    <Compile Include="Utils\Authenticator.cs" />
+    <Compile Include="Utils\TextValidator.cs" />
     <Compile Include="WorkCenter.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

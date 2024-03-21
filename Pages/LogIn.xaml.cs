@@ -27,7 +27,51 @@ namespace SGSC.Pages
 
 		private void btnLogIn_Click(object sender, RoutedEventArgs e)
 		{
-			
+            tblEmailError.Text = "";
+            tblPasswordError.Text = "";
+
+			bool valid = true;
+
+            if(tbEmail.Text.Equals(""))
+            {
+                tblEmailError.Text = "Please enter your email.";
+				valid = false;
+            }
+
+			if(pbPassword.Password.Equals(""))
+			{
+                tblPasswordError.Text = "Please enter your password.";
+				valid = false;
+            }
+
+			if(!valid)
+			{
+                return;
+            }
+
+			var email = tbEmail.Text;
+			var password = pbPassword.Password;
+
+			var res = Utils.Authenticator.AuthUser(email, password);
+			switch(res)
+			{
+				case Utils.Authenticator.AuthResult.Success:
+					MessageBox.Show("Log in successful.");
+					break;
+
+				case Utils.Authenticator.AuthResult.InvalidCredentials:
+					MessageBox.Show("Invalid credentials.");
+					break;
+
+				case Utils.Authenticator.AuthResult.DatabaseError:
+					MessageBox.Show("Database error.");
+					break;
+            }
 		}
-	}
+
+        private void Label_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+    }
 }
