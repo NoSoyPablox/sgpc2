@@ -24,5 +24,10 @@ namespace SGSC.Pages
 		{
 			InitializeComponent();
 		}
+
+		private void btnLogIn_Click(object sender, RoutedEventArgs e)
+		{
+			
+		}
 	}
 }
