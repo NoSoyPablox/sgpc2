@@ -49,7 +49,7 @@
         <TextBox Style="{StaticResource CustomTextBoxStyle}" Margin="314,287,301,172"/>
         <TextBox Style="{StaticResource CustomTextBoxStyle}" Margin="626,195,71,264"/>
         <Button Style="{StaticResource ButtonStyleCancel}" Content="Cancelar" FontSize="15" HorizontalAlignment="Left" Margin="613,426,0,0" VerticalAlignment="Top" Height="39" Width="130"/>
-        <Button Style="{StaticResource ButtonStyleConfirm}" Content="Continuar" FontSize="15" HorizontalAlignment="Left" Margin="780,426,0,0" VerticalAlignment="Top" Width="130" Height="38" Click="Button_Click_1"/>
+        <Button Style="{StaticResource ButtonStyleConfirm}" Content="Continuar" FontSize="15" HorizontalAlignment="Left" Margin="780,426,0,0" VerticalAlignment="Top" Width="130" Height="38"/>
 
 
     </Grid>

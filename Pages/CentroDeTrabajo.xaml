@@ -44,7 +44,7 @@
         <TextBox Style="{StaticResource CustomTextBoxStyle}" Margin="292,156,325,302"/>
         <Label Style="{StaticResource CustomLabelStyle}" FontSize="15" Content="Nombre del centro de trabajo" HorizontalAlignment="Left" Margin="292,135,0,0" VerticalAlignment="Top" x:Name="NombreLabel" Width="237" Height="21"/>
 
-        <TextBox Style="{StaticResource CustomTextBoxStyle}" Margin="675,156,64,302" TextChanged="TextBox_TextChanged"/>
+        <TextBox Style="{StaticResource CustomTextBoxStyle}" Margin="675,156,64,302"/>
         <Label Style="{StaticResource CustomLabelStyle}" FontSize="15" Content="Teléfono" HorizontalAlignment="Left" Margin="675,136,0,0" VerticalAlignment="Top"/>
         <Label FontFamily="{StaticResource FuenteNunitoBoldItalic}" FontSize="20" Content="Domicilio" HorizontalAlignment="Left" Margin="288,220,0,0" VerticalAlignment="Top" Height="33" Width="156"/>
         <TextBox Style="{StaticResource CustomTextBoxStyle}" Margin="292,279,474,179"/>
@@ -76,7 +76,7 @@
         </TextBox>
         <Label Style="{StaticResource CustomLabelStyle}" FontSize="15" Content="CP" HorizontalAlignment="Left" Margin="590,333,0,0" VerticalAlignment="Top" Height="30" RenderTransformOrigin="0.496,0.2"/>
         <Button Style="{StaticResource ButtonStyleCancel}" Content="Cancelar" FontSize="15" HorizontalAlignment="Left" Margin="613,426,0,0" VerticalAlignment="Top" Height="39" Width="130"/>
-        <Button Style="{StaticResource ButtonStyleConfirm}" Content="Continuar" FontSize="15" HorizontalAlignment="Left" Margin="756,426,0,0" VerticalAlignment="Top" Width="130" Height="38" Click="Button_Click_1"/>
+        <Button Style="{StaticResource ButtonStyleConfirm}" Content="Continuar" FontSize="15" HorizontalAlignment="Left" Margin="756,426,0,0" VerticalAlignment="Top" Width="130" Height="38"/>
 
     </Grid>
 </Page>
