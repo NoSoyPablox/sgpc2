@@ -16,7 +16,7 @@ namespace SGSC.Utils
             DatabaseError
         }
 
-        private static string HashPassword(string password)
+        public static string HashPassword(string password)
         {
             SHA256 sha256 = SHA256.Create();
             byte[] passwordBytes = Encoding.UTF8.GetBytes(password);
@@ -33,7 +33,7 @@ namespace SGSC.Utils
         public static AuthResult AuthUser(string email, string password)
         {
             ModelContainer context = new ModelContainer();
-            var user = context.Customers.Where(c => c.Email == email).FirstOrDefault();
+            var user = context.Employees.Where(c => c.Email == email).FirstOrDefault();
             if (user == null)
             {
                 return AuthResult.InvalidCredentials;

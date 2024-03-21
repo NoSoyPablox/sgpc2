@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 03/19/2024 18:23:20
+-- Date Created: 03/21/2024 16:39:49
 -- Generated from EDMX file: C:\Users\aiwass\source\repos\SGSC\Model.edmx
 -- --------------------------------------------------
 
@@ -17,11 +17,80 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[FK_CustomerContact]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Contacts] DROP CONSTRAINT [FK_CustomerContact];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CreditRequestCustomer]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Customers] DROP CONSTRAINT [FK_CreditRequestCustomer];
+GO
+IF OBJECT_ID(N'[dbo].[FK_BankAccountCustomer]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[BankAccounts] DROP CONSTRAINT [FK_BankAccountCustomer];
+GO
+IF OBJECT_ID(N'[dbo].[FK_BankAccountCreditRequest]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[BankAccounts] DROP CONSTRAINT [FK_BankAccountCreditRequest];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PaymentCreditRequest]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Payments] DROP CONSTRAINT [FK_PaymentCreditRequest];
+GO
+IF OBJECT_ID(N'[dbo].[FK_WorkCenterCustomer]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[WorkCenters] DROP CONSTRAINT [FK_WorkCenterCustomer];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CustomerContactInfoCustomer]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Customers] DROP CONSTRAINT [FK_CustomerContactInfoCustomer];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CustomerAddressCustomer]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CustomerAddresses] DROP CONSTRAINT [FK_CustomerAddressCustomer];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CreditRequestEmployee]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CreditRequests] DROP CONSTRAINT [FK_CreditRequestEmployee];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CreditConditionCreditRequest_CreditCondition]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CreditConditionCreditRequest] DROP CONSTRAINT [FK_CreditConditionCreditRequest_CreditCondition];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CreditConditionCreditRequest_CreditRequest]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CreditConditionCreditRequest] DROP CONSTRAINT [FK_CreditConditionCreditRequest_CreditRequest];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[Customers]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Customers];
+GO
+IF OBJECT_ID(N'[dbo].[Contacts]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Contacts];
+GO
+IF OBJECT_ID(N'[dbo].[WorkCenters]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[WorkCenters];
+GO
+IF OBJECT_ID(N'[dbo].[CreditRequests]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CreditRequests];
+GO
+IF OBJECT_ID(N'[dbo].[BankAccounts]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[BankAccounts];
+GO
+IF OBJECT_ID(N'[dbo].[Payments]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Payments];
+GO
+IF OBJECT_ID(N'[dbo].[CustomerContactInfoes]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CustomerContactInfoes];
+GO
+IF OBJECT_ID(N'[dbo].[CustomerAddresses]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CustomerAddresses];
+GO
+IF OBJECT_ID(N'[dbo].[Employees]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Employees];
+GO
+IF OBJECT_ID(N'[dbo].[CreditConditions]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CreditConditions];
+GO
+IF OBJECT_ID(N'[dbo].[CreditPolicies]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CreditPolicies];
+GO
+IF OBJECT_ID(N'[dbo].[CreditConditionCreditRequest]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CreditConditionCreditRequest];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -124,7 +193,8 @@ CREATE TABLE [dbo].[Employees] (
     [FirstSurname] nvarchar(max)  NOT NULL,
     [SecondSurname] nvarchar(max)  NOT NULL,
     [Email] nvarchar(max)  NOT NULL,
-    [Name] nvarchar(max)  NOT NULL
+    [Name] nvarchar(max)  NOT NULL,
+    [Password] nvarchar(max)  NOT NULL
 );
 GO
 
