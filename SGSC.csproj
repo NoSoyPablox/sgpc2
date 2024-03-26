@@ -116,6 +116,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\CentroDeTrabajo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\DatosDeContacto.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\LogIn.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -131,6 +139,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\CentroDeTrabajo.xaml.cs">
+      <DependentUpon>CentroDeTrabajo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\DatosDeContacto.xaml.cs">
+      <DependentUpon>DatosDeContacto.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\LogIn.xaml.cs">
       <DependentUpon>LogIn.xaml</DependentUpon>
@@ -164,6 +178,10 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Resource Include="Typographic styles\Poppins-SemiBold.otf" />
+    <Resource Include="Typographic styles\Nunito-Regular.ttf" />
+    <Resource Include="Typographic styles\Nunito-BoldItalic.ttf" />
+    <Resource Include="Typographic styles\Nunito-Bold.ttf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -183,6 +201,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Arrow-Icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
