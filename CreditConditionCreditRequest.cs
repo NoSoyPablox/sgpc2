@@ -12,14 +12,10 @@ namespace SGSC
     using System;
     using System.Collections.Generic;
     
-    public partial class CustomerContactInfo
+    public partial class CreditConditionCreditRequest
     {
-        public int CustomerContactInfoId { get; set; }
-        public string Email { get; set; }
-        public string PhoneNumberOne { get; set; }
-        public string PhoneNumberTwo { get; set; }
-        public Nullable<int> CustomerId { get; set; }
-    
-        public virtual Customer Customer { get; set; }
+        public int CreditConditionIdRequest { get; set; }
+        public Nullable<int> CreditCondition_CreditConditionId { get; set; }
+        public Nullable<int> CreditRequests_CreditRequestId { get; set; }
     }
 }

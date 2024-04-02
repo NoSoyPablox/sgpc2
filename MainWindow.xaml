@@ -6,11 +6,11 @@
         xmlns:local="clr-namespace:SGSC"
         xmlns:pages="clr-namespace:SGSC.Pages"
         mc:Ignorable="d"
-        Title="MainWindow" Height="720" Width="1280">
+        Title="MainWindow" Height="490" Width="950">
     <Grid>
         <Frame NavigationUIVisibility="Hidden">
             <Frame.Content>
-                <pages:LogIn/>
+                <pages:HomePageCreditAdvisor/>
             </Frame.Content>
         </Frame>
 

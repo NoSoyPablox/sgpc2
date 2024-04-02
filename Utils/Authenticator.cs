@@ -32,7 +32,7 @@ namespace SGSC.Utils
 
         public static AuthResult AuthUser(string email, string password)
         {
-            ModelContainer context = new ModelContainer();
+            sgscEntities context = new sgscEntities();
             var user = context.Employees.Where(c => c.Email == email).FirstOrDefault();
             if (user == null)
             {
