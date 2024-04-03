@@ -19,7 +19,8 @@ namespace SGSC
         public string ZipCode { get; set; }
         public string ExternalNumber { get; set; }
         public string InternalNumber { get; set; }
+        public Nullable<int> CustormerId { get; set; }
     
-        public virtual Customer Customers { get; set; }
+        public virtual Customer Customer { get; set; }
     }
 }

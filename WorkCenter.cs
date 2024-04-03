@@ -15,9 +15,14 @@ namespace SGSC
     public partial class WorkCenter
     {
         public int WorkCenterId { get; set; }
-        public string Address { get; set; }
-        public string Name { get; set; }
+        public string CenterName { get; set; }
+        public string Street { get; set; }
+        public string Colony { get; set; }
+        public Nullable<int> InnerNumber { get; set; }
+        public Nullable<int> OutsideNumber { get; set; }
+        public Nullable<int> ZipCode { get; set; }
         public string PhoneNumber { get; set; }
+        public Nullable<int> CustormerId { get; set; }
     
         public virtual Customer Customer { get; set; }
     }

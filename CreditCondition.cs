@@ -17,16 +17,13 @@ namespace SGSC
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CreditCondition()
         {
-            this.CreditRequests = new HashSet<CreditRequest>();
+            this.CreditConditionCreditRequests = new HashSet<CreditConditionCreditRequest>();
         }
     
         public int CreditConditionId { get; set; }
-        public decimal Iva { get; set; }
-        public System.DateTime TimePeriod { get; set; }
-        public decimal InterestRate { get; set; }
-        public bool Active { get; set; }
+        public string Description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CreditRequest> CreditRequests { get; set; }
+        public virtual ICollection<CreditConditionCreditRequest> CreditConditionCreditRequests { get; set; }
     }
 }

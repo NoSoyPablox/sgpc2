@@ -37,28 +37,27 @@
                 <Frame Content="Frame" />
 
                 <Grid Background="LightGray" Margin="0,0,707,0">
-                    <!-- No es necesario especificar un margen aquí -->
                 </Grid>
 
                 <Button x:Name="btnCancel" Style="{StaticResource ButtonStyleCancel}" Content="Cancelar" FontSize="15" HorizontalAlignment="Left" Margin="613,426,0,0" VerticalAlignment="Top" Height="39" Width="130"/>
-                <Button x:Name="btnContinue" Style="{StaticResource ButtonStyleConfirm}" Content="Continuar" FontSize="15" HorizontalAlignment="Left" Margin="756,426,0,0" VerticalAlignment="Top" Width="130" Height="38"/>
+                <Button x:Name="btnContinue" Style="{StaticResource ButtonStyleConfirm}" Content="Continuar" FontSize="15" HorizontalAlignment="Left" Margin="756,426,0,0" VerticalAlignment="Top" Width="130" Height="38" Click="btnContinue_Click"/>
                 <Label FontFamily="{StaticResource FuenteNunitoBoldItalic}" FontSize="22" Content="Referencias" HorizontalAlignment="Left" Margin="300,79,0,0" VerticalAlignment="Top" Width="290" Height="37" FontWeight="Bold"/>
                 <Rectangle Style="{StaticResource RoundedRectangleStyle}" Margin="270,109,29,243"/>
-                <TextBox x:Name="tbName" Style="{StaticResource CustomTextBoxStyle}" Margin="300,141,378,317"/>
+                <TextBox x:Name="tbName" Style="{StaticResource CustomTextBoxStyle}" Margin="300,141,378,317" PreviewTextInput="tbName_PreviewTextInput"/>
                 <Label Style="{StaticResource CustomLabelStyle}" FontSize="15" Content="Nombre (s)" HorizontalAlignment="Left" Margin="300,120,0,0" VerticalAlignment="Top" x:Name="NombreLabel_Copiar1" Width="237" Height="21"/>
-                <TextBox x:Name="firstSurname_Copiar" Style="{StaticResource CustomTextBoxStyle}" Margin="622,144,56,318"/>
+                <TextBox x:Name="tbFirstSurname" Style="{StaticResource CustomTextBoxStyle}" Margin="622,144,56,318"/>
                 <Label Style="{StaticResource CustomLabelStyle}" FontSize="15" Content="Apellido paterno" HorizontalAlignment="Left" Margin="624,123,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name ="secondSurname_Copiar" Style="{StaticResource CustomTextBoxStyle}" Margin="300,205,378,253"/>
+                <TextBox x:Name ="tbSecondSurname" Style="{StaticResource CustomTextBoxStyle}" Margin="300,205,378,253"/>
                 <Label Style="{StaticResource CustomLabelStyle}" FontSize="15" Content="Apellido materno" HorizontalAlignment="Left" Margin="300,184,0,0" VerticalAlignment="Top" Height="34"/>
-                <TextBox x:Name="phoneNumber" Style="{StaticResource CustomTextBoxStyle}" Margin="622,205,56,253" RenderTransformOrigin="0.533,0.406"/>
+                <TextBox x:Name="tbPhoneNumber" Style="{StaticResource CustomTextBoxStyle}" Margin="622,205,56,253" RenderTransformOrigin="0.533,0.406"/>
                 <Label Style="{StaticResource CustomLabelStyle}" FontSize="15" Content="Telefono" HorizontalAlignment="Left" Margin="624,184,0,0" VerticalAlignment="Top" Height="28" RenderTransformOrigin="0.498,0.593"/>
                 <TextBox x:Name="tbName1" Style="{StaticResource CustomTextBoxStyle}" Margin="300,290,378,168"/>
                 <Label Style="{StaticResource CustomLabelStyle}" FontSize="15" Content="Nombre (s)" HorizontalAlignment="Left" Margin="300,269,0,0" VerticalAlignment="Top" Width="237" Height="21"/>
-                <TextBox x:Name="firstSurname2" Style="{StaticResource CustomTextBoxStyle}" Margin="622,293,56,169"/>
+                <TextBox x:Name="tbFirstSurname2" Style="{StaticResource CustomTextBoxStyle}" Margin="622,293,56,169"/>
                 <Label Style="{StaticResource CustomLabelStyle}" FontSize="15" Content="Apellido paterno" HorizontalAlignment="Left" Margin="624,272,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name ="secondSurname2" Style="{StaticResource CustomTextBoxStyle}" Margin="300,354,378,104"/>
+                <TextBox x:Name ="tbSecondSurname2" Style="{StaticResource CustomTextBoxStyle}" Margin="300,354,378,104"/>
                 <Label Style="{StaticResource CustomLabelStyle}" FontSize="15" Content="Apellido materno" HorizontalAlignment="Left" Margin="300,333,0,0" VerticalAlignment="Top" Height="34"/>
-                <TextBox x:Name="phoneNumber2" Style="{StaticResource CustomTextBoxStyle}" Margin="622,354,56,104" RenderTransformOrigin="0.533,0.406"/>
+                <TextBox x:Name="tbPhoneNumber2" Style="{StaticResource CustomTextBoxStyle}" Margin="622,354,56,104" RenderTransformOrigin="0.533,0.406"/>
                 <Label Style="{StaticResource CustomLabelStyle}" FontSize="15" Content="Telefono" HorizontalAlignment="Left" Margin="624,333,0,0" VerticalAlignment="Top" Height="28" RenderTransformOrigin="0.498,0.593"/>
 
             </Grid>

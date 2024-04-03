@@ -17,8 +17,10 @@ namespace SGSC
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Customer()
         {
+            this.BankAccounts = new HashSet<BankAccount>();
             this.Contacts = new HashSet<Contact>();
-            this.BankAccount = new HashSet<BankAccount>();
+            this.CustomerAddresses = new HashSet<CustomerAddress>();
+            this.WorkCenters = new HashSet<WorkCenter>();
         }
     
         public int CustormerId { get; set; }
@@ -27,14 +29,18 @@ namespace SGSC
         public string SecondSurname { get; set; }
         public string Curp { get; set; }
         public string Rfc { get; set; }
+        public Nullable<int> CreditRequestId { get; set; }
+        public Nullable<int> CustomerContactInfoId { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BankAccount> BankAccounts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Contact> Contacts { get; set; }
         public virtual CreditRequest CreditRequest { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BankAccount> BankAccount { get; set; }
-        public virtual WorkCenter WorkCenter { get; set; }
+        public virtual ICollection<CustomerAddress> CustomerAddresses { get; set; }
         public virtual CustomerContactInfo CustomerContactInfo { get; set; }
-        public virtual CustomerAddress CustomerAddress { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WorkCenter> WorkCenters { get; set; }
     }
 }

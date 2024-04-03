@@ -17,29 +17,30 @@ namespace SGSC
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CreditRequest()
         {
-            this.Customer = new HashSet<Customer>();
             this.BankAccounts = new HashSet<BankAccount>();
+            this.CreditConditionCreditRequests = new HashSet<CreditConditionCreditRequest>();
+            this.Customers = new HashSet<Customer>();
             this.Payments = new HashSet<Payment>();
-            this.CreditCondition = new HashSet<CreditCondition>();
         }
     
         public int CreditRequestId { get; set; }
         public string FileNumber { get; set; }
-        public double Amount { get; set; }
-        public int Status { get; set; }
-        public System.DateTime TimePeriod { get; set; }
+        public Nullable<double> Amount { get; set; }
+        public Nullable<int> Status { get; set; }
+        public Nullable<System.DateTime> TimePeriod { get; set; }
         public string Purpose { get; set; }
-        public decimal InterestRate { get; set; }
-        public System.DateTime CreationDate { get; set; }
+        public Nullable<decimal> InterestRate { get; set; }
+        public Nullable<System.DateTime> CreationDate { get; set; }
+        public Nullable<int> EmployeeId { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Customer> Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BankAccount> BankAccounts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Payment> Payments { get; set; }
-        public virtual Employee Employees { get; set; }
+        public virtual ICollection<CreditConditionCreditRequest> CreditConditionCreditRequests { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CreditCondition> CreditCondition { get; set; }
+        public virtual ICollection<Customer> Customers { get; set; }
+        public virtual Employee Employee { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Payment> Payments { get; set; }
     }
 }

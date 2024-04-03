@@ -12,14 +12,13 @@ namespace SGSC
     using System;
     using System.Collections.Generic;
     
-    public partial class Payment
+    public partial class CreditConditionCreditRequest
     {
-        public int PaymentId { get; set; }
-        public string FileNumber { get; set; }
-        public Nullable<System.DateTime> PaymentDate { get; set; }
-        public string Amount { get; set; }
-        public Nullable<int> CreditRequestId { get; set; }
+        public int CreditConditionIdRequest { get; set; }
+        public Nullable<int> CreditCondition_CreditConditionId { get; set; }
+        public Nullable<int> CreditRequests_CreditRequestId { get; set; }
     
+        public virtual CreditCondition CreditCondition { get; set; }
         public virtual CreditRequest CreditRequest { get; set; }
     }
 }

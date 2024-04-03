@@ -19,6 +19,7 @@ namespace SGSC
         public string FirstSurname { get; set; }
         public string SecondSurname { get; set; }
         public string PhoneNumber { get; set; }
+        public Nullable<int> CustormerId { get; set; }
     
         public virtual Customer Customer { get; set; }
     }

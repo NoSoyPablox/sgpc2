@@ -32,6 +32,8 @@ namespace SGSC.Pages
 
         private void btnContinue_Click(object sender, RoutedEventArgs e)
         {
+            List<string> names = new List<string> {tbName.Text, tbFirstSurname.Text, tbSecondSurname.Text };
+
             if (string.IsNullOrEmpty(tbCURP.Text) || string.IsNullOrEmpty(tbName.Text) || string.IsNullOrEmpty(tbFirstSurname.Text))
             {
                 MessageBox.Show("Los campos no pueden estar vacios", "Campos incompletos", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -40,21 +42,20 @@ namespace SGSC.Pages
             else
             {
 
-                if (Validator.ValidateCURP(tbCURP.Text) && Validator.ValidateNames(tbName.Text) && Validator.ValidateNames(tbFirstSurname.Text))
+                if (Validator.ValidateCURP(tbCURP.Text) && Validator.ValidateMultipleNames(names))
                 {
-                    /*using (ModelContainer db = new ModelContainer())
+                    using (sgscEntities db = new sgscEntities())
                     {
                         Customer customerToRegister = new Customer();
-                        customerToRegister.Curp = "CUMP01050123";
-                        customerToRegister.Name = "Juan";
-                        customerToRegister.FirstSurname = "Mesa";
-                        customerToRegister.SecondSurname = "Murrieta";
+                        customerToRegister.Curp = tbCURP.Text;
+                        customerToRegister.Name = tbName.Text;
+                        customerToRegister.FirstSurname = tbFirstSurname.Text;
+                        customerToRegister.SecondSurname = tbSecondSurname.Text;
 
                         db.Customers.Add(customerToRegister);
 
                         try
                         {
-                            // Guardamos los cambios en la base de datos
                             db.SaveChanges();
                             Console.WriteLine("Cliente registrado exitosamente.");
                         }
@@ -62,25 +63,7 @@ namespace SGSC.Pages
                         {
                             Console.WriteLine("Ocurrió un error al intentar registrar el cliente: " + ex.Message);
                         }
-                    }*/
-
-                    using (ModelContainer db = new ModelContainer())
-                    {
-                        WorkCenter workCenter = new WorkCenter();
-                        workCenter.Name = "Centro de trabajo 1";
-                        workCenter.Address = "Calle 1";
-                        workCenter.PhoneNumber = "1234567890";
-
-                        db.WorkCenters.Add(workCenter);
-                        try
-                        {
-                            db.SaveChanges();
-                        }catch (Exception ex)
-                        {
-                            Console.WriteLine("Ocurrió un error al intentar registrar el centro de trabajo: " + ex.Message);
-                        }
-
-                    };
+                    }
 
                     MessageBox.Show("Datos guardados correctamente", "Operación realizada con exito", MessageBoxButton.OK, MessageBoxImage.Information);
 

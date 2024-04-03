@@ -16,12 +16,14 @@ namespace SGSC
     {
         public int BankAccountId { get; set; }
         public string InterbankCode { get; set; }
-        public System.TimeSpan CardNumber { get; set; }
+        public string CardNumber { get; set; }
         public string AccountType { get; set; }
         public string CardType { get; set; }
         public string BankName { get; set; }
+        public Nullable<int> Customer_CustormerId { get; set; }
+        public Nullable<int> CreditRequestId { get; set; }
     
+        public virtual CreditRequest CreditRequest { get; set; }
         public virtual Customer Customer { get; set; }
-        public virtual CreditRequest CreditRequests { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace SGSC
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Employee()
         {
-            this.CreditRequest = new HashSet<CreditRequest>();
+            this.CreditRequests = new HashSet<CreditRequest>();
         }
     
         public int EmployeeId { get; set; }
@@ -25,8 +25,9 @@ namespace SGSC
         public string SecondSurname { get; set; }
         public string Email { get; set; }
         public string Name { get; set; }
+        public string Password { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CreditRequest> CreditRequest { get; set; }
+        public virtual ICollection<CreditRequest> CreditRequests { get; set; }
     }
 }

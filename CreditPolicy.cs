@@ -16,7 +16,7 @@ namespace SGSC
     {
         public int CreditPolicyId { get; set; }
         public string Name { get; set; }
-        public bool Active { get; set; }
-        public System.DateTime EffectiveDate { get; set; }
+        public Nullable<bool> Active { get; set; }
+        public Nullable<System.DateTime> EffectiveDate { get; set; }
     }
 }

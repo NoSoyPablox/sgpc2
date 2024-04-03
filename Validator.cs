@@ -19,6 +19,11 @@ namespace SGSC
         {
             return !Regex.IsMatch(text, @"[^a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\s]+$");
         }
+
+        public static bool ValidateMultipleNames(List<string> text)
+        {
+            return text.TrueForAll(ValidateNames);
+        }
     }
 
 }
