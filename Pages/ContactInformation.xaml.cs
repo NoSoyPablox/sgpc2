@@ -3,6 +3,11 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Linq;
 using System.Data.Entity.Validation;
+using System.Collections.Generic;
+using System.IO;
+using System.Reflection.Emit;
+using System.Security.Policy;
+using System.Windows.Media;
 
 
 
@@ -10,8 +15,6 @@ namespace SGSC.Pages
 {
     public partial class ContactInformation : Page
     {
-        
-
         private sgscEntities dbContext;
 
         String PhoneOne = "";
@@ -20,6 +23,8 @@ namespace SGSC.Pages
         int CustomerId;
         SGSC.CustomerContactInfo userContactInformation = null;
         bool isEditable = false;
+
+        Dictionary<TextBox, Label> textBoxLabelMap;
 
         public ContactInformation(bool isEditable, int CustomerId)
         {
@@ -30,46 +35,70 @@ namespace SGSC.Pages
 
             this.CustomerId = CustomerId;
             this.isEditable = isEditable;
-            userContactInformation = dbContext.CustomerContactInfoes.FirstOrDefault(c => c.CustomerContactInfoId == 1);
+            
             if (isEditable)
             {
-                ShowInformationContact(userContactInformation);
+                try
+                {
+                    userContactInformation = dbContext.CustomerContactInfoes.FirstOrDefault(c => c.CustomerContactInfoId == 2);
+                    ShowInformationContact(userContactInformation);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error al intentar recuperar la información de la base de datos: {ex.Message}");
+                }
             }
+            textBoxLabelMap = new Dictionary<TextBox, Label>
+        {
+            {txtPhoneOne, lbPhoneOneIsEmpty},
+            {txtPhoneTwo, lbPhoneTwoIsEmpty},
+            {txtEmail, lbEmailIsEmpty},
+        };
         }
 
         private void BtnClicContinue(object sender, RoutedEventArgs e)
         {
-            if (isEditable)
+            if (ValidateFields())
             {
-                userContactInformation.PhoneNumberOne = txtPhoneOne.Text;
-                userContactInformation.PhoneNumberTwo = txtPhoneTwo.Text;
-                userContactInformation.Email = txtEmail.Text;
-            }
-            else
-            {
-                // Poner código de cuando no es editable
-            }
-                
-
-            try
-            {
-                dbContext.SaveChanges();
-                MessageBox.Show("Información actualizada correctamente.");
-            }
-            catch (DbEntityValidationException ex)
-            {
-                // Itera sobre cada error de validación
-                foreach (var validationErrors in ex.EntityValidationErrors)
+                try
                 {
-                    // Itera sobre cada error de validación para esta entidad
-                    foreach (var validationError in validationErrors.ValidationErrors)
+                    if (isEditable)
                     {
-                        // Accede a los detalles del error de validación
-                        Console.WriteLine($"Propiedad: {validationError.PropertyName}");
-                        Console.WriteLine($"Error: {validationError.ErrorMessage}");
+                        userContactInformation.PhoneNumberOne = txtPhoneOne.Text;
+                        userContactInformation.PhoneNumberTwo = txtPhoneTwo.Text;
+                        userContactInformation.Email = txtEmail.Text;
+                    }
+                    else
+                    {
+                        // Cuando es nuevo
+                    }
+
+                    dbContext.SaveChanges();
+
+                    MessageBox.Show("Operación realizada correctamente.");
+
+                    // Ocultar los labels de campos vacíos
+                    foreach (var pair in textBoxLabelMap)
+                    {
+                        pair.Value.Visibility = Visibility.Hidden;
+                    }
+                }
+                catch (DbEntityValidationException ex)
+                {
+                    // Itera sobre cada error de validación
+                    foreach (var validationErrors in ex.EntityValidationErrors)
+                    {
+                        // Itera sobre cada error de validación para esta entidad
+                        foreach (var validationError in validationErrors.ValidationErrors)
+                        {
+                            // Accede a los detalles del error de validación
+                            Console.WriteLine($"Propiedad: {validationError.PropertyName}");
+                            Console.WriteLine($"Error: {validationError.ErrorMessage}");
+                        }
                     }
                 }
             }
+
         }
 
         public void ShowInformationContact(SGSC.CustomerContactInfo userContactInformation)
@@ -91,6 +120,44 @@ namespace SGSC.Pages
             else
             {
                 MessageBox.Show("No se encontró información para el usuario con Id = 1.");
+            }
+        }
+
+        public bool ValidateFields()
+        {
+            bool IsValidate = true;
+
+            if (string.IsNullOrWhiteSpace(txtPhoneOne.Text)
+                || string.IsNullOrWhiteSpace(txtPhoneTwo.Text)
+                || string.IsNullOrWhiteSpace(txtEmail.Text)
+            {
+                IsValidate = false;
+
+
+                foreach (var pair in textBoxLabelMap)
+                {
+                    CheckAndSetLabelVisibility(pair.Value, pair.Key);
+                }
+
+            }
+            else
+            {
+                IsValidate = true;
+            }
+            return IsValidate;
+        }
+
+        private void CheckAndSetLabelVisibility(Label label, TextBox textBox)
+        {
+            if (string.IsNullOrWhiteSpace(textBox.Text))
+            {
+                label.Visibility = Visibility.Visible;
+                textBox.BorderBrush = Brushes.Red;
+            }
+            else
+            {
+                textBox.ClearValue(Border.BorderBrushProperty);
+                label.Visibility = Visibility.Hidden;
             }
         }
     }

@@ -65,6 +65,10 @@
         <TextBox x:Name="txtPhoneTwo" Style="{StaticResource CustomTextBoxStyle}" Margin="626,195,71,264"/>
         <Button Style="{StaticResource ButtonStyleCancel}" Content="Cancelar" FontSize="15" HorizontalAlignment="Left" Margin="613,426,0,0" VerticalAlignment="Top" Height="39" Width="130"/>
         <Button Style="{StaticResource ButtonStyleConfirm}" Content="Continuar" FontSize="15" HorizontalAlignment="Left" Margin="756,426,0,0" VerticalAlignment="Top" Width="130" Height="38" Click="BtnClicContinue"/>
+        <Label x:Name="lbPhoneOneIsEmpty" Content="Campo vacío" Foreground="Red" Visibility="Hidden" HorizontalAlignment="Left" Margin="314,223,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.395,0.398"/>
+        <Label x:Name="lbPhoneTwoIsEmpty"  Content="Campo vacío" Foreground="Red" Visibility="Hidden" HorizontalAlignment="Left" Margin="629,223,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.395,0.398"/>
+        <Label x:Name="lbEmailIsEmpty" Content="Campo vacío" Foreground="Red" Visibility="Hidden"  HorizontalAlignment="Left" Margin="314,315,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.395,0.398"/>
+        <Label  Content="*Campos obligatorios" Foreground="Red" FontFamily="{StaticResource FontNunito}" FontStyle="Italic" HorizontalAlignment="Left" Margin="292,355,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.395,0.398"/>
 
 
     </Grid>

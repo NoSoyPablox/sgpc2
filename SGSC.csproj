@@ -139,7 +139,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\WorkCenter.xaml">
+    <Page Include="Pages\PageWorkCenter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -153,8 +153,8 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Pages\WorkCenter.xaml.cs">
-      <DependentUpon>WorkCenter.xaml</DependentUpon>
+    <Compile Include="Pages\PageWorkCenter.xaml.cs">
+      <DependentUpon>PageWorkCenter.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ContactInformation.xaml.cs">
       <DependentUpon>ContactInformation.xaml</DependentUpon>
