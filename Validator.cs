@@ -11,8 +11,15 @@ namespace SGSC
     {
         public static bool ValidateCURP(string curp)
         {
-            Regex regex = new Regex(@"^[A-Z]{4}[0-9]{6}[HM][A-Z]{2}[A-Z]{3}[0-9]{2}$");
-            return regex.IsMatch(curp);
+            if(string.IsNullOrEmpty(curp) || curp.Length != 18)
+            {
+                return false;
+            }
+            else
+            {
+                Regex regex = new Regex(@"^[A-Z]{4}[0-9]{6}[HM][A-Z]{2}[A-Z]{3}[0-9]{2}$");
+                return regex.IsMatch(curp);
+            }
         }
 
         public static bool ValidateNames(string text)

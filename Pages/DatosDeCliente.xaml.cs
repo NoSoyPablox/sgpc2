@@ -24,65 +24,73 @@ namespace SGSC.Pages
     /// </summary>
     public partial class DatosDeCliente : Page
     {
-        public DatosDeCliente()
+        bool isEditable = true;
+        int idCustomer = 1;
+        public DatosDeCliente(/*bool isEditable, int idCliente*/)
         {
             InitializeComponent();
+            if (isEditable)
+            {
+                getCustomerInfo(idCustomer);
+            }
         }
 
 
         private void btnContinue_Click(object sender, RoutedEventArgs e)
         {
             List<string> names = new List<string> {tbName.Text, tbFirstSurname.Text, tbSecondSurname.Text };
-
-            if (string.IsNullOrEmpty(tbCURP.Text) || string.IsNullOrEmpty(tbName.Text) || string.IsNullOrEmpty(tbFirstSurname.Text))
+            if (!string.IsNullOrEmpty(tbCURP.Text) && !string.IsNullOrEmpty(tbName.Text) && !string.IsNullOrEmpty(tbFirstSurname.Text))
             {
-                MessageBox.Show("Los campos no pueden estar vacios", "Campos incompletos", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-            else
-            {
-
                 if (Validator.ValidateCURP(tbCURP.Text) && Validator.ValidateMultipleNames(names))
                 {
-                    using (sgscEntities db = new sgscEntities())
-                    {
-                        Customer customerToRegister = new Customer();
-                        customerToRegister.Curp = tbCURP.Text;
-                        customerToRegister.Name = tbName.Text;
-                        customerToRegister.FirstSurname = tbFirstSurname.Text;
-                        customerToRegister.SecondSurname = tbSecondSurname.Text;
-
-                        db.Customers.Add(customerToRegister);
-
-                        try
-                        {
-                            db.SaveChanges();
-                            Console.WriteLine("Cliente registrado exitosamente.");
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine("Ocurrió un error al intentar registrar el cliente: " + ex.Message);
-                        }
-                    }
-
-                    MessageBox.Show("Datos guardados correctamente", "Operación realizada con exito", MessageBoxButton.OK, MessageBoxImage.Information);
-
+                    registerCustomer();
                 }
                 else
                 {
                     MessageBox.Show("Los datos introducidos son incorrectos", "Información invalida", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+            else
+            {
+                MessageBox.Show("Los campos no pueden estar vacios", "Campos incompletos", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }   
 
-
-        private void tbName_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        private void registerCustomer()
         {
-            if (System.Text.RegularExpressions.Regex.IsMatch(tbFirstSurname.Text + e.Text, @"[^a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\s]+$"))
+            using (sgscEntities db = new sgscEntities())
+            {
+                Customer customerToRegister = new Customer();
+                customerToRegister.Curp = tbCURP.Text;
+                customerToRegister.Name = tbName.Text;
+                customerToRegister.FirstSurname = tbFirstSurname.Text;
+                customerToRegister.SecondSurname = tbSecondSurname.Text;
+                db.Customers.Add(customerToRegister);
+
+                try
+                {
+                    db.SaveChanges();
+                    Console.WriteLine("Cliente registrado exitosamente.");
+                    //limpiar campos
+                    tbCURP.Text = "";
+                    tbName.Text = "";
+                    tbFirstSurname.Text = "";
+                    tbSecondSurname.Text = "";
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Ocurrió un error al intentar registrar el cliente: " + ex.Message);
+                }
+            }
+        }
+
+        /*private void tbName_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(tbName.Text + e.Text, @"[^a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\s]+$"))
             {
                 e.Handled = true;
             }
-        }
+        }*/
 
         private void tbFirstSurname_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
@@ -105,6 +113,18 @@ namespace SGSC.Pages
             if (tbCURP.Text.Length >= 18 || System.Text.RegularExpressions.Regex.IsMatch(tbCURP.Text + e.Text, @"[^a-zA-Z0-9]+$"))
             {
                 e.Handled = true;
+            }
+        }
+
+        private void getCustomerInfo(int idCustomer)
+        {
+            using (sgscEntities db = new sgscEntities())
+            {
+                Customer customer = db.Customers.Find(idCustomer);
+                tbCURP.Text = customer.Curp;
+                tbName.Text = customer.Name;
+                tbFirstSurname.Text = customer.FirstSurname;
+                tbSecondSurname.Text = customer.SecondSurname;
             }
         }
     }

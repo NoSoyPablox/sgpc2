@@ -119,6 +119,7 @@
     <Compile Include="Payment.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="TextBoxName.cs" />
     <Compile Include="Validator.cs" />
     <Compile Include="WorkCenter.cs">
       <DependentUpon>Model.tt</DependentUpon>
@@ -146,6 +147,10 @@
     <Page Include="Pages\ReferenciasDelCliente.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
