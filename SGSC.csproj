@@ -97,6 +97,9 @@
     <Compile Include="Employee.cs">
       <DependentUpon>Modelsgsc.tt</DependentUpon>
     </Compile>
+    <Compile Include="Messages\ToastNotification.xaml.cs">
+      <DependentUpon>ToastNotification.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Modelsgsc.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -135,6 +138,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Messages\ToastNotification.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\HomePageCreditAdvisor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -143,7 +150,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\ContactInformation.xaml">
+    <Page Include="Pages\PageContactInformation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -156,8 +163,8 @@
     <Compile Include="Pages\PageWorkCenter.xaml.cs">
       <DependentUpon>PageWorkCenter.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ContactInformation.xaml.cs">
-      <DependentUpon>ContactInformation.xaml</DependentUpon>
+    <Compile Include="Pages\PageContactInformation.xaml.cs">
+      <DependentUpon>PageContactInformation.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\LogIn.xaml.cs">
       <DependentUpon>LogIn.xaml</DependentUpon>
@@ -213,6 +220,8 @@
     <Resource Include="Images\Arrow-Icon.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\icon-error.png" />
+    <Resource Include="Images\icon-check.png" />
     <Content Include="Modelsgsc.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Modelsgsc.edmx</DependentUpon>

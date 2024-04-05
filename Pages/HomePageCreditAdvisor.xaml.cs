@@ -3,9 +3,6 @@ using System.Windows.Controls;
 
 namespace SGSC.Pages
 {
-    /// <summary>
-    /// Lógica de interacción para HomePageCreditAdvisor.xaml
-    /// </summary>
     public partial class HomePageCreditAdvisor : Page
     {
         public HomePageCreditAdvisor()
@@ -15,12 +12,20 @@ namespace SGSC.Pages
 
         private void ButtonClicNuevo_Cliente(object sender, RoutedEventArgs e)
         {
-            // Crear una instancia de la página WorkCenter
-            PageWorkCenter workCenterPage = new PageWorkCenter(false, 2);
+            /*
+            PageContactInformation contactInformationPage = new PageContactInformation(true, 1);
+            if (NavigationService != null)
+            {
+                NavigationService.Navigate(contactInformationPage);
+            }*/
+
+            
+            PageWorkCenter workCenterPage = new PageWorkCenter(false, 1);
             if (NavigationService != null)
             {
                 NavigationService.Navigate(workCenterPage);
             }
+            
         }
     }
 }

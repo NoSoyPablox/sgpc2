@@ -1,4 +1,4 @@
-﻿<Page x:Class="SGSC.Pages.ContactInformation"
+﻿<Page x:Class="SGSC.Pages.PageContactInformation"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:SGSC.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="490" d:DesignWidth="950"
-      Title="ContactInformation">
+      Title="PageContactInformation">
 
     <Page.Resources>
         <!-- Definición de la fuente personalizada -->
@@ -33,7 +33,7 @@
             <!-- Aquí puedes poner tu contenido -->
         </Border>
 
-        <Frame Content="Frame"/>
+        <Frame />
 
         <!-- Grid con color de fondo -->
         <Rectangle Style="{StaticResource RoundedRectangleStyle}" Margin="271,116,28,135"/>
@@ -46,8 +46,9 @@
 
             <Button Style="{StaticResource ButtonStyle}" Tag="C:\Users\Dani\Desktop\Desarrollo de Software\Development\sgsc\Images\address-icon.png" Content="Dirección" HorizontalAlignment="Center" Margin="0,154,0,0" VerticalAlignment="Top" Width="195" Height="40"/>
             <Button Style="{StaticResource ButtonStyle}" Tag="C:\Users\Dani\Desktop\Desarrollo de Software\Development\sgsc\Images\card-icon.png" Content="Cuentas bancarias" HorizontalAlignment="Center" VerticalAlignment="Top" Width="195" Height="40" Margin="0,198,0,0"/>
-            <Button Style="{StaticResource ButtonStyle}" Tag="C:\Users\Dani\Desktop\Desarrollo de Software\Development\sgsc\Images\icon-job.png" Content="Centro de trabajo" HorizontalAlignment="Center" Margin="0,242,0,0" VerticalAlignment="Top" Width="195" Height="40"/>
-            <Button Style="{StaticResource ButtonStyle}" Tag="C:\Users\Dani\Desktop\Desarrollo de Software\Development\sgsc\Images\icon-contact.png" Content="Datos de contacto" HorizontalAlignment="Center" Margin="0,287,0,0" VerticalAlignment="Top" Width="195" Height="40"/>
+            
+            <Button Style="{StaticResource ButtonStyle}" Tag="C:\Users\Dani\Desktop\Desarrollo de Software\Development\sgsc\Images\icon-job.png" Content="Centro de trabajo" HorizontalAlignment="Center" Margin="0,242,0,0" VerticalAlignment="Top" Width="195" Height="40" Click="BtnClicPageWorkCenter"/>
+            <Button Style="{StaticResource ButtonStyle}" Tag="C:\Users\Dani\Desktop\Desarrollo de Software\Development\sgsc\Images\icon-contact.png" Content="Datos de contacto" HorizontalAlignment="Center" Margin="0,287,0,0" VerticalAlignment="Top" Width="195" Height="40" Click="BtnClicPageContactInformation"/>
             <Button Style="{StaticResource ButtonStyle}" Tag="C:\Users\Dani\Desktop\Desarrollo de Software\Development\sgsc\Images\people-icon.png" Content="Referencias" HorizontalAlignment="Center" Margin="0,331,0,0" VerticalAlignment="Top" Width="195" Height="40"/>
             <Button Style="{StaticResource ButtonStyle}" Tag="C:\Users\Dani\Desktop\Desarrollo de Software\Development\sgsc\Images\User.png"  Content="Datos personales"  HorizontalAlignment="Center" Margin="0,109,0,0" VerticalAlignment="Top" Width="196" Height="40"/>
         </Grid>

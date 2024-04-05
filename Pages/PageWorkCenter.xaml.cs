@@ -1,12 +1,16 @@
-﻿using System;
+﻿using SGSC.Messages;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Navigation;
 
 namespace SGSC.Pages
 {
@@ -35,7 +39,6 @@ namespace SGSC.Pages
             this.isEditable = isEditable;
 
             txtWorkCenterName.PreviewTextInput += AllowWriteLetters;
-            txtStreet.PreviewTextInput += AllowWriteLetters;
             txtColony.PreviewTextInput += AllowWriteLetters;
 
             txtPhone.PreviewTextInput += AllowPhoneNumber;
@@ -57,22 +60,21 @@ namespace SGSC.Pages
                 }
             }
             textBoxLabelMap = new Dictionary<TextBox, Label>
-        {
-            {txtWorkCenterName, lbIsEmptyCenterName},
-            {txtPhone, lbIsEmptyPhone},
-            {txtStreet, lbIsEmptyStreet},
-            {txtColony, lbIsEmptyColony},
-            {txtInnerNumber, lbIsEmptyInnerNumber},
-            {txtOutsideNumber, lbIsEmptyOutsideNumber},
-            {txtZipCode, lbIsEmptyZipCode}
-        };
+            {
+                {txtWorkCenterName, lbIsEmptyCenterName},
+                {txtPhone, lbIsEmptyPhone},
+                {txtStreet, lbIsEmptyStreet},
+                {txtColony, lbIsEmptyColony},
+                {txtInnerNumber, lbIsEmptyInnerNumber},
+                {txtOutsideNumber, lbIsEmptyOutsideNumber},
+                {txtZipCode, lbIsEmptyZipCode}
+            };
         }
 
         public void ShowInformationWorkCenter(SGSC.WorkCenter userWorkCenter)
         {
             if (userWorkCenter != null)
             {
-                // Mostrar la información recuperada en los TextBox correspondientes
                 txtWorkCenterName.Text = userWorkCenter.CenterName;
                 txtPhone.Text = userWorkCenter.PhoneNumber;
                 txtStreet.Text = userWorkCenter.Street;
@@ -107,7 +109,6 @@ namespace SGSC.Pages
                 {
                     CheckAndSetLabelVisibility(pair.Value, pair.Key);
                 }
-                
             } else
             {
                 IsValidate = true;
@@ -174,30 +175,21 @@ namespace SGSC.Pages
                         dbContext.WorkCenters.Add(NewWorkcenter);
                     }
 
-                    // Intenta guardar cambios en la base de datos
                     dbContext.SaveChanges();
 
-                    MessageBox.Show("Operación realizada correctamente.");
 
-                    // Ocultar los labels de campos vacíos
+
+                    ShowNotification("Se ha registrado con éxito la información", "Success");
+
                     foreach (var pair in textBoxLabelMap)
                     {
                         pair.Value.Visibility = Visibility.Hidden;
                     }
                 }
-                catch (DbEntityValidationException ex)
+                catch (EntityException ex)
                 {
-                    // Itera sobre cada error de validación
-                    foreach (var validationErrors in ex.EntityValidationErrors)
-                    {
-                        // Itera sobre cada error de validación para esta entidad
-                        foreach (var validationError in validationErrors.ValidationErrors)
-                        {
-                            // Accede a los detalles del error de validación
-                            Console.WriteLine($"Propiedad: {validationError.PropertyName}");
-                            Console.WriteLine($"Error: {validationError.ErrorMessage}");
-                        }
-                    }
+                    ShowNotification("No se puede conectar con la base de datos. " +
+                        "Por favor, inténtelo más tarde.", "Error");
                 }
             }
         }
@@ -261,6 +253,46 @@ namespace SGSC.Pages
             e.Handled = !Regex.IsMatch(e.Text, "^[0-9]+$");
         }
 
+        public void ShowNotification(string Message, String NotificationType)
+        {
+                var notificationWindow = new ToastNotification(Message, NotificationType);
+                notificationWindow.WindowStartupLocation = WindowStartupLocation.Manual;
+                notificationWindow.Left = SystemParameters.WorkArea.Left; // Ajustar según sea necesario
+                notificationWindow.Top = SystemParameters.WorkArea.Bottom - notificationWindow.Height; // Ajustar según sea necesario
 
+                notificationWindow.Show();
+                Task.Delay(3000).ContinueWith(_ =>
+                {
+                    notificationWindow.Dispatcher.Invoke(() =>
+                    {
+                        notificationWindow.Close();
+                    });
+                });
+        }
+
+        private void BtnClicPageContactInformation(object sender, RoutedEventArgs e)
+        {
+            Button clickedButton = sender as Button;
+            PageContactInformation contactInformation = new PageContactInformation(false, 2);
+            if (NavigationService != null)
+            {
+                NavigationService.Navigate(contactInformation);
+            }
+            clickedButton.Background = Brushes.Green;
+        }
+
+        private void BtnClicPageWorkCenter(object sender, RoutedEventArgs e)
+        {
+            Button clickedButton = sender as Button;
+            PageWorkCenter workCenter = new PageWorkCenter(false, 2);
+            if (NavigationService != null)
+            {
+                NavigationService.Navigate(workCenter);
+            }
+
+            clickedButton.Background = Brushes.Green;
+        }
     }
+
+   
 }

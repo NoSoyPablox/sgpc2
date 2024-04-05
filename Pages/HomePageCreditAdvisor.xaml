@@ -35,8 +35,8 @@
             <Image Source="C:\Users\Dani\Desktop\Desarrollo de Software\sgsc\Image\Banner.png" Stretch="Uniform" Margin="96,112,20,181"/>
         </Border>
 
-        <Button Style="{StaticResource Button}" Content="Nuevo Cliente" FontWeight="Medium"  Background="#FCDC2A" FontSize="15" HorizontalAlignment="Left" Margin="438,325,0,0" VerticalAlignment="Top" Width="176" Height="40" Click="ButtonClicNuevo_Cliente"/>
-        <Button Style="{StaticResource Button}" Content="Nueva solicitud" FontWeight="Medium"  Background="#1F3A52" Foreground="White" FontSize="15" HorizontalAlignment="Left" Margin="438,386,0,0" VerticalAlignment="Top" Width="176" Height="40"/>
+        <Button Style="{StaticResource Button}" Content="Nuevo Cliente" FontWeight="Medium"  Background="#FCDC2A" FontSize="15" HorizontalAlignment="Left" Margin="438,311,0,0" VerticalAlignment="Top" Width="176" Height="40" Click="ButtonClicNuevo_Cliente"/>
+        <Button Style="{StaticResource Button}" Content="Nueva solicitud" FontWeight="Medium"  Background="#1F3A52" Foreground="White" FontSize="15" HorizontalAlignment="Left" Margin="438,362,0,0" VerticalAlignment="Top" Width="176" Height="40"/>
 
 
         <Button Style="{StaticResource Menubutton}" FontSize="15" HorizontalAlignment="Left" Margin="13,264,0,0" VerticalAlignment="Top" Width="44" Height="46">
