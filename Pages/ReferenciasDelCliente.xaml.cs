@@ -20,6 +20,7 @@ namespace SGSC.Pages
     /// </summary>
     public partial class ReferenciasDelCliente : Page
     {
+        int idCustomer = 1;
         public ReferenciasDelCliente()
         {
             InitializeComponent();
@@ -48,6 +49,12 @@ namespace SGSC.Pages
                         contact1.SecondSurname =tbSecondSurname.Text;
                         db.Contacts.Add(contact1);
 
+                        Contact contact2 = new Contact();
+                        contact2.Name = tbName1.Text;
+                        contact2.FirstSurname = tbFirstSurname2.Text;
+                        contact2.SecondSurname = tbSecondSurname2.Text;
+                        db.Contacts.Add(contact2);
+
 
                         try
                         {
@@ -73,6 +80,11 @@ namespace SGSC.Pages
             {
                 e.Handled = true;
             }
+        }
+
+        private void tbName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }

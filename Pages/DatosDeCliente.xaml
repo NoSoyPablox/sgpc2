@@ -10,9 +10,7 @@
       Title="DatosDeCliente">
 
     <Page.Resources>
-        <!-- Definición de la fuente personalizada -->
         <FontFamily x:Key="FuenteNunito">/Typografic styles/Nunito-Regular.ttf#Nunito</FontFamily>
-
 
         <Style x:Key="CustomLabelStyle" TargetType="{x:Type Label}">
             <Setter Property="Template">
@@ -30,36 +28,33 @@
         <Viewbox Stretch="Fill">
             <Grid Height="490" Width="950">
                 <Border Background="White" CornerRadius="22">
-                    <!-- Contenido dentro del Border -->
-                    <!-- Aquí puedes poner tu contenido -->
                 </Border>
 
                 <Frame Content="Frame" />
 
                 <Grid Background="LightGray" Margin="0,0,707,0">
-                    <!-- No es necesario especificar un margen aquí -->
                 </Grid>
                 <Rectangle Style="{StaticResource RoundedRectangleStyle}" Margin="271,116,28,95"/>
 
                 <SGSC:TextBoxName x:Name="tbName" Style="{StaticResource CustomTextBoxStyle}" Margin="301,203,377,255"/>
                 <Label Style="{StaticResource CustomLabelStyle}" FontSize="15" Content="Nombre (s)" HorizontalAlignment="Left" Margin="301,182,0,0" VerticalAlignment="Top" x:Name="NombreLabel" Width="237" Height="21"/>
 
-                <TextBox x:Name="tbFirstSurname" Style="{StaticResource CustomTextBoxStyle}" Margin="623,206,55,256" PreviewTextInput="tbFirstSurname_PreviewTextInput"/>
+                <SGSC:TextBoxName x:Name="tbFirstSurname" Style="{StaticResource CustomTextBoxStyle}" Margin="623,206,55,256"/>
                 <Label Style="{StaticResource CustomLabelStyle}" FontSize="15" Content="Apellido paterno" HorizontalAlignment="Left" Margin="625,185,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name ="tbSecondSurname" Style="{StaticResource CustomTextBoxStyle}" Margin="301,303,377,155" PreviewTextInput="tbSecondSurname_PreviewTextInput"/>
+                <SGSC:TextBoxName x:Name ="tbSecondSurname" Style="{StaticResource CustomTextBoxStyle}" Margin="301,303,377,155"/>
                 <Label Style="{StaticResource CustomLabelStyle}" FontSize="15" Content="Apellido materno" HorizontalAlignment="Left" Margin="301,284,0,0" VerticalAlignment="Top" Height="34"/>
                 <TextBox x:Name="tbCURP" Style="{StaticResource CustomTextBoxStyle}" Margin="623,303,55,155" RenderTransformOrigin="0.533,0.406" PreviewTextInput="tbCURP_PreviewTextInput"/>
                 <Label Style="{StaticResource CustomLabelStyle}" FontSize="15" Content="CURP" HorizontalAlignment="Left" Margin="625,284,0,0" VerticalAlignment="Top" Height="28"/>
                 <Button x:Name="btnCancel" Style="{StaticResource ButtonStyleCancel}" Content="Cancelar" FontSize="15" HorizontalAlignment="Left" Margin="613,426,0,0" VerticalAlignment="Top" Height="39" Width="130"/>
                 <Button x:Name="btnContinue" Style="{StaticResource ButtonStyleConfirm}" Content="Continuar" FontSize="15" HorizontalAlignment="Left" Margin="756,426,0,0" VerticalAlignment="Top" Width="130" Height="38" Click="btnContinue_Click"/>
                 <Label Style="{StaticResource CustomLabelStyle}" FontSize="25" Content="Información personal" HorizontalAlignment="Left" Margin="292,133,0,0" VerticalAlignment="Top" x:Name="NombreLabel_Copiar" Width="290" Height="37"/>
-
-                <SGSC:TextBoxName HorizontalAlignment="Left" Margin="329,400,0,0" TextWrapping="Wrap" Text="TextBoxName" VerticalAlignment="Top" Width="120"/>
+                <Label x:Name="lbName" HorizontalAlignment="Left" Margin="301,232,0,0" VerticalAlignment="Top" Width="192" Foreground="#FFCE2222" FontStyle="Italic" FontSize="11"/>
+                <Label x:Name="lbSecondSurname" HorizontalAlignment="Left" Margin="301,332,0,0" VerticalAlignment="Top" Width="192" Foreground="#FFCE2222" FontStyle="Italic" FontSize="11"/>
+                <Label x:Name="lbCurp" HorizontalAlignment="Left" Margin="625,332,0,0" VerticalAlignment="Top" Width="192" Foreground="#FFCE2222" FontStyle="Italic" FontSize="11"/>
+                <Label x:Name="lbFirstSurname" HorizontalAlignment="Left" Margin="625,231,0,0" VerticalAlignment="Top" Width="192" Foreground="#FFCE2222" FontStyle="Italic" FontSize="11"/>
 
             </Grid>
         </Viewbox>
-
-        <!-- Grid con color de fondo -->
 
     </Grid>
 

@@ -40,7 +40,7 @@
                 <Button x:Name="btnContinue" Style="{StaticResource ButtonStyleConfirm}" Content="Continuar" FontSize="15" HorizontalAlignment="Left" Margin="756,426,0,0" VerticalAlignment="Top" Width="130" Height="38" Click="btnContinue_Click"/>
                 <Label FontFamily="{StaticResource FuenteNunitoBoldItalic}" FontSize="22" Content="Referencias" HorizontalAlignment="Left" Margin="300,79,0,0" VerticalAlignment="Top" Width="290" Height="37" FontWeight="Bold"/>
                 <Rectangle Style="{StaticResource RoundedRectangleStyle}" Margin="270,109,29,243"/>
-                <TextBox x:Name="tbName" Style="{StaticResource CustomTextBoxStyle}" Margin="300,141,378,317" PreviewTextInput="tbName_PreviewTextInput"/>
+                <TextBox x:Name="tbName" Style="{StaticResource CustomTextBoxStyle}" Margin="300,141,378,317" PreviewTextInput="tbName_PreviewTextInput" TextChanged="tbName_TextChanged"/>
                 <Label Style="{StaticResource CustomLabelStyle}" FontSize="15" Content="Nombre (s)" HorizontalAlignment="Left" Margin="300,120,0,0" VerticalAlignment="Top" x:Name="NombreLabel_Copiar1" Width="237" Height="21"/>
                 <TextBox x:Name="tbFirstSurname" Style="{StaticResource CustomTextBoxStyle}" Margin="622,144,56,318"/>
                 <Label Style="{StaticResource CustomLabelStyle}" FontSize="15" Content="Apellido paterno" HorizontalAlignment="Left" Margin="624,123,0,0" VerticalAlignment="Top"/>

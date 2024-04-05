@@ -24,12 +24,11 @@ namespace SGSC.Pages
     /// </summary>
     public partial class DatosDeCliente : Page
     {
-        bool isEditable = true;
-        int idCustomer = 1;
-        public DatosDeCliente(/*bool isEditable, int idCliente*/)
+        int idCustomer = -1;
+        public DatosDeCliente(/*int idCliente*/)
         {
             InitializeComponent();
-            if (isEditable)
+            if (idCustomer != -1)
             {
                 getCustomerInfo(idCustomer);
             }
@@ -38,21 +37,48 @@ namespace SGSC.Pages
 
         private void btnContinue_Click(object sender, RoutedEventArgs e)
         {
-            List<string> names = new List<string> {tbName.Text, tbFirstSurname.Text, tbSecondSurname.Text };
-            if (!string.IsNullOrEmpty(tbCURP.Text) && !string.IsNullOrEmpty(tbName.Text) && !string.IsNullOrEmpty(tbFirstSurname.Text))
+            lbName.Content = "";
+            lbFirstSurname.Content = "";
+            lbSecondSurname.Content = "";
+            lbCurp.Content = "";
+
+            bool valid = true;
+            if (string.IsNullOrEmpty(tbName.Text))
             {
-                if (Validator.ValidateCURP(tbCURP.Text) && Validator.ValidateMultipleNames(names))
-                {
-                    registerCustomer();
-                }
-                else
-                {
-                    MessageBox.Show("Los datos introducidos son incorrectos", "Información invalida", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                valid = false;
+                lbName.Content = "Porfavor introduzca el nombre";
+            }
+            if (string.IsNullOrEmpty(tbFirstSurname.Text))
+            {
+                valid = false;
+                lbFirstSurname.Content = "Porfavor introduzca el apellido paterno";
+            }
+            if (string.IsNullOrEmpty(tbSecondSurname.Text))
+            {
+                valid = false;
+                lbSecondSurname.Content = "Porfavor introduzca el apellido materno";
+            }
+            if (string.IsNullOrEmpty(tbCURP.Text))
+            {
+                valid = false;
+                lbCurp.Content = "Porfavor introduzca el CURP";
+            }
+            if (!Validator.ValidateCURP(tbCURP.Text))
+            {
+                valid = false;
+                lbCurp.Content = "Porfavor introduzca un CURP válido";
+            }
+            if (!valid)
+            {
+                return;
+            }
+            if (idCustomer == -1)
+            {
+                registerCustomer();
             }
             else
             {
-                MessageBox.Show("Los campos no pueden estar vacios", "Campos incompletos", MessageBoxButton.OK, MessageBoxImage.Error);
+                updateCustomer();
             }
         }   
 
@@ -70,8 +96,7 @@ namespace SGSC.Pages
                 try
                 {
                     db.SaveChanges();
-                    Console.WriteLine("Cliente registrado exitosamente.");
-                    //limpiar campos
+                    MessageBox.Show("Cliente registrado exitosamente.");
                     tbCURP.Text = "";
                     tbName.Text = "";
                     tbFirstSurname.Text = "";
@@ -84,27 +109,25 @@ namespace SGSC.Pages
             }
         }
 
-        /*private void tbName_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        private void updateCustomer()
         {
-            if (System.Text.RegularExpressions.Regex.IsMatch(tbName.Text + e.Text, @"[^a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\s]+$"))
+            using (sgscEntities db = new sgscEntities())
             {
-                e.Handled = true;
-            }
-        }*/
+                Customer customerToUpdate = db.Customers.Find(idCustomer);
+                customerToUpdate.Curp = tbCURP.Text;
+                customerToUpdate.Name = tbName.Text;
+                customerToUpdate.FirstSurname = tbFirstSurname.Text;
+                customerToUpdate.SecondSurname = tbSecondSurname.Text;
 
-        private void tbFirstSurname_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            if (System.Text.RegularExpressions.Regex.IsMatch(tbFirstSurname.Text + e.Text, @"[^a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\s]+$"))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void tbSecondSurname_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            if (System.Text.RegularExpressions.Regex.IsMatch(tbSecondSurname.Text + e.Text, @"[^a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\s]+$"))
-            {
-                e.Handled = true;
+                try
+                {
+                    db.SaveChanges();
+                    Console.WriteLine("Cliente actualizado exitosamente.");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Ocurrió un error al intentar actualizar el cliente: " + ex.Message);
+                }
             }
         }
 
