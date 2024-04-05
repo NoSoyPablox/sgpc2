@@ -24,7 +24,7 @@ namespace SGSC.Pages
     /// </summary>
     public partial class DatosDeCliente : Page
     {
-        int idCustomer = -1;
+        int idCustomer = 25;
         public DatosDeCliente(/*int idCliente*/)
         {
             InitializeComponent();
@@ -144,6 +144,12 @@ namespace SGSC.Pages
             using (sgscEntities db = new sgscEntities())
             {
                 Customer customer = db.Customers.Find(idCustomer);
+                if (customer == null)
+                {
+                    MessageBox.Show("No se encontró el cliente seleccionado");
+                    //Aqui deberá de regresar a la pantalla anterior
+                    return;
+                }
                 tbCURP.Text = customer.Curp;
                 tbName.Text = customer.Name;
                 tbFirstSurname.Text = customer.FirstSurname;
