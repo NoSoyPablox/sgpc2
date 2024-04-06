@@ -35,10 +35,8 @@
                 <Grid Background="LightGray" Margin="0,0,707,0">
                 </Grid>
                 <Rectangle Style="{StaticResource RoundedRectangleStyle}" Margin="271,116,28,95"/>
-
                 <SGSC:TextBoxName x:Name="tbName" Style="{StaticResource CustomTextBoxStyle}" Margin="301,203,377,255"/>
                 <Label Style="{StaticResource CustomLabelStyle}" FontSize="15" Content="Nombre (s)" HorizontalAlignment="Left" Margin="301,182,0,0" VerticalAlignment="Top" x:Name="NombreLabel" Width="237" Height="21"/>
-
                 <SGSC:TextBoxName x:Name="tbFirstSurname" Style="{StaticResource CustomTextBoxStyle}" Margin="623,206,55,256"/>
                 <Label Style="{StaticResource CustomLabelStyle}" FontSize="15" Content="Apellido paterno" HorizontalAlignment="Left" Margin="625,185,0,0" VerticalAlignment="Top"/>
                 <SGSC:TextBoxName x:Name ="tbSecondSurname" Style="{StaticResource CustomTextBoxStyle}" Margin="301,303,377,155"/>

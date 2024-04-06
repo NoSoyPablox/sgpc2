@@ -3,13 +3,14 @@ using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace SGSC.Pages
 {
     /// <summary>
     /// Lógica de interacción para AddressInformation.xaml
     /// </summary>
-    public partial class AddressInformation : Window
+    public partial class AddressInformation : Page
     {
         private int customer;
 
@@ -44,18 +45,13 @@ namespace SGSC.Pages
                     Street = Tb_Street.Text,
                     ExternalNumber = Tb_ExternalNumber.Text,
                     InternalNumber = Tb_InternalNumber.Text,
-                    ZipCode = Tb_ZipCode.Text
+                    ZipCode = Tb_ZipCode.Text,
+                    
                 };
-
-                if (customer != 0)
-                {
-                    newCustomerAddressInfo.CustomerAddressId = customer;
-                }
-
 
                 using (sgscEntities context = new sgscEntities())
                 {
-                    context.CustomerContactInfoes.AddOrUpdate();
+                    context.CustomerAddresses.AddOrUpdate(c => c.CustomerAddressId, newCustomerAddressInfo);
                     context.SaveChanges();
                 }
 
@@ -85,6 +81,7 @@ namespace SGSC.Pages
                         Tb_ExternalNumber.Text = customerData.ExternalNumber;
                         Tb_InternalNumber.Text = customerData.InternalNumber;
                         Tb_ZipCode.Text = customerData.ZipCode;
+                        //Tb_Colony.Text = customer.Colony;
                     }
                 }
             }
