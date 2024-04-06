@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="31e83c0dda694b569ab0fa1c4fff84cd" Name="Diagram1" ZoomLevel="47">
+        <EntityTypeShape EntityType="sgscModel.BankAccount" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="sgscModel.Contact" Width="1.5" PointX="5.25" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="sgscModel.CreditConditionCreditRequest" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="sgscModel.CreditCondition" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="sgscModel.CreditPolicy" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="sgscModel.CreditRequest" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="sgscModel.CustomerAddress" Width="1.5" PointX="7.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="sgscModel.CustomerContactInfo" Width="1.5" PointX="5.25" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="sgscModel.Customer" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="sgscModel.Employee" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="sgscModel.Payment" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="sgscModel.WorkCenter" Width="1.5" PointX="9.75" PointY="3.75" IsExpanded="true" />
+        <AssociationConnector Association="sgscModel.FK_BankAccountCustomer" ManuallyRouted="false" />
+        <AssociationConnector Association="sgscModel.FK_CustomerContact" ManuallyRouted="false" />
+        <AssociationConnector Association="sgscModel.FK_CreditRequestCustomer" ManuallyRouted="false" />
+        <AssociationConnector Association="sgscModel.CustomerId" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

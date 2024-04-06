@@ -1,0 +1,49 @@
+﻿<Page x:Class="SGSC.Pages.HomePageCreditAdvisor"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SGSC.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="490" d:DesignWidth="950"
+      Title="HomePageCreditAdvisor">
+
+    <Grid>
+        <Frame x:Name="frameHomePageCreditAdvisor" NavigationUIVisibility="Hidden"/>
+        <Border Background="White" CornerRadius="22" Margin="0">
+            <Rectangle Style="{StaticResource RoundedRectangleHomeStyle}"  Margin="91,113,20,22"/>
+
+            <!-- Contenido dentro del Border -->
+            <!-- Aquí puedes poner tu contenido -->
+        </Border>
+
+        <Image Source="C:\Users\Dani\Desktop\Desarrollo de Software\sgsc\Image\Line.png" Margin="49,0,863,0"></Image>
+        <Button Style="{StaticResource Menubutton}" FontSize="15" HorizontalAlignment="Left" Margin="16,209,0,0" VerticalAlignment="Top" Width="44" Height="44">
+            <Image Source="C:\Users\Dani\Desktop\Desarrollo de Software\sgsc\Image\Search-for -people.png" Height="43" Width="31"/>
+        </Button>
+        <Button Style="{StaticResource Menubutton}" FontSize="15" HorizontalAlignment="Left" Margin="16,148,0,0" VerticalAlignment="Top" Width="44" Height="46">
+            <Image Source="C:\Users\Dani\Desktop\Desarrollo de Software\sgsc\Image\Home.png" Height="43" Width="31"/>
+        </Button>
+
+
+
+
+        <Border CornerRadius="10" BorderBrush="Transparent" BorderThickness="0" Padding="5" Margin="10">
+            <Border.Effect>
+                <DropShadowEffect ShadowDepth="5" Direction="270" Opacity="0.3"/>
+            </Border.Effect>
+            <Image Source="C:\Users\Dani\Desktop\Desarrollo de Software\sgsc\Image\Banner.png" Stretch="Uniform" Margin="96,112,20,181"/>
+        </Border>
+
+        <Button Style="{StaticResource Button}" Content="Nuevo Cliente" FontWeight="Medium"  Background="#FCDC2A" FontSize="15" HorizontalAlignment="Left" Margin="438,311,0,0" VerticalAlignment="Top" Width="176" Height="40" Click="ButtonClicNuevo_Cliente"/>
+        <Button Style="{StaticResource Button}" Content="Nueva solicitud" FontWeight="Medium"  Background="#1F3A52" Foreground="White" FontSize="15" HorizontalAlignment="Left" Margin="438,362,0,0" VerticalAlignment="Top" Width="176" Height="40"/>
+
+
+        <Button Style="{StaticResource Menubutton}" FontSize="15" HorizontalAlignment="Left" Margin="13,264,0,0" VerticalAlignment="Top" Width="44" Height="46">
+            <Image Source="C:\Users\Dani\Desktop\Desarrollo de Software\sgsc\Image\Request.png" Height="43" Width="31"/>
+        </Button>
+
+
+    </Grid>
+</Page>
+
