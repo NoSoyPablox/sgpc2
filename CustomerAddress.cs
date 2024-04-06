@@ -20,5 +20,7 @@ namespace SGSC
         public string ExternalNumber { get; set; }
         public string InternalNumber { get; set; }
         public Nullable<int> CustormerId { get; set; }
+    
+        public virtual Customer Customer { get; set; }
     }
 }

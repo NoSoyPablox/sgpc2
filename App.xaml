@@ -93,6 +93,11 @@
 
 
 
+        <FontFamily x:Key="FuentePoppins">/Typografic styles/Poppins-SemiBold.otf#Poppins SemiBold</FontFamily>
+        <FontFamily x:Key="FuenteNunito">/Typografic styles/Nunito-Regular.ttf#Nunito</FontFamily>
+        <FontFamily x:Key="FuenteNunitoBold">/Typografic styles/Nunito-Bold.ttf#Nunito</FontFamily>
+        <FontFamily x:Key="FuenteNunitoBoldItalic">/Typografic styles/Nunito-BoldItalic.ttf#Nunito</FontFamily>
+
 
         <Style TargetType="Button" x:Key="ButtonStyleCancel">
             <Setter Property="Margin" Value="5"/>
@@ -134,7 +139,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Text="{TemplateBinding Content}" FontFamily="{StaticResource FontNunitoBold}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,10,30,10"/>
+                                <TextBlock Text="{TemplateBinding Content}" FontFamily="{StaticResource FuenteNunitoBold}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,10,30,10"/>
                                 <!-- Colocamos la imagen a la derecha -->
                                 <Image Source="Images/Arrow-Icon.png" Width="20" Height="20" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="-15,0,15,0" Grid.Column="1"/>
                             </Grid>
@@ -191,10 +196,6 @@
             </Setter>
             <Setter Property="Foreground" Value="#343434" />
         </Style>
-
-
-
-
-
+        
     </Application.Resources>
 </Application>

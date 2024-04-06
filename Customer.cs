@@ -19,7 +19,8 @@ namespace SGSC
         {
             this.BankAccounts = new HashSet<BankAccount>();
             this.Contacts = new HashSet<Contact>();
-            this.CustomerContactInfoes = new HashSet<CustomerContactInfo>();
+            this.CustomerAddresses = new HashSet<CustomerAddress>();
+            this.WorkCenters = new HashSet<WorkCenter>();
         }
     
         public int CustormerId { get; set; }
@@ -37,6 +38,9 @@ namespace SGSC
         public virtual ICollection<Contact> Contacts { get; set; }
         public virtual CreditRequest CreditRequest { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CustomerContactInfo> CustomerContactInfoes { get; set; }
+        public virtual ICollection<CustomerAddress> CustomerAddresses { get; set; }
+        public virtual CustomerContactInfo CustomerContactInfo { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WorkCenter> WorkCenters { get; set; }
     }
 }

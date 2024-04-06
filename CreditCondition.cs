@@ -14,7 +14,16 @@ namespace SGSC
     
     public partial class CreditCondition
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public CreditCondition()
+        {
+            this.CreditConditionCreditRequests = new HashSet<CreditConditionCreditRequest>();
+        }
+    
         public int CreditConditionId { get; set; }
         public string Description { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CreditConditionCreditRequest> CreditConditionCreditRequests { get; set; }
     }
 }

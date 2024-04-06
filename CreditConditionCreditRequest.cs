@@ -17,5 +17,8 @@ namespace SGSC
         public int CreditConditionIdRequest { get; set; }
         public Nullable<int> CreditCondition_CreditConditionId { get; set; }
         public Nullable<int> CreditRequests_CreditRequestId { get; set; }
+    
+        public virtual CreditCondition CreditCondition { get; set; }
+        public virtual CreditRequest CreditRequest { get; set; }
     }
 }

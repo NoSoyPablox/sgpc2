@@ -17,7 +17,10 @@ namespace SGSC
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CreditRequest()
         {
+            this.BankAccounts = new HashSet<BankAccount>();
+            this.CreditConditionCreditRequests = new HashSet<CreditConditionCreditRequest>();
             this.Customers = new HashSet<Customer>();
+            this.Payments = new HashSet<Payment>();
         }
     
         public int CreditRequestId { get; set; }
@@ -31,6 +34,13 @@ namespace SGSC
         public Nullable<int> EmployeeId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BankAccount> BankAccounts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CreditConditionCreditRequest> CreditConditionCreditRequests { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Customer> Customers { get; set; }
+        public virtual Employee Employee { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Payment> Payments { get; set; }
     }
 }

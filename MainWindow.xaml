@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SGSC"
         xmlns:pages="clr-namespace:SGSC.Pages"
         mc:Ignorable="d"
-        Title="MainWindow" Height="490" Width="950">
+        Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Frame NavigationUIVisibility="Hidden">
             <Frame.Content>

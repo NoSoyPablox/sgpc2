@@ -23,6 +23,7 @@ namespace SGSC
         public Nullable<int> Customer_CustormerId { get; set; }
         public Nullable<int> CreditRequestId { get; set; }
     
+        public virtual CreditRequest CreditRequest { get; set; }
         public virtual Customer Customer { get; set; }
     }
 }

@@ -19,5 +19,7 @@ namespace SGSC
         public Nullable<System.DateTime> PaymentDate { get; set; }
         public string Amount { get; set; }
         public Nullable<int> CreditRequestId { get; set; }
+    
+        public virtual CreditRequest CreditRequest { get; set; }
     }
 }
