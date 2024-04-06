@@ -1,18 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace SGSC.Pages
 {
@@ -33,20 +24,17 @@ namespace SGSC.Pages
         {
             try
             {
-
-                if (string.IsNullOrWhiteSpace(Tb_Email.Text) || string.IsNullOrWhiteSpace(Tb_PhoneNumberOne.Text) ||
-                    string.IsNullOrWhiteSpace(Tb_PhoneNumberTwo.Text))
+                if (!IsValidEmail(Tb_Email.Text) || !IsValidPhoneNumber(Tb_PhoneNumberOne.Text) || !IsValidPhoneNumber(Tb_PhoneNumberTwo.Text))
                 {
-                    MessageBox.Show("Por favor, complete todos los campos solicitados.");
+                    MessageBox.Show("Por favor, ingrese datos válidos en los campos solicitados.");
                     return;
                 }
 
-
                 var newCustomerContactInfo = new CustomerContactInfo
                 {
-                  PhoneNumberOne = Tb_PhoneNumberOne.Text,
-                  PhoneNumberTwo = Tb_PhoneNumberTwo.Text,
-                  Email = Tb_Email.Text,
+                    PhoneNumberOne = Tb_PhoneNumberOne.Text,
+                    PhoneNumberTwo = Tb_PhoneNumberTwo.Text,
+                    Email = Tb_Email.Text,
                 };
 
                 if (customer != 0)
@@ -54,10 +42,9 @@ namespace SGSC.Pages
                     newCustomerContactInfo.CustomerContactInfoId = customer;
                 }
 
-
                 using (sgscEntities context = new sgscEntities())
                 {
-                    context.CustomerContactInfoes.AddOrUpdate();
+                    context.CustomerContactInfoes.AddOrUpdate(newCustomerContactInfo);
                     context.SaveChanges();
                 }
 
@@ -68,25 +55,21 @@ namespace SGSC.Pages
                 MessageBox.Show("Error al intentar guardar los datos de contacto: " + ex.Message);
             }
         }
-
-        /*private void UpdateContactInformation()
+        private void UpdateContactInformation()
         {
             try
             {
-
                 using (var context = new sgscEntities())
                 {
                     var customerData = context.CustomerContactInfoes
-                        .Where(customerDb => customerDb. == customer)
+                        .Where(customerDb => customerDb.CustomerContactInfoId == customer)
                         .FirstOrDefault();
-
 
                     if (customerData != null)
                     {
-                        Tb_PhoneNumberOne = customerData.PhoneNumberOne;
-                        Tb_PhoneNumberTwo = customerData.PhoneNumberTwo;    
-                        Tb_Email = customerData.Email;  
-                        
+                        Tb_PhoneNumberOne.Text = customerData.PhoneNumberOne;
+                        Tb_PhoneNumberTwo.Text = customerData.PhoneNumberTwo;
+                        Tb_Email.Text = customerData.Email;
                     }
                 }
             }
@@ -94,6 +77,17 @@ namespace SGSC.Pages
             {
                 MessageBox.Show("Error al intentar obtener los datos de contacto: " + ex.Message);
             }
-        }*/
+        }
+
+
+        private bool IsValidEmail(string email)
+        {
+            return Regex.IsMatch(email, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+        }
+
+        private bool IsValidPhoneNumber(string phoneNumber)
+        {
+            return Regex.IsMatch(phoneNumber, @"^\d{10}$");
+        }
     }
 }
