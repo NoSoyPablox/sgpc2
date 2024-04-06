@@ -1,0 +1,59 @@
+﻿<Page
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SGSC.Pages"
+      xmlns:SGSC="clr-namespace:SGSC" x:Class="SGSC.Pages.DatosDeCliente"
+      mc:Ignorable="d" 
+      d:DesignHeight="490" d:DesignWidth="950"
+      Title="DatosDeCliente">
+
+    <Page.Resources>
+        <FontFamily x:Key="FuenteNunito">/Typografic styles/Nunito-Regular.ttf#Nunito</FontFamily>
+
+        <Style x:Key="CustomLabelStyle" TargetType="{x:Type Label}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Label}">
+                        <TextBlock FontWeight="Medium" FontFamily="{StaticResource FuenteNunito}"><Run Text="{Binding Content, RelativeSource={RelativeSource Mode=TemplatedParent}}"/><Run Text=" "/><Run Text="*" Foreground="#F67070"/></TextBlock>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+
+    <Grid>
+        <Viewbox Stretch="Fill">
+            <Grid Height="490" Width="950">
+                <Border Background="White" CornerRadius="22">
+                </Border>
+
+                <Frame Content="Frame" />
+
+                <Grid Background="LightGray" Margin="0,0,707,0">
+                </Grid>
+                <Rectangle Style="{StaticResource RoundedRectangleStyle}" Margin="271,116,28,95"/>
+                <SGSC:TextBoxName x:Name="tbName" Style="{StaticResource CustomTextBoxStyle}" Margin="301,203,377,255"/>
+                <Label Style="{StaticResource CustomLabelStyle}" FontSize="15" Content="Nombre (s)" HorizontalAlignment="Left" Margin="301,182,0,0" VerticalAlignment="Top" x:Name="NombreLabel" Width="237" Height="21"/>
+                <SGSC:TextBoxName x:Name="tbFirstSurname" Style="{StaticResource CustomTextBoxStyle}" Margin="623,206,55,256"/>
+                <Label Style="{StaticResource CustomLabelStyle}" FontSize="15" Content="Apellido paterno" HorizontalAlignment="Left" Margin="625,185,0,0" VerticalAlignment="Top"/>
+                <SGSC:TextBoxName x:Name ="tbSecondSurname" Style="{StaticResource CustomTextBoxStyle}" Margin="301,303,377,155"/>
+                <Label Style="{StaticResource CustomLabelStyle}" FontSize="15" Content="Apellido materno" HorizontalAlignment="Left" Margin="301,284,0,0" VerticalAlignment="Top" Height="34"/>
+                <TextBox x:Name="tbCURP" Style="{StaticResource CustomTextBoxStyle}" Margin="623,303,55,155" RenderTransformOrigin="0.533,0.406" PreviewTextInput="tbCURP_PreviewTextInput"/>
+                <Label Style="{StaticResource CustomLabelStyle}" FontSize="15" Content="CURP" HorizontalAlignment="Left" Margin="625,284,0,0" VerticalAlignment="Top" Height="28"/>
+                <Button x:Name="btnCancel" Style="{StaticResource ButtonStyleCancel}" Content="Cancelar" FontSize="15" HorizontalAlignment="Left" Margin="613,426,0,0" VerticalAlignment="Top" Height="39" Width="130"/>
+                <Button x:Name="btnContinue" Style="{StaticResource ButtonStyleConfirm}" Content="Continuar" FontSize="15" HorizontalAlignment="Left" Margin="756,426,0,0" VerticalAlignment="Top" Width="130" Height="38" Click="btnContinue_Click"/>
+                <Label Style="{StaticResource CustomLabelStyle}" FontSize="25" Content="Información personal" HorizontalAlignment="Left" Margin="292,133,0,0" VerticalAlignment="Top" x:Name="NombreLabel_Copiar" Width="290" Height="37"/>
+                <Label x:Name="lbName" HorizontalAlignment="Left" Margin="301,232,0,0" VerticalAlignment="Top" Width="192" Foreground="#FFCE2222" FontStyle="Italic" FontSize="11"/>
+                <Label x:Name="lbSecondSurname" HorizontalAlignment="Left" Margin="301,332,0,0" VerticalAlignment="Top" Width="192" Foreground="#FFCE2222" FontStyle="Italic" FontSize="11"/>
+                <Label x:Name="lbCurp" HorizontalAlignment="Left" Margin="625,332,0,0" VerticalAlignment="Top" Width="192" Foreground="#FFCE2222" FontStyle="Italic" FontSize="11"/>
+                <Label x:Name="lbFirstSurname" HorizontalAlignment="Left" Margin="625,231,0,0" VerticalAlignment="Top" Width="192" Foreground="#FFCE2222" FontStyle="Italic" FontSize="11"/>
+
+            </Grid>
+        </Viewbox>
+
+    </Grid>
+
+</Page>
