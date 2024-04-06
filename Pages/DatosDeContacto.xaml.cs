@@ -67,9 +67,10 @@ namespace SGSC.Pages
 
                     if (customerData != null)
                     {
-                        Tb_PhoneNumberOne.Text = customerData.PhoneNumber1;
-                        Tb_PhoneNumberTwo.Text = customerData.PhoneNumber2;
-                        Tb_Email.Text = customerData.Email;
+                        Tb_PhoneNumberOne = customerData.PhoneNumberOne;
+                        Tb_PhoneNumberTwo = customerData.PhoneNumberTwo;    
+                        Tb_Email = customerData.Email;  
+                        
                     }
                 }
             }
