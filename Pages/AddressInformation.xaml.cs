@@ -75,7 +75,7 @@ namespace SGSC.Pages
                 using (var context = new sgscEntities())
                 {
                     var customerData = context.CustomerAddresses
-                        .Where(customerDb => customerDb.CustomerAddressId == customer)
+                        .Where(customerDb => customerDb.CustormerId == customer)
                         .FirstOrDefault();
 
 
