@@ -27,29 +27,36 @@
     </Page.Resources>
 
     <Grid>
+        <Viewbox Stretch="Fill">
+            <Grid Height="490" Width="950">
 
-        <Border Background="White" CornerRadius="22" Margin="0">
-            <!-- Contenido dentro del Border -->
-            <!-- Aquí puedes poner tu contenido -->
-        </Border>
+                <Border Background="White" CornerRadius="22">
+                    <!-- Contenido dentro del Border -->
+                    <!-- Aquí puedes poner tu contenido -->
+                </Border>
 
-        <Frame Content="Frame"/>
+                <Frame Content="Frame"/>
 
-        <!-- Grid con color de fondo -->
-        <Grid Background="LightGray" Margin="0,0,707,0">
-            <!-- No es necesario especificar un margen aquí -->
-        </Grid>
-        <Rectangle Style="{StaticResource RoundedRectangleStyle}" Margin="271,116,28,135"/>
+                <Grid Background="LightGray" Margin="0,0,707,0">
+                    <!-- No es necesario especificar un margen aquí -->
+                </Grid>
+                <Rectangle Style="{StaticResource RoundedRectangleStyle}" Margin="271,116,28,135"/>
 
-        <TextBox Style="{StaticResource CustomTextBoxStyle}" Margin="314,195,383,264"/>
-        <Label Style="{StaticResource CustomLabelStyle}" FontSize="15" Content="Teléfono 1" HorizontalAlignment="Left" Margin="314,175,0,0" VerticalAlignment="Top" x:Name="NombreLabel" Width="237" Height="27"/>
-        <Label FontFamily="{StaticResource FuenteNunitoBoldItalic}" FontSize="20" Content="Teléfonos" HorizontalAlignment="Left" Margin="292,127,0,0" VerticalAlignment="Top" Height="33" Width="156"/>
-        <Label Style="{StaticResource CustomLabelStyle}" Content="Teléfono 2" FontSize="15" HorizontalAlignment="Left" Margin="626,175,0,0" VerticalAlignment="Top"/>
-        <Label Style="{StaticResource CustomLabelStyle}" Content="Correo" FontSize="15" HorizontalAlignment="Left" Margin="314,262,0,0" VerticalAlignment="Top"/>
-        <TextBox Style="{StaticResource CustomTextBoxStyle}" Margin="314,287,301,172"/>
-        <TextBox Style="{StaticResource CustomTextBoxStyle}" Margin="626,195,71,264"/>
-        <Button Style="{StaticResource ButtonStyleCancel}" Content="Cancelar" FontSize="15" HorizontalAlignment="Left" Margin="613,426,0,0" VerticalAlignment="Top" Height="39" Width="130"/>
-        <Button Style="{StaticResource ButtonStyleConfirm}" Content="Continuar" FontSize="15" HorizontalAlignment="Left" Margin="780,426,0,0" VerticalAlignment="Top" Width="130" Height="38"/>
+                <TextBox  x:Name="Tb_PhoneNumberOne" Style="{StaticResource CustomTextBoxStyle}" Margin="314,195,383,264"/>
+                <Label Style="{StaticResource CustomLabelStyle}" FontSize="15" Content="Teléfono 1" HorizontalAlignment="Left" Margin="314,175,0,0" VerticalAlignment="Top" x:Name="NombreLabel" Width="237" Height="27"/>
+                <Label FontFamily="{StaticResource FuenteNunitoBoldItalic}" FontSize="20" Content="Teléfonos" HorizontalAlignment="Left" Margin="299,83,0,0" VerticalAlignment="Top" Height="33" Width="156"/>
+                <Label Style="{StaticResource CustomLabelStyle}" Content="Teléfono 2" FontSize="15" HorizontalAlignment="Left" Margin="626,175,0,0" VerticalAlignment="Top"/>
+                <Label Style="{StaticResource CustomLabelStyle}" Content="Correo" FontSize="15" HorizontalAlignment="Left" Margin="314,262,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="Tb_Email" Style="{StaticResource CustomTextBoxStyle}" Margin="314,287,301,172"/>
+                <TextBox x:Name="Tb_PhoneNumberTwo" Style="{StaticResource CustomTextBoxStyle}" Margin="626,195,71,264"/>
+                <Button Style="{StaticResource ButtonStyleCancel}" Content="Cancelar" FontSize="15" HorizontalAlignment="Left" Margin="613,426,0,0" VerticalAlignment="Top" Height="39" Width="130"/>
+                <Button Style="{StaticResource ButtonStyleConfirm}" Content="Continuar" FontSize="15" HorizontalAlignment="Left" Margin="780,426,0,0" VerticalAlignment="Top" Width="130" Height="38" Click="AddContactInformation"/>
+
+
+            </Grid>
+        </Viewbox>
+
+        
 
 
     </Grid>
