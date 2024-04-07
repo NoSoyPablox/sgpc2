@@ -293,7 +293,7 @@
           <Property Name="Street" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ZipCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ExternalNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="InternalNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InternalNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="true" />
           <Property Name="CustomerId" Type="Int32" />
           <Property Name="Colony" Type="String" Nullable="false" />
         </EntityType>

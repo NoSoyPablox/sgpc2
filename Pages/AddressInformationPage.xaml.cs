@@ -14,6 +14,7 @@ namespace SGSC.Pages
     public partial class AddressInformationPage : Page
     {
         private int customerId;
+        private int? addressId = null;
 
         public AddressInformationPage(int customerId)
         {
@@ -31,8 +32,7 @@ namespace SGSC.Pages
             {
 
                 if (string.IsNullOrWhiteSpace(txtStreet.Text) || string.IsNullOrWhiteSpace(txtExternalNumber.Text) ||
-                    string.IsNullOrWhiteSpace(txtInternalNumber.Text) || string.IsNullOrWhiteSpace(txtZipCode.Text) ||
-                    string.IsNullOrWhiteSpace(txtColony.Text))
+                    string.IsNullOrWhiteSpace(txtZipCode.Text) || string.IsNullOrWhiteSpace(txtColony.Text))
                 {
                     MessageBox.Show("Por favor, complete todos los campos de dirección.");
                     return;
@@ -49,11 +49,24 @@ namespace SGSC.Pages
                 {
                     Street = txtStreet.Text,
                     ExternalNumber = txtExternalNumber.Text,
-                    InternalNumber = txtInternalNumber.Text,
                     ZipCode = txtZipCode.Text,
                     Colony = txtColony.Text,
                     CustomerId = customerId
                 };
+
+                if(!string.IsNullOrWhiteSpace(txtInternalNumber.Text))
+                {
+                    newCustomerAddressInfo.InternalNumber = txtInternalNumber.Text;
+                }
+                else
+                {
+                    newCustomerAddressInfo.InternalNumber = null;
+                }
+
+                if(addressId != null)
+                {
+                    newCustomerAddressInfo.CustomerAddressId = addressId.Value;
+                }
 
                 using (sgscEntities context = new sgscEntities())
                 {
@@ -88,6 +101,7 @@ namespace SGSC.Pages
                         txtInternalNumber.Text = customerData.InternalNumber;
                         txtZipCode.Text = customerData.ZipCode;
                         txtColony.Text = customerData.Colony;
+                        addressId = customerData.CustomerAddressId;
                     }
                 }
             }
