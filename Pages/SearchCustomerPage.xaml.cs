@@ -18,9 +18,9 @@ namespace SGSC.Pages
     /// <summary>
     /// Interaction logic for SearchClientPage.xaml
     /// </summary>
-    public partial class SearchClientPage : Page
+    public partial class SearchCustomerPage : Page
     {
-        public SearchClientPage()
+        public SearchCustomerPage()
         {
             InitializeComponent();
         }
