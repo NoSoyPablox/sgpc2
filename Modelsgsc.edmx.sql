@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 04/07/2024 16:35:44
+-- Date Created: 04/07/2024 17:37:50
 -- Generated from EDMX file: C:\Users\xjerr\source\repos\MangoFizz\sgsc\Modelsgsc.edmx
 -- --------------------------------------------------
 
@@ -24,10 +24,34 @@ IF OBJECT_ID(N'[dbo].[FK_CustomerContact]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Contacts] DROP CONSTRAINT [FK_CustomerContact];
 GO
 IF OBJECT_ID(N'[dbo].[FK_CreditRequestCustomer]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Customers] DROP CONSTRAINT [FK_CreditRequestCustomer];
+    ALTER TABLE [dbo].[CreditRequests] DROP CONSTRAINT [FK_CreditRequestCustomer];
 GO
 IF OBJECT_ID(N'[dbo].[FK_CustomerId]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[CustomerContactInfoes] DROP CONSTRAINT [FK_CustomerId];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CreditRequestBankAccount]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CreditRequests] DROP CONSTRAINT [FK_CreditRequestBankAccount];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CreditRequestBankAccount1]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CreditRequests] DROP CONSTRAINT [FK_CreditRequestBankAccount1];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CreditRequestCreditCondition_CreditRequest]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CreditRequestCreditCondition] DROP CONSTRAINT [FK_CreditRequestCreditCondition_CreditRequest];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CreditRequestCreditCondition_CreditCondition]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CreditRequestCreditCondition] DROP CONSTRAINT [FK_CreditRequestCreditCondition_CreditCondition];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CustomerCustomerAddress]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Customers] DROP CONSTRAINT [FK_CustomerCustomerAddress];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CustomerWorkCenter]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Customers] DROP CONSTRAINT [FK_CustomerWorkCenter];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PaymentCreditRequest]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Payments] DROP CONSTRAINT [FK_PaymentCreditRequest];
+GO
+IF OBJECT_ID(N'[dbo].[FK_EmployeeCreditRequest]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CreditRequests] DROP CONSTRAINT [FK_EmployeeCreditRequest];
 GO
 
 -- --------------------------------------------------
@@ -66,6 +90,9 @@ IF OBJECT_ID(N'[dbo].[Payments]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[WorkCenters]', 'U') IS NOT NULL
     DROP TABLE [dbo].[WorkCenters];
+GO
+IF OBJECT_ID(N'[dbo].[CreditRequestCreditCondition]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CreditRequestCreditCondition];
 GO
 
 -- --------------------------------------------------
@@ -137,7 +164,8 @@ CREATE TABLE [dbo].[CustomerAddresses] (
     [ExternalNumber] nvarchar(max)  NULL,
     [InternalNumber] nvarchar(max)  NULL,
     [CustomerId] int  NULL,
-    [Colony] nvarchar(max)  NOT NULL
+    [Colony] nvarchar(max)  NOT NULL,
+    [Customer_CustomerId] int  NOT NULL
 );
 GO
 
@@ -158,9 +186,7 @@ CREATE TABLE [dbo].[Customers] (
     [FirstSurname] nvarchar(max)  NULL,
     [SecondSurname] nvarchar(max)  NULL,
     [Curp] nvarchar(max)  NULL,
-    [Rfc] nvarchar(max)  NULL,
-    [CustomerAddresses_CustomerAddressId] int  NOT NULL,
-    [WorkCenters_WorkCenterId] int  NOT NULL
+    [Rfc] nvarchar(max)  NULL
 );
 GO
 
@@ -197,7 +223,8 @@ CREATE TABLE [dbo].[WorkCenters] (
     [OutsideNumber] int  NULL,
     [ZipCode] int  NULL,
     [PhoneNumber] nvarchar(max)  NULL,
-    [CustomerId] int  NULL
+    [CustomerId] int  NULL,
+    [Customer_CustomerId] int  NOT NULL
 );
 GO
 
@@ -402,34 +429,34 @@ ON [dbo].[CreditRequestCreditCondition]
     ([CreditConditions_CreditConditionId]);
 GO
 
--- Creating foreign key on [CustomerAddresses_CustomerAddressId] in table 'Customers'
-ALTER TABLE [dbo].[Customers]
+-- Creating foreign key on [Customer_CustomerId] in table 'CustomerAddresses'
+ALTER TABLE [dbo].[CustomerAddresses]
 ADD CONSTRAINT [FK_CustomerCustomerAddress]
-    FOREIGN KEY ([CustomerAddresses_CustomerAddressId])
-    REFERENCES [dbo].[CustomerAddresses]
-        ([CustomerAddressId])
+    FOREIGN KEY ([Customer_CustomerId])
+    REFERENCES [dbo].[Customers]
+        ([CustomerId])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_CustomerCustomerAddress'
 CREATE INDEX [IX_FK_CustomerCustomerAddress]
-ON [dbo].[Customers]
-    ([CustomerAddresses_CustomerAddressId]);
+ON [dbo].[CustomerAddresses]
+    ([Customer_CustomerId]);
 GO
 
--- Creating foreign key on [WorkCenters_WorkCenterId] in table 'Customers'
-ALTER TABLE [dbo].[Customers]
+-- Creating foreign key on [Customer_CustomerId] in table 'WorkCenters'
+ALTER TABLE [dbo].[WorkCenters]
 ADD CONSTRAINT [FK_CustomerWorkCenter]
-    FOREIGN KEY ([WorkCenters_WorkCenterId])
-    REFERENCES [dbo].[WorkCenters]
-        ([WorkCenterId])
+    FOREIGN KEY ([Customer_CustomerId])
+    REFERENCES [dbo].[Customers]
+        ([CustomerId])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_CustomerWorkCenter'
 CREATE INDEX [IX_FK_CustomerWorkCenter]
-ON [dbo].[Customers]
-    ([WorkCenters_WorkCenterId]);
+ON [dbo].[WorkCenters]
+    ([Customer_CustomerId]);
 GO
 
 -- Creating foreign key on [CreditRequests_CreditRequestId] in table 'Payments'
