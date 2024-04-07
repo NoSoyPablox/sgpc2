@@ -10,16 +10,26 @@
       Title="LogIn">
 
     <Grid Margin="4,0,-4,0">
-        <Border BorderBrush="Black" BorderThickness="1" Margin="750,145,109,145">
+        <Image Source="../Images/login-page-bkg.png" Margin="-178,0,178,0"/>
+
+        <Border CornerRadius="22" BorderBrush="Transparent" Background="White" BorderThickness="0" Margin="750,96,109,145">
+            <Border.Effect>
+                <DropShadowEffect ShadowDepth="5" Direction="270" Opacity="0.3"/>
+            </Border.Effect>
+        </Border>
+
+        <Label Content="Iniciar sesión" HorizontalAlignment="Left" Margin="870,132,0,0" VerticalAlignment="Top" FontSize="28" FontWeight="Bold" FontFamily="FontPoppins"/>
+
+        <Border  BorderThickness="1" Margin="750,145,109,145">
             <Grid>
                 <Label Content="Correo electrónico" HorizontalAlignment="Left" Margin="37,44,0,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold"/>
-                <TextBox x:Name="tbEmail" HorizontalAlignment="Center" VerticalAlignment="Top" Width="345" Height="50" Margin="0,82,0,0"/>
+                <TextBox x:Name="tbEmail" VerticalContentAlignment="Center" Style="{StaticResource CustomTextBoxStyle}" HorizontalAlignment="Center" VerticalAlignment="Top" Width="345" Height="50" FontSize="18" Margin="0,82,0,0"/>
                 <TextBlock Name="tblEmailError" HorizontalAlignment="Center" Margin="0,137,0,0" VerticalAlignment="Top" TextAlignment="Right" Width="345" Height="22" Foreground="#FFCE0000" FontStyle="Italic"><Run Language="es-mx" Text="Esto es un mensaje de error."/></TextBlock>
                 <Label Content="Contraseña" HorizontalAlignment="Left" Margin="37,171,0,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold"/>
-                <PasswordBox x:Name="pbPassword" HorizontalAlignment="Center" VerticalAlignment="Top" Width="345" Height="50" Margin="0,205,0,0"/>
+                <PasswordBox x:Name="pbPassword" VerticalContentAlignment="Center" Style="{StaticResource CustomPasswordBoxStyle}" HorizontalAlignment="Center" VerticalAlignment="Top" Width="345" Height="50" FontSize="18" Margin="0,205,0,0"/>
                 <TextBlock Name="tblPasswordError" HorizontalAlignment="Center" Margin="0,260,0,0" VerticalAlignment="Top" TextAlignment="Right" Width="345" Height="22" Foreground="#FFCE0000" FontStyle="Italic"><Run Language="es-mx" Text="Esto es un mensaje de error."/></TextBlock>
-                <Label Content="¿Olvidaste tu contraseña? Recupérala aquí" HorizontalAlignment="Center" Margin="0,300,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" Foreground="#FF0031A7" MouseLeftButtonUp="Label_MouseLeftButtonUp"/>
-                <Button x:Name="btnLogIn" Content="Iniciar sesión" HorizontalAlignment="Center" VerticalAlignment="Top" Height="32" Width="106" Margin="0,349,0,0" FontSize="16" Click="btnLogIn_Click"/>
+                <Label Content="¿Olvidaste tu contraseña? Recupérala aquí" HorizontalAlignment="Center" Margin="0,300,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" Foreground="#FF0031A7" MouseLeftButtonUp="Label_MouseLeftButtonUp" FontFamily="FontNunitoBold"/>
+                <Button x:Name="btnLogIn" Style="{StaticResource ButtonStyleDanger}" Content="Iniciar sesión" HorizontalAlignment="Center" VerticalAlignment="Top" Height="34" Width="144" Margin="0,348,0,0" FontSize="18" Click="btnLogIn_Click"/>
             </Grid>
         </Border>
 

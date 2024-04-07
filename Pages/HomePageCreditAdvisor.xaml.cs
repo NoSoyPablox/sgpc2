@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using SGSC.Utils;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace SGSC.Pages
@@ -8,24 +9,22 @@ namespace SGSC.Pages
         public HomePageCreditAdvisor()
         {
             InitializeComponent();
+            CreditAdvisorName.Text = UserSession.Instance.FullName;
         }
 
         private void ButtonClicNuevo_Cliente(object sender, RoutedEventArgs e)
-        {
-            /*
-            PageContactInformation contactInformationPage = new PageContactInformation(true, 1);
-            if (NavigationService != null)
-            {
-                NavigationService.Navigate(contactInformationPage);
-            }*/
-
-            
+        {            
             PageWorkCenter workCenterPage = new PageWorkCenter(false, 1);
             if (NavigationService != null)
             {
                 NavigationService.Navigate(workCenterPage);
             }
             
+        }
+
+        private void LogoutButton_Click(object sender, RoutedEventArgs e)
+        {
+            UserSession.LogOut();
         }
     }
 }

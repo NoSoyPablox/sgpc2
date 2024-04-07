@@ -141,6 +141,7 @@
     <Property Name="Email" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Password" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Role" Type="smallint" Nullable="false" />
   </EntityType>
   <EntityType Name="Payments">
     <Key>
@@ -332,6 +333,7 @@
           <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Role" Type="Int16" Nullable="false" />
         </EntityType>
         <EntityType Name="Payment">
           <Key>
@@ -555,6 +557,7 @@
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

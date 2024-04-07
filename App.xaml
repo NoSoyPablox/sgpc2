@@ -68,9 +68,19 @@
                 <ScrollViewer x:Name="PART_ContentHost"/>
             </Border>
         </ControlTemplate>
-        
+
         <Style TargetType="TextBox" x:Key="CustomTextBoxStyle">
             <Setter Property="Template" Value="{StaticResource CustomTextBoxTemplate}"/>
+        </Style>
+
+        <ControlTemplate TargetType="PasswordBox" x:Key="CustomPasswordBoxTemplate">
+            <Border Background="White" BorderBrush="#BFBFBF" BorderThickness="1.5" CornerRadius="5">
+                <ScrollViewer x:Name="PART_ContentHost"/>
+            </Border>
+        </ControlTemplate>
+
+        <Style TargetType="PasswordBox" x:Key="CustomPasswordBoxStyle">
+            <Setter Property="Template" Value="{StaticResource CustomPasswordBoxTemplate}"/>
         </Style>
 
         <Style TargetType="Rectangle" x:Key="RoundedRectangleStyle">
@@ -143,6 +153,22 @@
                                 <!-- Colocamos la imagen a la derecha -->
                                 <Image Source="Images/Arrow-Icon.png" Width="20" Height="20" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="-15,0,15,0" Grid.Column="1"/>
                             </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="Button" x:Key="ButtonStyleDanger">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="#FCDC2A" CornerRadius="12">
+                            <Border.Effect>
+                                <DropShadowEffect ShadowDepth="2" Direction="320" Color="Black" Opacity="0.5"/>
+                            </Border.Effect>
+                            <TextBlock Text="{TemplateBinding Content}" FontFamily="{StaticResource FuenteNunitoBold}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>

@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 04/06/2024 17:02:35
+-- Date Created: 04/06/2024 20:45:32
 -- Generated from EDMX file: C:\Users\xjerr\source\repos\MangoFizz\sgsc\Modelsgsc.edmx
 -- --------------------------------------------------
 
@@ -17,17 +17,17 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_CustomerId]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CustomerContactInfoes] DROP CONSTRAINT [FK_CustomerId];
-GO
 IF OBJECT_ID(N'[dbo].[FK_BankAccountCustomer]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[BankAccounts] DROP CONSTRAINT [FK_BankAccountCustomer];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CustomerContact]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Contacts] DROP CONSTRAINT [FK_CustomerContact];
 GO
 IF OBJECT_ID(N'[dbo].[FK_CreditRequestCustomer]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Customers] DROP CONSTRAINT [FK_CreditRequestCustomer];
 GO
-IF OBJECT_ID(N'[dbo].[FK_CustomerContact]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Contacts] DROP CONSTRAINT [FK_CustomerContact];
+IF OBJECT_ID(N'[dbo].[FK_CustomerId]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CustomerContactInfoes] DROP CONSTRAINT [FK_CustomerId];
 GO
 
 -- --------------------------------------------------
@@ -40,8 +40,8 @@ GO
 IF OBJECT_ID(N'[dbo].[Contacts]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Contacts];
 GO
-IF OBJECT_ID(N'[dbo].[CreditConditionCreditRequest]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[CreditConditionCreditRequest];
+IF OBJECT_ID(N'[dbo].[CreditConditionCreditRequests]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CreditConditionCreditRequests];
 GO
 IF OBJECT_ID(N'[dbo].[CreditConditions]', 'U') IS NOT NULL
     DROP TABLE [dbo].[CreditConditions];
@@ -178,7 +178,8 @@ CREATE TABLE [dbo].[Employees] (
     [SecondSurname] nvarchar(max)  NULL,
     [Email] nvarchar(max)  NULL,
     [Name] nvarchar(max)  NULL,
-    [Password] nvarchar(max)  NULL
+    [Password] nvarchar(max)  NULL,
+    [Role] smallint  NOT NULL
 );
 GO
 

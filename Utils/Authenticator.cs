@@ -13,7 +13,8 @@ namespace SGSC.Utils
         {
             Success = 0,
             InvalidCredentials,
-            DatabaseError
+            DatabaseError,
+            SessionAlreadyActive
         }
 
         public static string HashPassword(string password)
@@ -30,19 +31,34 @@ namespace SGSC.Utils
             return stringBuilder.ToString();
         }
 
-        public static AuthResult AuthUser(string email, string password)
+        public static AuthResult AuthUser(string email, string password, bool setSession = false)
         {
-            sgscEntities context = new sgscEntities();
-            var user = context.Employees.Where(c => c.Email == email).FirstOrDefault();
-            if (user == null)
+            if(setSession && UserSession.Instance != null)
             {
-                return AuthResult.InvalidCredentials;
+                return AuthResult.SessionAlreadyActive;
             }
-            if (user.Password != HashPassword(password))
+            try
             {
-                return AuthResult.InvalidCredentials;
+                sgscEntities context = new sgscEntities();
+                var user = context.Employees.Where(c => c.Email == email).FirstOrDefault();
+                if (user == null)
+                {
+                    return AuthResult.InvalidCredentials;
+                }
+                if (user.Password != HashPassword(password))
+                {
+                    return AuthResult.InvalidCredentials;
+                }
+                if(setSession)
+                {
+                    UserSession.LogIn(user.EmployeeId, user.Email, user.Name, user.FirstSurname, user.SecondSurname, user.Role);
+                }
+                return AuthResult.Success;
             }
-            return AuthResult.Success;
+            catch (Exception)
+            {
+                return AuthResult.DatabaseError;
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SGSC.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,7 +24,9 @@ namespace SGSC.Pages
 		public LogIn()
 		{
 			InitializeComponent();
-		}
+            tblEmailError.Text = "";
+            tblPasswordError.Text = "";
+        }
 
 		private void btnLogIn_Click(object sender, RoutedEventArgs e)
 		{
@@ -34,13 +37,13 @@ namespace SGSC.Pages
 
             if(tbEmail.Text.Equals(""))
             {
-                tblEmailError.Text = "Please enter your email.";
+                tblEmailError.Text = "Por favor ingresa tu correo electrónico.";
 				valid = false;
             }
 
 			if(pbPassword.Password.Equals(""))
 			{
-                tblPasswordError.Text = "Please enter your password.";
+                tblPasswordError.Text = "Por favor ingresa tu contraseña.";
 				valid = false;
             }
 
@@ -52,19 +55,22 @@ namespace SGSC.Pages
 			var email = tbEmail.Text;
 			var password = pbPassword.Password;
 
-			var res = Utils.Authenticator.AuthUser(email, password);
+			var res = Utils.Authenticator.AuthUser(email, password, true);
 			switch(res)
 			{
 				case Utils.Authenticator.AuthResult.Success:
-					MessageBox.Show("Log in successful.");
 					break;
 
 				case Utils.Authenticator.AuthResult.InvalidCredentials:
-					MessageBox.Show("Invalid credentials.");
+					MessageBox.Show("Credenciales inválidas.");
 					break;
 
 				case Utils.Authenticator.AuthResult.DatabaseError:
-					MessageBox.Show("Database error.");
+					MessageBox.Show("Error de conexión. Intentelo más tarde.");
+					break;
+
+				default:
+					MessageBox.Show("Error desconocido.");
 					break;
             }
 		}

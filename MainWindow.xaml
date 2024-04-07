@@ -6,12 +6,12 @@
         xmlns:local="clr-namespace:SGSC"
         xmlns:pages="clr-namespace:SGSC.Pages"
         mc:Ignorable="d"
-        Title="MainWindow" SizeToContent="WidthAndHeight" Background="White">
+        Title="Sistema de gestión de solucitudes crediticias" SizeToContent="WidthAndHeight" Background="White">
     <Grid>
         <Viewbox Name="MainViewBox">
-            <Frame NavigationUIVisibility="Hidden" Height="720" Width="1280">
+            <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Height="720" Width="1280">
                 <Frame.Content>
-                    <pages:HomePageCreditAdvisor/>
+                    <pages:LogIn/>
                 </Frame.Content>
             </Frame>
         </Viewbox>

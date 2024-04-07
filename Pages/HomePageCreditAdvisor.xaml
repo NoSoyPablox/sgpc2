@@ -27,13 +27,13 @@
             <Image Source="../Images/icon-board.png" Height="70" Width="50"/>
         </Button>
 
-        <Button Style="{StaticResource Menubutton}" FontSize="15" HorizontalAlignment="Left" Margin="16,630,0,0" VerticalAlignment="Top" Width="72" Height="75">
+        <Button Name="LogoutButton" Background="White" Style="{StaticResource Menubutton}" FontSize="15" HorizontalAlignment="Left" Margin="16,630,0,0" VerticalAlignment="Top" Width="72" Height="75" Click="LogoutButton_Click">
             <Image Source="../Images/icon-logout.png" Height="70" Width="50"/>
         </Button>
 
-        <Image Source="../Images/user-circle-placeholder.png" Margin="939,18,267,598" RenderTransformOrigin="0.47,0.339"/>
-        <TextBlock FontSize="16" FontWeight="Medium" Margin="1018,70,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"><Run Text="Asesor(a) de c"/><Run Text="rédito"/></TextBlock>
-        <TextBlock FontSize="20" FontWeight="Medium" Margin="1018,43,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"><Run Language="es-mx" Text="Nombre del usuario"/></TextBlock>
+        <Image Source="../Images/user-circle-placeholder.png" Margin="864,18,342,598" RenderTransformOrigin="0.47,0.339"/>
+        <TextBlock FontSize="16" FontWeight="Medium" Margin="943,70,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"><Run Text="Asesor(a) de c"/><Run Text="rédito"/></TextBlock>
+        <TextBlock Name="CreditAdvisorName" FontSize="20" FontWeight="Medium" Margin="943,43,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"><Run Language="es-mx" Text="Nombre del usuario"/></TextBlock>
 
         <Border CornerRadius="22" BorderBrush="Transparent" BorderThickness="0" Margin="166,142,50,337">
             <Border.Effect>

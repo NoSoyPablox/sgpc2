@@ -14,7 +14,7 @@
         <EntityTypeShape EntityType="sgscModel.CustomerAddress" Width="1.5" PointX="7.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="sgscModel.CustomerContactInfo" Width="1.5" PointX="5.25" PointY="7.875" IsExpanded="true" />
         <EntityTypeShape EntityType="sgscModel.Customer" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="sgscModel.Employee" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="sgscModel.Employee" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
         <EntityTypeShape EntityType="sgscModel.Payment" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="sgscModel.WorkCenter" Width="1.5" PointX="9.75" PointY="3.75" IsExpanded="true" />
         <AssociationConnector Association="sgscModel.FK_BankAccountCustomer" ManuallyRouted="false" />
