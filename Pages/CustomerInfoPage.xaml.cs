@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SGSC.Frames;
+using System;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Data.Entity;
@@ -22,18 +23,22 @@ namespace SGSC.Pages
     /// <summary>
     /// Lógica de interacción para DatosDeCliente.xaml
     /// </summary>
-    public partial class DatosDeCliente : Page
+    public partial class CustomerInfoPage : Page
     {
-        int idCustomer = 25;
-        public DatosDeCliente(/*int idCliente*/)
+        private int? CustomerId = null;
+
+        public CustomerInfoPage(int? customerId = null)
         {
             InitializeComponent();
-            if (idCustomer != -1)
+            CustomerId = customerId;
+            if (CustomerId != null)
             {
-                getCustomerInfo(idCustomer);
+                getCustomerInfo(CustomerId.Value);
             }
-        }
 
+            StepsSidebarFrame.Content = new CustomerRegisterStepsSidebar("PersonalInfo");
+            UserSessionFrame.Content = new UserSessionFrame();
+        }
 
         private void btnContinue_Click(object sender, RoutedEventArgs e)
         {
@@ -72,7 +77,7 @@ namespace SGSC.Pages
             {
                 return;
             }
-            if (idCustomer == -1)
+            if (CustomerId == -1)
             {
                 registerCustomer();
             }
@@ -113,7 +118,7 @@ namespace SGSC.Pages
         {
             using (sgscEntities db = new sgscEntities())
             {
-                Customer customerToUpdate = db.Customers.Find(idCustomer);
+                Customer customerToUpdate = db.Customers.Find(CustomerId);
                 customerToUpdate.Curp = tbCURP.Text;
                 customerToUpdate.Name = tbName.Text;
                 customerToUpdate.FirstSurname = tbFirstSurname.Text;
@@ -155,6 +160,11 @@ namespace SGSC.Pages
                 tbFirstSurname.Text = customer.FirstSurname;
                 tbSecondSurname.Text = customer.SecondSurname;
             }
+        }
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            App.Current.MainFrame.GoBack();
         }
     }
 }

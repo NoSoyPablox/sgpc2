@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SGSC.Pages"
+      xmlns:frames="clr-namespace:SGSC.Frames"
       mc:Ignorable="d" 
       d:DesignHeight="720" d:DesignWidth="1280"
       Title="HomePageCreditAdvisor">
@@ -31,9 +32,11 @@
             <Image Source="../Images/icon-logout.png" Height="70" Width="50"/>
         </Button>
 
-        <Image Source="../Images/user-circle-placeholder.png" Margin="864,18,342,598" RenderTransformOrigin="0.47,0.339"/>
-        <TextBlock FontSize="16" FontWeight="Medium" Margin="943,70,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"><Run Text="Asesor(a) de c"/><Run Text="rédito"/></TextBlock>
-        <TextBlock Name="CreditAdvisorName" FontSize="20" FontWeight="Medium" Margin="943,43,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"><Run Language="es-mx" Text="Nombre del usuario"/></TextBlock>
+        <Frame>
+            <Frame.Content>
+                <frames:UserSessionFrame Margin="831,23,38,612"/>
+            </Frame.Content>
+        </Frame>
 
         <Border CornerRadius="22" BorderBrush="Transparent" BorderThickness="0" Margin="166,142,50,337">
             <Border.Effect>

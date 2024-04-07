@@ -17,6 +17,21 @@ namespace SGSC.Utils
             CreditAnalyst,
         }
 
+        public static string GetRoleName(short role)
+        {
+            switch(role)
+            {
+                case (short)UserRole.Admin:
+                    return "Administrador(a)";
+                case (short)UserRole.CreditAdvisor:
+                    return "Asesor(a) de crédito";
+                case (short)UserRole.CreditAnalyst:
+                    return "Analista de crédito";
+                default:
+                    return "Rol no implementado";
+            }
+        }
+
         private static UserSession _instance;
         public static UserSession Instance
         {

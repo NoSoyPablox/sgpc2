@@ -99,6 +99,12 @@
     <Compile Include="Employee.cs">
       <DependentUpon>Modelsgsc.tt</DependentUpon>
     </Compile>
+    <Compile Include="Frames\CustomerRegisterStepsSidebar.xaml.cs">
+      <DependentUpon>CustomerRegisterStepsSidebar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Frames\UserSessionFrame.xaml.cs">
+      <DependentUpon>UserSessionFrame.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Messages\ToastNotification.xaml.cs">
       <DependentUpon>ToastNotification.xaml</DependentUpon>
     </Compile>
@@ -139,6 +145,14 @@
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="Frames\CustomerRegisterStepsSidebar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Frames\UserSessionFrame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Messages\ToastNotification.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -188,7 +202,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\DatosDeCliente.xaml">
+    <Page Include="Pages\CustomerInfoPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -209,8 +223,8 @@
     <Compile Include="Pages\CentroDeTrabajo.xaml.cs">
       <DependentUpon>CentroDeTrabajo.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\DatosDeCliente.xaml.cs">
-      <DependentUpon>DatosDeCliente.xaml</DependentUpon>
+    <Compile Include="Pages\CustomerInfoPage.xaml.cs">
+      <DependentUpon>CustomerInfoPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\DatosDeContacto.xaml.cs">
       <DependentUpon>DatosDeContacto.xaml</DependentUpon>

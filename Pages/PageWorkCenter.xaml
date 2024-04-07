@@ -33,6 +33,8 @@
 
         <Border CornerRadius="22" BorderBrush="Transparent" Background="#FFF3F3F3" BorderThickness="0" Margin="10,342,992,321"/>
 
+        <Label FontFamily="{StaticResource FontPoppins}" FontWeight="Bold" FontSize="36" Content="Dar de alta cliente" HorizontalAlignment="Left" Margin="46,48,0,0" VerticalAlignment="Top"/>
+
         <Grid Background="Transparent" Margin="27,138,1009,62">
             <Grid.RowDefinitions>
                 <RowDefinition Height="451*"/>
@@ -69,7 +71,6 @@
         <Button Style="{StaticResource ButtonStyleConfirm}" Content="Continuar" FontSize="22" HorizontalAlignment="Left" Margin="1048,614,0,0" VerticalAlignment="Top" Width="180" Height="54" Click="BtnClicContinue" />
 
         <Label FontFamily="{StaticResource FontNunitoSemiBold}" FontSize="30" Foreground="#343434" Content="Domicilio" HorizontalAlignment="Left" Margin="308,265,0,0" VerticalAlignment="Top" Height="55" Width="161"/>
-        <Label FontFamily="{StaticResource FontPoppins}" FontWeight="Bold" FontSize="36" Content="Dar de alta cliente" HorizontalAlignment="Left" Margin="271,53,0,0" VerticalAlignment="Top"/>
         <Label Content="* Campos obligatorios" Foreground="Red" FontFamily="{StaticResource FontNunito}" FontStyle="Italic"  HorizontalAlignment="Left" Margin="286,591,0,0" VerticalAlignment="Top" Width="206" FontSize="18"/>
         <Label x:Name="lbIsEmptyCenterName" Content="Campo vacío" HorizontalContentAlignment="right" Foreground="Red" FontFamily="{StaticResource ResourceKey=FontNunito}" HorizontalAlignment="Left" Margin="804,251,0,0" VerticalAlignment="Top" Height="39" Width="116"/>
         <Label x:Name="lbIsEmptyPhone" Content="Campo vacío" HorizontalContentAlignment="right" Foreground="Red" FontFamily="{StaticResource ResourceKey=FontNunito}" HorizontalAlignment="Left" Margin="1085,253,0,0" VerticalAlignment="Top" Height="39" Width="116"/>

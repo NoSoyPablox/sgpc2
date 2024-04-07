@@ -9,15 +9,14 @@ namespace SGSC.Pages
         public HomePageCreditAdvisor()
         {
             InitializeComponent();
-            CreditAdvisorName.Text = UserSession.Instance.FullName;
         }
 
         private void ButtonClicNuevo_Cliente(object sender, RoutedEventArgs e)
         {            
-            PageWorkCenter workCenterPage = new PageWorkCenter(false, 1);
+            var customerInfoPage = new CustomerInfoPage();
             if (NavigationService != null)
             {
-                NavigationService.Navigate(workCenterPage);
+                NavigationService.Navigate(customerInfoPage);
             }
             
         }
