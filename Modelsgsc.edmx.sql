@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 04/06/2024 20:45:32
+-- Date Created: 04/07/2024 04:29:33
 -- Generated from EDMX file: C:\Users\xjerr\source\repos\MangoFizz\sgsc\Modelsgsc.edmx
 -- --------------------------------------------------
 
@@ -83,7 +83,7 @@ CREATE TABLE [dbo].[BankAccounts] (
     [AccountType] nvarchar(max)  NULL,
     [CardType] nvarchar(max)  NULL,
     [BankName] nvarchar(max)  NULL,
-    [Customer_CustormerId] int  NULL,
+    [Customer_CustomerId] int  NULL,
     [CreditRequestId] int  NULL
 );
 GO
@@ -95,7 +95,7 @@ CREATE TABLE [dbo].[Contacts] (
     [FirstSurname] nvarchar(max)  NULL,
     [SecondSurname] nvarchar(max)  NULL,
     [PhoneNumber] nvarchar(max)  NULL,
-    [CustormerId] int  NULL
+    [CustomerId] int  NULL
 );
 GO
 
@@ -144,7 +144,8 @@ CREATE TABLE [dbo].[CustomerAddresses] (
     [ZipCode] nvarchar(max)  NULL,
     [ExternalNumber] nvarchar(max)  NULL,
     [InternalNumber] nvarchar(max)  NULL,
-    [CustormerId] int  NULL
+    [CustomerId] int  NULL,
+    [Colony] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -160,7 +161,7 @@ GO
 
 -- Creating table 'Customers'
 CREATE TABLE [dbo].[Customers] (
-    [CustormerId] int IDENTITY(1,1) NOT NULL,
+    [CustomerId] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(max)  NULL,
     [FirstSurname] nvarchar(max)  NULL,
     [SecondSurname] nvarchar(max)  NULL,
@@ -203,7 +204,7 @@ CREATE TABLE [dbo].[WorkCenters] (
     [OutsideNumber] int  NULL,
     [ZipCode] int  NULL,
     [PhoneNumber] nvarchar(max)  NULL,
-    [CustormerId] int  NULL
+    [CustomerId] int  NULL
 );
 GO
 
@@ -259,10 +260,10 @@ ADD CONSTRAINT [PK_CustomerContactInfoes]
     PRIMARY KEY CLUSTERED ([CustomerContactInfoId] ASC);
 GO
 
--- Creating primary key on [CustormerId] in table 'Customers'
+-- Creating primary key on [CustomerId] in table 'Customers'
 ALTER TABLE [dbo].[Customers]
 ADD CONSTRAINT [PK_Customers]
-    PRIMARY KEY CLUSTERED ([CustormerId] ASC);
+    PRIMARY KEY CLUSTERED ([CustomerId] ASC);
 GO
 
 -- Creating primary key on [EmployeeId] in table 'Employees'
@@ -287,34 +288,34 @@ GO
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
 
--- Creating foreign key on [Customer_CustormerId] in table 'BankAccounts'
+-- Creating foreign key on [Customer_CustomerId] in table 'BankAccounts'
 ALTER TABLE [dbo].[BankAccounts]
 ADD CONSTRAINT [FK_BankAccountCustomer]
-    FOREIGN KEY ([Customer_CustormerId])
+    FOREIGN KEY ([Customer_CustomerId])
     REFERENCES [dbo].[Customers]
-        ([CustormerId])
+        ([CustomerId])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_BankAccountCustomer'
 CREATE INDEX [IX_FK_BankAccountCustomer]
 ON [dbo].[BankAccounts]
-    ([Customer_CustormerId]);
+    ([Customer_CustomerId]);
 GO
 
--- Creating foreign key on [CustormerId] in table 'Contacts'
+-- Creating foreign key on [CustomerId] in table 'Contacts'
 ALTER TABLE [dbo].[Contacts]
 ADD CONSTRAINT [FK_CustomerContact]
-    FOREIGN KEY ([CustormerId])
+    FOREIGN KEY ([CustomerId])
     REFERENCES [dbo].[Customers]
-        ([CustormerId])
+        ([CustomerId])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_CustomerContact'
 CREATE INDEX [IX_FK_CustomerContact]
 ON [dbo].[Contacts]
-    ([CustormerId]);
+    ([CustomerId]);
 GO
 
 -- Creating foreign key on [CreditRequestId] in table 'Customers'
@@ -337,7 +338,7 @@ ALTER TABLE [dbo].[CustomerContactInfoes]
 ADD CONSTRAINT [FK_CustomerId]
     FOREIGN KEY ([CustomerId])
     REFERENCES [dbo].[Customers]
-        ([CustormerId])
+        ([CustomerId])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 

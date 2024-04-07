@@ -51,7 +51,7 @@ namespace SGSC.Pages
             {
                 try
                 {
-                    userWorkCenter = dbContext.WorkCenters.FirstOrDefault(c => c.CustormerId == 2);
+                    userWorkCenter = dbContext.WorkCenters.FirstOrDefault(c => c.CustomerId == 2);
                     ShowInformationWorkCenter(userWorkCenter);
                 }
                 catch (Exception ex)
@@ -175,7 +175,7 @@ namespace SGSC.Pages
                             OutsideNumber = IntOutsideNumber,
                             Colony = Colony,
                             ZipCode = IntZipCode,
-                            CustormerId = 2
+                            CustomerId = 2
                         };
 
                         dbContext.WorkCenters.Add(NewWorkcenter);

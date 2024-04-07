@@ -22,7 +22,7 @@ namespace SGSC
             this.CustomerContactInfoes = new HashSet<CustomerContactInfo>();
         }
     
-        public int CustormerId { get; set; }
+        public int CustomerId { get; set; }
         public string Name { get; set; }
         public string FirstSurname { get; set; }
         public string SecondSurname { get; set; }

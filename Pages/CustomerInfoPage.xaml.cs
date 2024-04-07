@@ -83,7 +83,7 @@ namespace SGSC.Pages
             {
                 return;
             }
-            if (CustomerId == -1)
+            if (CustomerId == null)
             {
                 registerCustomer();
             }
@@ -97,21 +97,23 @@ namespace SGSC.Pages
         {
             using (sgscEntities db = new sgscEntities())
             {
-                Customer customerToRegister = new Customer();
-                customerToRegister.Curp = tbCURP.Text;
-                customerToRegister.Name = tbName.Text;
-                customerToRegister.FirstSurname = tbFirstSurname.Text;
-                customerToRegister.SecondSurname = tbSecondSurname.Text;
-                db.Customers.Add(customerToRegister);
-
                 try
                 {
+                    Customer customerToRegister = new Customer();
+                    customerToRegister.Curp = tbCURP.Text;
+                    customerToRegister.Name = tbName.Text;
+                    customerToRegister.FirstSurname = tbFirstSurname.Text;
+                    customerToRegister.SecondSurname = tbSecondSurname.Text;
+                    customerToRegister = db.Customers.Add(customerToRegister);
+
                     db.SaveChanges();
                     MessageBox.Show("Cliente registrado exitosamente.");
                     tbCURP.Text = "";
                     tbName.Text = "";
                     tbFirstSurname.Text = "";
                     tbSecondSurname.Text = "";
+                    
+                    App.Current.MainFrame.Content = new AddressInformationPage(customerToRegister.CustomerId);
                 }
                 catch (Exception ex)
                 {
@@ -124,16 +126,18 @@ namespace SGSC.Pages
         {
             using (sgscEntities db = new sgscEntities())
             {
-                Customer customerToUpdate = db.Customers.Find(CustomerId);
-                customerToUpdate.Curp = tbCURP.Text;
-                customerToUpdate.Name = tbName.Text;
-                customerToUpdate.FirstSurname = tbFirstSurname.Text;
-                customerToUpdate.SecondSurname = tbSecondSurname.Text;
-
                 try
                 {
+                    Customer customerToUpdate = db.Customers.Find(CustomerId);
+                    customerToUpdate.Curp = tbCURP.Text;
+                    customerToUpdate.Name = tbName.Text;
+                    customerToUpdate.FirstSurname = tbFirstSurname.Text;
+                    customerToUpdate.SecondSurname = tbSecondSurname.Text;
+
                     db.SaveChanges();
-                    Console.WriteLine("Cliente actualizado exitosamente.");
+                    MessageBox.Show("Cliente actualizado exitosamente.");
+                    
+                    App.Current.MainFrame.Content = new AddressInformationPage(CustomerId.Value);
                 }
                 catch (Exception ex)
                 {
@@ -158,7 +162,7 @@ namespace SGSC.Pages
                 if (customer == null)
                 {
                     MessageBox.Show("No se encontró el cliente seleccionado");
-                    //Aqui deberá de regresar a la pantalla anterior
+                    App.Current.MainFrame.GoBack();
                     return;
                 }
                 tbCURP.Text = customer.Curp;

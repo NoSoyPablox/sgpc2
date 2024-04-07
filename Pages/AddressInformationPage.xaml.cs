@@ -1,23 +1,28 @@
-﻿using System;
+﻿using SGSC.Frames;
+using System;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace SGSC.Pages
 {
     /// <summary>
     /// Lógica de interacción para AddressInformation.xaml
     /// </summary>
-    public partial class AddressInformation : Window
+    public partial class AddressInformationPage : Page
     {
-        private int customer;
+        private int customerId;
 
-        public AddressInformation(/*int customerId*/)
+        public AddressInformationPage(int customerId)
         {
-            customer = 1;
+            this.customerId = customerId;
             InitializeComponent();
             UpdateAddressInformation();
+
+            StepsSidebarFrame.Content = new CustomerRegisterStepsSidebar("Address");
+            UserSessionFrame.Content = new UserSessionFrame();
         }
 
         private void AddAddressInformation(object sender, RoutedEventArgs e)
@@ -25,15 +30,16 @@ namespace SGSC.Pages
             try
             {
 
-                if (string.IsNullOrWhiteSpace(Tb_Street.Text) || string.IsNullOrWhiteSpace(Tb_ExternalNumber.Text) ||
-                    string.IsNullOrWhiteSpace(Tb_InternalNumber.Text) || string.IsNullOrWhiteSpace(Tb_ZipCode.Text))
+                if (string.IsNullOrWhiteSpace(txtStreet.Text) || string.IsNullOrWhiteSpace(txtExternalNumber.Text) ||
+                    string.IsNullOrWhiteSpace(txtInternalNumber.Text) || string.IsNullOrWhiteSpace(txtZipCode.Text) ||
+                    string.IsNullOrWhiteSpace(txtColony.Text))
                 {
                     MessageBox.Show("Por favor, complete todos los campos de dirección.");
                     return;
                 }
 
 
-                if (!IsValidZipCode(Tb_ZipCode.Text))
+                if (!IsValidZipCode(txtZipCode.Text))
                 {
                     MessageBox.Show("Por favor, introduzca un código postal válido.");
                     return;
@@ -41,21 +47,17 @@ namespace SGSC.Pages
 
                 var newCustomerAddressInfo = new CustomerAddress
                 {
-                    Street = Tb_Street.Text,
-                    ExternalNumber = Tb_ExternalNumber.Text,
-                    InternalNumber = Tb_InternalNumber.Text,
-                    ZipCode = Tb_ZipCode.Text
+                    Street = txtStreet.Text,
+                    ExternalNumber = txtExternalNumber.Text,
+                    InternalNumber = txtInternalNumber.Text,
+                    ZipCode = txtZipCode.Text,
+                    Colony = txtColony.Text,
+                    CustomerId = customerId
                 };
-
-                if (customer != 0)
-                {
-                    newCustomerAddressInfo.CustomerAddressId = customer;
-                }
-
 
                 using (sgscEntities context = new sgscEntities())
                 {
-                    context.CustomerContactInfoes.AddOrUpdate();
+                    context.CustomerAddresses.AddOrUpdate(newCustomerAddressInfo);
                     context.SaveChanges();
                 }
 
@@ -75,16 +77,17 @@ namespace SGSC.Pages
                 using (var context = new sgscEntities())
                 {
                     var customerData = context.CustomerAddresses
-                        .Where(customerDb => customerDb.CustormerId == customer)
+                        .Where(customerDb => customerDb.CustomerId == customerId)
                         .FirstOrDefault();
 
 
                     if (customerData != null)
                     {
-                        Tb_Street.Text = customerData.Street;
-                        Tb_ExternalNumber.Text = customerData.ExternalNumber;
-                        Tb_InternalNumber.Text = customerData.InternalNumber;
-                        Tb_ZipCode.Text = customerData.ZipCode;
+                        txtStreet.Text = customerData.Street;
+                        txtExternalNumber.Text = customerData.ExternalNumber;
+                        txtInternalNumber.Text = customerData.InternalNumber;
+                        txtZipCode.Text = customerData.ZipCode;
+                        txtColony.Text = customerData.Colony;
                     }
                 }
             }
@@ -102,7 +105,11 @@ namespace SGSC.Pages
 
         private void CancelRegister(object sender, RoutedEventArgs e)
         {
-            Environment.Exit(0);
+            var result = System.Windows.Forms.MessageBox.Show("Está seguro que desea cancelar el registro?\nSi decide cancelarlo puede retomarlo más tarde.", "Cancelar registro", System.Windows.Forms.MessageBoxButtons.YesNo);
+            if (result == System.Windows.Forms.DialogResult.Yes)
+            {
+                App.Current.MainFrame.Content = new HomePageCreditAdvisor();
+            }
         }
     }
 }

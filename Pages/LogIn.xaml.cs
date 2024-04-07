@@ -59,7 +59,7 @@ namespace SGSC.Pages
 			switch(res)
 			{
 				case Utils.Authenticator.AuthResult.Success:
-					break;
+                    break;
 
 				case Utils.Authenticator.AuthResult.InvalidCredentials:
 					MessageBox.Show("Credenciales inválidas.");

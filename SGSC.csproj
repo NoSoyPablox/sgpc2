@@ -185,8 +185,8 @@
     <Compile Include="Pages\PageContactInformation.xaml.cs">
       <DependentUpon>PageContactInformation.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\AddressInformation.xaml.cs">
-      <DependentUpon>AddressInformation.xaml</DependentUpon>
+    <Compile Include="Pages\AddressInformationPage.xaml.cs">
+      <DependentUpon>AddressInformationPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="TextBoxName.cs" />
     <Compile Include="Validator.cs" />
@@ -194,7 +194,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\AddressInformation.xaml">
+    <Page Include="Pages\AddressInformationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

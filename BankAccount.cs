@@ -20,7 +20,7 @@ namespace SGSC
         public string AccountType { get; set; }
         public string CardType { get; set; }
         public string BankName { get; set; }
-        public Nullable<int> Customer_CustormerId { get; set; }
+        public Nullable<int> Customer_CustomerId { get; set; }
         public Nullable<int> CreditRequestId { get; set; }
     
         public virtual Customer Customer { get; set; }
