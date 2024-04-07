@@ -123,6 +123,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Modelsgsc.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\CustomerBankAccountsPage.xaml.cs">
+      <DependentUpon>CustomerBankAccountsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\HomePageCreditAdvisor.xaml.cs">
       <DependentUpon>HomePageCreditAdvisor.xaml</DependentUpon>
     </Compile>
@@ -154,6 +157,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Messages\ToastNotification.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\CustomerBankAccountsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
