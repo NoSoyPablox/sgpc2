@@ -21,5 +21,7 @@ namespace SGSC
         public string InternalNumber { get; set; }
         public Nullable<int> CustomerId { get; set; }
         public string Colony { get; set; }
+    
+        public virtual Customer Customer { get; set; }
     }
 }

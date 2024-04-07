@@ -19,6 +19,7 @@ namespace SGSC
         {
             this.BankAccounts = new HashSet<BankAccount>();
             this.Contacts = new HashSet<Contact>();
+            this.CreditRequests = new HashSet<CreditRequest>();
             this.CustomerContactInfoes = new HashSet<CustomerContactInfo>();
         }
     
@@ -28,15 +29,16 @@ namespace SGSC
         public string SecondSurname { get; set; }
         public string Curp { get; set; }
         public string Rfc { get; set; }
-        public Nullable<int> CreditRequestId { get; set; }
-        public Nullable<int> CustomerContactInfoId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BankAccount> BankAccounts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Contact> Contacts { get; set; }
-        public virtual CreditRequest CreditRequest { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CreditRequest> CreditRequests { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CustomerContactInfo> CustomerContactInfoes { get; set; }
+        public virtual CustomerAddress CustomerAddresses { get; set; }
+        public virtual WorkCenter WorkCenters { get; set; }
     }
 }

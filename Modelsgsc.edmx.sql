@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 04/07/2024 05:17:05
+-- Date Created: 04/07/2024 16:35:44
 -- Generated from EDMX file: C:\Users\xjerr\source\repos\MangoFizz\sgsc\Modelsgsc.edmx
 -- --------------------------------------------------
 
@@ -39,9 +39,6 @@ IF OBJECT_ID(N'[dbo].[BankAccounts]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[Contacts]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Contacts];
-GO
-IF OBJECT_ID(N'[dbo].[CreditConditionCreditRequests]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[CreditConditionCreditRequests];
 GO
 IF OBJECT_ID(N'[dbo].[CreditConditions]', 'U') IS NOT NULL
     DROP TABLE [dbo].[CreditConditions];
@@ -83,8 +80,7 @@ CREATE TABLE [dbo].[BankAccounts] (
     [AccountType] nvarchar(max)  NULL,
     [CardType] nvarchar(max)  NULL,
     [BankName] nvarchar(max)  NULL,
-    [Customer_CustomerId] int  NULL,
-    [CreditRequestId] int  NULL
+    [CustomerId] int  NOT NULL
 );
 GO
 
@@ -95,15 +91,7 @@ CREATE TABLE [dbo].[Contacts] (
     [FirstSurname] nvarchar(max)  NULL,
     [SecondSurname] nvarchar(max)  NULL,
     [PhoneNumber] nvarchar(max)  NULL,
-    [CustomerId] int  NULL
-);
-GO
-
--- Creating table 'CreditConditionCreditRequests'
-CREATE TABLE [dbo].[CreditConditionCreditRequests] (
-    [CreditConditionIdRequest] int IDENTITY(1,1) NOT NULL,
-    [CreditCondition_CreditConditionId] int  NULL,
-    [CreditRequests_CreditRequestId] int  NULL
+    [CustomerId] int  NOT NULL
 );
 GO
 
@@ -133,7 +121,11 @@ CREATE TABLE [dbo].[CreditRequests] (
     [Purpose] nvarchar(max)  NULL,
     [InterestRate] decimal(18,0)  NULL,
     [CreationDate] datetime  NULL,
-    [EmployeeId] int  NULL
+    [EmployeeId] int  NULL,
+    [CustomerId] int  NOT NULL,
+    [TransferBankAccount_BankAccountId] int  NOT NULL,
+    [DirectDebitBankAccount_BankAccountId] int  NOT NULL,
+    [Employee_EmployeeId] int  NOT NULL
 );
 GO
 
@@ -167,8 +159,8 @@ CREATE TABLE [dbo].[Customers] (
     [SecondSurname] nvarchar(max)  NULL,
     [Curp] nvarchar(max)  NULL,
     [Rfc] nvarchar(max)  NULL,
-    [CreditRequestId] int  NULL,
-    [CustomerContactInfoId] int  NULL
+    [CustomerAddresses_CustomerAddressId] int  NOT NULL,
+    [WorkCenters_WorkCenterId] int  NOT NULL
 );
 GO
 
@@ -190,7 +182,8 @@ CREATE TABLE [dbo].[Payments] (
     [FileNumber] nvarchar(max)  NULL,
     [PaymentDate] datetime  NULL,
     [Amount] nvarchar(max)  NULL,
-    [CreditRequestId] int  NULL
+    [CreditRequestId] int  NULL,
+    [CreditRequests_CreditRequestId] int  NOT NULL
 );
 GO
 
@@ -208,6 +201,13 @@ CREATE TABLE [dbo].[WorkCenters] (
 );
 GO
 
+-- Creating table 'CreditRequestCreditCondition'
+CREATE TABLE [dbo].[CreditRequestCreditCondition] (
+    [CreditRequests_CreditRequestId] int  NOT NULL,
+    [CreditConditions_CreditConditionId] int  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -222,12 +222,6 @@ GO
 ALTER TABLE [dbo].[Contacts]
 ADD CONSTRAINT [PK_Contacts]
     PRIMARY KEY CLUSTERED ([ContactId] ASC);
-GO
-
--- Creating primary key on [CreditConditionIdRequest] in table 'CreditConditionCreditRequests'
-ALTER TABLE [dbo].[CreditConditionCreditRequests]
-ADD CONSTRAINT [PK_CreditConditionCreditRequests]
-    PRIMARY KEY CLUSTERED ([CreditConditionIdRequest] ASC);
 GO
 
 -- Creating primary key on [CreditConditionId] in table 'CreditConditions'
@@ -284,14 +278,20 @@ ADD CONSTRAINT [PK_WorkCenters]
     PRIMARY KEY CLUSTERED ([WorkCenterId] ASC);
 GO
 
+-- Creating primary key on [CreditRequests_CreditRequestId], [CreditConditions_CreditConditionId] in table 'CreditRequestCreditCondition'
+ALTER TABLE [dbo].[CreditRequestCreditCondition]
+ADD CONSTRAINT [PK_CreditRequestCreditCondition]
+    PRIMARY KEY CLUSTERED ([CreditRequests_CreditRequestId], [CreditConditions_CreditConditionId] ASC);
+GO
+
 -- --------------------------------------------------
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
 
--- Creating foreign key on [Customer_CustomerId] in table 'BankAccounts'
+-- Creating foreign key on [CustomerId] in table 'BankAccounts'
 ALTER TABLE [dbo].[BankAccounts]
 ADD CONSTRAINT [FK_BankAccountCustomer]
-    FOREIGN KEY ([Customer_CustomerId])
+    FOREIGN KEY ([CustomerId])
     REFERENCES [dbo].[Customers]
         ([CustomerId])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -300,7 +300,7 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_BankAccountCustomer'
 CREATE INDEX [IX_FK_BankAccountCustomer]
 ON [dbo].[BankAccounts]
-    ([Customer_CustomerId]);
+    ([CustomerId]);
 GO
 
 -- Creating foreign key on [CustomerId] in table 'Contacts'
@@ -318,19 +318,19 @@ ON [dbo].[Contacts]
     ([CustomerId]);
 GO
 
--- Creating foreign key on [CreditRequestId] in table 'Customers'
-ALTER TABLE [dbo].[Customers]
+-- Creating foreign key on [CustomerId] in table 'CreditRequests'
+ALTER TABLE [dbo].[CreditRequests]
 ADD CONSTRAINT [FK_CreditRequestCustomer]
-    FOREIGN KEY ([CreditRequestId])
-    REFERENCES [dbo].[CreditRequests]
-        ([CreditRequestId])
+    FOREIGN KEY ([CustomerId])
+    REFERENCES [dbo].[Customers]
+        ([CustomerId])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_CreditRequestCustomer'
 CREATE INDEX [IX_FK_CreditRequestCustomer]
-ON [dbo].[Customers]
-    ([CreditRequestId]);
+ON [dbo].[CreditRequests]
+    ([CustomerId]);
 GO
 
 -- Creating foreign key on [CustomerId] in table 'CustomerContactInfoes'
@@ -346,6 +346,120 @@ GO
 CREATE INDEX [IX_FK_CustomerId]
 ON [dbo].[CustomerContactInfoes]
     ([CustomerId]);
+GO
+
+-- Creating foreign key on [TransferBankAccount_BankAccountId] in table 'CreditRequests'
+ALTER TABLE [dbo].[CreditRequests]
+ADD CONSTRAINT [FK_CreditRequestBankAccount]
+    FOREIGN KEY ([TransferBankAccount_BankAccountId])
+    REFERENCES [dbo].[BankAccounts]
+        ([BankAccountId])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_CreditRequestBankAccount'
+CREATE INDEX [IX_FK_CreditRequestBankAccount]
+ON [dbo].[CreditRequests]
+    ([TransferBankAccount_BankAccountId]);
+GO
+
+-- Creating foreign key on [DirectDebitBankAccount_BankAccountId] in table 'CreditRequests'
+ALTER TABLE [dbo].[CreditRequests]
+ADD CONSTRAINT [FK_CreditRequestBankAccount1]
+    FOREIGN KEY ([DirectDebitBankAccount_BankAccountId])
+    REFERENCES [dbo].[BankAccounts]
+        ([BankAccountId])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_CreditRequestBankAccount1'
+CREATE INDEX [IX_FK_CreditRequestBankAccount1]
+ON [dbo].[CreditRequests]
+    ([DirectDebitBankAccount_BankAccountId]);
+GO
+
+-- Creating foreign key on [CreditRequests_CreditRequestId] in table 'CreditRequestCreditCondition'
+ALTER TABLE [dbo].[CreditRequestCreditCondition]
+ADD CONSTRAINT [FK_CreditRequestCreditCondition_CreditRequest]
+    FOREIGN KEY ([CreditRequests_CreditRequestId])
+    REFERENCES [dbo].[CreditRequests]
+        ([CreditRequestId])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [CreditConditions_CreditConditionId] in table 'CreditRequestCreditCondition'
+ALTER TABLE [dbo].[CreditRequestCreditCondition]
+ADD CONSTRAINT [FK_CreditRequestCreditCondition_CreditCondition]
+    FOREIGN KEY ([CreditConditions_CreditConditionId])
+    REFERENCES [dbo].[CreditConditions]
+        ([CreditConditionId])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_CreditRequestCreditCondition_CreditCondition'
+CREATE INDEX [IX_FK_CreditRequestCreditCondition_CreditCondition]
+ON [dbo].[CreditRequestCreditCondition]
+    ([CreditConditions_CreditConditionId]);
+GO
+
+-- Creating foreign key on [CustomerAddresses_CustomerAddressId] in table 'Customers'
+ALTER TABLE [dbo].[Customers]
+ADD CONSTRAINT [FK_CustomerCustomerAddress]
+    FOREIGN KEY ([CustomerAddresses_CustomerAddressId])
+    REFERENCES [dbo].[CustomerAddresses]
+        ([CustomerAddressId])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_CustomerCustomerAddress'
+CREATE INDEX [IX_FK_CustomerCustomerAddress]
+ON [dbo].[Customers]
+    ([CustomerAddresses_CustomerAddressId]);
+GO
+
+-- Creating foreign key on [WorkCenters_WorkCenterId] in table 'Customers'
+ALTER TABLE [dbo].[Customers]
+ADD CONSTRAINT [FK_CustomerWorkCenter]
+    FOREIGN KEY ([WorkCenters_WorkCenterId])
+    REFERENCES [dbo].[WorkCenters]
+        ([WorkCenterId])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_CustomerWorkCenter'
+CREATE INDEX [IX_FK_CustomerWorkCenter]
+ON [dbo].[Customers]
+    ([WorkCenters_WorkCenterId]);
+GO
+
+-- Creating foreign key on [CreditRequests_CreditRequestId] in table 'Payments'
+ALTER TABLE [dbo].[Payments]
+ADD CONSTRAINT [FK_PaymentCreditRequest]
+    FOREIGN KEY ([CreditRequests_CreditRequestId])
+    REFERENCES [dbo].[CreditRequests]
+        ([CreditRequestId])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PaymentCreditRequest'
+CREATE INDEX [IX_FK_PaymentCreditRequest]
+ON [dbo].[Payments]
+    ([CreditRequests_CreditRequestId]);
+GO
+
+-- Creating foreign key on [Employee_EmployeeId] in table 'CreditRequests'
+ALTER TABLE [dbo].[CreditRequests]
+ADD CONSTRAINT [FK_EmployeeCreditRequest]
+    FOREIGN KEY ([Employee_EmployeeId])
+    REFERENCES [dbo].[Employees]
+        ([EmployeeId])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_EmployeeCreditRequest'
+CREATE INDEX [IX_FK_EmployeeCreditRequest]
+ON [dbo].[CreditRequests]
+    ([Employee_EmployeeId]);
 GO
 
 -- --------------------------------------------------

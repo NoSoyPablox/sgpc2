@@ -8,7 +8,6 @@
   <EntityContainer Name="sgscModelStoreContainer">
     <EntitySet Name="BankAccounts" EntityType="sgscModel.Store.BankAccounts" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Contacts" EntityType="sgscModel.Store.Contacts" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="CreditConditionCreditRequests" EntityType="sgscModel.Store.CreditConditionCreditRequests" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CreditConditions" EntityType="sgscModel.Store.CreditConditions" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CreditPolicies" EntityType="sgscModel.Store.CreditPolicies" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CreditRequests" EntityType="sgscModel.Store.CreditRequests" store:Type="Tables" Schema="dbo" />
@@ -18,6 +17,7 @@
     <EntitySet Name="Employees" EntityType="sgscModel.Store.Employees" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Payments" EntityType="sgscModel.Store.Payments" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="WorkCenters" EntityType="sgscModel.Store.WorkCenters" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CreditRequestCreditCondition" EntityType="sgscModel.Store.CreditRequestCreditCondition" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK_BankAccountCustomer" Association="sgscModel.Store.FK_BankAccountCustomer">
       <End Role="Customers" EntitySet="Customers" />
       <End Role="BankAccounts" EntitySet="BankAccounts" />
@@ -28,11 +28,43 @@
     </AssociationSet>
     <AssociationSet Name="FK_CreditRequestCustomer" Association="sgscModel.Store.FK_CreditRequestCustomer">
       <End Role="CreditRequests" EntitySet="CreditRequests" />
-      <End Role="Customers" EntitySet="Customers" />
+      <End Role="Customer" EntitySet="Customers" />
     </AssociationSet>
     <AssociationSet Name="CustomerId" Association="sgscModel.Store.CustomerId">
       <End Role="Customers" EntitySet="Customers" />
       <End Role="CustomerContactInfoes" EntitySet="CustomerContactInfoes" />
+    </AssociationSet>
+    <AssociationSet Name="CreditRequestBankAccount" Association="sgscModel.Store.CreditRequestBankAccount">
+      <End Role="CreditRequest" EntitySet="CreditRequests" />
+      <End Role="BankAccount" EntitySet="BankAccounts" />
+    </AssociationSet>
+    <AssociationSet Name="CreditRequestBankAccount1" Association="sgscModel.Store.CreditRequestBankAccount1">
+      <End Role="CreditRequest" EntitySet="CreditRequests" />
+      <End Role="BankAccount" EntitySet="BankAccounts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CreditRequestCreditCondition_CreditRequest" Association="sgscModel.Store.FK_CreditRequestCreditCondition_CreditRequest">
+      <End Role="CreditRequest" EntitySet="CreditRequests" />
+      <End Role="CreditRequestCreditCondition" EntitySet="CreditRequestCreditCondition" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CreditRequestCreditCondition_CreditCondition" Association="sgscModel.Store.FK_CreditRequestCreditCondition_CreditCondition">
+      <End Role="CreditCondition" EntitySet="CreditConditions" />
+      <End Role="CreditRequestCreditCondition" EntitySet="CreditRequestCreditCondition" />
+    </AssociationSet>
+    <AssociationSet Name="CustomerCustomerAddress" Association="sgscModel.Store.CustomerCustomerAddress">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="CustomerAddress" EntitySet="CustomerAddresses" />
+    </AssociationSet>
+    <AssociationSet Name="CustomerWorkCenter" Association="sgscModel.Store.CustomerWorkCenter">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="WorkCenter" EntitySet="WorkCenters" />
+    </AssociationSet>
+    <AssociationSet Name="PaymentCreditRequest" Association="sgscModel.Store.PaymentCreditRequest">
+      <End Role="Payment" EntitySet="Payments" />
+      <End Role="CreditRequest" EntitySet="CreditRequests" />
+    </AssociationSet>
+    <AssociationSet Name="EmployeeCreditRequest" Association="sgscModel.Store.EmployeeCreditRequest">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="CreditRequest" EntitySet="CreditRequests" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="BankAccounts">
@@ -45,8 +77,7 @@
     <Property Name="AccountType" Type="nvarchar(max)" Nullable="true" />
     <Property Name="CardType" Type="nvarchar(max)" Nullable="true" />
     <Property Name="BankName" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Customer_CustomerId" Type="int" Nullable="true" />
-    <Property Name="CreditRequestId" Type="int" Nullable="true" />
+    <Property Name="CustomerId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Contacts">
     <Key>
@@ -57,15 +88,7 @@
     <Property Name="FirstSurname" Type="nvarchar(max)" Nullable="true" />
     <Property Name="SecondSurname" Type="nvarchar(max)" Nullable="true" />
     <Property Name="PhoneNumber" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="CustomerId" Type="int" Nullable="true" />
-  </EntityType>
-  <EntityType Name="CreditConditionCreditRequests">
-    <Key>
-      <PropertyRef Name="CreditConditionIdRequest" />
-    </Key>
-    <Property Name="CreditConditionIdRequest" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="CreditCondition_CreditConditionId" Type="int" Nullable="true" />
-    <Property Name="CreditRequests_CreditRequestId" Type="int" Nullable="true" />
+    <Property Name="CustomerId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="CreditConditions">
     <Key>
@@ -96,6 +119,10 @@
     <Property Name="InterestRate" Type="decimal" Nullable="true" Precision="18" Scale="0" />
     <Property Name="CreationDate" Type="datetime" Nullable="true" />
     <Property Name="EmployeeId" Type="int" Nullable="true" />
+    <Property Name="CustomerId" Type="int" Nullable="false" />
+    <Property Name="TransferBankAccount_BankAccountId" Type="int" Nullable="false" />
+    <Property Name="DirectDebitBankAccount_BankAccountId" Type="int" Nullable="false" />
+    <Property Name="Employee_EmployeeId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="CustomerAddresses">
     <Key>
@@ -129,8 +156,8 @@
     <Property Name="SecondSurname" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Curp" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Rfc" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="CreditRequestId" Type="int" Nullable="true" />
-    <Property Name="CustomerContactInfoId" Type="int" Nullable="true" />
+    <Property Name="CustomerAddresses_CustomerAddressId" Type="int" Nullable="false" />
+    <Property Name="WorkCenters_WorkCenterId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Employees">
     <Key>
@@ -153,6 +180,7 @@
     <Property Name="PaymentDate" Type="datetime" Nullable="true" />
     <Property Name="Amount" Type="nvarchar(max)" Nullable="true" />
     <Property Name="CreditRequestId" Type="int" Nullable="true" />
+    <Property Name="CreditRequests_CreditRequestId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="WorkCenters">
     <Key>
@@ -168,20 +196,28 @@
     <Property Name="PhoneNumber" Type="nvarchar(max)" Nullable="true" />
     <Property Name="CustomerId" Type="int" Nullable="true" />
   </EntityType>
+  <EntityType Name="CreditRequestCreditCondition">
+    <Key>
+      <PropertyRef Name="CreditRequests_CreditRequestId" />
+      <PropertyRef Name="CreditConditions_CreditConditionId" />
+    </Key>
+    <Property Name="CreditRequests_CreditRequestId" Type="int" Nullable="false" />
+    <Property Name="CreditConditions_CreditConditionId" Type="int" Nullable="false" />
+  </EntityType>
   <Association Name="FK_BankAccountCustomer">
-    <End Role="Customers" Type="sgscModel.Store.Customers" Multiplicity="0..1" />
+    <End Role="Customers" Type="sgscModel.Store.Customers" Multiplicity="1" />
     <End Role="BankAccounts" Type="sgscModel.Store.BankAccounts" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Customers">
         <PropertyRef Name="CustomerId" />
       </Principal>
       <Dependent Role="BankAccounts">
-        <PropertyRef Name="Customer_CustomerId" />
+        <PropertyRef Name="CustomerId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_CustomerContact">
-    <End Role="Customers" Type="sgscModel.Store.Customers" Multiplicity="0..1" />
+    <End Role="Customers" Type="sgscModel.Store.Customers" Multiplicity="1" />
     <End Role="Contacts" Type="sgscModel.Store.Contacts" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Customers">
@@ -193,14 +229,14 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_CreditRequestCustomer">
-    <End Role="CreditRequests" Type="sgscModel.Store.CreditRequests" Multiplicity="0..1" />
-    <End Role="Customers" Type="sgscModel.Store.Customers" Multiplicity="*" />
+    <End Role="CreditRequests" Type="sgscModel.Store.CreditRequests" Multiplicity="*" />
+    <End Role="Customer" Type="sgscModel.Store.Customers" Multiplicity="1" />
     <ReferentialConstraint>
-      <Principal Role="CreditRequests">
-        <PropertyRef Name="CreditRequestId" />
+      <Principal Role="Customer">
+        <PropertyRef Name="CustomerId" />
       </Principal>
-      <Dependent Role="Customers">
-        <PropertyRef Name="CreditRequestId" />
+      <Dependent Role="CreditRequests">
+        <PropertyRef Name="CustomerId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -213,6 +249,102 @@
       </Principal>
       <Dependent Role="CustomerContactInfoes">
         <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CreditRequestBankAccount">
+    <End Role="CreditRequest" Type="sgscModel.Store.CreditRequests" Multiplicity="*" />
+    <End Role="BankAccount" Type="sgscModel.Store.BankAccounts" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="BankAccount">
+        <PropertyRef Name="BankAccountId" />
+      </Principal>
+      <Dependent Role="CreditRequest">
+        <PropertyRef Name="TransferBankAccount_BankAccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CreditRequestBankAccount1">
+    <End Role="CreditRequest" Type="sgscModel.Store.CreditRequests" Multiplicity="*" />
+    <End Role="BankAccount" Type="sgscModel.Store.BankAccounts" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="BankAccount">
+        <PropertyRef Name="BankAccountId" />
+      </Principal>
+      <Dependent Role="CreditRequest">
+        <PropertyRef Name="DirectDebitBankAccount_BankAccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CustomerCustomerAddress">
+    <End Role="Customer" Type="sgscModel.Store.Customers" Multiplicity="*" />
+    <End Role="CustomerAddress" Type="sgscModel.Store.CustomerAddresses" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="CustomerAddress">
+        <PropertyRef Name="CustomerAddressId" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="CustomerAddresses_CustomerAddressId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CustomerWorkCenter">
+    <End Role="Customer" Type="sgscModel.Store.Customers" Multiplicity="*" />
+    <End Role="WorkCenter" Type="sgscModel.Store.WorkCenters" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="WorkCenter">
+        <PropertyRef Name="WorkCenterId" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="WorkCenters_WorkCenterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PaymentCreditRequest">
+    <End Role="Payment" Type="sgscModel.Store.Payments" Multiplicity="*" />
+    <End Role="CreditRequest" Type="sgscModel.Store.CreditRequests" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="CreditRequest">
+        <PropertyRef Name="CreditRequestId" />
+      </Principal>
+      <Dependent Role="Payment">
+        <PropertyRef Name="CreditRequests_CreditRequestId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EmployeeCreditRequest">
+    <End Role="Employee" Type="sgscModel.Store.Employees" Multiplicity="1" />
+    <End Role="CreditRequest" Type="sgscModel.Store.CreditRequests" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmployeeId" />
+      </Principal>
+      <Dependent Role="CreditRequest">
+        <PropertyRef Name="Employee_EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CreditRequestCreditCondition_CreditRequest">
+    <End Role="CreditRequest" Type="sgscModel.Store.CreditRequests" Multiplicity="1" />
+    <End Role="CreditRequestCreditCondition" Type="sgscModel.Store.CreditRequestCreditCondition" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CreditRequest">
+        <PropertyRef Name="CreditRequestId" />
+      </Principal>
+      <Dependent Role="CreditRequestCreditCondition">
+        <PropertyRef Name="CreditRequests_CreditRequestId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CreditRequestCreditCondition_CreditCondition">
+    <End Role="CreditRequestCreditCondition" Type="sgscModel.Store.CreditRequestCreditCondition" Multiplicity="*" />
+    <End Role="CreditCondition" Type="sgscModel.Store.CreditConditions" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="CreditCondition">
+        <PropertyRef Name="CreditConditionId" />
+      </Principal>
+      <Dependent Role="CreditRequestCreditCondition">
+        <PropertyRef Name="CreditConditions_CreditConditionId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -230,9 +362,10 @@
           <Property Name="AccountType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CardType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="BankName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Customer_CustomerId" Type="Int32" />
-          <Property Name="CreditRequestId" Type="Int32" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Customer" Relationship="Self.FK_BankAccountCustomer" FromRole="BankAccounts" ToRole="Customers" />
+          <NavigationProperty Name="CreditRequestAsTransferAccount" Relationship="sgscModel.CreditRequestBankAccount" FromRole="BankAccount" ToRole="CreditRequest" />
+          <NavigationProperty Name="CreditRequestAsDirectDebitAccount" Relationship="sgscModel.CreditRequestBankAccount1" FromRole="BankAccount" ToRole="CreditRequest" />
         </EntityType>
         <EntityType Name="Contact">
           <Key>
@@ -243,16 +376,8 @@
           <Property Name="FirstSurname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="SecondSurname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Customer" Relationship="Self.FK_CustomerContact" FromRole="Contacts" ToRole="Customers" />
-        </EntityType>
-        <EntityType Name="CreditConditionCreditRequest">
-          <Key>
-            <PropertyRef Name="CreditConditionIdRequest" />
-          </Key>
-          <Property Name="CreditConditionIdRequest" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CreditCondition_CreditConditionId" Type="Int32" />
-          <Property Name="CreditRequests_CreditRequestId" Type="Int32" />
         </EntityType>
         <EntityType Name="CreditCondition">
           <Key>
@@ -260,6 +385,7 @@
           </Key>
           <Property Name="CreditConditionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CreditRequests" Relationship="sgscModel.CreditRequestCreditCondition" FromRole="CreditCondition" ToRole="CreditRequest" />
         </EntityType>
         <EntityType Name="CreditPolicy">
           <Key>
@@ -283,7 +409,13 @@
           <Property Name="InterestRate" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="CreationDate" Type="DateTime" Precision="3" />
           <Property Name="EmployeeId" Type="Int32" />
-          <NavigationProperty Name="Customers" Relationship="Self.FK_CreditRequestCustomer" FromRole="CreditRequests" ToRole="Customers" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_CreditRequestCustomer" FromRole="CreditRequests" ToRole="Customer" />
+          <NavigationProperty Name="TransferBankAccount" Relationship="sgscModel.CreditRequestBankAccount" FromRole="CreditRequest" ToRole="BankAccount" />
+          <NavigationProperty Name="DirectDebitBankAccount" Relationship="sgscModel.CreditRequestBankAccount1" FromRole="CreditRequest" ToRole="BankAccount" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CreditConditions" Relationship="sgscModel.CreditRequestCreditCondition" FromRole="CreditRequest" ToRole="CreditCondition" />
+          <NavigationProperty Name="Payment" Relationship="sgscModel.PaymentCreditRequest" FromRole="CreditRequest" ToRole="Payment" />
+          <NavigationProperty Name="Employee" Relationship="sgscModel.EmployeeCreditRequest" FromRole="CreditRequest" ToRole="Employee" />
         </EntityType>
         <EntityType Name="CustomerAddress">
           <Key>
@@ -296,6 +428,7 @@
           <Property Name="InternalNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="true" />
           <Property Name="CustomerId" Type="Int32" />
           <Property Name="Colony" Type="String" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="sgscModel.CustomerCustomerAddress" FromRole="CustomerAddress" ToRole="Customer" />
         </EntityType>
         <EntityType Name="CustomerContactInfo">
           <Key>
@@ -318,12 +451,12 @@
           <Property Name="SecondSurname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Curp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Rfc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CreditRequestId" Type="Int32" />
-          <Property Name="CustomerContactInfoId" Type="Int32" />
           <NavigationProperty Name="BankAccounts" Relationship="Self.FK_BankAccountCustomer" FromRole="Customers" ToRole="BankAccounts" />
           <NavigationProperty Name="Contacts" Relationship="Self.FK_CustomerContact" FromRole="Customers" ToRole="Contacts" />
-          <NavigationProperty Name="CreditRequest" Relationship="Self.FK_CreditRequestCustomer" FromRole="Customers" ToRole="CreditRequests" />
+          <NavigationProperty Name="CreditRequests" Relationship="Self.FK_CreditRequestCustomer" FromRole="Customer" ToRole="CreditRequests" />
           <NavigationProperty Name="CustomerContactInfoes" Relationship="Self.CustomerId" FromRole="Customers" ToRole="CustomerContactInfoes" />
+          <NavigationProperty Name="CustomerAddresses" Relationship="sgscModel.CustomerCustomerAddress" FromRole="Customer" ToRole="CustomerAddress" />
+          <NavigationProperty Name="WorkCenters" Relationship="sgscModel.CustomerWorkCenter" FromRole="Customer" ToRole="WorkCenter" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -336,6 +469,7 @@
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Role" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="CreditRequests" Relationship="sgscModel.EmployeeCreditRequest" FromRole="Employee" ToRole="CreditRequest" />
         </EntityType>
         <EntityType Name="Payment">
           <Key>
@@ -346,6 +480,7 @@
           <Property Name="PaymentDate" Type="DateTime" Precision="0" />
           <Property Name="Amount" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CreditRequestId" Type="Int32" />
+          <NavigationProperty Name="CreditRequests" Relationship="sgscModel.PaymentCreditRequest" FromRole="Payment" ToRole="CreditRequest" />
         </EntityType>
         <EntityType Name="WorkCenter">
           <Key>
@@ -360,21 +495,22 @@
           <Property Name="ZipCode" Type="Int32" />
           <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CustomerId" Type="Int32" />
+          <NavigationProperty Name="Customer" Relationship="sgscModel.CustomerWorkCenter" FromRole="WorkCenter" ToRole="Customer" />
         </EntityType>
         <Association Name="FK_BankAccountCustomer">
-          <End Role="Customers" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Customers" Type="Self.Customer" Multiplicity="1" />
           <End Role="BankAccounts" Type="Self.BankAccount" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Customers">
               <PropertyRef Name="CustomerId" />
             </Principal>
             <Dependent Role="BankAccounts">
-              <PropertyRef Name="Customer_CustomerId" />
+              <PropertyRef Name="CustomerId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CustomerContact">
-          <End Role="Customers" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Customers" Type="Self.Customer" Multiplicity="1" />
           <End Role="Contacts" Type="Self.Contact" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Customers">
@@ -386,14 +522,15 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CreditRequestCustomer">
-          <End Role="CreditRequests" Type="Self.CreditRequest" Multiplicity="0..1" />
-          <End Role="Customers" Type="Self.Customer" Multiplicity="*" />
+          <End Role="CreditRequests" Type="Self.CreditRequest" Multiplicity="*" >
+          </End>
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
           <ReferentialConstraint>
-            <Principal Role="CreditRequests">
-              <PropertyRef Name="CreditRequestId" />
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerId" />
             </Principal>
-            <Dependent Role="Customers">
-              <PropertyRef Name="CreditRequestId" />
+            <Dependent Role="CreditRequests">
+              <PropertyRef Name="CustomerId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -412,7 +549,6 @@
         <EntityContainer Name="sgscEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="BankAccounts" EntityType="Self.BankAccount" />
           <EntitySet Name="Contacts" EntityType="Self.Contact" />
-          <EntitySet Name="CreditConditionCreditRequests" EntityType="Self.CreditConditionCreditRequest" />
           <EntitySet Name="CreditConditions" EntityType="Self.CreditCondition" />
           <EntitySet Name="CreditPolicies" EntityType="Self.CreditPolicy" />
           <EntitySet Name="CreditRequests" EntityType="Self.CreditRequest" />
@@ -432,13 +568,69 @@
           </AssociationSet>
           <AssociationSet Name="FK_CreditRequestCustomer" Association="Self.FK_CreditRequestCustomer">
             <End Role="CreditRequests" EntitySet="CreditRequests" />
-            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Customer" EntitySet="Customers" />
           </AssociationSet>
           <AssociationSet Name="CustomerId" Association="Self.CustomerId">
             <End Role="Customers" EntitySet="Customers" />
             <End Role="CustomerContactInfoes" EntitySet="CustomerContactInfoes" />
           </AssociationSet>
+          <AssociationSet Name="CreditRequestBankAccount" Association="sgscModel.CreditRequestBankAccount">
+            <End Role="CreditRequest" EntitySet="CreditRequests" />
+            <End Role="BankAccount" EntitySet="BankAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="CreditRequestBankAccount1" Association="sgscModel.CreditRequestBankAccount1">
+            <End Role="CreditRequest" EntitySet="CreditRequests" />
+            <End Role="BankAccount" EntitySet="BankAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="CreditRequestCreditCondition" Association="sgscModel.CreditRequestCreditCondition">
+            <End Role="CreditRequest" EntitySet="CreditRequests" />
+            <End Role="CreditCondition" EntitySet="CreditConditions" />
+          </AssociationSet>
+          <AssociationSet Name="CustomerCustomerAddress" Association="sgscModel.CustomerCustomerAddress">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="CustomerAddress" EntitySet="CustomerAddresses" />
+          </AssociationSet>
+          <AssociationSet Name="CustomerWorkCenter" Association="sgscModel.CustomerWorkCenter">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="WorkCenter" EntitySet="WorkCenters" />
+          </AssociationSet>
+          <AssociationSet Name="PaymentCreditRequest" Association="sgscModel.PaymentCreditRequest">
+            <End Role="Payment" EntitySet="Payments" />
+            <End Role="CreditRequest" EntitySet="CreditRequests" />
+          </AssociationSet>
+          <AssociationSet Name="EmployeeCreditRequest" Association="sgscModel.EmployeeCreditRequest">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="CreditRequest" EntitySet="CreditRequests" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="CreditRequestBankAccount">
+          <End Type="sgscModel.CreditRequest" Role="CreditRequest" Multiplicity="*" />
+          <End Type="sgscModel.BankAccount" Role="BankAccount" Multiplicity="1" />
+        </Association>
+        <Association Name="CreditRequestBankAccount1">
+          <End Type="sgscModel.CreditRequest" Role="CreditRequest" Multiplicity="*" />
+          <End Type="sgscModel.BankAccount" Role="BankAccount" Multiplicity="1" />
+        </Association>
+        <Association Name="CreditRequestCreditCondition">
+          <End Type="sgscModel.CreditRequest" Role="CreditRequest" Multiplicity="*" />
+          <End Type="sgscModel.CreditCondition" Role="CreditCondition" Multiplicity="*" />
+        </Association>
+        <Association Name="CustomerCustomerAddress">
+          <End Type="sgscModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="sgscModel.CustomerAddress" Role="CustomerAddress" Multiplicity="1" />
+        </Association>
+        <Association Name="CustomerWorkCenter">
+          <End Type="sgscModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="sgscModel.WorkCenter" Role="WorkCenter" Multiplicity="1" />
+        </Association>
+        <Association Name="PaymentCreditRequest">
+          <End Type="sgscModel.Payment" Role="Payment" Multiplicity="*" />
+          <End Type="sgscModel.CreditRequest" Role="CreditRequest" Multiplicity="1" />
+        </Association>
+        <Association Name="EmployeeCreditRequest">
+          <End Type="sgscModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="sgscModel.CreditRequest" Role="CreditRequest" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -454,8 +646,7 @@
           <ScalarProperty Name="AccountType" ColumnName="AccountType" />
           <ScalarProperty Name="CardType" ColumnName="CardType" />
           <ScalarProperty Name="BankName" ColumnName="BankName" />
-          <ScalarProperty Name="Customer_CustomerId" ColumnName="Customer_CustomerId" />
-          <ScalarProperty Name="CreditRequestId" ColumnName="CreditRequestId" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -468,15 +659,6 @@
           <ScalarProperty Name="SecondSurname" ColumnName="SecondSurname" />
           <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
           <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="CreditConditionCreditRequests">
-      <EntityTypeMapping TypeName="IsTypeOf(sgscModel.CreditConditionCreditRequest)">
-        <MappingFragment StoreEntitySet="CreditConditionCreditRequests">
-          <ScalarProperty Name="CreditConditionIdRequest" ColumnName="CreditConditionIdRequest" />
-          <ScalarProperty Name="CreditCondition_CreditConditionId" ColumnName="CreditCondition_CreditConditionId" />
-          <ScalarProperty Name="CreditRequests_CreditRequestId" ColumnName="CreditRequests_CreditRequestId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -510,6 +692,7 @@
           <ScalarProperty Name="InterestRate" ColumnName="InterestRate" />
           <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
           <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -546,8 +729,6 @@
           <ScalarProperty Name="SecondSurname" ColumnName="SecondSurname" />
           <ScalarProperty Name="Curp" ColumnName="Curp" />
           <ScalarProperty Name="Rfc" ColumnName="Rfc" />
-          <ScalarProperty Name="CreditRequestId" ColumnName="CreditRequestId" />
-          <ScalarProperty Name="CustomerContactInfoId" ColumnName="CustomerContactInfoId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -590,6 +771,62 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <AssociationSetMapping Name="CreditRequestBankAccount" TypeName="sgscModel.CreditRequestBankAccount" StoreEntitySet="CreditRequests">
+      <EndProperty Name="BankAccount">
+        <ScalarProperty Name="BankAccountId" ColumnName="TransferBankAccount_BankAccountId" />
+      </EndProperty>
+      <EndProperty Name="CreditRequest">
+        <ScalarProperty Name="CreditRequestId" ColumnName="CreditRequestId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CreditRequestBankAccount1" TypeName="sgscModel.CreditRequestBankAccount1" StoreEntitySet="CreditRequests">
+      <EndProperty Name="BankAccount">
+        <ScalarProperty Name="BankAccountId" ColumnName="DirectDebitBankAccount_BankAccountId" />
+      </EndProperty>
+      <EndProperty Name="CreditRequest">
+        <ScalarProperty Name="CreditRequestId" ColumnName="CreditRequestId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CreditRequestCreditCondition" TypeName="sgscModel.CreditRequestCreditCondition" StoreEntitySet="CreditRequestCreditCondition">
+      <EndProperty Name="CreditRequest">
+        <ScalarProperty Name="CreditRequestId" ColumnName="CreditRequests_CreditRequestId" />
+      </EndProperty>
+      <EndProperty Name="CreditCondition">
+        <ScalarProperty Name="CreditConditionId" ColumnName="CreditConditions_CreditConditionId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CustomerCustomerAddress" TypeName="sgscModel.CustomerCustomerAddress" StoreEntitySet="Customers">
+      <EndProperty Name="CustomerAddress">
+        <ScalarProperty Name="CustomerAddressId" ColumnName="CustomerAddresses_CustomerAddressId" />
+      </EndProperty>
+      <EndProperty Name="Customer">
+        <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CustomerWorkCenter" TypeName="sgscModel.CustomerWorkCenter" StoreEntitySet="Customers">
+      <EndProperty Name="WorkCenter">
+        <ScalarProperty Name="WorkCenterId" ColumnName="WorkCenters_WorkCenterId" />
+      </EndProperty>
+      <EndProperty Name="Customer">
+        <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PaymentCreditRequest" TypeName="sgscModel.PaymentCreditRequest" StoreEntitySet="Payments">
+      <EndProperty Name="CreditRequest">
+        <ScalarProperty Name="CreditRequestId" ColumnName="CreditRequests_CreditRequestId" />
+      </EndProperty>
+      <EndProperty Name="Payment">
+        <ScalarProperty Name="PaymentId" ColumnName="PaymentId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="EmployeeCreditRequest" TypeName="sgscModel.EmployeeCreditRequest" StoreEntitySet="CreditRequests">
+      <EndProperty Name="Employee">
+        <ScalarProperty Name="EmployeeId" ColumnName="Employee_EmployeeId" />
+      </EndProperty>
+      <EndProperty Name="CreditRequest">
+        <ScalarProperty Name="CreditRequestId" ColumnName="CreditRequestId" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>

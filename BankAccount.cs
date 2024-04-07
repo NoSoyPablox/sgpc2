@@ -14,15 +14,25 @@ namespace SGSC
     
     public partial class BankAccount
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public BankAccount()
+        {
+            this.CreditRequestAsTransferAccount = new HashSet<CreditRequest>();
+            this.CreditRequestAsDirectDebitAccount = new HashSet<CreditRequest>();
+        }
+    
         public int BankAccountId { get; set; }
         public string InterbankCode { get; set; }
         public string CardNumber { get; set; }
         public string AccountType { get; set; }
         public string CardType { get; set; }
         public string BankName { get; set; }
-        public Nullable<int> Customer_CustomerId { get; set; }
-        public Nullable<int> CreditRequestId { get; set; }
+        public int CustomerId { get; set; }
     
         public virtual Customer Customer { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CreditRequest> CreditRequestAsTransferAccount { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CreditRequest> CreditRequestAsDirectDebitAccount { get; set; }
     }
 }
