@@ -38,6 +38,12 @@ namespace SGSC.Pages
 
             StepsSidebarFrame.Content = new CustomerRegisterStepsSidebar("PersonalInfo");
             UserSessionFrame.Content = new UserSessionFrame();
+
+            // Clear the error labels
+            lbName.Content = "";
+            lbFirstSurname.Content = "";
+            lbSecondSurname.Content = "";
+            lbCurp.Content = "";
         }
 
         private void btnContinue_Click(object sender, RoutedEventArgs e)
@@ -51,27 +57,27 @@ namespace SGSC.Pages
             if (string.IsNullOrEmpty(tbName.Text))
             {
                 valid = false;
-                lbName.Content = "Porfavor introduzca el nombre";
+                lbName.Content = "Por favor introduzca el nombre";
             }
             if (string.IsNullOrEmpty(tbFirstSurname.Text))
             {
                 valid = false;
-                lbFirstSurname.Content = "Porfavor introduzca el apellido paterno";
+                lbFirstSurname.Content = "Por favor introduzca el apellido paterno";
             }
             if (string.IsNullOrEmpty(tbSecondSurname.Text))
             {
                 valid = false;
-                lbSecondSurname.Content = "Porfavor introduzca el apellido materno";
+                lbSecondSurname.Content = "Por favor introduzca el apellido materno";
             }
             if (string.IsNullOrEmpty(tbCURP.Text))
             {
                 valid = false;
-                lbCurp.Content = "Porfavor introduzca el CURP";
+                lbCurp.Content = "Por favor introduzca el CURP";
             }
             if (!Validator.ValidateCURP(tbCURP.Text))
             {
                 valid = false;
-                lbCurp.Content = "Porfavor introduzca un CURP válido";
+                lbCurp.Content = "Por favor introduzca un CURP válido";
             }
             if (!valid)
             {
