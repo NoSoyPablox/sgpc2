@@ -34,9 +34,6 @@ namespace SGSC
             InitializeComponent();
             this.SourceInitialized += Window_SourceInitialized;
 
-            var password = Utils.Authenticator.HashPassword("password");
-            System.Windows.MessageBox.Show(password);
-
             int screenWidth = Screen.PrimaryScreen.Bounds.Width;
             int screenHeight = Screen.PrimaryScreen.Bounds.Height;
             this.MaxWidth = screenWidth * 0.9;

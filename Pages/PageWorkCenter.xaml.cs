@@ -69,6 +69,12 @@ namespace SGSC.Pages
                 {txtOutsideNumber, lbIsEmptyOutsideNumber},
                 {txtZipCode, lbIsEmptyZipCode}
             };
+
+            // hide all error labels
+            foreach (var pair in textBoxLabelMap)
+            {
+                pair.Value.Visibility = Visibility.Hidden;
+            }
         }
 
         public void ShowInformationWorkCenter(SGSC.WorkCenter userWorkCenter)
@@ -291,6 +297,11 @@ namespace SGSC.Pages
             }
 
             clickedButton.Background = Brushes.Green;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 

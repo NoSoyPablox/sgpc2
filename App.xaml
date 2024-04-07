@@ -132,8 +132,6 @@
         </Style>
 
 
-
-
         <Style TargetType="Button" x:Key="ButtonStyleConfirm">
             <Setter Property="Margin" Value="5"/>
             <Setter Property="Template">
@@ -143,16 +141,13 @@
                             <Border.Effect>
                                 <DropShadowEffect ShadowDepth="2" Direction="320" Color="Black" Opacity="0.5"/>
                             </Border.Effect>
-                            <Grid>
-                                <!-- Colocamos el texto a la izquierda -->
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Text="{TemplateBinding Content}" FontFamily="{StaticResource FuenteNunitoBold}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,10,30,10"/>
-                                <!-- Colocamos la imagen a la derecha -->
-                                <Image Source="Images/Arrow-Icon.png" Width="20" Height="20" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="-15,0,15,0" Grid.Column="1"/>
-                            </Grid>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <ContentPresenter.Resources>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="FontFamily" Value="{StaticResource FontNunitoBold}"/>
+                                    </Style>
+                                </ContentPresenter.Resources>
+                            </ContentPresenter>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
@@ -192,20 +187,13 @@
                                 <!-- Colocamos la imagen a la izquierda -->
                                 <Image Source="{Binding Path=Tag, RelativeSource={RelativeSource TemplatedParent}}" Width="20" Height="20" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5"/>
                                 <!-- Colocamos el texto en el centro -->
-                                <TextBlock Grid.Column="1" Text="{TemplateBinding Content}" FontFamily="{StaticResource FontNunitoBold}" FontSize="15" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5,0"/>
+                                <TextBlock Grid.Column="1" Text="{TemplateBinding Content}" FontFamily="{StaticResource FontNunitoBold}" FontSize="22" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5,0"/>
                             </Grid>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-
-
-
-
-
-
-
 
         <Style x:Key="CustomLabelStyle" TargetType="Label">
             <Setter Property="Template">
