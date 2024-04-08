@@ -1,7 +1,9 @@
-﻿using SGSC.Messages;
+﻿using SGSC.Frames;
+using SGSC.Messages;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Core;
+using System.Data.Entity.Migrations;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -16,27 +18,25 @@ namespace SGSC.Pages
 {
     public partial class PageWorkCenter : Page
     {
-        string WorkCenterName = "";
-        string Phone = "";
-        string Street = "";
-        string InnerNumber = "";
-        string OutsideNumber = "";
-        string Colony = "";
-        string ZipCode = "";
-        int CustomerId;
-        SGSC.WorkCenter userWorkCenter = null;
-        bool isEditable = false;
+        private string WorkCenterName = "";
+        private string Phone = "";
+        private string Street = "";
+        private string InnerNumber = "";
+        private string OutsideNumber = "";
+        private string Colony = "";
+        private string ZipCode = "";
+        private int customerId;
+        private int? workCenterId = null;
 
         private sgscEntities dbContext;
 
         Dictionary<TextBox, Label> textBoxLabelMap;
 
-        public PageWorkCenter(bool isEditable, int CustomerId)
+        public PageWorkCenter(int customerId)
         {
             InitializeComponent();
             dbContext = new sgscEntities();
-            this.CustomerId = CustomerId;
-            this.isEditable = isEditable;
+            this.customerId = customerId;
 
             txtWorkCenterName.PreviewTextInput += AllowWriteLetters;
             txtColony.PreviewTextInput += AllowWriteLetters;
@@ -44,28 +44,31 @@ namespace SGSC.Pages
             txtPhone.PreviewTextInput += AllowPhoneNumber;
             txtInnerNumber.PreviewTextInput += AllowWriteNumbers;
             txtOutsideNumber.PreviewTextInput += AllowWriteNumbers;
-            txtZipCode.PreviewTextInput += AllowZipCode;   
-            
+            txtZipCode.PreviewTextInput += AllowZipCode;
 
-            if (isEditable)
+            StepsSidebarFrame.Content = new CustomerRegisterStepsSidebar("WorkCenter");
+            UserSessionFrame.Content = new UserSessionFrame();
+
+            try
             {
-                try
+                WorkCenter workCenter = dbContext.WorkCenters.FirstOrDefault(c => c.CustomerId == customerId);
+                if(workCenter != null)
                 {
-                    userWorkCenter = dbContext.WorkCenters.FirstOrDefault(c => c.CustomerId == 2);
-                    ShowInformationWorkCenter(userWorkCenter);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Error al intentar recuperar la información de la base de datos: {ex.Message}");
+                    ShowInformationWorkCenter(workCenter);
+                    workCenterId = workCenter.WorkCenterId;
                 }
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al intentar recuperar la información de la base de datos: {ex.Message}");
+            }
+
             textBoxLabelMap = new Dictionary<TextBox, Label>
             {
                 {txtWorkCenterName, lbIsEmptyCenterName},
                 {txtPhone, lbIsEmptyPhone},
                 {txtStreet, lbIsEmptyStreet},
                 {txtColony, lbIsEmptyColony},
-                {txtInnerNumber, lbIsEmptyInnerNumber},
                 {txtOutsideNumber, lbIsEmptyOutsideNumber},
                 {txtZipCode, lbIsEmptyZipCode}
             };
@@ -90,10 +93,6 @@ namespace SGSC.Pages
                 txtInnerNumber.Text = userWorkCenter.InnerNumber.ToString();
                 txtOutsideNumber.Text = userWorkCenter.OutsideNumber.ToString();
             }
-            else
-            {
-                MessageBox.Show("No se encontró la información del centro de trabajo del usuario");
-            }
         }
 
         public bool ValidateFields()
@@ -104,7 +103,6 @@ namespace SGSC.Pages
                 || string.IsNullOrWhiteSpace(txtPhone.Text) 
                 || string.IsNullOrWhiteSpace(txtStreet.Text)
                 || string.IsNullOrWhiteSpace(txtColony.Text) 
-                || string.IsNullOrWhiteSpace(txtInnerNumber.Text) 
                 || string.IsNullOrWhiteSpace(txtOutsideNumber.Text) 
                 || string.IsNullOrWhiteSpace(txtZipCode.Text))
             {
@@ -143,47 +141,40 @@ namespace SGSC.Pages
             {
                 try
                 {
-                    if (isEditable)
+                    WorkCenterName = txtWorkCenterName.Text;
+                    Phone = txtPhone.Text;
+                    Street = txtStreet.Text;
+                    InnerNumber = txtInnerNumber.Text;
+                    OutsideNumber = txtOutsideNumber.Text;
+                    int IntOutsideNumber = int.Parse(OutsideNumber);
+                    Colony = txtColony.Text;
+                    ZipCode = txtZipCode.Text;
+                    int IntZipCode = int.Parse(ZipCode);
+
+                    WorkCenter NewWorkcenter = new WorkCenter
                     {
-                        userWorkCenter.CenterName = txtWorkCenterName.Text;
-                        userWorkCenter.PhoneNumber = txtPhone.Text;
-                        userWorkCenter.Street = txtStreet.Text;
-                        userWorkCenter.Colony = txtColony.Text;
-                        userWorkCenter.InnerNumber = int.Parse(txtInnerNumber.Text);
-                        userWorkCenter.OutsideNumber = int.Parse(txtOutsideNumber.Text);
-                        userWorkCenter.ZipCode = int.Parse(txtZipCode.Text);
-                    }
-                    else
+                        CenterName = WorkCenterName,
+                        PhoneNumber = Phone,
+                        Street = Street,
+                        OutsideNumber = IntOutsideNumber,
+                        Colony = Colony,
+                        ZipCode = IntZipCode,
+                        CustomerId = customerId
+                    };
+
+                    if (!string.IsNullOrWhiteSpace(txtInnerNumber.Text))
                     {
-                        WorkCenterName = txtWorkCenterName.Text;
-                        Phone = txtPhone.Text;
-                        Street = txtStreet.Text;
-                        InnerNumber = txtInnerNumber.Text;
                         int IntInnerNumber = int.Parse(InnerNumber);
-                        OutsideNumber = txtOutsideNumber.Text;
-                        int IntOutsideNumber = int.Parse(OutsideNumber);
-                        Colony = txtColony.Text;
-                        ZipCode = txtZipCode.Text;
-                        int IntZipCode = int.Parse(ZipCode);
-
-                        SGSC.WorkCenter NewWorkcenter = new SGSC.WorkCenter
-                        {
-                            CenterName = WorkCenterName,
-                            PhoneNumber = Phone,
-                            Street = Street,
-                            InnerNumber = IntInnerNumber,
-                            OutsideNumber = IntOutsideNumber,
-                            Colony = Colony,
-                            ZipCode = IntZipCode,
-                            CustomerId = 2
-                        };
-
-                        dbContext.WorkCenters.Add(NewWorkcenter);
+                        NewWorkcenter.InnerNumber = IntInnerNumber;
                     }
 
+                    if(workCenterId != null)
+                    {
+                        NewWorkcenter.WorkCenterId = workCenterId.Value;
+                    }
+
+                    dbContext.WorkCenters.AddOrUpdate(NewWorkcenter);
                     dbContext.SaveChanges();
-
-
 
                     ShowNotification("Se ha registrado con éxito la información", "Success");
 
@@ -192,10 +183,10 @@ namespace SGSC.Pages
                         pair.Value.Visibility = Visibility.Hidden;
                     }
                 }
-                catch (EntityException ex)
+                catch (Exception ex)
                 {
-                    ShowNotification("No se puede conectar con la base de datos. " +
-                        "Por favor, inténtelo más tarde.", "Error");
+                    MessageBox.Show("No se puede conectar con la base de datos. \nPor favor, inténtelo más tarde.", "Error");
+                    ShowNotification("No se puede conectar con la base de datos. \nPor favor, inténtelo más tarde.", "Error");
                 }
             }
         }
@@ -204,7 +195,6 @@ namespace SGSC.Pages
         {
             e.Handled = !Regex.IsMatch(e.Text, "^[a-zA-Z]+$");
         }
-
         
         private void AllowPhoneNumber(object sender, TextCompositionEventArgs e)
         {
@@ -261,47 +251,28 @@ namespace SGSC.Pages
 
         public void ShowNotification(string Message, String NotificationType)
         {
-                var notificationWindow = new ToastNotification(Message, NotificationType);
-                notificationWindow.WindowStartupLocation = WindowStartupLocation.Manual;
-                notificationWindow.Left = SystemParameters.WorkArea.Left; // Ajustar según sea necesario
-                notificationWindow.Top = SystemParameters.WorkArea.Bottom - notificationWindow.Height; // Ajustar según sea necesario
+            var notificationWindow = new ToastNotification(Message, NotificationType);
+            notificationWindow.WindowStartupLocation = WindowStartupLocation.Manual;
+            notificationWindow.Left = SystemParameters.WorkArea.Left; // Ajustar según sea necesario
+            notificationWindow.Top = SystemParameters.WorkArea.Bottom - notificationWindow.Height; // Ajustar según sea necesario
 
-                notificationWindow.Show();
-                Task.Delay(3000).ContinueWith(_ =>
+            notificationWindow.Show();
+            Task.Delay(3000).ContinueWith(_ =>
+            {
+                notificationWindow.Dispatcher.Invoke(() =>
                 {
-                    notificationWindow.Dispatcher.Invoke(() =>
-                    {
-                        notificationWindow.Close();
-                    });
+                    notificationWindow.Close();
                 });
+            });
         }
 
-        private void BtnClicPageContactInformation(object sender, RoutedEventArgs e)
+        private void CancelRegister(object sender, RoutedEventArgs e)
         {
-            Button clickedButton = sender as Button;
-            PageContactInformation contactInformation = new PageContactInformation(false, 2);
-            if (NavigationService != null)
+            var result = System.Windows.Forms.MessageBox.Show("Está seguro que desea cancelar el registro?\nSi decide cancelarlo puede retomarlo más tarde.", "Cancelar registro", System.Windows.Forms.MessageBoxButtons.YesNo);
+            if (result == System.Windows.Forms.DialogResult.Yes)
             {
-                NavigationService.Navigate(contactInformation);
+                App.Current.MainFrame.Content = new HomePageCreditAdvisor();
             }
-            clickedButton.Background = Brushes.Green;
-        }
-
-        private void BtnClicPageWorkCenter(object sender, RoutedEventArgs e)
-        {
-            Button clickedButton = sender as Button;
-            PageWorkCenter workCenter = new PageWorkCenter(false, 2);
-            if (NavigationService != null)
-            {
-                NavigationService.Navigate(workCenter);
-            }
-
-            clickedButton.Background = Brushes.Green;
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 

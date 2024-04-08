@@ -31,43 +31,34 @@
     <Grid>
         <Border Background="White" CornerRadius="22" Margin="0"/>
 
-        <Border CornerRadius="22" BorderBrush="Transparent" Background="#FFF3F3F3" BorderThickness="0" Margin="10,342,992,321"/>
-
         <Label FontFamily="{StaticResource FontPoppins}" FontWeight="Bold" FontSize="36" Content="Dar de alta cliente" HorizontalAlignment="Left" Margin="46,48,0,0" VerticalAlignment="Top"/>
 
-        <Grid Background="Transparent" Margin="27,138,1009,62">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="451*"/>
-                <RowDefinition Height="39*"/>
-            </Grid.RowDefinitions>
+        <Frame Name="UserSessionFrame" NavigationUIVisibility="Hidden" Margin="831,43,38,592"/>
+        <Frame Name="StepsSidebarFrame" NavigationUIVisibility="Hidden" Margin="27,138,1009,28"/>
 
-            <Button Style="{StaticResource ButtonStyle}" Tag="../Images/User.png"  Content="Datos personales"  HorizontalAlignment="Center" Margin="0,34,0,0" VerticalAlignment="Top" Width="250" Height="40" FontSize="18"/>
-            <Button Style="{StaticResource ButtonStyle}" Tag="../Images/address-icon.png" Content="Dirección" HorizontalAlignment="Center" Margin="0,94,0,0" VerticalAlignment="Top" Width="250" Height="40" FontSize="16"/>
-            <Button Style="{StaticResource ButtonStyle}" Tag="../Images/card-icon.png" Content="Cuentas bancarias" HorizontalAlignment="Center" VerticalAlignment="Top" Width="250" Height="40" Margin="0,154,0,0" Click="Button_Click" FontSize="16"/>
-            <Button Style="{StaticResource ButtonStyle}" Tag="../Images/icon-job.png" Content="Centro de trabajo" HorizontalAlignment="Center" Margin="0,214,0,0" VerticalAlignment="Top" Width="250" Height="40" Click="BtnClicPageWorkCenter" FontSize="16"/>
-            <Button Style="{StaticResource ButtonStyle}" Tag="../Images/icon-contact.png" Content="Datos de contacto" HorizontalAlignment="Center" Margin="0,274,0,0" VerticalAlignment="Top" Width="250" Height="40" Click="BtnClicPageContactInformation" FontSize="16"/>
-            <Button Style="{StaticResource ButtonStyle}" Tag="../Images/people-icon.png" Content="Referencias" HorizontalAlignment="Center" Margin="0,334,0,0" VerticalAlignment="Top" Width="250" Height="40" FontSize="16"/>
-        </Grid>
         <Rectangle Style="{StaticResource RoundedRectangleStyle}" Margin="271,138,28,144"/>
 
-        <TextBox x:Name="txtWorkCenterName" Style="{StaticResource CustomTextBoxStyle}" Margin="314,206,360,469"/>
+        <TextBox x:Name="txtWorkCenterName" Style="{StaticResource CustomTextBoxStyle}" FontSize="18" VerticalContentAlignment="Center" Margin="314,206,360,469"/>
         <Label Style="{StaticResource CustomLabelStyle}" FontSize="20" Content="Nombre del centro de trabajo" HorizontalAlignment="Left" Margin="314,176,0,0" VerticalAlignment="Top" x:Name="NombreLabel" Width="282" Height="32"/>
 
-        <TextBox x:Name="txtPhone" Style="{StaticResource CustomTextBoxStyle}" Margin="951,206,79,469"/>
+        <TextBox x:Name="txtPhone" Style="{StaticResource CustomTextBoxStyle}" FontSize="18" VerticalContentAlignment="Center" Margin="951,206,79,469"/>
         <Label Style="{StaticResource CustomLabelStyle}" FontSize="20" Content="Teléfono" HorizontalAlignment="Left" Margin="951,176,0,0" VerticalAlignment="Top" Width="113"/>
 
 
-        <TextBox x:Name="txtStreet" Style="{StaticResource CustomTextBoxStyle}" Margin="314,354,360,321"/>
+        <TextBox x:Name="txtStreet" Style="{StaticResource CustomTextBoxStyle}" FontSize="18" VerticalContentAlignment="Center" Margin="314,354,360,321"/>
         <Label Style="{StaticResource CustomLabelStyle}" FontSize="20" Content="Calle" HorizontalAlignment="Left" Margin="314,325,0,0" VerticalAlignment="Top" Height="34" Width="92"/>
-        <TextBox x:Name="txtColony" Style="{StaticResource CustomTextBoxStyle}" Margin="315,473,360,202" RenderTransformOrigin="0.5,0.5" />
+        <TextBox x:Name="txtColony" Style="{StaticResource CustomTextBoxStyle}" FontSize="18" VerticalContentAlignment="Center" Margin="315,473,360,202" RenderTransformOrigin="0.5,0.5" />
         <Label Style="{StaticResource CustomLabelStyle}" FontSize="20" Content="Colonia" HorizontalAlignment="Left" Margin="314,443,0,0" VerticalAlignment="Top" Height="38" Width="92"/>
-        <TextBox x:Name="txtInnerNumber" Style="{StaticResource CustomTextBoxStyle}" Margin="951,354,216,321" RenderTransformOrigin="0.533,0.406"/>
-        <Label Style="{StaticResource CustomLabelStyle}" FontSize="20" Content="No. interior" HorizontalAlignment="Left" Margin="951,320,0,0" VerticalAlignment="Top" Height="28" Width="113"/>
-        <TextBox x:Name="txtOutsideNumber" Style="{StaticResource CustomTextBoxStyle}" Margin="1084,354,83,321"/>
-        <Label Style="{StaticResource CustomLabelStyle}" FontSize="20" Content="No. exterior" HorizontalAlignment="Left" Margin="1084,320,0,0" VerticalAlignment="Top" Height="27" Width="117"/>
-        <TextBox x:Name="txtZipCode" Style="{StaticResource CustomTextBoxStyle}" Margin="948,473,185,202" RenderTransformOrigin="0.5,0.5"/>
+
+        <TextBox x:Name="txtOutsideNumber" Style="{StaticResource CustomTextBoxStyle}" FontSize="18" VerticalContentAlignment="Center" Margin="951,354,216,321"/>
+        <Label Style="{StaticResource CustomLabelStyle}" FontSize="20" Content="No. exterior" HorizontalAlignment="Left" Margin="951,320,0,0" VerticalAlignment="Top" Height="27" Width="117"/>
+
+        <TextBox x:Name="txtInnerNumber" Style="{StaticResource CustomTextBoxStyle}" FontSize="18" VerticalContentAlignment="Center" Margin="1084,354,83,321" RenderTransformOrigin="0.533,0.406"/>
+        <Label Style="{StaticResource CustomLabelStyle}" FontSize="20" Content="No. interior" HorizontalAlignment="Left" Margin="1084,320,0,0" VerticalAlignment="Top" Height="28" Width="103"/>
+
+        <TextBox x:Name="txtZipCode" Style="{StaticResource CustomTextBoxStyle}" FontSize="18" VerticalContentAlignment="Center" Margin="948,473,185,202" RenderTransformOrigin="0.5,0.5"/>
         <Label Style="{StaticResource CustomLabelStyle}" FontSize="20" Content="Código postal" HorizontalAlignment="Left" Margin="948,443,0,0" VerticalAlignment="Top" Height="30" RenderTransformOrigin="0.496,0.2" Width="147"/>
-        <Button Style="{StaticResource ButtonStyleCancel}" Content="Cancelar" FontSize="22" HorizontalAlignment="Left" Margin="844,614,0,0" VerticalAlignment="Top" Height="54" Width="180" />
+        <Button Style="{StaticResource ButtonStyleCancel}" Content="Cancelar" FontSize="22" HorizontalAlignment="Left" Margin="844,614,0,0" VerticalAlignment="Top" Height="54" Width="180" Click="CancelRegister" />
         <Button Style="{StaticResource ButtonStyleConfirm}" Content="Continuar" FontSize="22" HorizontalAlignment="Left" Margin="1048,614,0,0" VerticalAlignment="Top" Width="180" Height="54" Click="BtnClicContinue" />
 
         <Label FontFamily="{StaticResource FontNunitoSemiBold}" FontSize="30" Foreground="#343434" Content="Domicilio" HorizontalAlignment="Left" Margin="308,265,0,0" VerticalAlignment="Top" Height="55" Width="161"/>
@@ -75,8 +66,7 @@
         <Label x:Name="lbIsEmptyCenterName" Content="Campo vacío" HorizontalContentAlignment="right" Foreground="Red" FontFamily="{StaticResource ResourceKey=FontNunito}" HorizontalAlignment="Left" Margin="804,251,0,0" VerticalAlignment="Top" Height="39" Width="116"/>
         <Label x:Name="lbIsEmptyPhone" Content="Campo vacío" HorizontalContentAlignment="right" Foreground="Red" FontFamily="{StaticResource ResourceKey=FontNunito}" HorizontalAlignment="Left" Margin="1085,253,0,0" VerticalAlignment="Top" Height="39" Width="116"/>
         <Label x:Name="lbIsEmptyStreet" Content="Campo vacío" HorizontalContentAlignment="right" Foreground="Red" FontFamily="{StaticResource ResourceKey=FontNunito}" HorizontalAlignment="Left" Margin="804,399,0,0" VerticalAlignment="Top" Height="39" Width="116"/>
-        <Label x:Name="lbIsEmptyInnerNumber" Content="Campo vacío" HorizontalContentAlignment="right" Foreground="Red" FontFamily="{StaticResource ResourceKey=FontNunito}" HorizontalAlignment="Left" Margin="948,399,0,0" VerticalAlignment="Top" Height="39" Width="116"/>
-        <Label x:Name="lbIsEmptyOutsideNumber" Content="Campo vacío" HorizontalContentAlignment="right" Foreground="Red" FontFamily="{StaticResource ResourceKey=FontNunito}" HorizontalAlignment="Left" Margin="1081,399,0,0" VerticalAlignment="Top" Height="39" Width="116"/>
+        <Label x:Name="lbIsEmptyOutsideNumber" Content="Campo vacío" HorizontalContentAlignment="right" Foreground="Red" FontFamily="{StaticResource ResourceKey=FontNunito}" HorizontalAlignment="Left" Margin="948,399,0,0" VerticalAlignment="Top" Height="39" Width="116"/>
         <Label x:Name="lbIsEmptyZipCode" Content="Campo vacío" HorizontalContentAlignment="right" Foreground="Red" FontFamily="{StaticResource ResourceKey=FontNunito}" HorizontalAlignment="Left" Margin="979,518,0,0" VerticalAlignment="Top" Height="39" Width="116"/>
         <Label x:Name="lbIsEmptyColony" Content="Campo vacío" HorizontalContentAlignment="right" Foreground="Red" FontFamily="{StaticResource ResourceKey=FontNunito}" HorizontalAlignment="Left" Margin="804,518,0,0" VerticalAlignment="Top" Height="39" Width="116"/>
         <StackPanel/>

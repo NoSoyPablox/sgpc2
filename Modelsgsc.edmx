@@ -194,7 +194,7 @@
     <Property Name="ZipCode" Type="int" Nullable="true" />
     <Property Name="PhoneNumber" Type="nvarchar(max)" Nullable="true" />
     <Property Name="CustomerId" Type="int" Nullable="true" />
-    <Property Name="Customer_CustomerId" Type="int" Nullable="false" />
+    <Property Name="Customer_CustomerId" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="CreditRequestCreditCondition">
     <Key>
@@ -277,7 +277,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="CustomerWorkCenter">
-    <End Role="Customer" Type="sgscModel.Store.Customers" Multiplicity="1" />
+    <End Role="Customer" Type="sgscModel.Store.Customers" Multiplicity="0..1" />
     <End Role="WorkCenter" Type="sgscModel.Store.WorkCenters" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Customer">
@@ -490,7 +490,7 @@
           <Property Name="CenterName" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
           <Property Name="Street" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
           <Property Name="Colony" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
-          <Property Name="InnerNumber" Type="Int32" />
+          <Property Name="InnerNumber" Type="Int32" Nullable="true" />
           <Property Name="OutsideNumber" Type="Int32" />
           <Property Name="ZipCode" Type="Int32" />
           <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -616,7 +616,7 @@
           <End Type="sgscModel.CreditCondition" Role="CreditCondition" Multiplicity="*" />
         </Association>
         <Association Name="CustomerWorkCenter">
-          <End Type="sgscModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="sgscModel.Customer" Role="Customer" Multiplicity="0..1" />
           <End Type="sgscModel.WorkCenter" Role="WorkCenter" Multiplicity="0..1" />
         </Association>
         <Association Name="PaymentCreditRequest">
@@ -802,6 +802,7 @@
       <EndProperty Name="WorkCenter">
         <ScalarProperty Name="WorkCenterId" ColumnName="WorkCenterId" />
       </EndProperty>
+      <Condition ColumnName="Customer_CustomerId" IsNull="false" />
     </AssociationSetMapping>
     <AssociationSetMapping Name="PaymentCreditRequest" TypeName="sgscModel.PaymentCreditRequest" StoreEntitySet="Payments">
       <EndProperty Name="CreditRequest">
