@@ -25,7 +25,6 @@ namespace SGSC.Pages
         bool isEditable = false;
         Dictionary<TextBox, System.Windows.Controls.Label> textBoxLabelMap;
 
-
         public PageContactInformation(bool isEditable, int CustomerId)
         {
             InitializeComponent();
@@ -195,29 +194,6 @@ namespace SGSC.Pages
                     notificationWindow.Close();
                 });
             });
-        }
-
-        private void BtnClicPageContactInformation(object sender, RoutedEventArgs e)
-        {
-            PageContactInformation contactInformation = new PageContactInformation(false, 2);
-            if (NavigationService != null)
-            {
-                NavigationService.Navigate(contactInformation);
-            }
-        }
-
-        private void BtnClicPageWorkCenter(object sender, RoutedEventArgs e)
-        {
-            PageWorkCenter workCenter = new PageWorkCenter(false, 2);
-            if (NavigationService != null)
-            {
-                NavigationService.Navigate(workCenter);
-            }
-        }
-
-        private void Frame_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
-        {
-
         }
     }
 }

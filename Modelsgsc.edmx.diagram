@@ -25,11 +25,11 @@
         <AssociationConnector Association="sgscModel.CreditRequestBankAccount1" ManuallyRouted="false" >
         </AssociationConnector>
         <AssociationConnector Association="sgscModel.CreditRequestCreditCondition" />
-        <AssociationConnector Association="sgscModel.CustomerCustomerAddress" />
         <AssociationConnector Association="sgscModel.CustomerWorkCenter" ManuallyRouted="false" >
         </AssociationConnector>
         <AssociationConnector Association="sgscModel.PaymentCreditRequest" />
         <AssociationConnector Association="sgscModel.EmployeeCreditRequest" />
+        <AssociationConnector Association="sgscModel.CustomerAddressCustomer" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

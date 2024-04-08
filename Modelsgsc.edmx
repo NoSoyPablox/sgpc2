@@ -50,10 +50,6 @@
       <End Role="CreditCondition" EntitySet="CreditConditions" />
       <End Role="CreditRequestCreditCondition" EntitySet="CreditRequestCreditCondition" />
     </AssociationSet>
-    <AssociationSet Name="CustomerCustomerAddress" Association="sgscModel.Store.CustomerCustomerAddress">
-      <End Role="Customer" EntitySet="Customers" />
-      <End Role="CustomerAddress" EntitySet="CustomerAddresses" />
-    </AssociationSet>
     <AssociationSet Name="CustomerWorkCenter" Association="sgscModel.Store.CustomerWorkCenter">
       <End Role="Customer" EntitySet="Customers" />
       <End Role="WorkCenter" EntitySet="WorkCenters" />
@@ -65,6 +61,10 @@
     <AssociationSet Name="EmployeeCreditRequest" Association="sgscModel.Store.EmployeeCreditRequest">
       <End Role="Employee" EntitySet="Employees" />
       <End Role="CreditRequest" EntitySet="CreditRequests" />
+    </AssociationSet>
+    <AssociationSet Name="CustomerAddressCustomer" Association="sgscModel.Store.CustomerAddressCustomer">
+      <End Role="CustomerAddress" EntitySet="CustomerAddresses" />
+      <End Role="Customer" EntitySet="Customers" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="BankAccounts">
@@ -133,9 +133,8 @@
     <Property Name="ZipCode" Type="nvarchar(max)" Nullable="true" />
     <Property Name="ExternalNumber" Type="nvarchar(max)" Nullable="true" />
     <Property Name="InternalNumber" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="CustomerId" Type="int" Nullable="true" />
+    <Property Name="CustomerId" Type="int" Nullable="false" />
     <Property Name="Colony" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Customer_CustomerId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="CustomerContactInfoes">
     <Key>
@@ -157,6 +156,7 @@
     <Property Name="SecondSurname" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Curp" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Rfc" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="CustomerAddress_CustomerAddressId" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="Employees">
     <Key>
@@ -276,18 +276,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="CustomerCustomerAddress">
-    <End Role="Customer" Type="sgscModel.Store.Customers" Multiplicity="1" />
-    <End Role="CustomerAddress" Type="sgscModel.Store.CustomerAddresses" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Customer">
-        <PropertyRef Name="CustomerId" />
-      </Principal>
-      <Dependent Role="CustomerAddress">
-        <PropertyRef Name="Customer_CustomerId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="CustomerWorkCenter">
     <End Role="Customer" Type="sgscModel.Store.Customers" Multiplicity="1" />
     <End Role="WorkCenter" Type="sgscModel.Store.WorkCenters" Multiplicity="*" />
@@ -321,6 +309,18 @@
       </Principal>
       <Dependent Role="CreditRequest">
         <PropertyRef Name="Employee_EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CustomerAddressCustomer">
+    <End Role="CustomerAddress" Type="sgscModel.Store.CustomerAddresses" Multiplicity="0..1" />
+    <End Role="Customer" Type="sgscModel.Store.Customers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CustomerAddress">
+        <PropertyRef Name="CustomerAddressId" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="CustomerAddress_CustomerAddressId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -426,9 +426,9 @@
           <Property Name="ZipCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ExternalNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="InternalNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="true" />
-          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
           <Property Name="Colony" Type="String" Nullable="false" />
-          <NavigationProperty Name="Customer" Relationship="sgscModel.CustomerCustomerAddress" FromRole="CustomerAddress" ToRole="Customer" />
+          <NavigationProperty Name="Customer" Relationship="sgscModel.CustomerAddressCustomer" FromRole="CustomerAddress" ToRole="Customer" />
         </EntityType>
         <EntityType Name="CustomerContactInfo">
           <Key>
@@ -455,8 +455,8 @@
           <NavigationProperty Name="Contacts" Relationship="Self.FK_CustomerContact" FromRole="Customers" ToRole="Contacts" />
           <NavigationProperty Name="CreditRequests" Relationship="Self.FK_CreditRequestCustomer" FromRole="Customer" ToRole="CreditRequests" />
           <NavigationProperty Name="CustomerContactInfoes" Relationship="Self.CustomerId" FromRole="Customers" ToRole="CustomerContactInfoes" />
-          <NavigationProperty Name="CustomerAddresses" Relationship="sgscModel.CustomerCustomerAddress" FromRole="Customer" ToRole="CustomerAddress" />
           <NavigationProperty Name="WorkCenters" Relationship="sgscModel.CustomerWorkCenter" FromRole="Customer" ToRole="WorkCenter" />
+          <NavigationProperty Name="CustomerAddress" Relationship="sgscModel.CustomerAddressCustomer" FromRole="Customer" ToRole="CustomerAddress" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -586,10 +586,6 @@
             <End Role="CreditRequest" EntitySet="CreditRequests" />
             <End Role="CreditCondition" EntitySet="CreditConditions" />
           </AssociationSet>
-          <AssociationSet Name="CustomerCustomerAddress" Association="sgscModel.CustomerCustomerAddress">
-            <End Role="Customer" EntitySet="Customers" />
-            <End Role="CustomerAddress" EntitySet="CustomerAddresses" />
-          </AssociationSet>
           <AssociationSet Name="CustomerWorkCenter" Association="sgscModel.CustomerWorkCenter">
             <End Role="Customer" EntitySet="Customers" />
             <End Role="WorkCenter" EntitySet="WorkCenters" />
@@ -601,6 +597,10 @@
           <AssociationSet Name="EmployeeCreditRequest" Association="sgscModel.EmployeeCreditRequest">
             <End Role="Employee" EntitySet="Employees" />
             <End Role="CreditRequest" EntitySet="CreditRequests" />
+          </AssociationSet>
+          <AssociationSet Name="CustomerAddressCustomer" Association="sgscModel.CustomerAddressCustomer">
+            <End Role="CustomerAddress" EntitySet="CustomerAddresses" />
+            <End Role="Customer" EntitySet="Customers" />
           </AssociationSet>
         </EntityContainer>
         <Association Name="CreditRequestBankAccount">
@@ -615,10 +615,6 @@
           <End Type="sgscModel.CreditRequest" Role="CreditRequest" Multiplicity="*" />
           <End Type="sgscModel.CreditCondition" Role="CreditCondition" Multiplicity="*" />
         </Association>
-        <Association Name="CustomerCustomerAddress">
-          <End Type="sgscModel.Customer" Role="Customer" Multiplicity="1" />
-          <End Type="sgscModel.CustomerAddress" Role="CustomerAddress" Multiplicity="0..1" />
-        </Association>
         <Association Name="CustomerWorkCenter">
           <End Type="sgscModel.Customer" Role="Customer" Multiplicity="1" />
           <End Type="sgscModel.WorkCenter" Role="WorkCenter" Multiplicity="0..1" />
@@ -630,6 +626,10 @@
         <Association Name="EmployeeCreditRequest">
           <End Type="sgscModel.Employee" Role="Employee" Multiplicity="1" />
           <End Type="sgscModel.CreditRequest" Role="CreditRequest" Multiplicity="*" />
+        </Association>
+        <Association Name="CustomerAddressCustomer">
+          <End Type="sgscModel.CustomerAddress" Role="CustomerAddress" Multiplicity="0..1" />
+          <End Type="sgscModel.Customer" Role="Customer" Multiplicity="0..1" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -795,14 +795,6 @@
         <ScalarProperty Name="CreditConditionId" ColumnName="CreditConditions_CreditConditionId" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="CustomerCustomerAddress" TypeName="sgscModel.CustomerCustomerAddress" StoreEntitySet="CustomerAddresses">
-      <EndProperty Name="Customer">
-        <ScalarProperty Name="CustomerId" ColumnName="Customer_CustomerId" />
-      </EndProperty>
-      <EndProperty Name="CustomerAddress">
-        <ScalarProperty Name="CustomerAddressId" ColumnName="CustomerAddressId" />
-      </EndProperty>
-    </AssociationSetMapping>
     <AssociationSetMapping Name="CustomerWorkCenter" TypeName="sgscModel.CustomerWorkCenter" StoreEntitySet="WorkCenters">
       <EndProperty Name="Customer">
         <ScalarProperty Name="CustomerId" ColumnName="Customer_CustomerId" />
@@ -826,6 +818,15 @@
       <EndProperty Name="CreditRequest">
         <ScalarProperty Name="CreditRequestId" ColumnName="CreditRequestId" />
       </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CustomerAddressCustomer" TypeName="sgscModel.CustomerAddressCustomer" StoreEntitySet="Customers">
+      <EndProperty Name="CustomerAddress">
+        <ScalarProperty Name="CustomerAddressId" ColumnName="CustomerAddress_CustomerAddressId" />
+      </EndProperty>
+      <EndProperty Name="Customer">
+        <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+      </EndProperty>
+      <Condition ColumnName="CustomerAddress_CustomerAddressId" IsNull="false" />
     </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>

@@ -38,7 +38,7 @@ namespace SGSC
         public virtual ICollection<CreditRequest> CreditRequests { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CustomerContactInfo> CustomerContactInfoes { get; set; }
-        public virtual CustomerAddress CustomerAddresses { get; set; }
         public virtual WorkCenter WorkCenters { get; set; }
+        public virtual CustomerAddress CustomerAddress { get; set; }
     }
 }

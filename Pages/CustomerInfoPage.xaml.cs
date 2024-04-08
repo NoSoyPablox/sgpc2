@@ -74,7 +74,7 @@ namespace SGSC.Pages
                 valid = false;
                 lbCurp.Content = "Por favor introduzca el CURP";
             }
-            if (!Validator.ValidateCURP(tbCURP.Text))
+            if (!Utils.TextValidator.ValidateCURP(tbCURP.Text))
             {
                 valid = false;
                 lbCurp.Content = "Por favor introduzca un CURP válido";
@@ -118,6 +118,7 @@ namespace SGSC.Pages
                 catch (Exception ex)
                 {
                     Console.WriteLine("Ocurrió un error al intentar registrar el cliente: " + ex.Message);
+                    MessageBox.Show("Ocurrió un error al intentar actualizar el cliente.");
                 }
             }
         }
@@ -141,6 +142,7 @@ namespace SGSC.Pages
                 }
                 catch (Exception ex)
                 {
+                    MessageBox.Show("Ocurrió un error al intentar actualizar el cliente.");
                     Console.WriteLine("Ocurrió un error al intentar actualizar el cliente: " + ex.Message);
                 }
             }

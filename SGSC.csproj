@@ -78,9 +78,6 @@
     <Compile Include="CreditCondition.cs">
       <DependentUpon>Modelsgsc.tt</DependentUpon>
     </Compile>
-    <Compile Include="CreditConditionCreditRequest.cs">
-      <DependentUpon>Modelsgsc.tt</DependentUpon>
-    </Compile>
     <Compile Include="CreditPolicy.cs">
       <DependentUpon>Modelsgsc.tt</DependentUpon>
     </Compile>
@@ -123,6 +120,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Modelsgsc.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Model\BankAccount.cs" />
     <Compile Include="Pages\CustomerBankAccountsPage.xaml.cs">
       <DependentUpon>CustomerBankAccountsPage.xaml</DependentUpon>
     </Compile>
@@ -138,15 +136,15 @@
     <Compile Include="Utils\Authenticator.cs" />
     <Compile Include="Utils\TextValidator.cs" />
     <Compile Include="Utils\UserSession.cs" />
-    <Compile Include="WorkCenter.cs">
-      <DependentUpon>Modelsgsc.tt</DependentUpon>
-    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WorkCenter.cs">
+      <DependentUpon>Modelsgsc.tt</DependentUpon>
     </Compile>
     <Page Include="Frames\CustomerRegisterStepsSidebar.xaml">
       <SubType>Designer</SubType>
@@ -196,7 +194,6 @@
       <DependentUpon>AddressInformationPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="TextBoxName.cs" />
-    <Compile Include="Validator.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
