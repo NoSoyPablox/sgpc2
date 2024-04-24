@@ -1,0 +1,30 @@
+﻿<Page x:Class="SGSC.Frames.CreditAdvisorSidebar"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="720" d:DesignWidth="108"
+      Background="White"
+      Title="CredirAdvisorSidebar">
+
+    <Grid>
+        <Image Source="../Images/coin-logo.png" Margin="10,8,1186,594" RenderTransformOrigin="0.47,0.339"/>
+        <Image Source="../Images/line.png" Margin="97,-2,0,2"></Image>
+        <Rectangle Name="homeButtonBackground" Style="{StaticResource RoundedRectangleHomeStyle}"  Margin="16,215,19,430"/>
+        <Button Style="{StaticResource Menubutton}" FontSize="15" HorizontalAlignment="Left" Margin="16,215,0,0" VerticalAlignment="Top" Width="72" Height="75" Click="HomeButton_Click">
+            <Image Source="../Images/icon-home-checked.png" Height="70" Width="50"/>
+        </Button>
+        <Rectangle Name="searchCustomerButtonBackground" Style="{StaticResource RoundedRectangleHomeStyle}"  Margin="16,295,18,350"/>
+        <Button Style="{StaticResource Menubutton}" FontSize="15" HorizontalAlignment="Left" Margin="16,295,0,0" VerticalAlignment="Top" Width="72" Height="75" Click="SearchCustomerButton_Click">
+            <Image Source="../Images/icon-find-customer.png" Height="70" Width="50" RenderTransformOrigin="0.5,0.643"/>
+        </Button>
+        <Rectangle Name="creditRequestButtonBackground"  Style="{StaticResource RoundedRectangleHomeStyle}"  Margin="16,375,19,270"/>
+        <Button Style="{StaticResource Menubutton}" FontSize="15" HorizontalAlignment="Left" Margin="16,375,0,0" VerticalAlignment="Top" Width="72" Height="75">
+            <Image Source="../Images/icon-board.png" Height="70" Width="50"/>
+        </Button>
+        <Button Name="LogoutButton" Background="White" Style="{StaticResource Menubutton}" FontSize="15" HorizontalAlignment="Left" Margin="16,630,0,0" VerticalAlignment="Top" Width="72" Height="75" Click="LogoutButton_Click">
+            <Image Source="../Images/icon-logout.png" Height="70" Width="50"/>
+        </Button>
+    </Grid>
+</Page>

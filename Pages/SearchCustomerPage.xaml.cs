@@ -23,6 +23,12 @@ namespace SGSC.Pages
         public SearchCustomerPage()
         {
             InitializeComponent();
-        }
-    }
+            creditAdvisorSidebar.Content = new Frames.CreditAdvisorSidebar("searchCustomer");
+		}
+
+		private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+
+		}
+	}
 }

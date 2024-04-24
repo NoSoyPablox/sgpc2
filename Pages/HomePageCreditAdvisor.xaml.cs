@@ -9,7 +9,8 @@ namespace SGSC.Pages
         public HomePageCreditAdvisor()
         {
             InitializeComponent();
-        }
+            creditAdvisorSidebar.Content = new Frames.CreditAdvisorSidebar("home");
+		}
 
         private void ButtonClicNuevo_Cliente(object sender, RoutedEventArgs e)
         {            
@@ -21,14 +22,4 @@ namespace SGSC.Pages
             
         }
 
-        private void LogoutButton_Click(object sender, RoutedEventArgs e)
-        {
-            UserSession.LogOut();
-        }
-
-        private void CreditsBtn(object sender, RoutedEventArgs e)
-        {
-            App.Current.MainFrame.Content = new ActiveCreditsPage();
-        }
-    }
 }

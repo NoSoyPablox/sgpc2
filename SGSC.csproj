@@ -103,6 +103,9 @@
     <Compile Include="Employee.cs">
       <DependentUpon>Modelsgsc.tt</DependentUpon>
     </Compile>
+    <Compile Include="Frames\CreditAdvisorSidebar.xaml.cs">
+      <DependentUpon>CreditAdvisorSidebar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Frames\CustomerRegisterStepsSidebar.xaml.cs">
       <DependentUpon>CustomerRegisterStepsSidebar.xaml</DependentUpon>
     </Compile>
@@ -156,9 +159,18 @@
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utils\Utils.cs" />
+    <Page Include="Frames\CreditApplicationDataStepsSidebar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Compile Include="WorkCenter.cs">
       <DependentUpon>Modelsgsc.tt</DependentUpon>
     </Compile>
+    <Page Include="Frames\CreditAdvisorSidebar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Frames\CustomerRegisterStepsSidebar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
