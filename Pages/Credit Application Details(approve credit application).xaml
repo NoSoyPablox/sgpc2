@@ -48,8 +48,11 @@
         </Button>
 
         <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="12" Background="White" Margin="736,131,59,419">
-            <TextBlock x:Name="txtObservations" FontFamily="{StaticResource FontNunito}" FontSize="18" Padding="10"/>
+            <TextBox x:Name="txtObservations" BorderBrush="Transparent" FontFamily="{StaticResource FontNunito}" FontSize="18" Padding="10" TextWrapping="Wrap" AcceptsReturn="True" Margin="9,-1,9,-1" IsReadOnly="False" IsReadOnlyCaretVisible="False"/>
         </Border>
+
+
+
 
         <Label Content="Detalle de solicitud de crédito" FontFamily="{StaticResource FontPoppins}" FontSize="26" HorizontalAlignment="Left" Margin="276,77,0,0" VerticalAlignment="Top"/>
         <Image Margin="276,126,602,254" Source="C:\Users\Dani\Desktop\Desarrollo de Software\sgsc\Images\background-Approve.png" Stretch="Fill"/>

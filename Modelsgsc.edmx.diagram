@@ -6,7 +6,6 @@
     <edmx:Diagrams>
       <Diagram DiagramId="56620f64c3ca410ab7240ff79619d967" Name="Diagram1" ZoomLevel="73">
         <EntityTypeShape EntityType="sgscModel.BankAccounts" Width="1.5" PointX="9.75" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="sgscModel.Colony" Width="1.5" PointX="5.25" PointY="9.875" IsExpanded="true" />
         <EntityTypeShape EntityType="sgscModel.Contacts" Width="1.5" PointX="9.75" PointY="7.5" IsExpanded="true" />
         <EntityTypeShape EntityType="sgscModel.CreditPolicy" Width="1.5" PointX="12" PointY="2.75" IsExpanded="true" />
         <EntityTypeShape EntityType="sgscModel.CreditPromotion" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
@@ -22,7 +21,6 @@
         <AssociationConnector Association="sgscModel.FK_BankAccountCustomer" ManuallyRouted="false" />
         <AssociationConnector Association="sgscModel.FK_BankAccountDomicialization" ManuallyRouted="false" />
         <AssociationConnector Association="sgscModel.FK_CreditRequestBankAccount" ManuallyRouted="false" />
-        <AssociationConnector Association="sgscModel.FK_ColonyId" ManuallyRouted="false" />
         <AssociationConnector Association="sgscModel.FK_CustomerContact" ManuallyRouted="false" />
         <AssociationConnector Association="sgscModel.FK_CreditPolicy" ManuallyRouted="false" />
         <AssociationConnector Association="sgscModel.FK_CreditPromotionId" ManuallyRouted="false" />
@@ -34,6 +32,8 @@
         <AssociationConnector Association="sgscModel.TypeAddressId" ManuallyRouted="false" />
         <AssociationConnector Association="sgscModel.FK_CustomerId" ManuallyRouted="false" />
         <AssociationConnector Association="sgscModel.FK_CustomerWorkCenter" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="sgscModel.Localization" Width="1.5" PointX="3" PointY="2.625" />
+        <AssociationConnector Association="sgscModel.FK_LocalizationId" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -84,6 +84,12 @@ namespace SGSC.Utils
                     mainFrame.Content = landingPageCreditAnalyst;
                     break;
 
+                case (short)UserRole.Admin:
+                    var landingPageAdmin = new Pages.Home_manager();
+                    mainFrame.Content = landingPageAdmin;
+                    break;
+
+
                 default:
                     MessageBox.Show("Rol no implementado.");
                     break;

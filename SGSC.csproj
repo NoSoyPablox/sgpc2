@@ -71,6 +71,36 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BankAccounts.cs">
+      <DependentUpon>Modelsgsc.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contacts.cs">
+      <DependentUpon>Modelsgsc.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CreditPolicy.cs">
+      <DependentUpon>Modelsgsc.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CreditPromotion.cs">
+      <DependentUpon>Modelsgsc.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CreditRequestCreditPolicy.cs">
+      <DependentUpon>Modelsgsc.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CreditRequests.cs">
+      <DependentUpon>Modelsgsc.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerAddresses.cs">
+      <DependentUpon>Modelsgsc.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerContactInfoes.cs">
+      <DependentUpon>Modelsgsc.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Customers.cs">
+      <DependentUpon>Modelsgsc.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Employees.cs">
+      <DependentUpon>Modelsgsc.tt</DependentUpon>
+    </Compile>
     <Compile Include="Frames\CreditApplicationDataStepsSidebar.xaml.cs">
       <DependentUpon>CreditApplicationDataStepsSidebar.xaml</DependentUpon>
     </Compile>
@@ -79,6 +109,9 @@
     </Compile>
     <Compile Include="Frames\UserSessionFrame.xaml.cs">
       <DependentUpon>UserSessionFrame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Localization.cs">
+      <DependentUpon>Modelsgsc.tt</DependentUpon>
     </Compile>
     <Compile Include="Messages\ToastNotification.xaml.cs">
       <DependentUpon>ToastNotification.xaml</DependentUpon>
@@ -135,6 +168,12 @@
     <Compile Include="Pages\SearchCustomerPage.xaml.cs">
       <DependentUpon>SearchCustomerPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Payments.cs">
+      <DependentUpon>Modelsgsc.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TypeAddress.cs">
+      <DependentUpon>Modelsgsc.tt</DependentUpon>
+    </Compile>
     <Compile Include="Utils\Authenticator.cs" />
     <Compile Include="Utils\TextValidator.cs" />
     <Compile Include="Utils\UserSession.cs" />
@@ -146,6 +185,9 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utils\Utils.cs" />
+    <Compile Include="WorkCenters.cs">
+      <DependentUpon>Modelsgsc.tt</DependentUpon>
+    </Compile>
     <Page Include="Frames\CreditApplicationDataStepsSidebar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
