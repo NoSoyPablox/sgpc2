@@ -15,14 +15,21 @@ using System.Windows.Shapes;
 
 namespace SGSC.Pages
 {
-    /// <summary>
-    /// Lógica de interacción para CentroDeTrabajo.xaml
-    /// </summary>
-    public partial class CentroDeTrabajo : Page
+    public partial class Credit_Analyst_home_page : Page
     {
-        public CentroDeTrabajo()
+        public Credit_Analyst_home_page()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            int requestId = 3;
+            var customerInfoPage = new Credit_Application_Details_request_(requestId);
+            if (NavigationService != null)
+            {
+                NavigationService.Navigate(customerInfoPage);
+            }
         }
     }
 }

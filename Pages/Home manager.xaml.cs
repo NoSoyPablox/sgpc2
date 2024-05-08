@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace SGSC.Pages
 {
     /// <summary>
-    /// Lógica de interacción para DatosDeContacto.xaml
+    /// Lógica de interacción para Home_manager.xaml
     /// </summary>
-    public partial class DatosDeContacto : Page
+    public partial class Home_manager : Page
     {
-        public DatosDeContacto()
+        public Home_manager()
         {
             InitializeComponent();
         }

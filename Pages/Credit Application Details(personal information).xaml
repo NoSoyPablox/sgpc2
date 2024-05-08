@@ -1,0 +1,105 @@
+﻿<Page x:Class="SGSC.Pages.Credit_Application_Details_personal_information_"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SGSC.Pages"
+      xmlns:frames="clr-namespace:SGSC.Frames"
+      mc:Ignorable="d" 
+      d:DesignHeight="720" d:DesignWidth="1280"
+      Title="Credit_Application_Details_personal_information_">
+
+    <Page.Resources>
+        <!-- Definición de la fuente personalizada -->
+        <FontFamily x:Key="FuenteNunito">/Typografic styles/Nunito-Regular.ttf#Nunito</FontFamily>
+
+        <Style x:Key="CustomLabelStyle" TargetType="Label">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Label">
+                        <TextBlock FontWeight="Medium" FontFamily="{StaticResource FuenteNunito}">
+        <Run Text="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}"/>
+        <Run Text="*" Foreground="#F67070"/>
+                        </TextBlock>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+
+    <Grid>
+        <Border Background="White" CornerRadius="22" Margin="0">
+            <!-- Contenido dentro del Border -->
+            <!-- Aquí puedes poner tu contenido -->
+        </Border>
+
+        <Frame/>
+
+        <!-- Grid con color de fondo -->
+        <Frame Name="UserSessionFrame" NavigationUIVisibility="Hidden" Margin="888,10,20,624"/>
+        <Frame Name="StepsSidebarFrame" NavigationUIVisibility="Hidden" Margin="9,68,1009,98" />
+
+        <!-- Grid con color de fondo -->
+        <Button Style="{StaticResource ButtonStyleConfirm}" Content="Continuar" FontSize="15" HorizontalAlignment="Left" Margin="1122,666,0,0" VerticalAlignment="Top" Width="130" Height="38" Click="Button_Click"/>
+
+
+        <Button Width="100" Height="50" BorderThickness="0" Background="Transparent" Margin="-4,11,1184,659">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="C:\Users\Dani\Desktop\Desarrollo de Software\sgsc\Images\return.png" Width="62" Height="53" />
+            </StackPanel>
+        </Button>
+        <Label Content="Detalle de solicitud de crédito" FontFamily="{StaticResource FontPoppins}" FontSize="26" HorizontalAlignment="Left" Margin="276,77,0,0" VerticalAlignment="Top"/>
+        <Image Margin="276,126,22,69" Source="C:\Users\Dani\Desktop\Desarrollo de Software\sgsc\Images\Background personal information.png" Stretch="Fill"/>
+        <Label Content="A. Paterno:" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Margin="603,144,0,0" VerticalAlignment="Top"/>
+        <Label Content="A. Materno:" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Margin="936,144,0,0" VerticalAlignment="Top"/>
+        <Label Content="Nombre:" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Margin="286,144,0,0" VerticalAlignment="Top"/>
+        <Label Content="Fecha de nacimiento:" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Margin="285,188,0,0" VerticalAlignment="Top"/>
+        <Label Content="Género:" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Margin="678,188,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="cbxWoman" Content="Femenino" FontSize="16" HorizontalAlignment="Left" Margin="750,193,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="cbxMan" Content="Masculino" FontSize="16" HorizontalAlignment="Left" Margin="874,192,0,0" VerticalAlignment="Top" />
+        <Label Content="CURP:" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Margin="286,231,0,0" VerticalAlignment="Top"/>
+        <Label Content="Correo Electrónico:" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Margin="642,231,0,0" VerticalAlignment="Top"/>
+        <Label Content="Calle:" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Margin="287,275,0,0" VerticalAlignment="Top"/>
+        <Label Content="No.Ext.:" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Margin="921,273,0,0" VerticalAlignment="Top"/>
+        <Label Content="No.Int.:" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Margin="1084,271,0,0" VerticalAlignment="Top"/>
+        <Label Content="Colonia:" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Margin="284,460,0,0" VerticalAlignment="Top"/>
+        <Label Content="CP:" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Margin="886,465,0,0" VerticalAlignment="Top"/>
+        <Label Content="Delegación o municipio:" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Margin="286,323,0,0" VerticalAlignment="Top"/>
+        <Label Content="Ciudad:" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Margin="750,323,0,0" VerticalAlignment="Top"/>
+        <Label Content="Estado:" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Margin="288,366,0,0" VerticalAlignment="Top"/>
+        <Label Content="Tipo de domicilio:" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Margin="284,407,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="cbxOwner" Content="Propietario" FontSize="16" HorizontalAlignment="Left" Margin="434,426,0,0" VerticalAlignment="Top" />
+        <CheckBox x:Name="cbxMortgaged" Content="Hipotecado" FontSize="16" HorizontalAlignment="Left" Margin="563,428,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="cbxRent" Content="Alquiler" FontSize="16" HorizontalAlignment="Left" Margin="682,428,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="cbxFamily" Content="Familiar" FontSize="16" HorizontalAlignment="Left" Margin="795,426,0,0" VerticalAlignment="Top" />
+        <CheckBox x:Name="cbxOther" Content="Otro____" FontSize="16" HorizontalAlignment="Left" Margin="914,426,0,0" VerticalAlignment="Top"/>
+        <Label Content="Edo. Civil:" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Margin="285,565,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="cbxSingle" Content="Soltero(a)" FontSize="16" HorizontalAlignment="Left" Margin="320,606,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="cbxMarried" Content="Casado(a)" FontSize="16" HorizontalAlignment="Left" Margin="477,606,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="cbxDivorced" Content="Divorciado(a)" FontSize="16" HorizontalAlignment="Left" Margin="614,606,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="cbxVidower" Content="Viudo(a)" FontSize="16" HorizontalAlignment="Left" Margin="773,606,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="cbxFreeUnion" Content="Unión libre" FontSize="16" HorizontalAlignment="Left" Margin="936,606,0,0" VerticalAlignment="Top"/>
+        <Label Content="Teléfonos:" FontSize="16" FontWeight="Bold"  HorizontalAlignment="Left" Margin="285,503,0,0" VerticalAlignment="Top"/>
+        <Label Content="Trabajo:" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Margin="311,529,0,0" VerticalAlignment="Top"/>
+        <Label Content="Teléfono1:" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Margin="576,529,0,0" VerticalAlignment="Top"/>
+        <Label Content="Teléfono2:" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Margin="842,529,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbName" FontSize="16" HorizontalAlignment="Left" Margin="355,144,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbFirstSurname" FontSize="16" HorizontalAlignment="Left" Margin="689,144,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbSecondSurname" FontSize="16" HorizontalAlignment="Left" Margin="1027,144,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbCurp" FontSize="16" HorizontalAlignment="Left" Margin="335,231,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbEmail" FontSize="16" HorizontalAlignment="Left" Margin="789,231,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbStreet" FontSize="16" HorizontalAlignment="Left" Margin="331,275,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lnOutsideNumber" FontSize="16" HorizontalAlignment="Left" Margin="983,273,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbInnerNumber" FontSize="16" HorizontalAlignment="Left" Margin="1143,273,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbMunicipality" FontSize="16" HorizontalAlignment="Left" Margin="472,323,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbTown" FontSize="16" HorizontalAlignment="Left" Margin="814,323,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbState" FontSize="16" HorizontalAlignment="Left" Margin="347,366,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbColony" FontSize="16" HorizontalAlignment="Left" Margin="349,461,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbWorkPhone" FontSize="16" HorizontalAlignment="Left" Margin="377,529,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbPhoneOne" FontSize="16" HorizontalAlignment="Left" Margin="661,529,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbPhoneTwo" FontSize="16" HorizontalAlignment="Left" Margin="926,528,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbDateOfBirth" HorizontalAlignment="Left" Margin="447,192,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Page>

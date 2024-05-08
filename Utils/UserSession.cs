@@ -70,14 +70,19 @@ namespace SGSC.Utils
             _instance = new UserSession(id, email, name, firstSurname, secondSurname, role);
 
             var mainFrame = App.Current.MainFrame;
-            switch(role)
+            switch (role)
             {
                 case (short)UserRole.CreditAdvisor:
                 {
-                    var landingPage = new Pages.HomePageCreditAdvisor();
-                    mainFrame.Content = landingPage;
+                    var landingPageCreditAdvisor = new Pages.HomePageCreditAdvisor();
+                    mainFrame.Content = landingPageCreditAdvisor;
                     break;
                 }
+
+                case (short)UserRole.CreditAnalyst:
+                    var landingPageCreditAnalyst = new Pages.Credit_Analyst_home_page();
+                    mainFrame.Content = landingPageCreditAnalyst;
+                    break;
 
                 default:
                     MessageBox.Show("Rol no implementado.");

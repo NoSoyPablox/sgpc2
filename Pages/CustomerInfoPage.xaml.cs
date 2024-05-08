@@ -36,7 +36,7 @@ namespace SGSC.Pages
                 getCustomerInfo(CustomerId.Value);
             }
 
-            StepsSidebarFrame.Content = new CustomerRegisterStepsSidebar("PersonalInfo");
+            StepsSidebarFrame.Content = new CreditApplicationDataStepsSidebar();
             UserSessionFrame.Content = new UserSessionFrame();
 
             // Clear the error labels
@@ -99,7 +99,7 @@ namespace SGSC.Pages
             {
                 try
                 {
-                    Customer customerToRegister = new Customer();
+                    Customers customerToRegister = new Customers();
                     customerToRegister.Curp = tbCURP.Text;
                     customerToRegister.Name = tbName.Text;
                     customerToRegister.FirstSurname = tbFirstSurname.Text;
@@ -129,7 +129,7 @@ namespace SGSC.Pages
             {
                 try
                 {
-                    Customer customerToUpdate = db.Customers.Find(CustomerId);
+                    Customers customerToUpdate = db.Customers.Find(CustomerId);
                     customerToUpdate.Curp = tbCURP.Text;
                     customerToUpdate.Name = tbName.Text;
                     customerToUpdate.FirstSurname = tbFirstSurname.Text;
@@ -160,10 +160,10 @@ namespace SGSC.Pages
         {
             using (sgscEntities db = new sgscEntities())
             {
-                Customer customer = db.Customers.Find(idCustomer);
+                Customers customer = db.Customers.Find(idCustomer);
                 if (customer == null)
                 {
-                    MessageBox.Show("No se encontró el cliente seleccionado");
+                    MessageBox.Show("No se encontró la solicitud solicitada, por favor, inténtelo más tarde");
                     App.Current.MainFrame.GoBack();
                     return;
                 }

@@ -44,7 +44,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="System" />
+    <Reference Include="System">
+      <HintPath>..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -69,32 +71,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BankAccount.cs">
-      <DependentUpon>Modelsgsc.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Contact.cs">
-      <DependentUpon>Modelsgsc.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CreditCondition.cs">
-      <DependentUpon>Modelsgsc.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CreditPolicy.cs">
-      <DependentUpon>Modelsgsc.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CreditRequest.cs">
-      <DependentUpon>Modelsgsc.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Customer.cs">
-      <DependentUpon>Modelsgsc.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CustomerAddress.cs">
-      <DependentUpon>Modelsgsc.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CustomerContactInfo.cs">
-      <DependentUpon>Modelsgsc.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Employee.cs">
-      <DependentUpon>Modelsgsc.tt</DependentUpon>
+    <Compile Include="Frames\CreditApplicationDataStepsSidebar.xaml.cs">
+      <DependentUpon>CreditApplicationDataStepsSidebar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Frames\CustomerRegisterStepsSidebar.xaml.cs">
       <DependentUpon>CustomerRegisterStepsSidebar.xaml</DependentUpon>
@@ -121,17 +99,41 @@
       <DependentUpon>Modelsgsc.edmx</DependentUpon>
     </Compile>
     <Compile Include="Model\BankAccount.cs" />
+    <Compile Include="Pages\Approve credit application.xaml.cs">
+      <DependentUpon>Approve credit application.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Credit Analyst home page.xaml.cs">
+      <DependentUpon>Credit Analyst home page.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Credit Application Details%28approve credit application%29.xaml.cs">
+      <DependentUpon>Credit Application Details%28approve credit application%29.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Credit Application Details%28bank accounts%29.xaml.cs">
+      <DependentUpon>Credit Application Details%28bank accounts%29.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Credit Application Details%28personal information%29.xaml.cs">
+      <DependentUpon>Credit Application Details%28personal information%29.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Credit Application Details%28personal references%29.xaml.cs">
+      <DependentUpon>Credit Application Details%28personal references%29.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Credit Application Details%28request%29.xaml.cs">
+      <DependentUpon>Credit Application Details%28request%29.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Credit Application Details%28WorkCenter%29.xaml.cs">
+      <DependentUpon>Credit Application Details%28WorkCenter%29.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\CustomerBankAccountsPage.xaml.cs">
       <DependentUpon>CustomerBankAccountsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Home manager.xaml.cs">
+      <DependentUpon>Home manager.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\HomePageCreditAdvisor.xaml.cs">
       <DependentUpon>HomePageCreditAdvisor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\SearchCustomerPage.xaml.cs">
       <DependentUpon>SearchCustomerPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Payment.cs">
-      <DependentUpon>Modelsgsc.tt</DependentUpon>
     </Compile>
     <Compile Include="Utils\Authenticator.cs" />
     <Compile Include="Utils\TextValidator.cs" />
@@ -143,9 +145,11 @@
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WorkCenter.cs">
-      <DependentUpon>Modelsgsc.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Utils\Utils.cs" />
+    <Page Include="Frames\CreditApplicationDataStepsSidebar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Frames\CustomerRegisterStepsSidebar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -158,7 +162,43 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\Approve credit application.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Credit Analyst home page.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Credit Application Details%28approve credit application%29.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Credit Application Details%28bank accounts%29.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Credit Application Details%28personal information%29.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Credit Application Details%28personal references%29.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Credit Application Details%28request%29.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Credit Application Details%28WorkCenter%29.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\CustomerBankAccountsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Home manager.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -202,17 +242,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\CentroDeTrabajo.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Pages\CustomerInfoPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\DatosDeContacto.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\ReferenciasDelCliente.xaml">
       <SubType>Designer</SubType>
@@ -224,14 +256,8 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Pages\CentroDeTrabajo.xaml.cs">
-      <DependentUpon>CentroDeTrabajo.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\CustomerInfoPage.xaml.cs">
       <DependentUpon>CustomerInfoPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\DatosDeContacto.xaml.cs">
-      <DependentUpon>DatosDeContacto.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\LogIn.xaml.cs">
       <DependentUpon>LogIn.xaml</DependentUpon>
@@ -301,12 +327,30 @@
     <Resource Include="Images\user-circle-placeholder.png" />
     <Resource Include="Images\landing-banner.png" />
     <Resource Include="Images\login-page-bkg.png" />
+    <Resource Include="Images\return.png" />
+    <Resource Include="Images\background-request.png" />
+    <Resource Include="Images\Background-personal-information.png" />
+    <Resource Include="Images\Background personal information.png" />
+    <Resource Include="Images\Backgroud-workCenter.png" />
+    <Resource Include="Images\Background-bankAccounts.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\icon-discount.png" />
+    <Resource Include="Images\icon-locked.png" />
+    <Resource Include="Images\icon-policy.png" />
+    <Resource Include="Images\groups-icon.png" />
+    <Resource Include="Images\Background-workcenter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\background-Approve.png" />
+    <Resource Include="Images\background-Approve-request.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Modelsgsc.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Modelsgsc.edmx</DependentUpon>
       <LastGenOutput>Modelsgsc.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Modelsgsc.edmx.sql" />
     <Content Include="Modelsgsc.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Modelsgsc.edmx</DependentUpon>

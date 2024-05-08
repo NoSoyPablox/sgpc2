@@ -21,7 +21,7 @@ namespace SGSC.Pages
         String Email = "";
         int CustomerId;
         private sgscEntities dbContext;
-        SGSC.CustomerContactInfo userContactInformation = null;
+        SGSC.CustomerContactInfoes userContactInformation = null;
         bool isEditable = false;
         Dictionary<TextBox, System.Windows.Controls.Label> textBoxLabelMap;
 
@@ -54,7 +54,7 @@ namespace SGSC.Pages
             };
         }
 
-        public void ShowInformationContact(SGSC.CustomerContactInfo userContactInformation)
+        public void ShowInformationContact(SGSC.CustomerContactInfoes userContactInformation)
         {
             if (userContactInformation != null)
             {

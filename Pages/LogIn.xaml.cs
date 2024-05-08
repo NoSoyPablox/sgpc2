@@ -70,7 +70,7 @@ namespace SGSC.Pages
 					break;
 
 				default:
-					MessageBox.Show("Error desconocido.");
+					MessageBox.Show("Error desconocido." + res);
 					break;
             }
 		}

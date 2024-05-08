@@ -43,13 +43,13 @@ namespace SGSC.Pages
                 {
                     using (sgscEntities db = new sgscEntities())
                     {
-                        Contact contact1 = new Contact();
+                        Contacts contact1 = new Contacts();
                         contact1.Name = tbName.Text;
                         contact1.FirstSurname = tbFirstSurname.Text;
                         contact1.SecondSurname =tbSecondSurname.Text;
                         db.Contacts.Add(contact1);
 
-                        Contact contact2 = new Contact();
+                        Contacts contact2 = new Contacts();
                         contact2.Name = tbName1.Text;
                         contact2.FirstSurname = tbFirstSurname2.Text;
                         contact2.SecondSurname = tbSecondSurname2.Text;

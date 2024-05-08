@@ -18,7 +18,6 @@ namespace SGSC.Pages
             {
                 NavigationService.Navigate(customerInfoPage);
             }
-            
         }
 
         private void LogoutButton_Click(object sender, RoutedEventArgs e)

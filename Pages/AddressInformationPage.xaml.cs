@@ -45,7 +45,7 @@ namespace SGSC.Pages
                     return;
                 }
 
-                var newCustomerAddressInfo = new CustomerAddress
+                var newCustomerAddressInfoes = new CustomerAddresses
                 {
                     Street = txtStreet.Text,
                     ExternalNumber = txtExternalNumber.Text,
@@ -56,21 +56,21 @@ namespace SGSC.Pages
 
                 if(!string.IsNullOrWhiteSpace(txtInternalNumber.Text))
                 {
-                    newCustomerAddressInfo.InternalNumber = txtInternalNumber.Text;
+                    newCustomerAddressInfoes.InternalNumber = txtInternalNumber.Text;
                 }
                 else
                 {
-                    newCustomerAddressInfo.InternalNumber = null;
+                    newCustomerAddressInfoes.InternalNumber = null;
                 }
 
                 if(addressId != null)
                 {
-                    newCustomerAddressInfo.CustomerAddressId = addressId.Value;
+                    newCustomerAddressInfoes.CustomerAddressId = addressId.Value;
                 }
 
                 using (sgscEntities context = new sgscEntities())
                 {
-                    context.CustomerAddresses.AddOrUpdate(newCustomerAddressInfo);
+                    context.CustomerAddresses.AddOrUpdate(newCustomerAddressInfoes);
                     context.SaveChanges();
                 }
 
