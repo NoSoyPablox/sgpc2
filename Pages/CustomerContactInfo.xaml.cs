@@ -71,13 +71,13 @@ namespace SGSC.Pages
 
             clearErrors();
 
-            if(TextValidator.ValidateTextNumeric(tbPhoneNumber1.Text, 10, 10, false))
+            if(!TextValidator.ValidateTextNumeric(tbPhoneNumber1.Text, 10, 10, false))
             {
                 valid = false;
                 lbPhoneNumber1Error.Content = "Por favor introduzca un número de teléfono válido.";
             }
 
-            if (TextValidator.ValidateTextNumeric(tbPhoneNumber2.Text, 10, 10, false))
+            if (!TextValidator.ValidateTextNumeric(tbPhoneNumber2.Text, 10, 10, false))
             {
                 valid = false;
                 lbPhoneNumber2Error.Content = "Por favor introduzca un número de teléfono válido.";
@@ -128,6 +128,8 @@ namespace SGSC.Pages
                 }
 
                 MessageBox.Show("Información de contacto guardada exitosamente.");
+
+                App.Current.MainFrame.Content = new CustomerReferencesPage(customerId);
             }
             catch (Exception ex)
             {
