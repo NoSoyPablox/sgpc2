@@ -51,7 +51,8 @@ namespace SGSC.Pages
                     ExternalNumber = txtExternalNumber.Text,
                     ZipCode = txtZipCode.Text,
                     Colony = txtColony.Text,
-                    CustomerId = customerId
+                    CustomerId = customerId,
+                    State = "Veracruz"
                 };
 
                 if(!string.IsNullOrWhiteSpace(txtInternalNumber.Text))
