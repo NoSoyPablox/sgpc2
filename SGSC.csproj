@@ -176,10 +176,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\PageContactInformation.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pages\LogIn.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -192,9 +188,6 @@
   <ItemGroup>
     <Compile Include="Pages\PageWorkCenter.xaml.cs">
       <DependentUpon>PageWorkCenter.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\PageContactInformation.xaml.cs">
-      <DependentUpon>PageContactInformation.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\AddressInformationPage.xaml.cs">
       <DependentUpon>AddressInformationPage.xaml</DependentUpon>
@@ -216,11 +209,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\DatosDeContacto.xaml">
+    <Page Include="Pages\CustomerContactInfo.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\ReferenciasDelCliente.xaml">
+    <Page Include="Pages\CustomerReferencesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -236,14 +229,14 @@
     <Compile Include="Pages\CustomerInfoPage.xaml.cs">
       <DependentUpon>CustomerInfoPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\DatosDeContacto.xaml.cs">
-      <DependentUpon>DatosDeContacto.xaml</DependentUpon>
+    <Compile Include="Pages\CustomerContactInfo.xaml.cs">
+      <DependentUpon>CustomerContactInfo.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\LogIn.xaml.cs">
       <DependentUpon>LogIn.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ReferenciasDelCliente.xaml.cs">
-      <DependentUpon>ReferenciasDelCliente.xaml</DependentUpon>
+    <Compile Include="Pages\CustomerReferencesPage.xaml.cs">
+      <DependentUpon>CustomerReferencesPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

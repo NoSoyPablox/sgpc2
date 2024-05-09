@@ -4,10 +4,12 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SGSC.Pages"
-      xmlns:SGSC="clr-namespace:SGSC" x:Class="SGSC.Pages.ReferenciasDelCliente"
+      xmlns:SGSC="clr-namespace:SGSC" x:Class="SGSC.Pages.CustomerReferencesPage"
       mc:Ignorable="d" 
-      d:DesignHeight="490" d:DesignWidth="950"
-      Title="ReferenciasDelCliente">
+      xmlns:frames="clr-namespace:SGSC.Frames"
+      xmlns:pages="clr-namespace:SGSC.Pages"
+      d:DesignHeight="720" d:DesignWidth="1280"
+      Title="Customer references">
 
     <Page.Resources>
         <!-- Definición de la fuente personalizada -->
@@ -25,20 +27,14 @@
     </Page.Resources>
 
     <Grid>
+        <Border Background="White" CornerRadius="22"/>
+        <Label FontFamily="{StaticResource FontPoppins}" FontWeight="Bold" FontSize="36" Content="Referencias del cliente" HorizontalAlignment="Left" Margin="46,48,0,0" VerticalAlignment="Top"/>
+        <Frame Name="UserSessionFrame" NavigationUIVisibility="Hidden" Margin="831,43,38,592"/>
+        <Frame Name="StepsSidebarFrame" NavigationUIVisibility="Hidden" Margin="27,138,1009,28"/>
         <Viewbox Stretch="Fill">
             <Grid Height="490" Width="950">
-                <Border Background="White" CornerRadius="22">
-                    <!-- Contenido dentro del Border -->
-                    <!-- Aquí puedes poner tu contenido -->
-                </Border>
-
-                <Frame Content="Frame" />
-
-                <Grid Background="LightGray" Margin="0,0,707,0"/>
-
-                <Button x:Name="btnCancel" Style="{StaticResource ButtonStyleCancel}" Content="Cancelar" FontSize="15" HorizontalAlignment="Left" Margin="613,426,0,0" VerticalAlignment="Top" Height="39" Width="130"/>
+                <Button x:Name="btnCancel" Style="{StaticResource ButtonStyleCancel}" Content="Cancelar" FontSize="15" HorizontalAlignment="Left" Margin="613,426,0,0" VerticalAlignment="Top" Height="39" Width="130" Click="CancelRegister"/>
                 <Button x:Name="btnContinue" Style="{StaticResource ButtonStyleConfirm}" Content="Continuar" FontSize="15" HorizontalAlignment="Left" Margin="756,426,0,0" VerticalAlignment="Top" Width="130" Height="38" Click="btnContinue_Click"/>
-                <Label FontFamily="{StaticResource FuenteNunitoBoldItalic}" FontSize="22" Content="Referencias" HorizontalAlignment="Left" Margin="300,79,0,0" VerticalAlignment="Top" Width="290" Height="37" FontWeight="Bold"/>
                 <Rectangle Style="{StaticResource RoundedRectangleStyle}" Margin="270,109,29,243"/>
                 <TextBox x:Name="tbName" Style="{StaticResource CustomTextBoxStyle}" Margin="300,141,378,317" PreviewTextInput="tbName_PreviewTextInput" TextChanged="tbName_TextChanged"/>
                 <Label Style="{StaticResource CustomLabelStyle}" FontSize="15" Content="Nombre (s)" HorizontalAlignment="Left" Margin="300,120,0,0" VerticalAlignment="Top" x:Name="NombreLabel_Copiar1" Width="237" Height="21"/>
