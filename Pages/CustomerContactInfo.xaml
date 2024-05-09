@@ -1,0 +1,56 @@
+﻿<Page x:Class="SGSC.Pages.CustomerContactInfo"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:SGSC="clr-namespace:SGSC"
+      xmlns:local="clr-namespace:SGSC.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="720" d:DesignWidth="1280"
+      Title="Datos de contacto del cliente">
+
+    <Page.Resources>
+        <!-- Definición de la fuente personalizada -->
+        <FontFamily x:Key="FuenteNunito">/Typografic styles/Nunito-Regular.ttf#Nunito</FontFamily>
+
+        <Style x:Key="CustomLabelStyle" TargetType="Label">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Label">
+                        <TextBlock FontWeight="Medium" FontFamily="{StaticResource FuenteNunito}">
+            <Run Text="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}"/>
+            <Run Text="*" Foreground="#F67070"/>
+                        </TextBlock>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+
+        <Border Background="White" CornerRadius="22" Margin="0"/>
+
+        <Label FontFamily="{StaticResource FontPoppins}" FontWeight="Bold" FontSize="36" Content="Dar de alta cliente" HorizontalAlignment="Left" Margin="46,48,0,0" VerticalAlignment="Top"/>
+
+        <Frame Name="UserSessionFrame" NavigationUIVisibility="Hidden" Margin="831,43,38,592"/>
+        <Frame Name="StepsSidebarFrame" NavigationUIVisibility="Hidden" Margin="27,138,1009,28"/>
+
+        <Rectangle Style="{StaticResource RoundedRectangleStyle}" Margin="271,138,28,144"/>
+
+        <TextBox x:Name="tbPhoneNumber1" Style="{StaticResource CustomTextBoxStyle}" FontSize="18" VerticalContentAlignment="Center" Margin="314,220,559,455"/>
+        <Label Style="{StaticResource CustomLabelStyle}" FontSize="20" Content="Teléfono 1" HorizontalAlignment="Left" Margin="314,190,0,0" VerticalAlignment="Top" x:Name="NombreLabel" Width="237" Height="20"/>
+        <Label x:Name="lbPhoneNumber1Error" Content="Error" HorizontalAlignment="Left" HorizontalContentAlignment="Right" Margin="314,266,0,0" VerticalAlignment="Top" Width="407" Foreground="#FFCE2222" FontStyle="Italic"/>
+
+        <TextBox x:Name="tbPhoneNumber2" Style="{StaticResource CustomTextBoxStyle}" FontSize="18" VerticalContentAlignment="Center" Margin="799,221,74,454"/>
+        <Label Style="{StaticResource CustomLabelStyle}" FontSize="20" Content="Teléfono 2" HorizontalAlignment="Left" Margin="799,190,0,0" VerticalAlignment="Top" x:Name="NombreLabel_Copy1" Width="237" Height="21"/>
+        <Label x:Name="lbPhoneNumber2Error" Content="Error" HorizontalAlignment="Left" HorizontalContentAlignment="Right" Margin="799,266,0,0" VerticalAlignment="Top" Width="407" Foreground="#FFCE2222" FontStyle="Italic"/>
+
+        <TextBox x:Name="tbEmailAddress" Style="{StaticResource CustomTextBoxStyle}" FontSize="18" VerticalContentAlignment="Center" Margin="314,318,559,356"/>
+        <Label Style="{StaticResource CustomLabelStyle}" FontSize="20" Content="Correo electrónico" HorizontalAlignment="Left" Margin="314,288,0,0" VerticalAlignment="Top" Width="237" Height="20"/>
+        <Label Name="lbEmailAddressError" Content="Error" HorizontalAlignment="Left" HorizontalContentAlignment="Right" Margin="314,364,0,0" VerticalAlignment="Top" Width="407" Foreground="#FFCE2222" FontStyle="Italic"/>
+
+        <Button Style="{StaticResource ButtonStyleCancel}" Content="Cancelar" FontSize="22" HorizontalAlignment="Left" Margin="844,614,0,0" VerticalAlignment="Top" Height="54" Width="180" Click="CancelRegister" />
+        <Button Style="{StaticResource ButtonStyleConfirm}" Content="Continuar" FontSize="22" HorizontalAlignment="Left" Margin="1048,614,0,0" VerticalAlignment="Top" Width="180" Height="54" Click="btnSaveContactInfo_Click" />
+    </Grid>
+</Page>

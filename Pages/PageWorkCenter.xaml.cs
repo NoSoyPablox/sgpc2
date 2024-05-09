@@ -182,6 +182,8 @@ namespace SGSC.Pages
                     {
                         pair.Value.Visibility = Visibility.Hidden;
                     }
+
+                    App.Current.MainFrame.Content = new CustomerContactInfo(customerId);
                 }
                 catch (Exception ex)
                 {
