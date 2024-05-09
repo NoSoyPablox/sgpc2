@@ -127,6 +127,10 @@
       <DependentUpon>Modelsgsc.edmx</DependentUpon>
     </Compile>
     <Compile Include="Model\BankAccount.cs" />
+    <Compile Include="Model\CreditRequest.cs" />
+    <Compile Include="Pages\ActiveCreditsPage.xaml.cs">
+      <DependentUpon>ActiveCreditsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\CustomerBankAccountsPage.xaml.cs">
       <DependentUpon>CustomerBankAccountsPage.xaml</DependentUpon>
     </Compile>
@@ -161,6 +165,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Messages\ToastNotification.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ActiveCreditsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

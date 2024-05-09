@@ -1,18 +1,20 @@
-﻿<Page x:Class="SGSC.Pages.HomePageCreditAdvisor"
+﻿<Page x:Class="SGSC.Pages.ActiveCreditsPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
       xmlns:local="clr-namespace:SGSC.Pages"
       xmlns:frames="clr-namespace:SGSC.Frames"
-      mc:Ignorable="d" 
       d:DesignHeight="720" d:DesignWidth="1280"
-      Title="HomePageCreditAdvisor">
+      Title="ActiveCreditsPage">
 
     <Grid>
-        <Border Background="White" Margin="0">
-            <Rectangle Style="{StaticResource RoundedRectangleHomeStyle}"  Margin="131,113,20,22"/>
-        </Border>
+        <Border Background="White" CornerRadius="22"/>
+
+        <Label FontFamily="{StaticResource FontPoppins}" FontWeight="Bold" FontSize="36" Content="Créditos activos" HorizontalAlignment="Left" Margin="136,48,0,0" VerticalAlignment="Top"/>
+
+        <Frame Name="UserSessionFrame" NavigationUIVisibility="Hidden" Margin="831,43,38,592"/>
 
         <Image Source="../Images/coin-logo.png" Margin="10,8,1186,594" RenderTransformOrigin="0.47,0.339"/>
 
@@ -24,7 +26,7 @@
         <Button Style="{StaticResource Menubutton}" FontSize="15" HorizontalAlignment="Left" Margin="16,295,0,0" VerticalAlignment="Top" Width="72" Height="75">
             <Image Source="../Images/icon-find-customer.png" Height="70" Width="50"/>
         </Button>
-        <Button Style="{StaticResource Menubutton}" FontSize="15" HorizontalAlignment="Left" Margin="16,375,0,0" VerticalAlignment="Top" Width="72" Height="75" Click="CreditsBtn">
+        <Button Style="{StaticResource Menubutton}" FontSize="15" HorizontalAlignment="Left" Margin="16,375,0,0" VerticalAlignment="Top" Width="72" Height="75">
             <Image Source="../Images/icon-board.png" Height="70" Width="50"/>
         </Button>
 
@@ -32,24 +34,16 @@
             <Image Source="../Images/icon-logout.png" Height="70" Width="50"/>
         </Button>
 
-        <Frame>
-            <Frame.Content>
-                <frames:UserSessionFrame Margin="831,23,38,612"/>
-            </Frame.Content>
-        </Frame>
+        <Rectangle Style="{StaticResource RoundedRectangleStyle}" Margin="136,138,28,144"/>
+        <DataGrid Name="dgCredits" ItemsSource="{Binding ActiveCreditsCollection}" Margin="182,182,74,192" FontSize="22">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Nombre del cliente" Binding="{Binding ClientPageNumber}"/>
+                <DataGridTextColumn Header="Crédito" Binding="{Binding CreditAmount}"/>
+                <DataGridTextColumn Header="Fecha de inicio" Binding="{Binding CreditDate}"/>
+                <DataGridTextColumn Header="Fecha de fin" Binding="{Binding CreditPeriod}"/>
+            </DataGrid.Columns>
+        </DataGrid>
 
-        <Border CornerRadius="22" BorderBrush="Transparent" BorderThickness="0" Margin="166,142,50,337">
-            <Border.Effect>
-                <DropShadowEffect ShadowDepth="5" Direction="270" Opacity="0.3"/>
-            </Border.Effect>
-            <Border.Background>
-                <ImageBrush ImageSource="../Images/landing-banner.png" Stretch="Fill"/>
-            </Border.Background>
-        </Border>
-
-        <Button Style="{StaticResource Button}" Content="Nuevo Cliente" FontWeight="Medium"  Background="#FCDC2A" FontSize="28" HorizontalAlignment="Left" Margin="571,456,0,0" VerticalAlignment="Top" Width="294" Height="61" Click="ButtonClicNuevo_Cliente"/>
-        <Button Style="{StaticResource Button}" Content="Nueva solicitud" FontWeight="Medium"  Background="#1F3A52" Foreground="White" FontSize="28" HorizontalAlignment="Left" Margin="571,543,0,0" VerticalAlignment="Top" Width="294" Height="61"/>
 
     </Grid>
 </Page>
-
