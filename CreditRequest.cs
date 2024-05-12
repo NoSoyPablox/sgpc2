@@ -17,10 +17,8 @@ namespace SGSC
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CreditRequest()
         {
-            this.BankAccounts = new HashSet<BankAccount>();
-            this.CreditConditionCreditRequests = new HashSet<CreditConditionCreditRequest>();
-            this.Customers = new HashSet<Customer>();
-            this.Payments = new HashSet<Payment>();
+            this.CreditConditions = new HashSet<CreditCondition>();
+            this.Payment = new HashSet<Payment>();
         }
     
         public int CreditRequestId { get; set; }
@@ -32,15 +30,15 @@ namespace SGSC
         public Nullable<decimal> InterestRate { get; set; }
         public Nullable<System.DateTime> CreationDate { get; set; }
         public Nullable<int> EmployeeId { get; set; }
+        public int CustomerId { get; set; }
     
+        public virtual Customer Customer { get; set; }
+        public virtual BankAccount TransferBankAccount { get; set; }
+        public virtual BankAccount DirectDebitBankAccount { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BankAccount> BankAccounts { get; set; }
+        public virtual ICollection<CreditCondition> CreditConditions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CreditConditionCreditRequest> CreditConditionCreditRequests { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Customer> Customers { get; set; }
+        public virtual ICollection<Payment> Payment { get; set; }
         public virtual Employee Employee { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Payment> Payments { get; set; }
     }
 }

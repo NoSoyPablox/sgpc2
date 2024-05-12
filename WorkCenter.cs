@@ -22,7 +22,7 @@ namespace SGSC
         public Nullable<int> OutsideNumber { get; set; }
         public Nullable<int> ZipCode { get; set; }
         public string PhoneNumber { get; set; }
-        public Nullable<int> CustormerId { get; set; }
+        public Nullable<int> CustomerId { get; set; }
     
         public virtual Customer Customer { get; set; }
     }

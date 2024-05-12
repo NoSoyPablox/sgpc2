@@ -20,6 +20,6 @@ namespace SGSC
         public string Amount { get; set; }
         public Nullable<int> CreditRequestId { get; set; }
     
-        public virtual CreditRequest CreditRequest { get; set; }
+        public virtual CreditRequest CreditRequests { get; set; }
     }
 }

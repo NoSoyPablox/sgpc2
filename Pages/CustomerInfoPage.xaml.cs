@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SGSC.Frames;
+using System;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Data.Entity;
@@ -22,18 +23,28 @@ namespace SGSC.Pages
     /// <summary>
     /// Lógica de interacción para DatosDeCliente.xaml
     /// </summary>
-    public partial class DatosDeCliente : Page
+    public partial class CustomerInfoPage : Page
     {
-        int idCustomer = 25;
-        public DatosDeCliente(/*int idCliente*/)
+        private int? CustomerId = null;
+
+        public CustomerInfoPage(int? customerId = null)
         {
             InitializeComponent();
-            if (idCustomer != -1)
+            CustomerId = customerId;
+            if (CustomerId != null)
             {
-                getCustomerInfo(idCustomer);
+                getCustomerInfo(CustomerId.Value);
             }
-        }
 
+            StepsSidebarFrame.Content = new CustomerRegisterStepsSidebar("PersonalInfo");
+            UserSessionFrame.Content = new UserSessionFrame();
+
+            // Clear the error labels
+            lbName.Content = "";
+            lbFirstSurname.Content = "";
+            lbSecondSurname.Content = "";
+            lbCurp.Content = "";
+        }
 
         private void btnContinue_Click(object sender, RoutedEventArgs e)
         {
@@ -46,33 +57,33 @@ namespace SGSC.Pages
             if (string.IsNullOrEmpty(tbName.Text))
             {
                 valid = false;
-                lbName.Content = "Porfavor introduzca el nombre";
+                lbName.Content = "Por favor introduzca el nombre";
             }
             if (string.IsNullOrEmpty(tbFirstSurname.Text))
             {
                 valid = false;
-                lbFirstSurname.Content = "Porfavor introduzca el apellido paterno";
+                lbFirstSurname.Content = "Por favor introduzca el apellido paterno";
             }
             if (string.IsNullOrEmpty(tbSecondSurname.Text))
             {
                 valid = false;
-                lbSecondSurname.Content = "Porfavor introduzca el apellido materno";
+                lbSecondSurname.Content = "Por favor introduzca el apellido materno";
             }
             if (string.IsNullOrEmpty(tbCURP.Text))
             {
                 valid = false;
-                lbCurp.Content = "Porfavor introduzca el CURP";
+                lbCurp.Content = "Por favor introduzca el CURP";
             }
-            if (!Validator.ValidateCURP(tbCURP.Text))
+            if (!Utils.TextValidator.ValidateCURP(tbCURP.Text))
             {
                 valid = false;
-                lbCurp.Content = "Porfavor introduzca un CURP válido";
+                lbCurp.Content = "Por favor introduzca un CURP válido";
             }
             if (!valid)
             {
                 return;
             }
-            if (idCustomer == -1)
+            if (CustomerId == null)
             {
                 registerCustomer();
             }
@@ -86,25 +97,28 @@ namespace SGSC.Pages
         {
             using (sgscEntities db = new sgscEntities())
             {
-                Customer customerToRegister = new Customer();
-                customerToRegister.Curp = tbCURP.Text;
-                customerToRegister.Name = tbName.Text;
-                customerToRegister.FirstSurname = tbFirstSurname.Text;
-                customerToRegister.SecondSurname = tbSecondSurname.Text;
-                db.Customers.Add(customerToRegister);
-
                 try
                 {
+                    Customer customerToRegister = new Customer();
+                    customerToRegister.Curp = tbCURP.Text;
+                    customerToRegister.Name = tbName.Text;
+                    customerToRegister.FirstSurname = tbFirstSurname.Text;
+                    customerToRegister.SecondSurname = tbSecondSurname.Text;
+                    customerToRegister = db.Customers.Add(customerToRegister);
+
                     db.SaveChanges();
                     MessageBox.Show("Cliente registrado exitosamente.");
                     tbCURP.Text = "";
                     tbName.Text = "";
                     tbFirstSurname.Text = "";
                     tbSecondSurname.Text = "";
+                    
+                    App.Current.MainFrame.Content = new AddressInformationPage(customerToRegister.CustomerId);
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine("Ocurrió un error al intentar registrar el cliente: " + ex.Message);
+                    MessageBox.Show("Ocurrió un error al intentar actualizar el cliente.");
                 }
             }
         }
@@ -113,19 +127,22 @@ namespace SGSC.Pages
         {
             using (sgscEntities db = new sgscEntities())
             {
-                Customer customerToUpdate = db.Customers.Find(idCustomer);
-                customerToUpdate.Curp = tbCURP.Text;
-                customerToUpdate.Name = tbName.Text;
-                customerToUpdate.FirstSurname = tbFirstSurname.Text;
-                customerToUpdate.SecondSurname = tbSecondSurname.Text;
-
                 try
                 {
+                    Customer customerToUpdate = db.Customers.Find(CustomerId);
+                    customerToUpdate.Curp = tbCURP.Text;
+                    customerToUpdate.Name = tbName.Text;
+                    customerToUpdate.FirstSurname = tbFirstSurname.Text;
+                    customerToUpdate.SecondSurname = tbSecondSurname.Text;
+
                     db.SaveChanges();
-                    Console.WriteLine("Cliente actualizado exitosamente.");
+                    MessageBox.Show("Cliente actualizado exitosamente.");
+                    
+                    App.Current.MainFrame.Content = new AddressInformationPage(CustomerId.Value);
                 }
                 catch (Exception ex)
                 {
+                    MessageBox.Show("Ocurrió un error al intentar actualizar el cliente.");
                     Console.WriteLine("Ocurrió un error al intentar actualizar el cliente: " + ex.Message);
                 }
             }
@@ -147,7 +164,7 @@ namespace SGSC.Pages
                 if (customer == null)
                 {
                     MessageBox.Show("No se encontró el cliente seleccionado");
-                    //Aqui deberá de regresar a la pantalla anterior
+                    App.Current.MainFrame.GoBack();
                     return;
                 }
                 tbCURP.Text = customer.Curp;
@@ -155,6 +172,11 @@ namespace SGSC.Pages
                 tbFirstSurname.Text = customer.FirstSurname;
                 tbSecondSurname.Text = customer.SecondSurname;
             }
+        }
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            App.Current.MainFrame.GoBack();
         }
     }
 }

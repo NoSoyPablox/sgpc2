@@ -4,12 +4,17 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SGSC"
+        xmlns:pages="clr-namespace:SGSC.Pages"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
-
-
-    >
+        Title="Sistema de gestión de solucitudes crediticias" SizeToContent="WidthAndHeight" Background="White">
     <Grid>
-        
+        <Viewbox Name="MainViewBox">
+            <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Height="720" Width="1280">
+                <Frame.Content>
+                    <pages:LogIn/>
+                </Frame.Content>
+            </Frame>
+        </Viewbox>
+
     </Grid>
 </Window>

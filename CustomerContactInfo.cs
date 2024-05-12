@@ -14,18 +14,12 @@ namespace SGSC
     
     public partial class CustomerContactInfo
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CustomerContactInfo()
-        {
-            this.Customers = new HashSet<Customer>();
-        }
-    
         public int CustomerContactInfoId { get; set; }
         public string Email { get; set; }
         public string PhoneNumberOne { get; set; }
         public string PhoneNumberTwo { get; set; }
+        public Nullable<int> CustomerId { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Customer> Customers { get; set; }
+        public virtual Customer Customer { get; set; }
     }
 }

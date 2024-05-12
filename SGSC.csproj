@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -14,6 +15,8 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -36,16 +39,18 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -64,74 +69,136 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BankAccount.cs">
+      <DependentUpon>Modelsgsc.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contact.cs">
+      <DependentUpon>Modelsgsc.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CreditCondition.cs">
+      <DependentUpon>Modelsgsc.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CreditPolicy.cs">
+      <DependentUpon>Modelsgsc.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CreditRequest.cs">
+      <DependentUpon>Modelsgsc.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Customer.cs">
+      <DependentUpon>Modelsgsc.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerAddress.cs">
+      <DependentUpon>Modelsgsc.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerContactInfo.cs">
+      <DependentUpon>Modelsgsc.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Employee.cs">
+      <DependentUpon>Modelsgsc.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Frames\CustomerRegisterStepsSidebar.xaml.cs">
+      <DependentUpon>CustomerRegisterStepsSidebar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Frames\UserSessionFrame.xaml.cs">
+      <DependentUpon>UserSessionFrame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Messages\ToastNotification.xaml.cs">
+      <DependentUpon>ToastNotification.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modelsgsc.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Modelsgsc.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelsgsc.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Modelsgsc.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelsgsc.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Modelsgsc.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\BankAccount.cs" />
+    <Compile Include="Pages\CustomerBankAccountsPage.xaml.cs">
+      <DependentUpon>CustomerBankAccountsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\HomePageCreditAdvisor.xaml.cs">
+      <DependentUpon>HomePageCreditAdvisor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SearchCustomerPage.xaml.cs">
+      <DependentUpon>SearchCustomerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Payment.cs">
+      <DependentUpon>Modelsgsc.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\Authenticator.cs" />
+    <Compile Include="Utils\TextValidator.cs" />
+    <Compile Include="Utils\UserSession.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="BankAccount.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Contact.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CreditCondition.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CreditConditionCreditRequest.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CreditPolicy.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CreditRequest.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Customer.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CustomerAddress.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CustomerContactInfo.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Employee.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model.Context.tt</DependentUpon>
+    <Compile Include="WorkCenter.cs">
+      <DependentUpon>Modelsgsc.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model.tt</DependentUpon>
+    <Page Include="Frames\CustomerRegisterStepsSidebar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Frames\UserSessionFrame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Messages\ToastNotification.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\CustomerBankAccountsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\HomePageCreditAdvisor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\PageWorkCenter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\PageContactInformation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\LogIn.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SearchCustomerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Pages\PageWorkCenter.xaml.cs">
+      <DependentUpon>PageWorkCenter.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model.edmx</DependentUpon>
+    <Compile Include="Pages\PageContactInformation.xaml.cs">
+      <DependentUpon>PageContactInformation.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\AddressInformation.xaml.cs">
-      <DependentUpon>AddressInformation.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Payment.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+    <Compile Include="Pages\AddressInformationPage.xaml.cs">
+      <DependentUpon>AddressInformationPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="TextBoxName.cs" />
-    <Compile Include="Validator.cs" />
-    <Compile Include="WorkCenter.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\AddressInformation.xaml">
+    <Page Include="Pages\AddressInformationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -139,17 +206,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\DatosDeCliente.xaml">
+    <Page Include="Pages\CustomerInfoPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\DatosDeContacto.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Pages\LogIn.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\ReferenciasDelCliente.xaml">
       <SubType>Designer</SubType>
@@ -164,8 +227,8 @@
     <Compile Include="Pages\CentroDeTrabajo.xaml.cs">
       <DependentUpon>CentroDeTrabajo.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\DatosDeCliente.xaml.cs">
-      <DependentUpon>DatosDeCliente.xaml</DependentUpon>
+    <Compile Include="Pages\CustomerInfoPage.xaml.cs">
+      <DependentUpon>CustomerInfoPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\DatosDeContacto.xaml.cs">
       <DependentUpon>DatosDeContacto.xaml</DependentUpon>
@@ -193,43 +256,70 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Model.edmx">
+    <EntityDeploy Include="Modelsgsc.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model.Designer.cs</LastGenOutput>
+      <LastGenOutput>Modelsgsc.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Model.edmx.diagram">
-      <DependentUpon>Model.edmx</DependentUpon>
+    <None Include="App.Config" />
+    <None Include="Modelsgsc.edmx.diagram">
+      <DependentUpon>Modelsgsc.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Resource Include="Typographic styles\Nunito-Bold.ttf" />
-    <Resource Include="Typographic styles\Nunito-BoldItalic.ttf" />
-    <Resource Include="Typographic styles\Nunito-Regular.ttf" />
     <Resource Include="Typographic styles\Poppins-SemiBold.otf" />
+    <Resource Include="Typographic styles\Nunito-Light.ttf" />
+    <Resource Include="Typographic styles\Nunito-SemiBoldItalic.ttf" />
+    <Resource Include="Typographic styles\Nunito-Regular.ttf" />
+    <Resource Include="Typographic styles\Nunito-Bold.ttf" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Arrow-Icon.png" />
+    <Resource Include="Images\User.png" />
+    <Resource Include="Images\address-icon.png" />
+    <Resource Include="Images\card-icon.png" />
+    <Resource Include="Images\icon-job.png" />
+    <Resource Include="Images\icon-contact.png" />
+    <Resource Include="Images\people-icon.png" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Model.Context.tt">
+    <Resource Include="Images\Arrow-Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\icon-error.png" />
+    <Resource Include="Images\icon-check.png" />
+    <Resource Include="Images\line.png" />
+    <Resource Include="Images\icon-home-checked.png" />
+    <Resource Include="Images\icon-find-customer.png" />
+    <Resource Include="Images\icon-board.png" />
+    <Resource Include="Images\coin-logo.png" />
+    <Resource Include="Images\icon-logout.png" />
+    <Resource Include="Images\user-circle-placeholder.png" />
+    <Resource Include="Images\landing-banner.png" />
+    <Resource Include="Images\login-page-bkg.png" />
+    <Content Include="Modelsgsc.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model.edmx</DependentUpon>
-      <LastGenOutput>Model.Context.cs</LastGenOutput>
+      <DependentUpon>Modelsgsc.edmx</DependentUpon>
+      <LastGenOutput>Modelsgsc.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Model.tt">
+    <Content Include="Modelsgsc.edmx.sql" />
+    <Content Include="Modelsgsc.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model.edmx</DependentUpon>
-      <LastGenOutput>Model.cs</LastGenOutput>
+      <DependentUpon>Modelsgsc.edmx</DependentUpon>
+      <LastGenOutput>Modelsgsc.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
 </Project>

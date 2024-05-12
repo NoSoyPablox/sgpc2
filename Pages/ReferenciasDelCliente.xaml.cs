@@ -39,7 +39,7 @@ namespace SGSC.Pages
             else
             {
                 //validate the fields
-                if (Validator.ValidateMultipleNames(names))
+                if (Utils.TextValidator.ValidateMultipleNames(names))
                 {
                     using (sgscEntities db = new sgscEntities())
                     {
