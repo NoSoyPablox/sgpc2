@@ -56,18 +56,31 @@ namespace SGSC.Pages
             InitializeComponent();
             UserSessionFrame.Content = new UserSessionFrame();
             GetCreditRequests();
-            GetAllCreditRequests();
         }
 
+        private void InitializeTimer()
         {
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromMilliseconds(500);
+            timer.Tick += Timer_Tick;
         }
+
+        private void Timer_Tick(object sender, EventArgs e)
         {
+            timer.Stop(); 
+            SearchCreditRequests();
         }
         }
 
+        private void SearchCreditRequests()
         {
+            string searchText1 = tbRfc.Text.Trim();
+            string searchText2 = tbCreationDate.Text.Trim();
+            string searchText3 = tbStatus.Text.Trim();
+
             try
             {
+                using (sgscEntities db = new sgscEntities())
                 {
                     var creditRequests = (from cr in db.CreditRequests
                                           join c in db.Customers on cr.CustomerId equals c.CustomerId
@@ -96,10 +109,14 @@ namespace SGSC.Pages
             }
             catch (Exception ex)
             {
+                MessageBox.Show("Ocurrió un error al intentar buscar las solicitudes de crédito. Por favor, inténtelo de nuevo más tarde.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
+            timer.Stop(); 
+            timer.Start();
         }
         }
 
@@ -123,31 +140,15 @@ namespace SGSC.Pages
                                               cr.CreationDate,
                                               CustomerName = c.Name + " " + c.FirstSurname + " " + c.SecondSurname,
                                               c.Rfc,
+                                          }).Take(pageSize).ToList();
+
                     if (creditRequests.Any())
                     {
-                        ObservableCollection<CreditRequestData> creditRequestsData = new ObservableCollection<CreditRequestData>();
-                        foreach (var cr in creditRequests)
-                        {
-                            creditRequestsData.Add(new CreditRequestData
-                            {
-                                CreditRequestId = cr.CreditRequestId,
-                                Status = CreditRequest.RequestStatusToString((CreditRequest.RequestStatus)cr.Status),
-                                CreationDate = cr.CreationDate.Value,
-                                CustomerName = cr.CustomerName,
-                                Rfc = cr.Rfc,
-                                FileNumber = cr.FileNumber,
-                                Amount = cr.Amount.HasValue ? cr.Amount.Value : 0.0,
-                                AmountString = cr.Amount.HasValue ? cr.Amount.Value.ToString("C2", new CultureInfo("es-MX")) : "$0.00",
-                                InterestRate = cr.InterestRate.HasValue ? cr.InterestRate.Value : 0.0m,
-                                InterestRateString = cr.InterestRate.HasValue ? $"{cr.InterestRate.Value}%" : "0.0%",
-                                TimePeriod = cr.TimePeriod.HasValue ? cr.TimePeriod.Value : 0,
-                                TimePeriodString = cr.TimePeriod.HasValue ? $"{cr.TimePeriod.Value} Quincenas" : "Quincenas"
-                            });
-                        }
+                    }
 
                         creditRequestsDataGrid.ItemsSource = creditRequestsData;
 
-                    }
+                }
 
                     tbCurrentPage.Text = $"Página {currentPage} de {totalPages}";
                     cbPages.ItemsSource = Enumerable.Range(1, totalPages).ToList();
@@ -155,11 +156,13 @@ namespace SGSC.Pages
 
                     btnPreviousPage.IsEnabled = currentPage > 1;
                     btnNextPage.IsEnabled = currentPage < (totalRecords + pageSize - 1) / pageSize;
-                }
+            }
             }
 
             catch (Exception ex)
             {
+                MessageBox.Show(" Sex Ocurrió un error al intentar obtener las solicitudes de crédito. Por favor, inténtelo de nuevo más tarde.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
@@ -167,6 +170,7 @@ namespace SGSC.Pages
             UserSession.LogOut();
         }
 
+        private void NextPageRequest(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -184,27 +188,12 @@ namespace SGSC.Pages
                                               cr.CreationDate,
                                               CustomerName = c.Name + " " + c.FirstSurname + " " + c.SecondSurname,
                                               c.Rfc,
+                                          }).Skip(currentPage * pageSize).Take(pageSize).ToList();
+
                     if (creditRequests.Any())
                     {
-                        ObservableCollection<CreditRequestData> creditRequestsData = new ObservableCollection<CreditRequestData>();
-                        foreach (var cr in creditRequests)
-                        {
-                            creditRequestsData.Add(new CreditRequestData
-                            {
-                                CreditRequestId = cr.CreditRequestId,
-                                Status = CreditRequest.RequestStatusToString((CreditRequest.RequestStatus)cr.Status),
-                                CreationDate = cr.CreationDate.Value,
-                                CustomerName = cr.CustomerName,
-                                Rfc = cr.Rfc,
-                                FileNumber = cr.FileNumber,
-                                Amount = cr.Amount.HasValue ? cr.Amount.Value : 0.0,
-                                AmountString = cr.Amount.HasValue ? cr.Amount.Value.ToString("C2") : "$0.00",
-                                InterestRate = cr.InterestRate.HasValue ? cr.InterestRate.Value : 0.0m,
-                                InterestRateString = cr.InterestRate.HasValue ? $"{cr.InterestRate.Value}%" : "0.0%",
-                                TimePeriod = cr.TimePeriod.Value,
-                                TimePeriodString = cr.TimePeriod.Value.ToString()
-                            });
-                        }
+                    {
+                    }
 
                     tbCurrentPage.Text = $"Página {currentPage} de {totalPages}";
                     cbPages.ItemsSource = Enumerable.Range(1, totalPages).ToList();
@@ -303,18 +292,13 @@ namespace SGSC.Pages
             else
             {
                 MessageBox.Show("Por favor, seleccione una solicitud de crédito para Consultar .", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+        }
 
-
-
-
-            /*var creditRequestDetails = new correctCreditRequest(creditRequestData.CreditRequestId);
-             if (NavigationService != null)
-             {
+        {
                  NavigationService.Navigate(correctCreditRequest);
              }*/
             //Pendiente agregar la página para Corregir solicitudes de crédito
-        
+
         }
     }
 }
