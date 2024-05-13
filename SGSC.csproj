@@ -130,6 +130,9 @@
     <Compile Include="Pages\SearchCustomerPage.xaml.cs">
       <DependentUpon>SearchCustomerPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ViewCreditRequests.xaml.cs">
+      <DependentUpon>ViewCreditRequests.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Payment.cs">
       <DependentUpon>Modelsgsc.tt</DependentUpon>
     </Compile>
@@ -218,6 +221,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\ViewCreditRequests.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -301,6 +308,8 @@
     <Resource Include="Images\user-circle-placeholder.png" />
     <Resource Include="Images\landing-banner.png" />
     <Resource Include="Images\login-page-bkg.png" />
+    <Resource Include="Images\icon-lens.png" />
+    <Resource Include="Images\table-requests-background.png" />
     <Content Include="Modelsgsc.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Modelsgsc.edmx</DependentUpon>
