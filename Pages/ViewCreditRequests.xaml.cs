@@ -75,7 +75,7 @@ namespace SGSC.Pages
         private void SearchCreditRequests()
         {
             string searchText1 = tbRfc.Text.Trim();
-            string searchText2 = tbCreationDate.Text.Trim();
+            string searchText2 = tbCustomerName.Text.Trim();
             string searchText3 = tbStatus.Text.Trim();
 
             try
@@ -126,6 +126,7 @@ namespace SGSC.Pages
 
             try
             {
+                
                 using (sgscEntities db = new sgscEntities())
                 {
                     int totalRecords = db.CreditRequests.Count();
@@ -141,7 +142,6 @@ namespace SGSC.Pages
                                               CustomerName = c.Name + " " + c.FirstSurname + " " + c.SecondSurname,
                                               c.Rfc,
                                           }).Take(pageSize).ToList();
-
                     if (creditRequests.Any())
                     {
                     }
