@@ -472,7 +472,7 @@
           <Property Name="ExternalNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="InternalNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="true" />
           <Property Name="CustomerId" Type="Int32" Nullable="false" />
-          <Property Name="Colony" Type="String" Nullable="false" />
+          <Property Name="Colony" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Customer" Relationship="sgscModel.CustomerAddressCustomer" FromRole="CustomerAddress" ToRole="Customer" />
           <Property Name="State" Type="String" Nullable="false" />
           <Property Name="Type" Type="Int32" Nullable="false" />
