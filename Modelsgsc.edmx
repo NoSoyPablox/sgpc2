@@ -469,7 +469,7 @@
           <Property Name="ExternalNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="InternalNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="true" />
           <Property Name="CustomerId" Type="Int32" Nullable="false" />
-          <Property Name="Colony" Type="String" Nullable="false" />
+          <Property Name="Colony" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Customer" Relationship="sgscModel.CustomerAddressCustomer" FromRole="CustomerAddress" ToRole="Customer" />
           <Property Name="State" Type="String" Nullable="false" />
           <Property Name="Type" Type="Int32" Nullable="false" />
@@ -524,7 +524,7 @@
           </Key>
           <Property Name="PaymentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FileNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PaymentDate" Type="DateTime" Precision="0" />
+          <Property Name="PaymentDate" Type="DateTime" Precision="3" />
           <Property Name="Amount" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CreditRequestId" Type="Int32" />
           <NavigationProperty Name="CreditRequests" Relationship="sgscModel.PaymentCreditRequest" FromRole="Payment" ToRole="CreditRequest" />

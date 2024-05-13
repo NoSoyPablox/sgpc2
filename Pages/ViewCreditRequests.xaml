@@ -67,7 +67,7 @@
 
                     <TextBox x:Name="tbRfc" Margin="0,5,850,5" Style="{StaticResource CustomTextBoxStyle}" Height="40" Width="250" TextChanged="TextBox_TextChanged" />
 
-                    <TextBox x:Name="tbCreationDate" Margin="425,5,425,5" Style="{StaticResource CustomTextBoxStyle}" Height="40" Width="250" TextChanged="TextBox_TextChanged"/>
+                    <TextBox x:Name="tbCustomerName" Margin="425,5,425,5" Style="{StaticResource CustomTextBoxStyle}" Height="40" Width="250" TextChanged="TextBox_TextChanged"/>
                     <TextBox x:Name="tbStatus" Margin="815,5,35,5" Style="{StaticResource CustomTextBoxStyle}" Height="40" Width="250" TextChanged="TextBox_TextChanged" />
 
                 </Grid>
@@ -75,7 +75,7 @@
             </Grid>
         </Grid>
 
-        <Frame RenderTransformOrigin="0.5,0.5" Margin="565,51,105,521">
+        <Frame RenderTransformOrigin="0.5,0.5" Margin="602,6,68,626">
             <Frame.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -85,7 +85,16 @@
                 </TransformGroup>
             </Frame.RenderTransform>
             <Frame.Content>
-                <frames:UserSessionFrame Margin="831,23,38,612"/>
+                <frames:UserSessionFrame Margin="604,23,-221,-20" RenderTransformOrigin="0.5,0.5">
+                    <frames:UserSessionFrame.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="-1"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </frames:UserSessionFrame.RenderTransform>
+                </frames:UserSessionFrame>
             </Frame.Content>
         </Frame>
 
