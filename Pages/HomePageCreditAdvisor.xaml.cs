@@ -21,9 +21,25 @@ namespace SGSC.Pages
             
         }
 
+
+
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
         {
             UserSession.LogOut();
+        }
+
+        private void Frame_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
+        {
+
+        }
+
+        private void ViewRequestsButton_Click(object sender, RoutedEventArgs e)
+        {
+         var viewCreditRequests = new ViewCreditRequests();
+            if (NavigationService != null)
+            {
+                NavigationService.Navigate(viewCreditRequests);
+            }
         }
     }
 }
