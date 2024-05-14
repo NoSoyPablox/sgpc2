@@ -1,0 +1,34 @@
+﻿<Page x:Class="SGSC.Pages.CreditPromotionDetails"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SGSC.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="720" d:DesignWidth="1280"
+      Title="CreditPromotionDetails">
+
+    
+    
+    <Grid>
+        <Viewbox Stretch="Fill">
+            <Grid Height="720" Width="1280">
+                <Border Background="White" CornerRadius="22"/>
+                <Label FontFamily="{StaticResource FontPoppins}" FontWeight="Bold" FontSize="36" Content="Detalles de la promoción" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="212,81,0,0"/>
+                <Button x:Name="btnModify" Style="{StaticResource Button}" Content="Modificar" FontWeight="Medium"  Background="#FCDC2A" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top" Width="234" Height="52" Margin="977,619,0,0" Click="btnModify_Click"/>
+                <Rectangle Style="{StaticResource RoundedRectangleStyle}" Margin="216,189,175,222"/>
+                <TextBox x:Name="tbName" Style="{StaticResource CustomTextBoxStyle}" Margin="266,278,619,400" FontSize="20"/>
+                <TextBox x:Name="tbTimePeriod" Style="{StaticResource CustomTextBoxStyle}" Margin="266,384,863,294" FontSize="20"/>
+                <TextBox x:Name="tbInterestRate" Style="{StaticResource CustomTextBoxStyle}" Margin="737,278,436,400" FontSize="20"/>
+                <Label Style="{StaticResource CustomLabelStyle}" FontSize="24" Content="Nombre" HorizontalAlignment="Left" Margin="266,238,0,0" VerticalAlignment="Top" x:Name="NombreLabel" Width="237" Height="27"/>
+                <Label Style="{StaticResource CustomLabelStyle}" FontSize="24" Content="Plazo" HorizontalAlignment="Left" Margin="266,345,0,0" VerticalAlignment="Top" x:Name="NombreLabel_Copiar" Width="237" Height="27"/>
+                <Label Style="{StaticResource CustomLabelStyle}" FontSize="24" Content="Tasa de interés" HorizontalAlignment="Left" Margin="737,238,0,0" VerticalAlignment="Top" x:Name="NombreLabel_Copiar1" Width="237" Height="27"/>
+                <Button x:Name="btnCancel" Style="{StaticResource ButtonStyleCancel}" Content="Cancelar" FontSize="22" HorizontalAlignment="Left" Margin="742,617,0,0" VerticalAlignment="Top" Height="54" Width="180" Click="btnCancel_Click" />
+                <Label Content="%" HorizontalAlignment="Left" Margin="856,278,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold"/>
+                <Label Content="*Semanas" HorizontalAlignment="Left" Margin="432,385,0,0" VerticalAlignment="Top" FontSize="18" FontStyle="Italic"/>
+
+            </Grid>
+        </Viewbox>
+
+    </Grid>
+</Page>
