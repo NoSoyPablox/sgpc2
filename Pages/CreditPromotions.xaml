@@ -1,0 +1,65 @@
+﻿<Page x:Class="SGSC.Pages.CreditPromotions"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SGSC.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="720" d:DesignWidth="1280"
+      Title="CreditPromotions">
+
+    <Grid>
+        
+        <Viewbox Stretch="Fill">
+            <Grid Height="720" Width="1280">
+                <Border Background="White" CornerRadius="22"/>
+                <Label FontFamily="{StaticResource FontPoppins}" FontWeight="Bold" FontSize="36" Content="Promociones de credito" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="240,115,0,0"/>
+                <Button x:Name="btnSeeDetails" Style="{StaticResource Button}" Content="Ver detalles" FontWeight="Medium"  Background="#FCDC2A" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top" Width="234" Height="52" Margin="713,635,0,0" Click="btnSeeDetails_Click"/>
+                <TextBox x:Name="tbSearch" Style="{StaticResource CustomTextBoxStyle}" Margin="836,178,148,500" KeyDown="tbSearch_KeyDown" LostFocus="tbSearch_LostFocus"/>
+                <DataGrid x:Name="dgPromotions" AutoGenerateColumns="False" AlternationCount="2" CanUserAddRows="False" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="240,246,148,143" HeadersVisibility="Column" VerticalContentAlignment="Center" MinRowHeight="30" ColumnHeaderHeight="40">
+
+                    <DataGrid.ColumnHeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="Background" Value="#A3D68A"/>
+                            <Setter Property="Foreground" Value="Black"/>
+                            <Setter Property="SeparatorBrush" Value="Black"/>
+                            <Setter Property="FontSize" Value="20"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            <Setter Property="VerticalContentAlignment" Value="Center"/>
+                            <Setter Property="FontFamily" Value="{StaticResource FontPoppins}"/>
+                            <Setter Property="FontWeight" Value="Medium"/>
+                        </Style>
+                    </DataGrid.ColumnHeaderStyle>
+
+                    <DataGrid.RowStyle>
+                        <Style TargetType="DataGridRow">
+                            <Style.Triggers>
+                                <!--first alteraniting colour-->
+                                <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                                    <Setter Property="Background" Value="#A3D68A">
+                                    </Setter>
+                                </Trigger>
+                                <!--then override with my own colour-->
+                                <DataTrigger Binding="{Binding InvoiceSet}" Value="2">
+                                    <Setter Property="Background" Value="White"></Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.RowStyle>
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Nombre" Binding="{Binding Name}" Width="*" IsReadOnly="True" FontWeight="Normal" FontFamily="{StaticResource FontNunito}" FontSize="16"/>
+                        <DataGridTextColumn Header="Tasa de interes" Binding="{Binding InterestRate}" Width="*"  IsReadOnly="True" FontFamily="{StaticResource FontNunito}" FontSize="16" />
+                        <DataGridTextColumn Header="Semanas" Binding="{Binding TimePeriod}" Width="*" IsReadOnly="True" FontFamily="{StaticResource FontNunito}" FontSize="16"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <Button x:Name="btnAddPromotion" Style="{StaticResource Button}" Content="Agregar" FontWeight="Medium"  Background="#FCDC2A" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top" Width="234" Height="52" Margin="984,635,0,0" Click="btnAddPromotion_Click"/>
+
+
+            </Grid>
+        </Viewbox>
+
+
+    </Grid>
+</Page>
