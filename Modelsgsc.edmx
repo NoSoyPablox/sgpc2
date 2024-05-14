@@ -232,6 +232,17 @@
     <Property Name="CreditRequests_CreditRequestId" Type="int" Nullable="false" />
     <Property Name="CreditConditions_CreditConditionId" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="CreditPromotions">
+    <Key>
+      <PropertyRef Name="CreditPromotionId" />
+    </Key>
+    <Property Name="CreditPromotionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="TimePeriod" Type="int" />
+    <Property Name="InterestRate" Type="float" />
+    <Property Name="StartDate" Type="datetime" />
+    <Property Name="EndDate" Type="datetime" />
+  </EntityType>
   <Association Name="FK_BankAccountCustomer">
     <End Role="Customers" Type="sgscModel.Store.Customers" Multiplicity="1" />
     <End Role="BankAccounts" Type="sgscModel.Store.BankAccounts" Multiplicity="*" />
@@ -469,7 +480,7 @@
           <Property Name="ExternalNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="InternalNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="true" />
           <Property Name="CustomerId" Type="Int32" Nullable="false" />
-          <Property Name="Colony" Type="String" Nullable="false" />
+          <Property Name="Colony" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Customer" Relationship="sgscModel.CustomerAddressCustomer" FromRole="CustomerAddress" ToRole="Customer" />
           <Property Name="State" Type="String" Nullable="false" />
           <Property Name="Type" Type="Int32" Nullable="false" />
@@ -524,7 +535,7 @@
           </Key>
           <Property Name="PaymentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FileNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PaymentDate" Type="DateTime" Precision="0" />
+          <Property Name="PaymentDate" Type="DateTime" Precision="3" />
           <Property Name="Amount" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CreditRequestId" Type="Int32" />
           <NavigationProperty Name="CreditRequests" Relationship="sgscModel.PaymentCreditRequest" FromRole="Payment" ToRole="CreditRequest" />
@@ -655,6 +666,7 @@
             <End Role="BankAccount" EntitySet="BankAccounts" />
           </AssociationSet>
           <EntitySet Name="Colonies" EntityType="sgscModel.Colony" />
+          <EntitySet Name="CreditPromotions" EntityType="sgscModel.CreditPromotion" />
         </EntityContainer>
         <Association Name="CreditRequestBankAccount">
           <End Type="sgscModel.CreditRequest" Role="CreditRequest" Multiplicity="*" />
@@ -712,6 +724,17 @@
           <Property Name="Zipcode" Type="String" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" />
           <Property Name="State" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CreditPromotion">
+          <Key>
+            <PropertyRef Name="CreditPromotionId" />
+          </Key>
+          <Property Name="CreditPromotionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TimePeriod" Type="Int32" />
+          <Property Name="InterestRate" Type="Double" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -935,6 +958,18 @@
       </EndProperty>
       <Condition ColumnName="CustomerAddress_CustomerAddressId" IsNull="false" />
     </AssociationSetMapping>
+          <EntitySetMapping Name="CreditPromotions">
+            <EntityTypeMapping TypeName="sgscModel.CreditPromotion">
+              <MappingFragment StoreEntitySet="CreditPromotions">
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="InterestRate" ColumnName="InterestRate" />
+                <ScalarProperty Name="TimePeriod" ColumnName="TimePeriod" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CreditPromotionId" ColumnName="CreditPromotionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
