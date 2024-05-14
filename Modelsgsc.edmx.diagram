@@ -39,6 +39,7 @@
         <EntityTypeShape EntityType="sgscModel.Bank" Width="1.5" PointX="3" PointY="1.375" />
         <AssociationConnector Association="sgscModel.BankBankAccount" />
         <EntityTypeShape EntityType="sgscModel.Colony" Width="1.5" PointX="0.75" PointY="0.5" />
+        <EntityTypeShape EntityType="sgscModel.CreditPromotion" Width="1.5" PointX="10.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
