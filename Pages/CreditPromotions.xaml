@@ -49,8 +49,18 @@
 
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Nombre" Binding="{Binding Name}" Width="*" IsReadOnly="True" FontWeight="Normal" FontFamily="{StaticResource FontNunito}" FontSize="16"/>
-                        <DataGridTextColumn Header="Tasa de interes" Binding="{Binding InterestRate}" Width="*"  IsReadOnly="True" FontFamily="{StaticResource FontNunito}" FontSize="16" />
+                        <DataGridTextColumn Header="Tasa de interés" Binding="{Binding InterestRate}" Width="*" IsReadOnly="True" FontFamily="{StaticResource FontNunito}" FontSize="16"/>
                         <DataGridTextColumn Header="Semanas" Binding="{Binding TimePeriod}" Width="*" IsReadOnly="True" FontFamily="{StaticResource FontNunito}" FontSize="16"/>
+                        <DataGridTextColumn Header="Inicio" Width="*" IsReadOnly="True" FontFamily="{StaticResource FontNunito}" FontSize="16">
+                            <DataGridTextColumn.Binding>
+                                <Binding Path="StartDate" StringFormat="{}{0:dd/MM/yyyy}" />
+                            </DataGridTextColumn.Binding>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Fin" Width="*" IsReadOnly="True" FontFamily="{StaticResource FontNunito}" FontSize="16">
+                            <DataGridTextColumn.Binding>
+                                <Binding Path="EndDate" StringFormat="{}{0:dd/MM/yyyy}" />
+                            </DataGridTextColumn.Binding>
+                        </DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
 
