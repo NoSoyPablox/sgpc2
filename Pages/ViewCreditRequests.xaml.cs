@@ -1,21 +1,22 @@
-﻿using SGSC.Frames;
-using SGSC.Utils;
-using System;
-using System.Collections.Generic;
+﻿    using SGSC.Frames;
+    using SGSC.Utils;
+    using System;
+    using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Drawing.Printing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Windows.Threading;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Data;
+    using System.Windows.Documents;
+    using System.Windows.Input;
+    using System.Windows.Media;
+    using System.Windows.Media.Imaging;
+    using System.Windows.Navigation;
+    using System.Windows.Shapes;
+    using System.Windows.Threading;
 
 namespace SGSC.Pages
 {
@@ -24,84 +25,65 @@ namespace SGSC.Pages
     /// </summary>
     public partial class ViewCreditRequests : Page
     {
+        private class CreditRequestData
+        {
+            public int CreditRequestId { get; set; }
+            public string Status { get; set; }
+            public DateTime CreationDate { get; set; }
+            public string CustomerName { get; set; }
+            public string Rfc { get; set; }
+        }
+
         private int currentPage = 0;
         private int pageSize = 7;
-        private DispatcherTimer timer;
 
         public ViewCreditRequests()
         {
             InitializeComponent();
             GetCreditRequests();
-            InitializeTimer();
         }
 
-        private void InitializeTimer()
+        private void NextPageRequest(object sender, RoutedEventArgs e)
         {
-            timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromMilliseconds(500);
-            timer.Tick += Timer_Tick;
-        }
-
-        private void Timer_Tick(object sender, EventArgs e)
-        {
-            timer.Stop(); 
-            SearchCreditRequests();
-        }
-
-        private void SearchCreditRequests()
-        {
-            string searchText1 = tbRfc.Text.Trim();
-            string searchText2 = tbCustomerName.Text.Trim();
-            string searchText3 = tbStatus.Text.Trim();
-
             try
             {
-                using (sgscEntities db = new sgscEntities())
+                currentPage++;
+                if (currentPage < 0)
                 {
-                    var creditRequests = (from cr in db.CreditRequests
-                                          join c in db.Customers on cr.CustomerId equals c.CustomerId
-                                          where c.Name.Contains(searchText1) &&
-                                                c.FirstSurname.Contains(searchText2) &&
-                                                c.SecondSurname.Contains(searchText3)
-                                          select new
-                                          {
-                                              cr.CreditRequestId,
-                                              cr.Status,
-                                              cr.CreationDate,
-                                              CustomerName = c.Name + " " + c.FirstSurname + " " + c.SecondSurname,
-                                              c.Rfc,
-                                          }).Skip(currentPage * pageSize).Take(pageSize).ToList();
-
-                    if (creditRequests.Any())
-                    {
-                        creditRequestsDataGrid.ItemsSource = creditRequests;
-                    }
-                    else
-                    {
-                        currentPage--;
-                    }
+                    currentPage = 0;
                 }
+                GetCreditRequests();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ocurrió un error al intentar buscar las solicitudes de crédito. Por favor, inténtelo de nuevo más tarde.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Ocurrió un error al intentar obtener las SIGUIENTES solicitudes de crédito. Por favor, inténtelo de nuevo más tarde.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void PreviousPageRequest(object sender, RoutedEventArgs e)
         {
-            timer.Stop(); 
-            timer.Start();
+            try
+            {
+                currentPage--;
+                if (currentPage < 0)
+                {
+                    currentPage = 0;
+                }
+                GetCreditRequests();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrió un error al intentar obtener las solicitudes de crédito. Por favor, inténtelo de nuevo más tarde.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
+
 
         private void GetCreditRequests()
         {
             try
             {
-                
                 using (sgscEntities db = new sgscEntities())
                 {
-                    
                     var creditRequests = (from cr in db.CreditRequests
                                           join c in db.Customers on cr.CustomerId equals c.CustomerId
                                           select new
@@ -114,47 +96,21 @@ namespace SGSC.Pages
                                           }).Take(pageSize).ToList();
                     if (creditRequests.Any())
                     {
-                        creditRequestsDataGrid.ItemsSource = creditRequests;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(" Sex Ocurrió un error al intentar obtener las solicitudes de crédito. Por favor, inténtelo de nuevo más tarde.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
+                       ObservableCollection<CreditRequestData> creditRequestsData = new ObservableCollection<CreditRequestData>();
+                        foreach (var cr in creditRequests)
+                        {
+                            creditRequestsData.Add(new CreditRequestData
+                            {
+                                CreditRequestId = cr.CreditRequestId,
+                                Status = CreditRequest.RequestStatusToString((CreditRequest.RequestStatus)cr.Status),
+                                CreationDate = cr.CreationDate.Value,
+                                CustomerName = cr.CustomerName,
+                                Rfc = cr.Rfc
+                            });
+                        }
+                       
+                        creditRequestsDataGrid.ItemsSource = creditRequestsData;
 
-        private void LogoutButton_Click(object sender, RoutedEventArgs e)
-        {
-            UserSession.LogOut();
-        }
-
-        private void NextPageRequest(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                currentPage++;
-
-                using (sgscEntities db = new sgscEntities())
-                {
-                    var creditRequests = (from cr in db.CreditRequests
-                                          join c in db.Customers on cr.CustomerId equals c.CustomerId
-                                          select new
-                                          {
-                                              cr.CreditRequestId,
-                                              cr.Status,
-                                              cr.CreationDate,
-                                              CustomerName = c.Name + " " + c.FirstSurname + " " + c.SecondSurname,
-                                              c.Rfc,
-                                          }).Skip(currentPage * pageSize).Take(pageSize).ToList();
-
-                    if (creditRequests.Any())
-                    {
-                        creditRequestsDataGrid.ItemsSource = creditRequests;
-                    }
-                    else
-                    {
-                        currentPage--;
                     }
                 }
             }
@@ -164,9 +120,11 @@ namespace SGSC.Pages
             }
         }
 
-        private void Frame_Navigated(object sender, NavigationEventArgs e)
-        {
 
+
+        private void LogoutButton_Click(object sender, RoutedEventArgs e)
+        {
+            UserSession.LogOut();
         }
     }
-}
+    }

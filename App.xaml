@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:SGSC"
              StartupUri="MainWindow.xaml">
-    <Application.Resources>
+    
+        <Application.Resources>
 
         <FontFamily x:Key="FontPoppins">/Typographic styles/Poppins-SemiBold.otf#Poppins SemiBold</FontFamily>
 

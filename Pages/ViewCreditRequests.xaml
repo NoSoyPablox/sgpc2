@@ -37,77 +37,70 @@
             </Grid.RowDefinitions>
             <Grid Height="531" Margin="15,22,15,0" Grid.RowSpan="2" VerticalAlignment="Top">
 
-                <DataGrid x:Name="creditRequestsDataGrid" AutoGenerateColumns="False" Margin="-1,73,1,0" Height="456" VerticalAlignment="Top">
-                    <DataGrid.RowStyle>
-                        <Style TargetType="{x:Type DataGridRow}">
-                            <Style.Triggers>
-                                <!-- Alternar estilo para filas impares -->
-                                <DataTrigger Binding="{Binding AlternationIndex, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}, Mode=FindAncestor}}" Value="1">
-                                    <Setter Property="Background" Value="LightGreen"/>
-                                </DataTrigger>
-                                <!-- Aplicar estilo por defecto para filas pares -->
-                                <DataTrigger Binding="{Binding AlternationIndex, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}, Mode=FindAncestor}}" Value="0">
-                                    <Setter Property="Background" Value="White"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </DataGrid.RowStyle>
+				<DataGrid x:Name="creditRequestsDataGrid" AutoGenerateColumns="False" Margin="-1,73,1,0" Height="456" VerticalAlignment="Top" BorderThickness="0" HeadersVisibility="Column" RowHeight="50">
+					<DataGrid.RowStyle>
+						<Style TargetType="{x:Type DataGridRow}">
+							<Style.Triggers>
+								<DataTrigger Binding="{Binding AlternationIndex, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}, Mode=FindAncestor}}" Value="1">
+									<Setter Property="Background" Value="LightGreen"/>
+								</DataTrigger>
+								<DataTrigger Binding="{Binding AlternationIndex, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}, Mode=FindAncestor}}" Value="0">
+									<Setter Property="Background" Value="White"/>
+								</DataTrigger>
+							</Style.Triggers>
+						</Style>
+					</DataGrid.RowStyle>
 
-                    <!-- Definición de las columnas -->
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="RFC" IsReadOnly="True" CanUserResize="False" Binding="{Binding Rfc}" Width="*" />
-                        <DataGridTextColumn Header="Fecha de Creación" IsReadOnly="True" CanUserResize="False" Binding="{Binding CreationDate}" Width="*" />
-                        <DataGridTextColumn Header="Nombre Completo" IsReadOnly="True" CanUserResize="False" Binding="{Binding CustomerName}" Width="*" />
-                        <DataGridTextColumn Header="Estado" IsReadOnly="True" CanUserResize="False" Binding="{Binding Status}" Width="*" />
-                    </DataGrid.Columns>
-                </DataGrid>
-                <Grid Margin="0,0,10,481">
+					<!-- Definición de las columnas -->
+					<DataGrid.Columns>
+						<DataGridTextColumn Header="RFC" IsReadOnly="True" CanUserResize="False" Binding="{Binding Rfc}" Width="*" />
+						<DataGridTextColumn Header="Fecha de Creación" IsReadOnly="True" CanUserResize="False" Binding="{Binding CreationDate}" Width="*" />
+						<DataGridTextColumn Header="Nombre Completo" IsReadOnly="True" CanUserResize="False" Binding="{Binding CustomerName}" Width="*" />
+						<DataGridTextColumn Header="Estado" IsReadOnly="True" CanUserResize="False" Binding="{Binding Status}" Width="*" />
+					</DataGrid.Columns>
+
+					<!-- Estilo para las cabeceras de las columnas -->
+					<DataGrid.ColumnHeaderStyle>
+						<Style TargetType="{x:Type DataGridColumnHeader}">
+							<Setter Property="FontWeight" Value="Bold"/>
+							<Setter Property="FontSize" Value="25"/>
+							<Setter Property="BorderThickness" Value="0"/>
+						</Style>
+					</DataGrid.ColumnHeaderStyle>
+
+					<!-- Estilo para las celdas -->
+					<DataGrid.CellStyle>
+						<Style TargetType="{x:Type DataGridCell}">
+							<Setter Property="BorderThickness" Value="0"/>
+						</Style>
+					</DataGrid.CellStyle>
+				</DataGrid>
 
 
 
-                    <TextBox x:Name="tbRfc" Margin="0,5,850,5" Style="{StaticResource CustomTextBoxStyle}" Height="40" Width="250" TextChanged="TextBox_TextChanged" />
+				<Grid Margin="0,0,10,481">
 
-                    <TextBox x:Name="tbCustomerName" Margin="425,5,425,5" Style="{StaticResource CustomTextBoxStyle}" Height="40" Width="250" TextChanged="TextBox_TextChanged"/>
-                    <TextBox x:Name="tbStatus" Margin="815,5,35,5" Style="{StaticResource CustomTextBoxStyle}" Height="40" Width="250" TextChanged="TextBox_TextChanged" />
+
+
+                    <TextBox x:Name="tbRfc" Margin="0,5,850,5" Style="{StaticResource CustomTextBoxStyle}" Height="40" Width="250"  />
+
+                    <TextBox x:Name="tbCustomerName" Margin="425,5,425,5" Style="{StaticResource CustomTextBoxStyle}" Height="40" Width="250" />
+                    <TextBox x:Name="tbStatus" Margin="815,5,35,5" Style="{StaticResource CustomTextBoxStyle}" Height="40" Width="250"  />
 
                 </Grid>
 
             </Grid>
         </Grid>
 
-        <Frame RenderTransformOrigin="0.5,0.5" Margin="602,6,68,626">
-            <Frame.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="0.111"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Frame.RenderTransform>
-            <Frame.Content>
-                <frames:UserSessionFrame Margin="604,23,-221,-20" RenderTransformOrigin="0.5,0.5">
-                    <frames:UserSessionFrame.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform ScaleX="-1"/>
-                            <SkewTransform/>
-                            <RotateTransform/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </frames:UserSessionFrame.RenderTransform>
-                </frames:UserSessionFrame>
-            </Frame.Content>
-        </Frame>
+        <Frame Name="UserSessionFrame" NavigationUIVisibility="Hidden" Margin="888,10,20,624"/>
 
         <Grid Height="52" Margin="455,658,-132,10">
 
 
 
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Orientation="Horizontal" Margin="0,0,0,2" Width="338">
-                <Button Content="1" Style="{StaticResource ButtonStyle}" Click="NextPageRequest"/>
-                <Button Content="2" Style="{StaticResource ButtonStyle}" Click="NextPageRequest"/>
-                <Button Content="3" Style="{StaticResource ButtonStyle}" Click="NextPageRequest"/>
-                <Button Content="4" Style="{StaticResource ButtonStyle}" Click="NextPageRequest"/>
-                <Button Content="5" Style="{StaticResource ButtonStyle}" Click="NextPageRequest"/>
+                <Button Content="Anterior" Style="{StaticResource ButtonStyle}" Click="PreviousPageRequest"/>
+                <Button Content="Siguiente" Style="{StaticResource ButtonStyle}" Click="NextPageRequest"/>
             </StackPanel>
 
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal" Margin="414,0,0,0" Width="411" Height="52" RenderTransformOrigin="0.5,0.5">

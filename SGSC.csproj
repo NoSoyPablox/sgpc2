@@ -127,6 +127,7 @@
       <DependentUpon>Modelsgsc.edmx</DependentUpon>
     </Compile>
     <Compile Include="Model\BankAccount.cs" />
+    <Compile Include="Model\CreditRequest.cs" />
     <Compile Include="Pages\CustomerBankAccountsPage.xaml.cs">
       <DependentUpon>CustomerBankAccountsPage.xaml</DependentUpon>
     </Compile>
