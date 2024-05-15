@@ -1,0 +1,39 @@
+﻿<Page x:Class="SGSC.Pages.RegisterCreditRequest"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SGSC.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="720" d:DesignWidth="1280"
+      Title="RegisterCreditRequest">
+
+    <Grid>
+        <Border Background="White" Margin="0">
+        </Border>
+
+        <Label FontFamily="{StaticResource FontPoppins}" FontWeight="Bold" FontSize="36" Content="Registrar solicitud de credito" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="204,93,0,0"/>
+        <Rectangle Style="{StaticResource RoundedRectangleStyle}" Margin="196,166,136,415"/>
+        <Rectangle Style="{StaticResource RoundedRectangleStyle}" Margin="196,360,136,131"/>
+        <TextBox x:Name="tbAmount" Style="{StaticResource CustomTextBoxStyle}" Margin="245,424,888,254" VerticalContentAlignment="Center" FontSize="20"/>
+        <TextBox x:Name="tbAmount_Copiar" Style="{StaticResource CustomTextBoxStyle}" Margin="245,515,217,163" VerticalContentAlignment="Center" FontSize="20"/>
+        <ComboBox x:Name="cbStatusSearch" HorizontalAlignment="Left" VerticalAlignment="Top" Width="148" Height="37" FontFamily="{StaticResource FontNunitoBold}" FontSize="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="522,429,0,0">
+
+        </ComboBox>
+        <Label Content="Cliente" FontFamily="{StaticResource FontNunitoBold}" FontSize="18" HorizontalAlignment="Left" Margin="278,189,0,0" VerticalAlignment="Top"/>
+        <Label Content="Correo electronico" FontFamily="{StaticResource FontNunitoBold}" FontSize="18" HorizontalAlignment="Left" Margin="744,189,0,0" VerticalAlignment="Top"/>
+        <Label Content="Monto solicitado" FontFamily="{StaticResource FontNunitoBold}" FontSize="18" HorizontalAlignment="Left" Margin="245,384,0,0" VerticalAlignment="Top"/>
+        <Label Content="Promoción" FontFamily="{StaticResource FontNunitoBold}" FontSize="18" HorizontalAlignment="Left" Margin="522,384,0,0" VerticalAlignment="Top"/>
+        <Label Content="Tasa de interés" FontFamily="{StaticResource FontNunitoBold}" FontSize="18" HorizontalAlignment="Left" Margin="758,384,0,0" VerticalAlignment="Top"/>
+        <Label Content="Plazo" FontFamily="{StaticResource FontNunitoBold}" FontSize="18" HorizontalAlignment="Left" Margin="958,384,0,0" VerticalAlignment="Top"/>
+        <Label Content="Destino del credito:" FontFamily="{StaticResource FontNunitoBold}" FontSize="18" HorizontalAlignment="Left" Margin="245,480,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbInterestRate" Content="tasa de interes" FontFamily="{StaticResource FontNunito}" FontSize="18" HorizontalAlignment="Left" Margin="759,428,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbTimePeriod" Content="Plazo" FontFamily="{StaticResource FontNunito}" FontSize="18" HorizontalAlignment="Left" Margin="958,428,0,0" VerticalAlignment="Top"/>
+        <Label Content="Total:" FontFamily="{StaticResource FontNunitoBold}" FontSize="18" HorizontalAlignment="Left" Margin="245,594,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbTotalAmount" Content="total calculado aqui" FontFamily="{StaticResource FontNunito}" FontSize="18" HorizontalAlignment="Left" Margin="312,594,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbName" Content="Nombre de cliente" FontFamily="{StaticResource FontNunito}" FontSize="18" HorizontalAlignment="Left" Margin="255,236,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbEmail" Content="Correo del cliente" FontFamily="{StaticResource FontNunito}" FontSize="18" HorizontalAlignment="Left" Margin="744,236,0,0" VerticalAlignment="Top"/>
+        <Label Content="MXN" FontFamily="{StaticResource FontNunitoBold}" FontSize="18" HorizontalAlignment="Left" Margin="397,431,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Page>

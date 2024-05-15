@@ -144,6 +144,9 @@
     <Compile Include="Pages\HomePageCreditAdvisor.xaml.cs">
       <DependentUpon>HomePageCreditAdvisor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\RegisterCreditRequest.xaml.cs">
+      <DependentUpon>RegisterCreditRequest.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\SearchCustomerPage.xaml.cs">
       <DependentUpon>SearchCustomerPage.xaml</DependentUpon>
     </Compile>
@@ -200,6 +203,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\LogIn.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\RegisterCreditRequest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
