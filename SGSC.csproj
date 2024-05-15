@@ -144,6 +144,7 @@
       <DependentUpon>Modelsgsc.tt</DependentUpon>
     </Compile>
     <Compile Include="Utils\Authenticator.cs" />
+    <Compile Include="Utils\StringExtensions.cs" />
     <Compile Include="Utils\TextValidator.cs" />
     <Compile Include="Utils\UserSession.cs" />
     <Compile Include="App.xaml.cs">
