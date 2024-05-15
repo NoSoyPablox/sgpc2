@@ -35,6 +35,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
+            
 
         <!-- Estilo para filas blancas -->
         <Style x:Key="WhiteRowStyle" TargetType="DataGridRow">
@@ -221,6 +222,5 @@
             </Setter>
             <Setter Property="Foreground" Value="#343434" />
         </Style>
-        
     </Application.Resources>
 </Application>
