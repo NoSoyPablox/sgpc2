@@ -104,36 +104,15 @@
                     <Label Style="{StaticResource CustomLabelStyle}" FontSize="15" Content="Filtrar por Nombre del Cliente" HorizontalAlignment="Left" Margin="403,-15,0,0" VerticalAlignment="Top" x:Name="lblCustomerName_Copiar" Width="197" Height="27" Grid.Column="1" Grid.ColumnSpan="2"/>
                     <Label Style="{StaticResource CustomLabelStyle}" FontSize="15" Content="Filtrar por Estado de la Solicitud" HorizontalAlignment="Left" Margin="315,-15,0,0" VerticalAlignment="Top" x:Name="lblStatus_Copiar1" Width="215" Height="27" Grid.Column="2"/>
 
-                    <TextBox x:Name="tbCustomerName" Margin="425,5,425,5" Style="{StaticResource CustomTextBoxStyle}" Height="40" Width="250" TextChanged="TextBox_TextChanged"/>
-                    <TextBox x:Name="tbStatus" Margin="815,5,35,5" Style="{StaticResource CustomTextBoxStyle}" Height="40" Width="250" TextChanged="TextBox_TextChanged" />
+                    <TextBox x:Name="tbCustomerName" Margin="425,5,425,5" Style="{StaticResource CustomTextBoxStyle}" Height="40" Width="250" />
+                    <TextBox x:Name="tbStatus" Margin="815,5,35,5" Style="{StaticResource CustomTextBoxStyle}" Height="40" Width="250"  />
 
                 </Grid>
 
             </Grid>
         </Grid>
 
-        <Frame RenderTransformOrigin="0.5,0.5" Margin="602,6,68,626">
-            <Frame.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="0.111"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Frame.RenderTransform>
-            <Frame.Content>
-                <frames:UserSessionFrame Margin="604,23,-221,-20" RenderTransformOrigin="0.5,0.5">
-                    <frames:UserSessionFrame.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform ScaleX="-1"/>
-                            <SkewTransform/>
-                            <RotateTransform/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </frames:UserSessionFrame.RenderTransform>
-                </frames:UserSessionFrame>
-            </Frame.Content>
-        </Frame>
+        <Frame Name="UserSessionFrame" NavigationUIVisibility="Hidden" Margin="888,10,20,624"/>
 
         <Grid Height="52" Margin="455,658,-132,10">
 
