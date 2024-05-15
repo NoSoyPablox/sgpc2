@@ -29,7 +29,7 @@
             <DatePicker x:Name="dpEndDate" HorizontalAlignment="Left" Margin="878,393,0,0" VerticalAlignment="Top"/>
             <Label Content="Fecha de inicio" FontFamily="{StaticResource FontNunito}" HorizontalAlignment="Left" Margin="614,353,0,0" VerticalAlignment="Top" FontSize="24" Foreground="#FF343434"/>
             <Label Content="Fecha de fin" FontFamily="{StaticResource FontNunito}" HorizontalAlignment="Left" Margin="878,354,0,0" VerticalAlignment="Top" FontSize="24" Foreground="#FF343434"/>
-            <Button x:Name="btnRegister" Style="{StaticResource Button}" Content="Guardar" FontWeight="Medium"  Background="#FCDC2A" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top" Width="234" Height="52" Margin="977,536,0,0" Click="btnRegister_Click"/>
+            <Button x:Name="btnRegister" Style="{StaticResource Button}" Content="Guardar" FontWeight="Medium"  Background="#FCDC2A" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top" Width="234" Height="52" Margin="977,617,0,0" Click="btnRegister_Click"/>
             <Label x:Name="lbName" Content="Error" HorizontalAlignment="Left" HorizontalContentAlignment="Right" VerticalAlignment="Top" Width="395" Foreground="#FFCE2222" FontStyle="Italic" Margin="266,321,0,0"/>
             <Label x:Name="lbInterestRate" Content="Error" HorizontalAlignment="Left" HorizontalContentAlignment="Right" VerticalAlignment="Top" Width="107" Foreground="#FFCE2222" FontStyle="Italic" Margin="737,321,0,0"/>
             <Label x:Name="lbTimePeriod" Content="Error" HorizontalAlignment="Left" HorizontalContentAlignment="Right" VerticalAlignment="Top" Width="151" Foreground="#FFCE2222" FontStyle="Italic" Margin="266,426,0,0"/>

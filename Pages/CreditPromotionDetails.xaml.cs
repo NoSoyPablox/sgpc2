@@ -20,12 +20,16 @@ namespace SGSC.Pages
     /// </summary>
     public partial class CreditPromotionDetails : Page
     {
+        private bool editMode = false;
+        private int idPromotion = -1;
         public CreditPromotionDetails(int idPromotion)
         {
             InitializeComponent();
+            this.idPromotion = idPromotion;
             tbName.Focus();
-            dpStartDate.SelectedDate = DateTime.Now;
-
+            btnModify.Visibility = Visibility.Hidden;
+            btnModify.IsEnabled = false;
+            
             lbName.Content = "";
             lbInterestRate.Content = "";
             lbTimePeriod.Content = "";
@@ -35,7 +39,25 @@ namespace SGSC.Pages
             if (idPromotion != -1)
             {
                 retrievePromotionDetails(idPromotion);
+                btnModify.Visibility = Visibility.Visible;
+                btnModify.IsEnabled = true;
+                btnRegister.Visibility = Visibility.Hidden;
+                btnRegister.IsEnabled = false;
             }
+        }
+
+        private void enableEdit()
+        {
+            tbName.IsReadOnly = false;
+            tbTimePeriod.IsReadOnly = false;
+            tbInterestRate.IsReadOnly = false;
+            dpEndDate.IsEnabled = true;
+            dpStartDate.IsEnabled = true;
+            btnModify.Visibility = Visibility.Hidden;
+            btnModify.IsEnabled = false;
+            btnRegister.Visibility = Visibility.Visible;
+            btnRegister.IsEnabled = true;
+            editMode = true;
         }
 
         public void retrievePromotionDetails(int idPromotion)
@@ -62,11 +84,7 @@ namespace SGSC.Pages
 
         private void btnModify_Click(object sender, RoutedEventArgs e)
         {
-            tbName.IsReadOnly = false;
-            tbTimePeriod.IsReadOnly = false;
-            tbInterestRate.IsReadOnly = false;
-            dpEndDate.IsEnabled = true;
-            dpStartDate.IsEnabled = true;
+            enableEdit();
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
@@ -125,7 +143,14 @@ namespace SGSC.Pages
             }
             if (valid)
             {
-                registerPromotion();
+                if (editMode)
+                {
+                    updatePromotion();
+                }
+                else
+                {
+                    registerPromotion();
+                }
             }
         }
 
@@ -152,5 +177,26 @@ namespace SGSC.Pages
                 MessageBox.Show("Promoción registrada con éxito", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
+
+        private void updatePromotion()
+        {
+            using (sgscEntities db = new sgscEntities())
+            {
+                var promotion = db.CreditPromotions.Where(p => p.CreditPromotionId == idPromotion).FirstOrDefault();
+                if (promotion != null)
+                {
+                    promotion.Name = tbName.Text;
+                    promotion.TimePeriod = int.Parse(tbTimePeriod.Text);
+                    promotion.InterestRate = double.Parse(tbInterestRate.Text);
+                    promotion.StartDate = dpStartDate.SelectedDate.Value;
+                    promotion.EndDate = dpEndDate.SelectedDate.Value;
+
+                    db.SaveChanges();
+
+                    MessageBox.Show("Promoción actualizada con éxito", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+        }
+
     }
 }
