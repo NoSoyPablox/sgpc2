@@ -361,3 +361,34 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/App.config
+/BankAccount.cs
+/BankAccount.cs
+/Contact.cs
+/CreditCondition.cs
+/CreditPolicy.cs
+/CreditRequest.cs
+/Customer.cs
+/CustomerAddress.cs
+/CustomerContactInfo.cs
+/Employee.cs
+/Modelsgsc.Context.cs
+/Modelsgsc.cs
+/Modelsgsc.Designer.cs
+/Payment.cs
+/WorkCenter.cs
+/.gitignore
+/Contact.cs
+/CreditCondition.cs
+/CreditPolicy.cs
+/CreditRequest.cs
+/Customer.cs
+/CustomerAddress.cs
+/CustomerContactInfo.cs
+/Employee.cs
+/Modelsgsc.Context.cs
+/Modelsgsc.cs
+/Modelsgsc.Designer.cs
+/Payment.cs
+/WorkCenter.cs
+/App.config
