@@ -26,7 +26,6 @@ namespace SGSC.Pages
 			InitializeComponent();
             tblEmailError.Text = "";
             tblPasswordError.Text = "";
-            DataBaseError();
         }
 
 		private void btnLogIn_Click(object sender, RoutedEventArgs e)
