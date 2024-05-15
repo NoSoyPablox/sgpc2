@@ -15,9 +15,9 @@
         <Label FontFamily="{StaticResource FontPoppins}" FontWeight="Bold" FontSize="36" Content="Registrar solicitud de credito" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="204,93,0,0"/>
         <Rectangle Style="{StaticResource RoundedRectangleStyle}" Margin="196,166,136,415"/>
         <Rectangle Style="{StaticResource RoundedRectangleStyle}" Margin="196,360,136,131"/>
-        <TextBox x:Name="tbAmount" Style="{StaticResource CustomTextBoxStyle}" Margin="245,424,888,254" VerticalContentAlignment="Center" FontSize="20"/>
+        <TextBox x:Name="tbAmount" Style="{StaticResource CustomTextBoxStyle}" Margin="245,424,888,254" VerticalContentAlignment="Center" FontSize="20" PreviewTextInput="tbAmount_PreviewTextInput" TextChanged="tbAmount_TextChanged"/>
         <TextBox x:Name="tbAmount_Copiar" Style="{StaticResource CustomTextBoxStyle}" Margin="245,515,217,163" VerticalContentAlignment="Center" FontSize="20"/>
-        <ComboBox x:Name="cbStatusSearch" HorizontalAlignment="Left" VerticalAlignment="Top" Width="148" Height="37" FontFamily="{StaticResource FontNunitoBold}" FontSize="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="522,429,0,0">
+        <ComboBox x:Name="cbCreditPromotions" HorizontalAlignment="Left" VerticalAlignment="Top" Width="148" Height="37" FontFamily="{StaticResource FontNunitoBold}" FontSize="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="522,429,0,0" SelectionChanged="cbCreditPromotions_SelectionChanged">
 
         </ComboBox>
         <Label Content="Cliente" FontFamily="{StaticResource FontNunitoBold}" FontSize="18" HorizontalAlignment="Left" Margin="278,189,0,0" VerticalAlignment="Top"/>
