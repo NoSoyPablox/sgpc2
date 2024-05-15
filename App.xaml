@@ -222,6 +222,5 @@
             </Setter>
             <Setter Property="Foreground" Value="#343434" />
         </Style>
-        
     </Application.Resources>
 </Application>
