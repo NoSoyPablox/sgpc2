@@ -26,7 +26,6 @@ namespace SGSC.Pages
 			InitializeComponent();
             tblEmailError.Text = "";
             tblPasswordError.Text = "";
-            DataBaseError();
         }
 
 		private void btnLogIn_Click(object sender, RoutedEventArgs e)
@@ -76,21 +75,6 @@ namespace SGSC.Pages
             }
 		}
 
-		private void DataBaseError()
-		{
-			using (var db = new sgscEntities())
-			{
-                var user = db.Employees.Where(u => u.Email == "pedro@gmail.com").FirstOrDefault();
-                tbEmail.Text = user.Email;
-                if (user == null)
-				{
-
-                    MessageBox.Show("Usuario no encontrado.");
-                    return;
-                }
-
-            }
-		}
 
         private void Label_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
