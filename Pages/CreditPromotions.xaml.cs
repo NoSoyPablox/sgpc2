@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 
 namespace SGSC.Pages
 {
@@ -53,7 +54,7 @@ namespace SGSC.Pages
         {
             if (e.Key == Key.Enter)
             {
-                searchPromotionByName();
+                searchCriterias();
             }
         }
 
@@ -61,17 +62,7 @@ namespace SGSC.Pages
         {
             using (sgscEntities db = new sgscEntities())
             {
-                searchPromotionByName();
-            }
-        }
-
-        private void searchPromotionByName()
-        {
-            using (sgscEntities db = new sgscEntities())
-            {
-                string searchCriteria = tbSearch.Text.Replace(" ", "").ToUpper();
-                var promotions = db.CreditPromotions.Where(p => p.Name.Contains(searchCriteria)).ToList();
-                dgPromotions.ItemsSource = promotions;
+                searchCriterias();
             }
         }
 
@@ -79,6 +70,55 @@ namespace SGSC.Pages
         {
             CreditPromotionDetails promotionDetails = new CreditPromotionDetails(-1);
             this.NavigationService.Navigate(promotionDetails);
+        }
+
+        private void searchCriterias()
+        {
+            DateTime currentDate = DateTime.Now;
+            using (sgscEntities db = new sgscEntities())
+            {
+                if (string.IsNullOrEmpty(tbSearch.Text)){
+                    switch (cbStatusSearch.SelectedIndex)
+                    {
+                        case 0: //Todas
+                            var promotions = db.CreditPromotions.ToList();
+                            dgPromotions.ItemsSource = promotions;
+                            break;
+                        case 1: //vigente
+                            var activePromotions = db.CreditPromotions.Where(predicate: p => p.StartDate <= currentDate && p.EndDate >= currentDate).ToList();
+                            dgPromotions.ItemsSource = activePromotions;
+                            break;
+                        case 2: //vencida
+                            var inactivePromotions = db.CreditPromotions.Where(predicate: p => p.EndDate < currentDate).ToList();
+                            dgPromotions.ItemsSource = inactivePromotions;
+                            break;
+                    }
+                }
+                else
+                {
+                    string searchCriteria = tbSearch.Text.Replace(" ", "").ToUpper();
+                    switch (cbStatusSearch.SelectedIndex)
+                    {
+                        case 0: //Todas
+                            var promotions = db.CreditPromotions.Where(p => p.Name.Contains(searchCriteria)).ToList();
+                            dgPromotions.ItemsSource = promotions;
+                            break;
+                        case 1: //vigente
+                            var activePromotions = db.CreditPromotions.Where(predicate: p => p.StartDate <= currentDate && p.EndDate >= currentDate && p.Name.Contains(searchCriteria)).ToList();
+                            dgPromotions.ItemsSource = activePromotions;
+                            break;
+                        case 2: //vencida
+                            var inactivePromotions = db.CreditPromotions.Where(predicate: p => p.EndDate < currentDate && p.Name.Contains(searchCriteria)).ToList();
+                            dgPromotions.ItemsSource = inactivePromotions;
+                            break;
+                    }
+                }
+            }
+        }
+
+        private void cbStatusSearch_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            searchCriterias();
         }
     }
 }
