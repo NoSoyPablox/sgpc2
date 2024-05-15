@@ -24,6 +24,13 @@ namespace SGSC.Pages
         {
             InitializeComponent();
             tbName.Focus();
+            dpStartDate.SelectedDate = DateTime.Now;
+
+            lbName.Content = "";
+            lbInterestRate.Content = "";
+            lbTimePeriod.Content = "";
+            lbStartDate.Content = "";
+            lbEndDate.Content = "";
 
             if (idPromotion != -1)
             {
@@ -41,10 +48,14 @@ namespace SGSC.Pages
                     tbName.Text = promotion.Name;
                     tbTimePeriod.Text = promotion.TimePeriod.ToString();
                     tbInterestRate.Text = promotion.InterestRate.ToString();
+                    dpStartDate.SelectedDate = promotion.StartDate;
+                    dpEndDate.SelectedDate = promotion.EndDate;
 
                     tbName.IsReadOnly = true;
                     tbTimePeriod.IsReadOnly = true;
                     tbInterestRate.IsReadOnly = true;
+                    dpEndDate.IsEnabled = false;
+                    dpStartDate.IsEnabled = false;
                 }
             }
         }
@@ -54,11 +65,92 @@ namespace SGSC.Pages
             tbName.IsReadOnly = false;
             tbTimePeriod.IsReadOnly = false;
             tbInterestRate.IsReadOnly = false;
+            dpEndDate.IsEnabled = true;
+            dpStartDate.IsEnabled = true;
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.GoBack();
+        }
+
+        private void btnRegister_Click(object sender, RoutedEventArgs e)
+        {
+            lbName.Content = "";
+            lbInterestRate.Content = "";
+            lbTimePeriod.Content = "";
+            lbStartDate.Content = "";
+            lbEndDate.Content = "";
+            bool valid = true;
+
+            if (string.IsNullOrEmpty(tbName.Text))
+            {
+                valid = false;
+                lbName.Content= "Por favor introduzca el nombre";
+            }
+            if (string.IsNullOrEmpty(tbInterestRate.Text))
+            {
+                valid = false;
+                lbInterestRate.Content = "Por favor introduzca la tasa de interés";
+            }
+            if (!double.TryParse(tbInterestRate.Text, out double interestRate))
+            {
+                valid = false;
+                lbInterestRate.Content = "Por favor introduzca una tasa de interés valida";
+            }
+            if (string.IsNullOrEmpty(tbTimePeriod.Text))
+            {
+                valid = false;
+                lbTimePeriod.Content = "Por favor introduzca el periodo de tiempo";
+            }
+            if (!int.TryParse(tbTimePeriod.Text, out int timePeriod))
+            {
+                valid = false;
+                lbTimePeriod.Content = "Por favor introduzca un periodo de tiempo valido";
+            }
+            if (dpStartDate.SelectedDate == null)
+            {
+                valid = false;
+                lbStartDate.Content = "Por favor introduzca la fecha de inicio";
+            }
+            if (dpEndDate.SelectedDate == null)
+            {
+                valid = false;
+                lbEndDate.Content = "Por favor introduzca la fecha de fin";
+            }
+            if (dpStartDate.SelectedDate > dpEndDate.SelectedDate)
+            {
+                valid = false;
+                lbEndDate.Content = "La fecha de fin debe ser mayor a la fecha de inicio";
+            }
+            if (valid)
+            {
+                registerPromotion();
+            }
+        }
+
+        private void registerPromotion()
+        {
+            using (sgscEntities db = new sgscEntities())
+            {
+                CreditPromotion promotion = new CreditPromotion();
+                promotion.Name = tbName.Text;
+                promotion.TimePeriod = int.Parse(tbTimePeriod.Text);
+                promotion.InterestRate = double.Parse(tbInterestRate.Text);
+                promotion.StartDate = dpStartDate.SelectedDate.Value;
+                promotion.EndDate = dpEndDate.SelectedDate.Value;
+
+                db.CreditPromotions.Add(promotion);
+                db.SaveChanges();
+
+                tbName.Text = "";
+                tbTimePeriod.Text = "";
+                tbInterestRate.Text = "";
+                dpStartDate.SelectedDate = DateTime.Now;
+                dpEndDate.SelectedDate = null;
+
+                MessageBox.Show("Promoción registrada con éxito", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
     }
 }

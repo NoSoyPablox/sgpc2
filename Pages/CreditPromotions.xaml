@@ -13,7 +13,7 @@
             <Border Background="White" CornerRadius="22"/>
             <Label FontFamily="{StaticResource FontPoppins}" FontWeight="Bold" FontSize="36" Content="Promociones de credito" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="240,115,0,0"/>
             <Button x:Name="btnSeeDetails" Style="{StaticResource Button}" Content="Ver detalles" FontWeight="Medium"  Background="#FCDC2A" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top" Width="234" Height="52" Margin="713,635,0,0" Click="btnSeeDetails_Click"/>
-            <TextBox x:Name="tbSearch" Style="{StaticResource CustomTextBoxStyle}" Margin="640,179,344,499" KeyDown="tbSearch_KeyDown" LostFocus="tbSearch_LostFocus"/>
+            <TextBox x:Name="tbSearch" Style="{StaticResource CustomTextBoxStyle}" Margin="640,182,344,499" KeyDown="tbSearch_KeyDown" FontFamily="{StaticResource FontNunito}" FontSize="18" VerticalContentAlignment="Center" LostFocus="tbSearch_LostFocus"/>
             <DataGrid x:Name="dgPromotions" AutoGenerateColumns="False" AlternationCount="2" CanUserAddRows="False" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="240,246,148,143" HeadersVisibility="Column" VerticalContentAlignment="Center" MinRowHeight="30" ColumnHeaderHeight="40">
 
                 <DataGrid.ColumnHeaderStyle>
@@ -54,10 +54,10 @@
             </DataGrid>
 
             <Button x:Name="btnAddPromotion" Style="{StaticResource Button}" Content="Agregar" FontWeight="Medium"  Background="#FCDC2A" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top" Width="234" Height="52" Margin="984,635,0,0" Click="btnAddPromotion_Click"/>
-            <ComboBox HorizontalAlignment="Left" Margin="984,184,0,0" VerticalAlignment="Top" Width="148" Height="37" FontFamily="{StaticResource FontNunitoBold}" FontSize="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+            <ComboBox x:Name="cbStatusSearch" HorizontalAlignment="Left" Margin="984,184,0,0" VerticalAlignment="Top" Width="148" Height="37" FontFamily="{StaticResource FontNunitoBold}" FontSize="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SelectionChanged="cbStatusSearch_SelectionChanged">
+                <ComboBoxItem Content="Todas" FontFamily="{StaticResource FontNunito}" FontSize="18" IsSelected="True" HorizontalContentAlignment="Center" />
                 <ComboBoxItem Content="Vigente" FontFamily="{StaticResource FontNunito}" FontSize="18" HorizontalContentAlignment="Center"/>
                 <ComboBoxItem Content="Vencida" FontFamily="{StaticResource FontNunito}" FontSize="18" HorizontalContentAlignment="Center" />
-                <ComboBoxItem Content="Todas" FontFamily="{StaticResource FontNunito}" FontSize="18" IsSelected="True" HorizontalContentAlignment="Center" />
             </ComboBox>
 
 
