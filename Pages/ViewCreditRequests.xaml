@@ -104,19 +104,13 @@
                     <Label Style="{StaticResource CustomLabelStyle}" FontSize="15" Content="Filtrar por Nombre del Cliente" HorizontalAlignment="Left" Margin="403,-15,0,0" VerticalAlignment="Top" x:Name="lblCustomerName_Copiar" Width="197" Height="27" Grid.Column="1" Grid.ColumnSpan="2"/>
                     <Label Style="{StaticResource CustomLabelStyle}" FontSize="15" Content="Filtrar por Estado de la Solicitud" HorizontalAlignment="Left" Margin="315,-15,0,0" VerticalAlignment="Top" x:Name="lblStatus_Copiar1" Width="215" Height="27" Grid.Column="2"/>
 
-                    <TextBox x:Name="tbCustomerName" Margin="425,5,425,5" Style="{StaticResource CustomTextBoxStyle}" Height="40" Width="250" />
-                    <TextBox x:Name="tbStatus" Margin="815,5,35,5" Style="{StaticResource CustomTextBoxStyle}" Height="40" Width="250"  />
 
                 </Grid>
 
             </Grid>
         </Grid>
 
-        <Frame Name="UserSessionFrame" NavigationUIVisibility="Hidden" Margin="888,10,20,624"/>
-
-        <Grid Height="52" Margin="455,658,-132,10">
-
-
+        <Frame Name="UserSessionFrame" NavigationUIVisibility="Hidden" Margin="834,10,74,624"/>
 
         <Grid Height="52" Margin="330,658,-57,10">
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Orientation="Horizontal" Margin="-130,0,0,4" Width="531">

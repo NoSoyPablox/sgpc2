@@ -54,6 +54,9 @@ namespace SGSC.Pages
             InitializeComponent();
             UserSessionFrame.Content = new UserSessionFrame();
             GetCreditRequests();
+            tbRfc.TextChanged += tbRfc_TextChanged;
+            tbCustomerName.TextChanged += tbCustomerName_TextChanged;
+            tbStatus.TextChanged += tbStatus_TextChanged;
         }
 
         {
@@ -163,6 +166,13 @@ namespace SGSC.Pages
                     {
                     }
                     }
+
+                    tbCurrentPage.Text = $"Página {currentPage} de {totalPages}";
+                    cbPages.ItemsSource = Enumerable.Range(1, totalPages).ToList();
+                    cbPages.SelectedItem = currentPage;
+
+                    btnPreviousPage.IsEnabled = currentPage > 1;
+                    btnNextPage.IsEnabled = currentPage < (totalRecords + pageSize - 1) / pageSize;
                 }
             }
 
