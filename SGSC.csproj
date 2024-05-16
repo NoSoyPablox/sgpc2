@@ -122,8 +122,14 @@
     </Compile>
     <Compile Include="Model\BankAccount.cs" />
     <Compile Include="Model\CreditRequest.cs" />
+    <Compile Include="Pages\CollectionEfficienciesPage.xaml.cs">
+      <DependentUpon>CollectionEfficienciesPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\CustomerBankAccountsPage.xaml.cs">
       <DependentUpon>CustomerBankAccountsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\DocumentsManagerPage.xaml.cs">
+      <DependentUpon>DocumentsManagerPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\HomePageCreditAdvisor.xaml.cs">
       <DependentUpon>HomePageCreditAdvisor.xaml</DependentUpon>
@@ -138,7 +144,6 @@
       <DependentUpon>Modelsgsc.tt</DependentUpon>
     </Compile>
     <Compile Include="Utils\Authenticator.cs" />
-    <Compile Include="Utils\StringExtensions.cs" />
     <Compile Include="Utils\TextValidator.cs" />
     <Compile Include="Utils\UserSession.cs" />
     <Compile Include="App.xaml.cs">
@@ -163,7 +168,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\CollectionEfficienciesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\CustomerBankAccountsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\DocumentsManagerPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
