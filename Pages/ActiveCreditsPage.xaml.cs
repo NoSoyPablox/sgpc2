@@ -38,8 +38,9 @@ namespace SGSC.Pages
         private int CurrentPage = 1;
         private int TotalPages = 1;
         private const int ItemsPerPage = 3;
+        private bool UpdatingPagination = false;
 
-        public ActiveCreditsPage()
+		public ActiveCreditsPage()
         {
             InitializeComponent();
             UserSessionFrame.Content = new UserSessionFrame();
@@ -48,7 +49,9 @@ namespace SGSC.Pages
 
         private void UpdatePagination()
         {
-            try
+            UpdatingPagination = true;
+
+			try
             {
                 using (var context = new sgscEntities())
                 {
@@ -72,7 +75,10 @@ namespace SGSC.Pages
             {
                 MessageBox.Show("Error al intentar obtener los datos de los créditos activos: " + ex.Message);
             }
-        }
+
+            UpdatingPagination = false;
+
+		}
 
         private void GetActiveCredits()
         {
@@ -132,6 +138,12 @@ namespace SGSC.Pages
 
 		private void cbPages_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
+            if(UpdatingPagination)
+            {
+                return;
+            }
+            CurrentPage = cbPages.SelectedIndex + 1;
+			GetActiveCredits();
 		}
 	}
 }
