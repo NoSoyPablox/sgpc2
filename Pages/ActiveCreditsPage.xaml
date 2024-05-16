@@ -3,18 +3,23 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      mc:Ignorable="d" 
       xmlns:local="clr-namespace:SGSC.Pages"
       xmlns:frames="clr-namespace:SGSC.Frames"
-      d:DesignHeight="720" d:DesignWidth="1280"
-      Title="ActiveCreditsPage">
+      mc:Ignorable="d" 
+      d:DesignHeight="720" d:DesignWidth="1280">
+
+    <Page.Resources>
+        <Style x:Key="CenterGridHeaderStyle" TargetType="DataGridColumnHeader">
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
+    </Page.Resources>
 
     <Grid>
         <Border Background="White" CornerRadius="22"/>
 
-        <Label FontFamily="{StaticResource FontPoppins}" FontWeight="Bold" FontSize="36" Content="Créditos activos" HorizontalAlignment="Left" Margin="136,48,0,0" VerticalAlignment="Top"/>
+        <Label FontFamily="{StaticResource FontPoppins}" FontWeight="Bold" FontSize="36" Content="Créditos activos" HorizontalAlignment="Left" Margin="136,39,0,0" VerticalAlignment="Top"/>
 
-        <Frame Name="UserSessionFrame" NavigationUIVisibility="Hidden" Margin="831,43,38,592"/>
+        <Frame Name="UserSessionFrame" NavigationUIVisibility="Hidden" Margin="831,28,38,607"/>
 
         <Image Source="../Images/coin-logo.png" Margin="10,8,1186,594" RenderTransformOrigin="0.47,0.339"/>
 
@@ -33,17 +38,30 @@
         <Button Name="LogoutButton" Background="White" Style="{StaticResource Menubutton}" FontSize="15" HorizontalAlignment="Left" Margin="16,630,0,0" VerticalAlignment="Top" Width="72" Height="75" Click="LogoutButton_Click">
             <Image Source="../Images/icon-logout.png" Height="70" Width="50"/>
         </Button>
-
-        <Rectangle Style="{StaticResource RoundedRectangleStyle}" Margin="136,138,28,144"/>
-        <DataGrid Name="dgCredits" ItemsSource="{Binding ActiveCreditsCollection}" Margin="182,182,74,192" FontSize="22">
+        <DataGrid Name="dgCredits" AutoGenerateColumns="False" Margin="136,215,28,99" FontSize="22">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Nombre del cliente" Binding="{Binding ClientPageNumber}"/>
-                <DataGridTextColumn Header="Crédito" Binding="{Binding CreditAmount}"/>
-                <DataGridTextColumn Header="Fecha de inicio" Binding="{Binding CreditDate}"/>
-                <DataGridTextColumn Header="Fecha de fin" Binding="{Binding CreditPeriod}"/>
+                <DataGridTextColumn Header="Folio" Binding="{Binding CreditPageNumber}" Width="150" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
+                <DataGridTextColumn Header="Nombre del cliente" Binding="{Binding ClientFullName}" Width="360" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
+                <DataGridTextColumn Header="Plazo" Binding="{Binding CreditPeriod}" Width="150" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
+                <DataGridTextColumn Header="Total" Binding="{Binding CreditAmount}" Width="124" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
+                <DataGridTextColumn Header="Saldo pendiente" Binding="{Binding CreditPendingDebt}" Width="200" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
+                <DataGridTextColumn Header="Eficiencia" Binding="{Binding CreditEfficiency}" Width="124" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
             </DataGrid.Columns>
         </DataGrid>
 
+        <Button Style="{StaticResource ButtonStyleCancel}" Content="&lt;" FontSize="20" HorizontalAlignment="Left" Margin="136,655,0,0" VerticalAlignment="Top" Height="28" Width="31" />
+        <Button Style="{StaticResource ButtonStyleCancel}" Content=">" FontSize="20" HorizontalAlignment="Left" Margin="296,655,0,0" VerticalAlignment="Top" Height="28" Width="31" />
+        <Label Name="lbCurrentPage" FontSize="20" Content="Página 1/1" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="172,649,0,0" VerticalAlignment="Top" Width="124"/>
+        <ComboBox Name="cbPages" Margin="354,653,843,38"/>
 
+        <Button Style="{StaticResource ButtonStyleCancel}" Content="Generar layout de cobros" FontSize="22" HorizontalAlignment="Left" Margin="584,646,0,0" VerticalAlignment="Top" Width="278" Height="40" Click="AddAddressInformation" />
+        <Button Style="{StaticResource ButtonStyleCancel}" Content="Registrar cobros" FontSize="22" HorizontalAlignment="Left" Margin="877,646,0,0" VerticalAlignment="Top" Width="180" Height="40" Click="AddAddressInformation" />
+        <Button Style="{StaticResource ButtonStyleConfirm}" Content="Ver eficiencias" FontSize="22" HorizontalAlignment="Left" Margin="1072,646,0,0" VerticalAlignment="Top" Width="180" Height="40" Click="AddAddressInformation" />
+
+        <Label Style="{StaticResource CustomLabelStyle}" FontSize="20" Content="Filtrar por Folio " HorizontalAlignment="Left" Margin="136,124,0,0" VerticalAlignment="Top" Height="34" Width="140"/>
+        <TextBox Style="{StaticResource CustomTextBoxStyle}" FontSize="18" VerticalContentAlignment="Center" Margin="136,151,843,524"/>
+
+        <Label Style="{StaticResource CustomLabelStyle}" FontSize="20" Content="Filtrar por cliente " HorizontalAlignment="Left" Margin="466,124,0,0" VerticalAlignment="Top" Height="34" Width="154"/>
+        <TextBox Style="{StaticResource CustomTextBoxStyle}" FontSize="18" VerticalContentAlignment="Center" Margin="466,151,512,524"/>
     </Grid>
 </Page>

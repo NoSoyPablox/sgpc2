@@ -128,6 +128,7 @@
     </Compile>
     <Compile Include="Model\BankAccount.cs" />
     <Compile Include="Model\CreditRequest.cs" />
+    <Compile Include="Model\Customer.cs" />
     <Compile Include="Pages\ActiveCreditsPage.xaml.cs">
       <DependentUpon>ActiveCreditsPage.xaml</DependentUpon>
     </Compile>

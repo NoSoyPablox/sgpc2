@@ -28,7 +28,7 @@ namespace SGSC.Pages
 
         private void CreditsBtn(object sender, RoutedEventArgs e)
         {
-            App.Current.MainWindow.Content = new ActiveCreditsPage();
+            App.Current.MainFrame.Content = new ActiveCreditsPage();
         }
     }
 }
