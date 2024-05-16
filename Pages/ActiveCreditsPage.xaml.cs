@@ -37,7 +37,7 @@ namespace SGSC.Pages
         private ObservableCollection<ActiveCredit> ActiveCredits;
         private int CurrentPage = 1;
         private int TotalPages = 1;
-        private const int ItemsPerPage = 3;
+        private const int ItemsPerPage = 10;
         private bool UpdatingPagination = false;
 
 		public ActiveCreditsPage()

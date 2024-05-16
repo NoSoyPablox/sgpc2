@@ -38,7 +38,7 @@
         <Button Name="LogoutButton" Background="White" Style="{StaticResource Menubutton}" FontSize="15" HorizontalAlignment="Left" Margin="16,630,0,0" VerticalAlignment="Top" Width="72" Height="75" Click="LogoutButton_Click">
             <Image Source="../Images/icon-logout.png" Height="70" Width="50"/>
         </Button>
-        <DataGrid Name="dgCredits" AutoGenerateColumns="False" CanUserAddRows="False" Margin="136,215,28,99" FontSize="22">
+        <DataGrid Name="dgCredits" AutoGenerateColumns="False" CanUserAddRows="False" AlternatingRowBackground="#DAEFD0" Margin="136,215,28,99" FontSize="22">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Folio" Binding="{Binding CreditPageNumber}" Width="150" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
                 <DataGridTextColumn Header="Nombre del cliente" Binding="{Binding ClientFullName}" Width="360" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
