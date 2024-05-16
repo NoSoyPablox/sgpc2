@@ -1,5 +1,4 @@
-﻿using SGSC.Utils;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,18 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SGSC.Frames
+namespace SGSC.Pages
 {
     /// <summary>
-    /// Interaction logic for UserSessionFrame.xaml
+    /// Interaction logic for CollectionEfficienciesPage.xaml
     /// </summary>
-    public partial class UserSessionFrame : Page
+    public partial class CollectionEfficienciesPage : Page
     {
-        public UserSessionFrame()
+        public CollectionEfficienciesPage()
         {
             InitializeComponent();
-            UserName.Text = UserSession.Instance.FullName;
-            RoleName.Text = UserSession.GetRoleName(UserSession.Instance.Role);
         }
     }
 }

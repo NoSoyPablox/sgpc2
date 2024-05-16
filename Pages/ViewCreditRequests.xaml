@@ -8,9 +8,12 @@
       mc:Ignorable="d" 
       d:DesignHeight="720" d:DesignWidth="1280"
       Title="ViewCreditRequests">
+    
 
     <Grid Background="White">
 
+        <Frame Name="UserSessionFrame" NavigationUIVisibility="Hidden" Margin="834,10,74,624"/>
+        
 
         <Button Style="{StaticResource Menubutton}" FontSize="15" HorizontalAlignment="Left" Margin="16,215,0,0" VerticalAlignment="Top" Width="72" Height="75" Click="HomePageCreditAdvisorMenu">
             <Image Source="../Images/icon-home-checked.png" Height="70" Width="50"/>
@@ -18,6 +21,7 @@
         <Button Style="{StaticResource Menubutton}" FontSize="15" HorizontalAlignment="Left" Margin="16,295,0,0" VerticalAlignment="Top" Width="72" Height="75">
             <Image Source="../Images/icon-find-customer.png" Height="70" Width="50"/>
         </Button>
+        <Rectangle Style="{StaticResource RoundedRectangleHomeStyle}"  Margin="17,377,1191,268"/>
         <Button Style="{StaticResource Menubutton}" FontSize="15" HorizontalAlignment="Left" Margin="16,375,0,0" VerticalAlignment="Top" Width="72" Height="75">
             <Image Source="../Images/icon-board.png" Height="70" Width="50"/>
         </Button>
@@ -26,9 +30,9 @@
             <Image Source="../Images/icon-logout.png" Height="70" Width="50"/>
         </Button>
 
-        <Image Source="../Images/coin-logo.png"  Margin="16,117,1192,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="72" Height="75" />
+        <Image Source="../Images/coin-logo.png" Margin="10,8,1186,594" RenderTransformOrigin="0.47,0.339"/>
 
-        <Image Source="../Images/line.png"  HorizontalAlignment="Left" Margin="88,0,0,0" VerticalAlignment="Center" Width="72" Height="720" />
+        <Image Source="../Images/line.png" Margin="97,0,1172,0"></Image>
 
         <Grid Margin="118,75,22,67">
             <Grid.RowDefinitions>
@@ -59,7 +63,7 @@
                                 <DataGridTextColumn Header="Plazo" IsReadOnly="True" CanUserResize="False" Binding="{Binding TimePeriod}" Width="100" />
                                 <DataGridTextColumn Header="RFC" IsReadOnly="True" CanUserResize="False" Binding="{Binding Rfc}" Width="150" />
                                 <DataGridTextColumn Header="Fecha de Creación" IsReadOnly="True" CanUserResize="False" Binding="{Binding CreationDate}" Width="220" />
-                                <DataGridTextColumn Header="Nombre Completo" IsReadOnly="True" CanUserResize="False" Binding="{Binding CustomerName}" Width="220" />
+                                <DataGridTextColumn Header="Nombre Completo" IsReadOnly="True" CanUserResize="False" Binding="{Binding CustomerName}" Width="229" />
                                 <DataGridTextColumn Header="Estado" IsReadOnly="True" CanUserResize="False" Binding="{Binding Status}" Width="150" />
                             </DataGrid.Columns>
                             <DataGrid.ColumnHeaderStyle>
@@ -84,11 +88,11 @@
 
                 <Grid Margin="0,0,10,481">
 
-                    <TextBox x:Name="tbRfc" Margin="0,5,850,5" Style="{StaticResource CustomTextBoxStyle}" Height="40" Width="250" TextChanged="tbRfc_TextChanged"/>
+                    <TextBox x:Name="tbRfc" Margin="0,5,850,5" Style="{StaticResource CustomTextBoxStyle}" Height="40" Width="250" TextChanged="TextBox_CreditRequestSearchCustomerRfc"/>
                     <Image Source="../Images/icon-lens.png" Margin="205,8,855,8" Width="40" />
-                    <TextBox x:Name="tbCustomerName" Margin="425,5,425,5" Style="{StaticResource CustomTextBoxStyle}" Height="40" Width="250" TextChanged="tbCustomerName_TextChanged"/>
+                    <TextBox x:Name="tbCustomerName" Margin="425,5,425,5" Style="{StaticResource CustomTextBoxStyle}" Height="40" Width="250"  TextChanged="TextBox_CreditRequestSearchCustomerName"/>
                     <Image Source="../Images/icon-lens.png" Margin="634,8,426,8" Width="40" />
-                    <TextBox x:Name="tbStatus" Margin="815,5,35,5" Style="{StaticResource CustomTextBoxStyle}" Height="40" Width="250" TextChanged="tbStatus_TextChanged"/>
+                    <TextBox x:Name="tbStatus" Margin="815,5,35,5" Style="{StaticResource CustomTextBoxStyle}" Height="40" Width="250" TextChanged="TextBox_CreditRequestSearchStatus"/>
                     <Image Source="/Images/icon-lens.png" Margin="1024,8,36,8" Width="40" />
 
 
@@ -97,7 +101,6 @@
             </Grid>
         </Grid>
 
-        <Frame Name="UserSessionFrame" NavigationUIVisibility="Hidden" Margin="834,10,74,624"/>
 
         <Grid Height="52" Margin="330,658,-57,10">
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Orientation="Horizontal" Margin="-130,0,0,4" Width="531">
