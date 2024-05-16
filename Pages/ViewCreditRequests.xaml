@@ -41,36 +41,38 @@
             </Grid.RowDefinitions>
             <Grid Height="531" Margin="15,22,15,0" Grid.RowSpan="2" VerticalAlignment="Top">
 
-				<DataGrid x:Name="creditRequestsDataGrid" AutoGenerateColumns="False" Margin="-1,73,1,0" Height="456" VerticalAlignment="Top" BorderThickness="0" HeadersVisibility="Column" RowHeight="50">
-					<DataGrid.RowStyle>
-						<Style TargetType="{x:Type DataGridRow}">
-							<Style.Triggers>
-								<DataTrigger Binding="{Binding AlternationIndex, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}, Mode=FindAncestor}}" Value="1">
-									<Setter Property="Background" Value="LightGreen"/>
-								</DataTrigger>
-								<DataTrigger Binding="{Binding AlternationIndex, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}, Mode=FindAncestor}}" Value="0">
-									<Setter Property="Background" Value="White"/>
-								</DataTrigger>
-							</Style.Triggers>
-						</Style>
-					</DataGrid.RowStyle>
-
-					<!-- Definición de las columnas -->
-					<DataGrid.Columns>
-						<DataGridTextColumn Header="RFC" IsReadOnly="True" CanUserResize="False" Binding="{Binding Rfc}" Width="*" />
-						<DataGridTextColumn Header="Fecha de Creación" IsReadOnly="True" CanUserResize="False" Binding="{Binding CreationDate}" Width="*" />
-						<DataGridTextColumn Header="Nombre Completo" IsReadOnly="True" CanUserResize="False" Binding="{Binding CustomerName}" Width="*" />
-						<DataGridTextColumn Header="Estado" IsReadOnly="True" CanUserResize="False" Binding="{Binding Status}" Width="*" />
-					</DataGrid.Columns>
-
-					<!-- Estilo para las cabeceras de las columnas -->
-					<DataGrid.ColumnHeaderStyle>
-						<Style TargetType="{x:Type DataGridColumnHeader}">
-							<Setter Property="FontWeight" Value="Bold"/>
-							<Setter Property="FontSize" Value="25"/>
-							<Setter Property="BorderThickness" Value="0"/>
-						</Style>
-					</DataGrid.ColumnHeaderStyle>
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" Margin="0,73,0,0" Height="456" VerticalAlignment="Top">
+                    <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="10">
+                        <DataGrid x:Name="creditRequestsDataGrid" AutoGenerateColumns="False" BorderThickness="0" HeadersVisibility="Column" RowHeight="50" AlternationCount="2">
+                            <DataGrid.RowStyle>
+                                <Style TargetType="{x:Type DataGridRow}">
+                                    <Style.Triggers>
+                                        <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                                            <Setter Property="Background" Value="LightGreen"/>
+                                        </Trigger>
+                                        <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                                            <Setter Property="Background" Value="White"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.RowStyle>
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Folio" IsReadOnly="True" CanUserResize="False" Binding="{Binding FileNumber}" Width="100" />
+                                <DataGridTextColumn Header="Cantidad" IsReadOnly="True" CanUserResize="False" Binding="{Binding AmountString}" Width="150" />
+                                <DataGridTextColumn Header="Tasa de interés" IsReadOnly="True" CanUserResize="False" Binding="{Binding InterestRateString}" Width="185"/>
+                                <DataGridTextColumn Header="Plazo" IsReadOnly="True" CanUserResize="False" Binding="{Binding TimePeriod}" Width="100" />
+                                <DataGridTextColumn Header="RFC" IsReadOnly="True" CanUserResize="False" Binding="{Binding Rfc}" Width="150" />
+                                <DataGridTextColumn Header="Fecha de Creación" IsReadOnly="True" CanUserResize="False" Binding="{Binding CreationDate}" Width="220" />
+                                <DataGridTextColumn Header="Nombre Completo" IsReadOnly="True" CanUserResize="False" Binding="{Binding CustomerName}" Width="229" />
+                                <DataGridTextColumn Header="Estado" IsReadOnly="True" CanUserResize="False" Binding="{Binding Status}" Width="150" />
+                            </DataGrid.Columns>
+                            <DataGrid.ColumnHeaderStyle>
+                                <Style TargetType="{x:Type DataGridColumnHeader}">
+                                    <Setter Property="FontWeight" Value="Bold"/>
+                                    <Setter Property="FontSize" Value="25"/>
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                </Style>
+                            </DataGrid.ColumnHeaderStyle>
 
 					<!-- Estilo para las celdas -->
 					<DataGrid.CellStyle>
@@ -86,18 +88,18 @@
 
 
 
-                    <TextBox x:Name="tbRfc" Margin="0,5,850,5" Style="{StaticResource CustomTextBoxStyle}" Height="40" Width="250"  />
+                    <TextBox x:Name="tbRfc" Margin="0,5,850,5" Style="{StaticResource CustomTextBoxStyle}" Height="40" Width="250" TextChanged="TextBox_CreditRequestSearchCustomerRfc"/>
+                    <Image Source="../Images/icon-lens.png" Margin="205,8,855,8" Width="40" />
+                    <TextBox x:Name="tbCustomerName" Margin="425,5,425,5" Style="{StaticResource CustomTextBoxStyle}" Height="40" Width="250"  TextChanged="TextBox_CreditRequestSearchCustomerName"/>
+                    <Image Source="../Images/icon-lens.png" Margin="634,8,426,8" Width="40" />
+                    <TextBox x:Name="tbStatus" Margin="815,5,35,5" Style="{StaticResource CustomTextBoxStyle}" Height="40" Width="250" TextChanged="TextBox_CreditRequestSearchStatus"/>
+                    <Image Source="/Images/icon-lens.png" Margin="1024,8,36,8" Width="40" />
 
 
                 </Grid>
 
             </Grid>
         </Grid>
-
-        <Frame Name="UserSessionFrame" NavigationUIVisibility="Hidden" Margin="888,10,20,624"/>
-
-        <Grid Height="52" Margin="455,658,-132,10">
-
 
 
         <Grid Height="52" Margin="330,658,-57,10">
