@@ -35,16 +35,16 @@ namespace SGSC.Pages
         }
 
         private ObservableCollection<ActiveCredit> ActiveCredits;
-        private uint CurrentPage = 1;
-        private uint TotalPages = 1;
-        private const uint ItemsPerPage = 10;
+        private int CurrentPage = 1;
+        private int TotalPages = 1;
+        private const int ItemsPerPage = 3;
 
         public ActiveCreditsPage()
         {
             InitializeComponent();
             UserSessionFrame.Content = new UserSessionFrame();
             GetActiveCredits();
-        }
+		}
 
         private void UpdatePagination()
         {
@@ -52,14 +52,21 @@ namespace SGSC.Pages
             {
                 using (var context = new sgscEntities())
                 {
-                    var activeCreditsCount = context.CreditRequests.Count();
-                    TotalPages = (uint)Math.Ceiling((double)activeCreditsCount / ItemsPerPage);
+                    var activeCreditsCount = context.CreditRequests.Where(request => request.FileNumber.Contains(tbPageNumberFilter.Text) &&
+                        (request.Customer.Name + " " + request.Customer.FirstSurname + " " + request.Customer.SecondSurname).Contains(tbCustomerNameFilter.Text) &&
+                        request.Status == 4).Count();
+					TotalPages = (int)Math.Ceiling((double)activeCreditsCount / ItemsPerPage);
                     lbCurrentPage.Content = $"Página {CurrentPage}/{TotalPages}";
-                    for(uint i = 0; i < TotalPages; i++)
+                    cbPages.Items.Clear();
+					for (uint i = 1; i <= TotalPages; i++)
                     {
                         cbPages.Items.Add(i);
                     }
-                }
+                    cbPages.SelectedIndex = CurrentPage - 1;
+
+                    btnNextPage.IsEnabled = CurrentPage < TotalPages;
+                    btnPreviousPage.IsEnabled = CurrentPage > 1;
+				}
             }
             catch (Exception ex)
             {
@@ -73,8 +80,11 @@ namespace SGSC.Pages
             {
                 using (var context = new sgscEntities())
                 {
-                    var activeCredits = context.CreditRequests.ToList();
-                    var activeCreditsArray = activeCredits.ToList();
+                    var activeCredits = context.CreditRequests.Where(request => request.FileNumber.Contains(tbPageNumberFilter.Text) && 
+                        (request.Customer.Name + " " + request.Customer.FirstSurname + " " + request.Customer.SecondSurname).Contains(tbCustomerNameFilter.Text) && 
+                        request.Status == 4).OrderBy(request => request.FileNumber).Skip((CurrentPage - 1) * ItemsPerPage).Take(ItemsPerPage);
+
+					var activeCreditsArray = activeCredits.ToList();
                     ActiveCredits = new ObservableCollection<ActiveCredit>();
                     foreach (var item in activeCreditsArray)
                     {
@@ -83,16 +93,16 @@ namespace SGSC.Pages
                             CreditPageNumber = item.FileNumber,
                             ClientFullName = item.Customer.FullName,
                             CreditPeriod = item.TimePeriod.Value.ToString(),
-                            CreditAmount = item.Amount.ToString(),
-                            CreditPendingDebt = "0",
+                            CreditAmount = $"$ {item.Amount}",
+                            CreditPendingDebt = "$ 0",
                             CreditEfficiency = "0%"
                         });
                     }
                     dgCredits.ItemsSource = ActiveCredits;
                 }
-                    
-            }
-            catch (Exception ex)
+                UpdatePagination();
+			}
+			catch (Exception ex)
             {
                 MessageBox.Show("Error al intentar obtener los datos de los créditos activos: " + ex.Message);
             }
@@ -103,9 +113,25 @@ namespace SGSC.Pages
             UserSession.LogOut();
         }
 
-        private void AddAddressInformation(object sender, RoutedEventArgs e)
+        private void tbFilter_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            GetActiveCredits();
         }
-    }
+
+		private void btnNextPage_Click(object sender, RoutedEventArgs e)
+		{
+            CurrentPage++;
+            GetActiveCredits();
+		}
+
+		private void btnPreviousPage_Click(object sender, RoutedEventArgs e)
+		{
+			CurrentPage--;
+            GetActiveCredits();
+		}
+
+		private void cbPages_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+		}
+	}
 }

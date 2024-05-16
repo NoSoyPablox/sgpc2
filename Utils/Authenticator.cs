@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SGSC.Utils
 {
-    internal class Authenticator
+    public static class Authenticator
     {
         public enum AuthResult
         {

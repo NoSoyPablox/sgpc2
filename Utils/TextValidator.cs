@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace SGSC.Utils
 {
-    public class TextValidator
+    public static class TextValidator
     {
         public static bool ValidateText(string text, int maxLength, int minLength = 1, bool spacesAllowed = true)
         {
