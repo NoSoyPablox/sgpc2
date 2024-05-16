@@ -45,6 +45,7 @@ namespace SGSC.Pages
         private int pageSize = 8;
         private int totalRecords = 0;
         private int totalPages = 0;
+        ObservableCollection<CreditRequestData> creditRequestsDataAux;
 
             public string TimePeriodString { get; set; }
 
@@ -61,9 +62,7 @@ namespace SGSC.Pages
             InitializeComponent();
             UserSessionFrame.Content = new UserSessionFrame();
             GetCreditRequests();
-            tbRfc.TextChanged += tbRfc_TextChanged;
-            tbCustomerName.TextChanged += tbCustomerName_TextChanged;
-            tbStatus.TextChanged += tbStatus_TextChanged;
+            GetAllCreditRequests();
         }
 
         private void NextPageRequest(object sender, RoutedEventArgs e)
@@ -158,39 +157,26 @@ namespace SGSC.Pages
                                           .ToList();
                     if (creditRequests.Any())
                     {
-                        creditRequestsDataGrid.ItemsSource = creditRequests;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(" Sex Ocurrió un error al intentar obtener las solicitudes de crédito. Por favor, inténtelo de nuevo más tarde.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
+                        ObservableCollection<CreditRequestData> creditRequestsData = new ObservableCollection<CreditRequestData>();
+                        foreach (var cr in creditRequests)
+                        {
+                            creditRequestsData.Add(new CreditRequestData
+                            {
+                                CreditRequestId = cr.CreditRequestId,
+                                Status = CreditRequest.RequestStatusToString((CreditRequest.RequestStatus)cr.Status),
+                                CreationDate = cr.CreationDate.Value,
+                                CustomerName = cr.CustomerName,
+                                Rfc = cr.Rfc,
+                                FileNumber = cr.FileNumber,
+                                Amount = cr.Amount.HasValue ? cr.Amount.Value : 0.0,
+                                AmountString = cr.Amount.HasValue ? cr.Amount.Value.ToString("C2") : "$0.00",
+                                InterestRate = cr.InterestRate.HasValue ? cr.InterestRate.Value : 0.0m,
+                                InterestRateString = cr.InterestRate.HasValue ? $"{cr.InterestRate.Value}%" : "0.0%",
+                                TimePeriod = cr.TimePeriod.Value,
+                            });
+                        }
 
-        private void LogoutButton_Click(object sender, RoutedEventArgs e)
-        {
-            UserSession.LogOut();
-        }
-
-        private void NextPageRequest(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                currentPage++;
-
-                using (sgscEntities db = new sgscEntities())
-                {
-                    var creditRequests = (from cr in db.CreditRequests
-                                          join c in db.Customers on cr.CustomerId equals c.CustomerId
-                                          select new
-                                          {
-                                              cr.CreditRequestId,
-                                              cr.Status,
-                                              cr.CreationDate,
-                                              CustomerName = c.Name + " " + c.FirstSurname + " " + c.SecondSurname,
-                                              c.Rfc,
-                                          }).Skip(currentPage * pageSize).Take(pageSize).ToList();
+                        creditRequestsDataGrid.ItemsSource = creditRequestsData;
 
                     if (creditRequests.Any())
                     {
@@ -209,57 +195,40 @@ namespace SGSC.Pages
                     btnNextPage.IsEnabled = currentPage < (totalRecords + pageSize - 1) / pageSize;
                 }
             }
+            
             catch (Exception ex)
             {
                 MessageBox.Show("Ocurrió un error al intentar obtener las solicitudes de crédito. Por favor, inténtelo de nuevo más tarde.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
-        private void tbRfc_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            UpdateFilteredResults();
-        }
-
-        private void tbCustomerName_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            UpdateFilteredResults();
-        }
-
-        private void tbStatus_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            UpdateFilteredResults();
-        }
-
-        private void UpdateFilteredResults()
+        public void GetAllCreditRequests()
         {
             try
             {
                 using (sgscEntities db = new sgscEntities())
                 {
-                    var filteredRequests = (from cr in db.CreditRequests
-                                            join c in db.Customers on cr.CustomerId equals c.CustomerId
-                                            where (string.IsNullOrEmpty(tbRfc.Text) || c.Rfc.Like(tbRfc.Text))
-                                            && (string.IsNullOrEmpty(tbCustomerName.Text) || (c.Name + " " + c.FirstSurname + " " + c.SecondSurname).Like(tbCustomerName.Text))
-                                            && (string.IsNullOrEmpty(tbStatus.Text) || cr.Status.ToString().Like(tbStatus.Text))
-                                            select new
-                                            {
-                                                cr.CreditRequestId,
-                                                cr.Status,
-                                                cr.CreationDate,
-                                                CustomerName = c.Name + " " + c.FirstSurname + " " + c.SecondSurname,
-                                                c.Rfc,
-                                                cr.FileNumber,
-                                                cr.Amount,
-                                                cr.InterestRate,
-                                                cr.TimePeriod,
-                                            })
-                                            .OrderBy(cr => cr.CreditRequestId)
-                                            .ToList();
 
-                    if (filteredRequests.Any())
+                    var creditRequests = (from cr in db.CreditRequests
+                                          join c in db.Customers on cr.CustomerId equals c.CustomerId
+                                          select new
+                                          {
+                                              cr.CreditRequestId,
+                                              cr.Status,
+                                              cr.CreationDate,
+                                              CustomerName = c.Name + " " + c.FirstSurname + " " + c.SecondSurname,
+                                              c.Rfc,
+                                              cr.FileNumber,
+                                              cr.Amount,
+                                              cr.InterestRate,
+                                              cr.TimePeriod,
+                                          })
+                                          .OrderBy(cr => cr.CreditRequestId)
+                                          .ToList();
+                    if (creditRequests.Any())
                     {
                         ObservableCollection<CreditRequestData> creditRequestsData = new ObservableCollection<CreditRequestData>();
-                        foreach (var cr in filteredRequests)
+                        foreach (var cr in creditRequests)
                         {
                             creditRequestsData.Add(new CreditRequestData
                             {
@@ -270,23 +239,70 @@ namespace SGSC.Pages
                                 Rfc = cr.Rfc,
                                 FileNumber = cr.FileNumber,
                                 Amount = cr.Amount.HasValue ? cr.Amount.Value : 0.0,
+                                AmountString = cr.Amount.HasValue ? cr.Amount.Value.ToString("C2") : "$0.00",
                                 InterestRate = cr.InterestRate.HasValue ? cr.InterestRate.Value : 0.0m,
+                                InterestRateString = cr.InterestRate.HasValue ? $"{cr.InterestRate.Value}%" : "0.0%",
                                 TimePeriod = cr.TimePeriod.Value,
                             });
                         }
 
-                        creditRequestsDataGrid.ItemsSource = creditRequestsData;
-                    }
-                    else
-                    {
-                        creditRequestsDataGrid.ItemsSource = null;
+                        creditRequestsDataAux = creditRequestsData;
                     }
                 }
             }
+
             catch (Exception ex)
             {
-                MessageBox.Show("Ocurrió un error al intentar obtener las solicitudes de crédito filtradas. Por favor, inténtelo de nuevo más tarde.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Ocurrió un error al intentar obtener las solicitudes de crédito. Por favor, inténtelo de nuevo más tarde.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void TextBox_CreditRequestSearchStatus(object sender, EventArgs e)
+        {
+            string textSearch = tbStatus.Text;
+            FilterCreditRequests(textSearch, "Status");
+        }
+
+        private void TextBox_CreditRequestSearchCustomerName(object sender, EventArgs e)
+        {
+            string textSearch = tbCustomerName.Text;
+            FilterCreditRequests(textSearch,"Customer Name");
+        }
+
+        private void TextBox_CreditRequestSearchCustomerRfc(object sender, EventArgs e)
+        {
+            string textSearch = tbRfc.Text;
+            FilterCreditRequests(textSearch,"RFC");
+        }
+
+
+        private void FilterCreditRequests(string textSearch, string type)
+        {
+            List<CreditRequestData> filteredRequests = null;
+            switch (type)
+            {
+                case "Status":
+                    filteredRequests = creditRequestsDataAux
+                    .Where(c => c.Status.ToLower().Contains(textSearch.ToLower()))
+                    .ToList();
+                    break;
+                case "Customer Name":
+                    filteredRequests = creditRequestsDataAux
+                    .Where(c => c.CustomerName.ToLower().Contains(textSearch.ToLower()))
+                    .ToList();
+
+                    break;
+                case "RFC":
+                    filteredRequests = creditRequestsDataAux
+                    .Where(c => c.Rfc.ToLower().Contains(textSearch.ToLower()))
+                    .ToList();
+                    break;
+            }
+
+            ObservableCollection<CreditRequestData> creditRequestsDataAux2 = new ObservableCollection<CreditRequestData> (filteredRequests);
+            creditRequestsDataGrid.ItemsSource = creditRequestsDataAux2;
+
+
         }
 
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
@@ -299,5 +315,6 @@ namespace SGSC.Pages
         {
             NavigationService.Navigate(new HomePageCreditAdvisor());
         }
-    }
-    }
+
+        }
+}
