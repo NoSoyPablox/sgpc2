@@ -92,7 +92,8 @@ namespace SGSC.Pages
                     var totalInterest = monthlyInterest * weeksInMonths;
                     //aqui calculamos el monto total
                     var totalAmount = amountIntroduced + (amountIntroduced * totalInterest);
-                    lbTotalAmount.Content = totalAmount.ToString();
+                    //format to only 2 decimals
+                    lbTotalAmount.Content = totalAmount.ToString("0.00");
                 }
             }
         }
