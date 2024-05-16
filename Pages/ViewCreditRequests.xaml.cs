@@ -54,9 +54,7 @@ namespace SGSC.Pages
             InitializeComponent();
             UserSessionFrame.Content = new UserSessionFrame();
             GetCreditRequests();
-            tbRfc.TextChanged += tbRfc_TextChanged;
-            tbCustomerName.TextChanged += tbCustomerName_TextChanged;
-            tbStatus.TextChanged += tbStatus_TextChanged;
+            GetAllCreditRequests();
         }
 
         {

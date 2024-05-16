@@ -110,7 +110,6 @@
             </Grid>
         </Grid>
 
-        <Frame Name="UserSessionFrame" NavigationUIVisibility="Hidden" Margin="834,10,74,624"/>
 
         <Grid Height="52" Margin="330,658,-57,10">
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Orientation="Horizontal" Margin="-130,0,0,4" Width="531">
