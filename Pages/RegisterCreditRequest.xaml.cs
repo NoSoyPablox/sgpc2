@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -72,24 +71,30 @@ namespace SGSC.Pages
 
         private void tbAmount_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            if (System.Text.RegularExpressions.Regex.IsMatch(e.Text, @"[^0-9]+"))
-            {
-                e.Handled = true;
-            }
+
         }
 
         private void tbAmount_TextChanged(object sender, TextChangedEventArgs e)
         {
-            tbAmount.TextChanged -= tbAmount_TextChanged;
-
-            string text = tbAmount.Text.Replace(",", "");
-            if (double.TryParse(text, out double amount))
+            // Calcula el monto total
+            if (cbCreditPromotions.SelectedIndex != -1)
             {
-                tbAmount.Text = amount.ToString("N0", CultureInfo.CurrentCulture);
-                tbAmount.CaretIndex = tbAmount.Text.Length;
+                var selectedPromotion = (CreditPromotion)cbCreditPromotions.SelectedItem;
+                var amountIntroduced = 0.0;
+                // Convierte el texto ingresado a un valor numérico
+                if (double.TryParse(tbAmount.Text, out amountIntroduced))
+                {
+                    //aqui obtenemos el interes mensual
+                    double monthlyInterest = (double)(selectedPromotion.InterestRate / 100 / 12);
+                    //aqui obtenemos las semanas en meses
+                    double weeksInMonths = (double)(selectedPromotion.TimePeriod / 4.33);
+                    //aqui multiplicamos el interes mensual por las semanas en meses
+                    var totalInterest = monthlyInterest * weeksInMonths;
+                    //aqui calculamos el monto total
+                    var totalAmount = amountIntroduced + (amountIntroduced * totalInterest);
+                    lbTotalAmount.Content = totalAmount.ToString();
+                }
             }
-
-            tbAmount.TextChanged += tbAmount_TextChanged;
         }
     }
 }
