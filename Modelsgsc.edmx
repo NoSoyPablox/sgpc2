@@ -237,6 +237,7 @@
     <Property Name="InterestRate" Type="float" Nullable="true" />
     <Property Name="StartDate" Type="datetime" Nullable="true" />
     <Property Name="EndDate" Type="datetime" Nullable="true" />
+    <Property Name="Interval" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="CreditRequestCreditCondition">
     <Key>
@@ -740,6 +741,7 @@
           <Property Name="InterestRate" Type="Double" />
           <Property Name="StartDate" Type="DateTime" Precision="3" />
           <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="Interval" Type="Int32" Nullable="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -916,6 +918,7 @@
           <ScalarProperty Name="InterestRate" ColumnName="InterestRate" />
           <ScalarProperty Name="StartDate" ColumnName="StartDate" />
           <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="Interval" ColumnName="Interval" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
