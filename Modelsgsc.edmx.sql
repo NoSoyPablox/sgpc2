@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/19/2024 21:58:45
--- Generated from EDMX file: C:\Users\aiwass\source\repos\SGSC\Modelsgsc.edmx
+-- Date Created: 05/16/2024 18:42:06
+-- Generated from EDMX file: C:\Users\pablo\source\repos\sgsc\Modelsgsc.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -102,6 +102,9 @@ IF OBJECT_ID(N'[dbo].[Colonies]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[CreditRequestCreditCondition]', 'U') IS NOT NULL
     DROP TABLE [dbo].[CreditRequestCreditCondition];
+GO
+IF OBJECT_ID(N'[dbo].[CreditPromotions]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CreditPromotions];
 GO
 
 -- --------------------------------------------------
@@ -261,6 +264,17 @@ CREATE TABLE [dbo].[Colonies] (
 );
 GO
 
+-- Creating table 'CreditPromotions'
+CREATE TABLE [dbo].[CreditPromotions] (
+    [CreditPromotionId] int IDENTITY(1,1) NOT NULL,
+    [Name] nvarchar(max)  NULL,
+    [TimePeriod] int  NULL,
+    [InterestRate] float  NULL,
+    [StartDate] datetime  NULL,
+    [EndDate] datetime  NULL
+);
+GO
+
 -- Creating table 'CreditRequestCreditCondition'
 CREATE TABLE [dbo].[CreditRequestCreditCondition] (
     [CreditRequests_CreditRequestId] int  NOT NULL,
@@ -348,6 +362,12 @@ GO
 ALTER TABLE [dbo].[Colonies]
 ADD CONSTRAINT [PK_Colonies]
     PRIMARY KEY CLUSTERED ([ColonyId] ASC);
+GO
+
+-- Creating primary key on [CreditPromotionId] in table 'CreditPromotions'
+ALTER TABLE [dbo].[CreditPromotions]
+ADD CONSTRAINT [PK_CreditPromotions]
+    PRIMARY KEY CLUSTERED ([CreditPromotionId] ASC);
 GO
 
 -- Creating primary key on [CreditRequests_CreditRequestId], [CreditConditions_CreditConditionId] in table 'CreditRequestCreditCondition'

@@ -58,9 +58,7 @@ namespace SGSC.Pages
         {
             if (userContactInformation != null)
             {
-                txtPhoneOne.Text = userContactInformation.PhoneNumberOne;
-                txtPhoneTwo.Text = userContactInformation.PhoneNumberTwo;
-                txtEmail.Text = userContactInformation.Email;
+
             }
             else
             {
@@ -109,8 +107,6 @@ namespace SGSC.Pages
                 {
                     if (isEditable)
                     {
-                        userContactInformation.PhoneNumberOne = txtPhoneOne.Text;
-                        userContactInformation.PhoneNumberTwo = txtPhoneTwo.Text;
                         userContactInformation.Email = txtEmail.Text;
                     }
                     else
