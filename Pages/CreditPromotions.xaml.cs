@@ -50,22 +50,6 @@ namespace SGSC.Pages
             }
         }
 
-        private void tbSearch_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                searchCriterias();
-            }
-        }
-
-        private void tbSearch_LostFocus(object sender, RoutedEventArgs e)
-        {
-            using (sgscEntities db = new sgscEntities())
-            {
-                searchCriterias();
-            }
-        }
-
         private void btnAddPromotion_Click(object sender, RoutedEventArgs e)
         {
             CreditPromotionDetails promotionDetails = new CreditPromotionDetails(-1);
@@ -117,6 +101,11 @@ namespace SGSC.Pages
         }
 
         private void cbStatusSearch_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            searchCriterias();
+        }
+
+        private void tbSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
             searchCriterias();
         }

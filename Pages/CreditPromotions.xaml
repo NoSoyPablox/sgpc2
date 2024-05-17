@@ -13,7 +13,7 @@
             <Border Background="White" CornerRadius="22"/>
             <Label FontFamily="{StaticResource FontPoppins}" FontWeight="Bold" FontSize="36" Content="Promociones de credito" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="240,115,0,0"/>
             <Button x:Name="btnSeeDetails" Style="{StaticResource Button}" Content="Ver detalles" FontWeight="Medium"  Background="#FCDC2A" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top" Width="234" Height="52" Margin="713,635,0,0" Click="btnSeeDetails_Click"/>
-            <TextBox x:Name="tbSearch" Style="{StaticResource CustomTextBoxStyle}" Margin="640,182,344,499" KeyDown="tbSearch_KeyDown" FontFamily="{StaticResource FontNunito}" FontSize="18" VerticalContentAlignment="Center" LostFocus="tbSearch_LostFocus"/>
+            <TextBox x:Name="tbSearch" Style="{StaticResource CustomTextBoxStyle}" Margin="640,182,344,499" FontFamily="{StaticResource FontNunito}" FontSize="18" VerticalContentAlignment="Center" TextChanged="tbSearch_TextChanged"/>
             <DataGrid x:Name="dgPromotions" AutoGenerateColumns="False" AlternationCount="2" CanUserAddRows="False" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="240,246,148,143" HeadersVisibility="Column" VerticalContentAlignment="Center" MinRowHeight="30" ColumnHeaderHeight="40">
 
                 <DataGrid.ColumnHeaderStyle>
