@@ -29,7 +29,6 @@ namespace SGSC.Pages
             tbName.Focus();
             btnModify.Visibility = Visibility.Hidden;
             btnModify.IsEnabled = false;
-            cbInterval.IsEnabled = false;
             
             lbName.Content = "";
             lbInterestRate.Content = "";
@@ -45,6 +44,7 @@ namespace SGSC.Pages
                 btnModify.IsEnabled = true;
                 btnRegister.Visibility = Visibility.Hidden;
                 btnRegister.IsEnabled = false;
+                cbInterval.IsEnabled = false;
             }
         }
 
