@@ -2,7 +2,7 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:SGSC"
-             StartupUri="/Pages/CreditPromotions.xaml">
+             StartupUri="MainWindow.xaml">
     <Application.Resources>
 
         <FontFamily x:Key="FontPoppins">/Typographic styles/Poppins-SemiBold.otf#Poppins SemiBold</FontFamily>
