@@ -38,7 +38,7 @@
                 <ComboBoxItem Content="Quincenas" FontFamily="{StaticResource FontNunito}" FontSize="18" HorizontalContentAlignment="Center" IsSelected="True"/>
                 <ComboBoxItem Content="Meses" FontFamily="{StaticResource FontNunito}" FontSize="18" HorizontalContentAlignment="Center"/>
             </ComboBox>
-            <Label x:Name="lbInterval" Content="Error" HorizontalAlignment="Left" HorizontalContentAlignment="Right" VerticalAlignment="Top" Width="151" Foreground="#FFCE2222" FontStyle="Italic" Margin="445,426,0,0"/>
+            <Label x:Name="lbInterval" Content="Error" HorizontalAlignment="Left" HorizontalContentAlignment="Right" VerticalAlignment="Top" Width="110" Foreground="#FFCE2222" FontStyle="Italic" Margin="445,426,0,0"/>
 
         </Grid>
 
