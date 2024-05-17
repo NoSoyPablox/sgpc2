@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -37,7 +38,7 @@ namespace SGSC.Pages
                 var customerContactInfo = context.CustomerContactInfoes.Where(c => c.CustomerId == idCustomer).FirstOrDefault();
                 if (customer != null && customerContactInfo != null)
                 {
-                    lbName.Content = customer.Name;
+                    lbName.Content = customer.Name + " " + customer.FirstSurname + " " + customer.SecondSurname ;
                     lbEmail.Content = customerContactInfo.Email;
                 }
             }
@@ -64,32 +65,62 @@ namespace SGSC.Pages
             if (cbCreditPromotions.SelectedIndex != -1)
             {
                 var selectedPromotion = (CreditPromotion)cbCreditPromotions.SelectedItem;
-                lbTimePeriod.Content = selectedPromotion.TimePeriod.ToString();
-                lbInterestRate.Content = selectedPromotion.InterestRate.ToString();
+                if(selectedPromotion.Interval == 1)
+                {
+                    lbTimePeriod.Content = selectedPromotion.TimePeriod+" Quincenas";
+                }
+                else if(selectedPromotion.Interval == 2)
+                {
+                    lbTimePeriod.Content = selectedPromotion.TimePeriod+" Meses";
+                }
+                lbInterestRate.Content = selectedPromotion.InterestRate.ToString() + "%";
+
+                //aqui que calcule el monto
+                calculateTotalAmount();
             }
         }
 
         private void tbAmount_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-
+            e.Handled = new Regex("[^0-9]+").IsMatch(e.Text);
         }
 
         private void tbAmount_TextChanged(object sender, TextChangedEventArgs e)
         {
-            // Calcula el monto total
+            if(tbAmount.Text.Length < 1)
+            {
+                lbTotalAmount.Content = "0.0";
+            }
+            else
+            {
+            calculateTotalAmount();
+            }
+            
+        }
+
+        private void calculateTotalAmount()
+        {
             if (cbCreditPromotions.SelectedIndex != -1)
             {
                 var selectedPromotion = (CreditPromotion)cbCreditPromotions.SelectedItem;
                 var amountIntroduced = 0.0;
-                // Convierte el texto ingresado a un valor numérico
+                var timePeriodInMonths = 0.0;
+
                 if (double.TryParse(tbAmount.Text, out amountIntroduced))
                 {
+                    if (selectedPromotion.Interval == 1)
+                    {
+                        timePeriodInMonths = (double)(selectedPromotion.TimePeriod / 2);
+                    }
+                    if (selectedPromotion.Interval == 2)
+                    {
+                        timePeriodInMonths = (double)selectedPromotion.TimePeriod;
+                    }
+
                     //aqui obtenemos el interes mensual
                     double monthlyInterest = (double)(selectedPromotion.InterestRate / 100 / 12);
-                    //aqui obtenemos las semanas en meses
-                    double weeksInMonths = (double)(selectedPromotion.TimePeriod / 4.33);
                     //aqui multiplicamos el interes mensual por las semanas en meses
-                    var totalInterest = monthlyInterest * weeksInMonths;
+                    var totalInterest = monthlyInterest * timePeriodInMonths;
                     //aqui calculamos el monto total
                     var totalAmount = amountIntroduced + (amountIntroduced * totalInterest);
                     //format to only 2 decimals
