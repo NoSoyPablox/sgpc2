@@ -24,7 +24,6 @@
             <Label Style="{StaticResource CustomLabelStyle}" FontSize="24" Content="Tasa de interés" HorizontalAlignment="Left" Margin="737,238,0,0" VerticalAlignment="Top" x:Name="NombreLabel_Copiar1" Width="237" Height="27"/>
             <Button x:Name="btnCancel" Style="{StaticResource ButtonStyleCancel}" Content="Cancelar" FontSize="22" HorizontalAlignment="Left" Margin="742,617,0,0" VerticalAlignment="Top" Height="54" Width="180" Click="btnCancel_Click" />
             <Label Content="%" HorizontalAlignment="Left" Margin="856,278,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold"/>
-            <Label Content="*Semanas" HorizontalAlignment="Left" Margin="432,385,0,0" VerticalAlignment="Top" FontSize="18" FontStyle="Italic"/>
             <DatePicker x:Name="dpStartDate" HorizontalAlignment="Left" Margin="626,392,0,0" VerticalAlignment="Top"/>
             <DatePicker x:Name="dpEndDate" HorizontalAlignment="Left" Margin="878,393,0,0" VerticalAlignment="Top"/>
             <Label Content="Fecha de inicio" FontFamily="{StaticResource FontNunito}" HorizontalAlignment="Left" Margin="614,353,0,0" VerticalAlignment="Top" FontSize="24" Foreground="#FF343434"/>
@@ -35,6 +34,11 @@
             <Label x:Name="lbTimePeriod" Content="Error" HorizontalAlignment="Left" HorizontalContentAlignment="Right" VerticalAlignment="Top" Width="151" Foreground="#FFCE2222" FontStyle="Italic" Margin="266,426,0,0"/>
             <Label x:Name="lbStartDate" Content="Error" HorizontalAlignment="Left" HorizontalContentAlignment="Right" VerticalAlignment="Top" Width="151" Foreground="#FFCE2222" FontStyle="Italic" Margin="622,421,0,0"/>
             <Label x:Name="lbEndDate" Content="Error" HorizontalAlignment="Left" HorizontalContentAlignment="Right" VerticalAlignment="Top" Width="151" Foreground="#FFCE2222" FontStyle="Italic" Margin="872,421,0,0"/>
+            <ComboBox x:Name="cbInterval" HorizontalAlignment="Left" Margin="445,384,0,0" VerticalAlignment="Top" Width="110" Height="42" FontFamily="{StaticResource FontNunito}" FontSize="16" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                <ComboBoxItem Content="Quincenas" FontFamily="{StaticResource FontNunito}" FontSize="18" HorizontalContentAlignment="Center" IsSelected="True"/>
+                <ComboBoxItem Content="Meses" FontFamily="{StaticResource FontNunito}" FontSize="18" HorizontalContentAlignment="Center"/>
+            </ComboBox>
+            <Label x:Name="lbInterval" Content="Error" HorizontalAlignment="Left" HorizontalContentAlignment="Right" VerticalAlignment="Top" Width="151" Foreground="#FFCE2222" FontStyle="Italic" Margin="445,426,0,0"/>
 
         </Grid>
 

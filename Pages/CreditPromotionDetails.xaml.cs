@@ -35,6 +35,7 @@ namespace SGSC.Pages
             lbTimePeriod.Content = "";
             lbStartDate.Content = "";
             lbEndDate.Content = "";
+            lbInterval.Content = "";
 
             if (idPromotion != -1)
             {
@@ -99,6 +100,7 @@ namespace SGSC.Pages
             lbTimePeriod.Content = "";
             lbStartDate.Content = "";
             lbEndDate.Content = "";
+            lbInterval.Content = "";
             bool valid = true;
 
             if (string.IsNullOrEmpty(tbName.Text))
@@ -141,6 +143,11 @@ namespace SGSC.Pages
                 valid = false;
                 lbEndDate.Content = "La fecha de fin debe ser mayor a la fecha de inicio";
             }
+            if (cbInterval.SelectedIndex == -1)
+            {
+                valid = false;
+                lbInterval.Content = "Por favor seleccione un intervalo";
+            }
             if (valid)
             {
                 if (editMode)
@@ -164,6 +171,7 @@ namespace SGSC.Pages
                 promotion.InterestRate = double.Parse(tbInterestRate.Text);
                 promotion.StartDate = dpStartDate.SelectedDate.Value;
                 promotion.EndDate = dpEndDate.SelectedDate.Value;
+                promotion.Interval = cbInterval.SelectedIndex+1;
 
                 db.CreditPromotions.Add(promotion);
                 db.SaveChanges();
@@ -190,6 +198,7 @@ namespace SGSC.Pages
                     promotion.InterestRate = double.Parse(tbInterestRate.Text);
                     promotion.StartDate = dpStartDate.SelectedDate.Value;
                     promotion.EndDate = dpEndDate.SelectedDate.Value;
+                    promotion.Interval = cbInterval.SelectedIndex+1;
 
                     db.SaveChanges();
 
