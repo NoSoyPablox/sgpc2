@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/16/2024 18:42:06
+-- Date Created: 05/16/2024 22:22:24
 -- Generated from EDMX file: C:\Users\pablo\source\repos\sgsc\Modelsgsc.edmx
 -- --------------------------------------------------
 
@@ -100,11 +100,11 @@ GO
 IF OBJECT_ID(N'[dbo].[Colonies]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Colonies];
 GO
-IF OBJECT_ID(N'[dbo].[CreditRequestCreditCondition]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[CreditRequestCreditCondition];
-GO
 IF OBJECT_ID(N'[dbo].[CreditPromotions]', 'U') IS NOT NULL
     DROP TABLE [dbo].[CreditPromotions];
+GO
+IF OBJECT_ID(N'[dbo].[CreditRequestCreditCondition]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CreditRequestCreditCondition];
 GO
 
 -- --------------------------------------------------
@@ -269,7 +269,8 @@ CREATE TABLE [dbo].[CreditPromotions] (
     [TimePeriod] int  NULL,
     [InterestRate] float  NULL,
     [StartDate] datetime  NULL,
-    [EndDate] datetime  NULL
+    [EndDate] datetime  NULL,
+    [Interval] int  NULL
 );
 GO
 
