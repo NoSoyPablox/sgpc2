@@ -19,8 +19,8 @@
     <EntitySet Name="WorkCenters" EntityType="sgscModel.Store.WorkCenters" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Banks" EntityType="sgscModel.Store.Banks" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Colonies" EntityType="sgscModel.Store.Colonies" store:Type="Tables" Schema="dbo" />
-	<EntitySet Name="CreditRequestCreditCondition" EntityType="sgscModel.Store.CreditRequestCreditCondition" store:Type="Tables" Schema="dbo" />
-	<EntitySet Name="CreditPromotions" EntityType="sgscModel.Store.CreditPromotions" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CreditPromotions" EntityType="sgscModel.Store.CreditPromotions" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CreditRequestCreditCondition" EntityType="sgscModel.Store.CreditRequestCreditCondition" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK_BankAccountCustomer" Association="sgscModel.Store.FK_BankAccountCustomer">
       <End Role="Customers" EntitySet="Customers" />
       <End Role="BankAccounts" EntitySet="BankAccounts" />
@@ -225,17 +225,17 @@
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="State" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
-    <EntityType Name="CreditPromotions">
-	    <Key>
-		    <PropertyRef Name="CreditPromotionId" />
-	    </Key>
-	    <Property Name="CreditPromotionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-	    <Property Name="Name" Type="nvarchar(max)" />
-	    <Property Name="TimePeriod" Type="int" />
-	    <Property Name="InterestRate" Type="float" />
-	    <Property Name="StartDate" Type="datetime" />
-	    <Property Name="EndDate" Type="datetime" />
-    </EntityType>
+  <EntityType Name="CreditPromotions">
+    <Key>
+      <PropertyRef Name="CreditPromotionId" />
+    </Key>
+    <Property Name="CreditPromotionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="TimePeriod" Type="int" Nullable="true" />
+    <Property Name="InterestRate" Type="float" Nullable="true" />
+    <Property Name="StartDate" Type="datetime" Nullable="true" />
+    <Property Name="EndDate" Type="datetime" Nullable="true" />
+  </EntityType>
   <EntityType Name="CreditRequestCreditCondition">
     <Key>
       <PropertyRef Name="CreditRequests_CreditRequestId" />
@@ -901,18 +901,18 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-	  <EntitySetMapping Name="CreditPromotions">
-		  <EntityTypeMapping TypeName="sgscModel.CreditPromotion">
-			  <MappingFragment StoreEntitySet="CreditPromotions">
-				  <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-				  <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-				  <ScalarProperty Name="InterestRate" ColumnName="InterestRate" />
-				  <ScalarProperty Name="TimePeriod" ColumnName="TimePeriod" />
-				  <ScalarProperty Name="Name" ColumnName="Name" />
-				  <ScalarProperty Name="CreditPromotionId" ColumnName="CreditPromotionId" />
-			  </MappingFragment>
-		  </EntityTypeMapping>
-	  </EntitySetMapping>
+    <EntitySetMapping Name="CreditPromotions">
+      <EntityTypeMapping TypeName="IsTypeOf(sgscModel.CreditPromotion)">
+        <MappingFragment StoreEntitySet="CreditPromotions">
+          <ScalarProperty Name="CreditPromotionId" ColumnName="CreditPromotionId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="TimePeriod" ColumnName="TimePeriod" />
+          <ScalarProperty Name="InterestRate" ColumnName="InterestRate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <AssociationSetMapping Name="CreditRequestBankAccount" TypeName="sgscModel.CreditRequestBankAccount" StoreEntitySet="CreditRequests">
       <EndProperty Name="BankAccount">
         <ScalarProperty Name="BankAccountId" ColumnName="TransferBankAccount_BankAccountId" />

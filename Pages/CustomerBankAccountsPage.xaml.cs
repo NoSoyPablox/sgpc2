@@ -60,7 +60,6 @@ namespace SGSC.Pages
                     if(transferAccount != null)
                     {
                         tbTansAccCardNumber.Text = transferAccount.CardNumber;
-                        tbTansAccBank.Text = transferAccount.BankName;
                         tbTansAccInterbankCode.Text = transferAccount.InterbankCode;
                         tansferAccountId = transferAccount.BankAccountId;
                     }
@@ -69,7 +68,6 @@ namespace SGSC.Pages
                     if (directDebitAccount != null)
                     {
                         tbDomAccBankCardNumber.Text = directDebitAccount.CardNumber;
-                        tbDomAccBank.Text = directDebitAccount.BankName;
                         tbDomAccBankInterbankCode.Text = directDebitAccount.InterbankCode;
                         directDebitAccountId = directDebitAccount.BankAccountId;
                     }
@@ -163,7 +161,6 @@ namespace SGSC.Pages
                     var transferAccount = new BankAccount
                     {
                         CardNumber = tbTansAccCardNumber.Text,
-                        BankName = tbTansAccBank.Text,
                         InterbankCode = tbTansAccInterbankCode.Text,
                         AccountType = "transfer",
                         CustomerId = customerId
@@ -177,7 +174,6 @@ namespace SGSC.Pages
                     var directDebitAccount = new BankAccount
                     {
                         CardNumber = tbDomAccBankCardNumber.Text,
-                        BankName = tbDomAccBank.Text,
                         InterbankCode = tbDomAccBankInterbankCode.Text,
                         AccountType = "directDebit",
                         CustomerId = customerId
