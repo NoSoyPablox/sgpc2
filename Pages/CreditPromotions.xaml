@@ -16,6 +16,14 @@
             <TextBox x:Name="tbSearch" Style="{StaticResource CustomTextBoxStyle}" Margin="640,182,344,499" FontFamily="{StaticResource FontNunito}" FontSize="18" VerticalContentAlignment="Center" TextChanged="tbSearch_TextChanged"/>
             <DataGrid x:Name="dgPromotions" AutoGenerateColumns="False" AlternationCount="2" CanUserAddRows="False" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="240,246,148,143" HeadersVisibility="Column" VerticalContentAlignment="Center" MinRowHeight="30" ColumnHeaderHeight="40">
 
+                <DataGrid.Resources>
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                    </Style>
+                </DataGrid.Resources>
+                
                 <DataGrid.ColumnHeaderStyle>
                     <Style TargetType="{x:Type DataGridColumnHeader}">
                         <Setter Property="Background" Value="#A3D68A"/>
@@ -45,11 +53,40 @@
                 </DataGrid.RowStyle>
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Nombre" Binding="{Binding Name}" Width="*" IsReadOnly="True" FontWeight="Normal" FontFamily="{StaticResource FontNunito}" FontSize="16"/>
-                    <DataGridTextColumn Header="Tasa de interés" Binding="{Binding InterestRate}" Width="*" IsReadOnly="True" FontFamily="{StaticResource FontNunito}" FontSize="16"/>
-                    <DataGridTextColumn Header="Semanas" Binding="{Binding TimePeriod}" Width="*" IsReadOnly="True" FontFamily="{StaticResource FontNunito}" FontSize="16"/>
-                    <DataGridTextColumn Header="Inicio" Width="*" IsReadOnly="True" FontFamily="{StaticResource FontNunito}" FontSize="16" Binding="{Binding StartDate, StringFormat=\{0:dd/MM/yyyy\}}"/>
-                    <DataGridTextColumn Header="Fin" Width="*" IsReadOnly="True" FontFamily="{StaticResource FontNunito}" FontSize="16" Binding="{Binding EndDate, StringFormat=\{0:dd/MM/yyyy\}}"/>
+                    <DataGridTextColumn Header="Nombre" Binding="{Binding Name}" Width="170" IsReadOnly="True" FontWeight="Normal" FontFamily="{StaticResource FontNunito}" FontSize="16"/>
+                    <DataGridTextColumn Header="Tasa de interés" Binding="{Binding InterestRate}" Width="200" IsReadOnly="True" FontFamily="{StaticResource FontNunito}" FontSize="16"/>
+                    <DataGridTextColumn Header="Cantidad" Binding="{Binding TimePeriod}" Width="120" IsReadOnly="True" FontFamily="{StaticResource FontNunito}" FontSize="16"/>
+                    
+                    <DataGridTemplateColumn Header="Intervalo" Width="140" IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Text" Value="{Binding Interval}"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Interval}" Value="1">
+                                                    <Setter Property="Text" Value="Quincenas"/>
+                                                    <Setter Property="FontFamily" Value="{StaticResource FontNunito}"/>
+                                                    <Setter Property="FontSize" Value="16"/>
+                                                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Interval}" Value="2">
+                                                    <Setter Property="Text" Value="Meses"/>
+                                                    <Setter Property="FontFamily" Value="{StaticResource FontNunito}"/>
+                                                    <Setter Property="FontSize" Value="16"/>
+                                                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    
+                    <DataGridTextColumn Header="Inicio" Width="140" IsReadOnly="True" FontFamily="{StaticResource FontNunito}" FontSize="16" Binding="{Binding StartDate, StringFormat=\{0:dd/MM/yyyy\}}"/>
+                    <DataGridTextColumn Header="Fin" Width="120" IsReadOnly="True" FontFamily="{StaticResource FontNunito}" FontSize="16" Binding="{Binding EndDate, StringFormat=\{0:dd/MM/yyyy\}}"/>
                 </DataGrid.Columns>
             </DataGrid>
 
