@@ -76,6 +76,10 @@ namespace SGSC.Pages
                             var inactivePromotions = db.CreditPromotions.Where(predicate: p => p.EndDate < currentDate).ToList();
                             dgPromotions.ItemsSource = inactivePromotions;
                             break;
+                        case 3:
+                            var upcomingPromotions = db.CreditPromotions.Where(predicate: p => p.StartDate > currentDate).ToList();
+                            dgPromotions.ItemsSource = upcomingPromotions;
+                            break;
                     }
                 }
                 else

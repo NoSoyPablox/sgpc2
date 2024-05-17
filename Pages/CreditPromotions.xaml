@@ -93,8 +93,9 @@
             <Button x:Name="btnAddPromotion" Style="{StaticResource Button}" Content="Agregar" FontWeight="Medium"  Background="#FCDC2A" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top" Width="234" Height="52" Margin="984,635,0,0" Click="btnAddPromotion_Click"/>
             <ComboBox x:Name="cbStatusSearch" HorizontalAlignment="Left" Margin="984,184,0,0" VerticalAlignment="Top" Width="148" Height="37" FontFamily="{StaticResource FontNunitoBold}" FontSize="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SelectionChanged="cbStatusSearch_SelectionChanged">
                 <ComboBoxItem Content="Todas" FontFamily="{StaticResource FontNunito}" FontSize="18" IsSelected="True" HorizontalContentAlignment="Center" />
-                <ComboBoxItem Content="Vigente" FontFamily="{StaticResource FontNunito}" FontSize="18" HorizontalContentAlignment="Center"/>
-                <ComboBoxItem Content="Vencida" FontFamily="{StaticResource FontNunito}" FontSize="18" HorizontalContentAlignment="Center" />
+                <ComboBoxItem Content="Vigentes" FontFamily="{StaticResource FontNunito}" FontSize="18" HorizontalContentAlignment="Center"/>
+                <ComboBoxItem Content="Vencidas" FontFamily="{StaticResource FontNunito}" FontSize="18" HorizontalContentAlignment="Center"/>
+                <ComboBoxItem Content="Proximas" FontFamily="{StaticResource FontNunito}" FontSize="18" HorizontalContentAlignment="Center"/>
             </ComboBox>
 
 
