@@ -17,6 +17,8 @@ using System.Drawing.Printing;
     using System.Windows.Navigation;
     using System.Windows.Shapes;
     using System.Windows.Threading;
+    using System.Globalization;
+
 
 namespace SGSC.Pages
 {
@@ -169,7 +171,7 @@ namespace SGSC.Pages
                                 Rfc = cr.Rfc,
                                 FileNumber = cr.FileNumber,
                                 Amount = cr.Amount.HasValue ? cr.Amount.Value : 0.0,
-                                AmountString = cr.Amount.HasValue ? cr.Amount.Value.ToString("C2") : "$0.00",
+                                AmountString = cr.Amount.HasValue ? cr.Amount.Value.ToString("C2", new CultureInfo("es-MX")) : "$0.00",
                                 InterestRate = cr.InterestRate.HasValue ? cr.InterestRate.Value : 0.0m,
                                 InterestRateString = cr.InterestRate.HasValue ? $"{cr.InterestRate.Value}%" : "0.0%",
                                 TimePeriod = cr.TimePeriod.Value,
