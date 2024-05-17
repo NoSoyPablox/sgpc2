@@ -17,6 +17,7 @@ using System.Drawing.Printing;
     using System.Windows.Navigation;
     using System.Windows.Shapes;
     using System.Windows.Threading;
+    
 
 namespace SGSC.Pages
 {
@@ -143,7 +144,13 @@ namespace SGSC.Pages
                                 Status = CreditRequest.RequestStatusToString((CreditRequest.RequestStatus)cr.Status),
                                 CreationDate = cr.CreationDate.Value,
                                 CustomerName = cr.CustomerName,
-                                Rfc = cr.Rfc
+                                Rfc = cr.Rfc,
+                                FileNumber = cr.FileNumber,
+                                Amount = cr.Amount.HasValue ? cr.Amount.Value : 0.0,
+                                AmountString = cr.Amount.HasValue ? cr.Amount.Value.ToString("C2") : "$0.00",
+                                InterestRate = cr.InterestRate.HasValue ? cr.InterestRate.Value : 0.0m,
+                                InterestRateString = cr.InterestRate.HasValue ? $"{cr.InterestRate.Value}%" : "0.0%",
+                                TimePeriod = cr.TimePeriod.Value,
                             });
                         }
 

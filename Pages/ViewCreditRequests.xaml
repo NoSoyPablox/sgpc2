@@ -86,14 +86,21 @@
 
 				<Grid Margin="0,0,10,481">
 
-
-
-                    <TextBox x:Name="tbRfc" Margin="0,5,850,5" Style="{StaticResource CustomTextBoxStyle}" Height="40" Width="250" TextChanged="TextBox_CreditRequestSearchCustomerRfc"/>
-                    <Image Source="../Images/icon-lens.png" Margin="205,8,855,8" Width="40" />
-                    <TextBox x:Name="tbCustomerName" Margin="425,5,425,5" Style="{StaticResource CustomTextBoxStyle}" Height="40" Width="250"  TextChanged="TextBox_CreditRequestSearchCustomerName"/>
-                    <Image Source="../Images/icon-lens.png" Margin="634,8,426,8" Width="40" />
-                    <TextBox x:Name="tbStatus" Margin="815,5,35,5" Style="{StaticResource CustomTextBoxStyle}" Height="40" Width="250" TextChanged="TextBox_CreditRequestSearchStatus"/>
-                    <Image Source="/Images/icon-lens.png" Margin="1024,8,36,8" Width="40" />
+                <Grid Margin="0,0,10,481">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="11*"/>
+                        <ColumnDefinition Width="240*"/>
+                        <ColumnDefinition Width="299*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Style="{StaticResource CustomLabelStyle}" FontSize="15" Content="Filtrar por RFC" HorizontalAlignment="Left" Margin="0,-15,0,0" VerticalAlignment="Top" x:Name="lblRfc" Width="97" Height="27" Grid.ColumnSpan="2"/>
+                    <TextBox x:Name="tbRfc" Margin="0,5,252,5" Style="{StaticResource CustomTextBoxStyle}" Height="40" Width="250" TextChanged="TextBox_CreditRequestSearchCustomerRfc" Grid.ColumnSpan="2"/>
+                    <Image Source="../Images/icon-lens.png" Margin="183,8,257,8" Width="40" Grid.Column="1" />
+                    <TextBox x:Name="tbCustomerName" Margin="403,5,425,5" Style="{StaticResource CustomTextBoxStyle}" Height="40" Width="250"  TextChanged="TextBox_CreditRequestSearchCustomerName" Grid.Column="1" Grid.ColumnSpan="2"/>
+                    <Image Source="../Images/icon-lens.png" Margin="132,8,426,8" Width="40" Grid.Column="2" />
+                    <TextBox x:Name="tbStatus" Margin="313,5,35,5" Style="{StaticResource CustomTextBoxStyle}" Height="40" Width="250" TextChanged="TextBox_CreditRequestSearchStatus" Grid.Column="2"/>
+                    <Image Source="/Images/icon-lens.png" Margin="522,8,36,8" Width="40" Grid.Column="2" />
+                    <Label Style="{StaticResource CustomLabelStyle}" FontSize="15" Content="Filtrar por Nombre del Cliente" HorizontalAlignment="Left" Margin="403,-15,0,0" VerticalAlignment="Top" x:Name="lblCustomerName_Copiar" Width="197" Height="27" Grid.Column="1" Grid.ColumnSpan="2"/>
+                    <Label Style="{StaticResource CustomLabelStyle}" FontSize="15" Content="Filtrar por Estado de la Solicitud" HorizontalAlignment="Left" Margin="315,-15,0,0" VerticalAlignment="Top" x:Name="lblStatus_Copiar1" Width="215" Height="27" Grid.Column="2"/>
 
 
                 </Grid>
