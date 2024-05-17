@@ -16,8 +16,8 @@ namespace SGSC
     {
         public int CustomerContactInfoId { get; set; }
         public string Email { get; set; }
-        public string PhoneNumberOne { get; set; }
-        public string PhoneNumberTwo { get; set; }
+        public string PhoneNumber1 { get; set; }
+        public string PhoneNumber2 { get; set; }
         public Nullable<int> CustomerId { get; set; }
     
         public virtual Customer Customer { get; set; }

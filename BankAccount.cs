@@ -26,13 +26,14 @@ namespace SGSC
         public string CardNumber { get; set; }
         public string AccountType { get; set; }
         public string CardType { get; set; }
-        public string BankName { get; set; }
         public int CustomerId { get; set; }
+        public Nullable<int> BankBankId { get; set; }
     
         public virtual Customer Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CreditRequest> CreditRequestAsTransferAccount { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CreditRequest> CreditRequestAsDirectDebitAccount { get; set; }
+        public virtual Bank Bank { get; set; }
     }
 }

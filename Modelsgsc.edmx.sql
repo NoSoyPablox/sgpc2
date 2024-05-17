@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 04/08/2024 00:24:35
--- Generated from EDMX file: C:\Users\xjerr\source\repos\MangoFizz\sgsc\Modelsgsc.edmx
+-- Date Created: 05/16/2024 18:26:28
+-- Generated from EDMX file: C:\Users\aiwass\source\repos\SGSC\Modelsgsc.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -53,6 +53,9 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_CustomerAddressCustomer]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Customers] DROP CONSTRAINT [FK_CustomerAddressCustomer];
 GO
+IF OBJECT_ID(N'[dbo].[FK_BankBankAccount]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[BankAccounts] DROP CONSTRAINT [FK_BankBankAccount];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -91,6 +94,12 @@ GO
 IF OBJECT_ID(N'[dbo].[WorkCenters]', 'U') IS NOT NULL
     DROP TABLE [dbo].[WorkCenters];
 GO
+IF OBJECT_ID(N'[dbo].[Banks]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Banks];
+GO
+IF OBJECT_ID(N'[dbo].[Colonies]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Colonies];
+GO
 IF OBJECT_ID(N'[dbo].[CreditRequestCreditCondition]', 'U') IS NOT NULL
     DROP TABLE [dbo].[CreditRequestCreditCondition];
 GO
@@ -106,8 +115,8 @@ CREATE TABLE [dbo].[BankAccounts] (
     [CardNumber] nvarchar(max)  NULL,
     [AccountType] nvarchar(max)  NULL,
     [CardType] nvarchar(max)  NULL,
-    [BankName] nvarchar(max)  NULL,
-    [CustomerId] int  NOT NULL
+    [CustomerId] int  NOT NULL,
+    [BankBankId] int  NULL
 );
 GO
 
@@ -118,7 +127,8 @@ CREATE TABLE [dbo].[Contacts] (
     [FirstSurname] nvarchar(max)  NULL,
     [SecondSurname] nvarchar(max)  NULL,
     [PhoneNumber] nvarchar(max)  NULL,
-    [CustomerId] int  NOT NULL
+    [CustomerId] int  NOT NULL,
+    [Relationship] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -144,7 +154,7 @@ CREATE TABLE [dbo].[CreditRequests] (
     [FileNumber] nvarchar(max)  NULL,
     [Amount] float  NULL,
     [Status] int  NULL,
-    [TimePeriod] datetime  NULL,
+    [TimePeriod] int  NULL,
     [Purpose] nvarchar(max)  NULL,
     [InterestRate] decimal(18,0)  NULL,
     [CreationDate] datetime  NULL,
@@ -164,7 +174,9 @@ CREATE TABLE [dbo].[CustomerAddresses] (
     [ExternalNumber] nvarchar(max)  NULL,
     [InternalNumber] nvarchar(max)  NULL,
     [CustomerId] int  NOT NULL,
-    [Colony] nvarchar(max)  NOT NULL
+    [Colony] nvarchar(max)  NOT NULL,
+    [State] nvarchar(max)  NOT NULL,
+    [Type] int  NOT NULL
 );
 GO
 
@@ -172,8 +184,8 @@ GO
 CREATE TABLE [dbo].[CustomerContactInfoes] (
     [CustomerContactInfoId] int IDENTITY(1,1) NOT NULL,
     [Email] nvarchar(max)  NULL,
-    [PhoneNumberOne] nvarchar(max)  NULL,
-    [PhoneNumberTwo] nvarchar(max)  NULL,
+    [PhoneNumber1] nvarchar(max)  NULL,
+    [PhoneNumber2] nvarchar(max)  NULL,
     [CustomerId] int  NULL
 );
 GO
@@ -186,6 +198,9 @@ CREATE TABLE [dbo].[Customers] (
     [SecondSurname] nvarchar(max)  NULL,
     [Curp] nvarchar(max)  NULL,
     [Rfc] nvarchar(max)  NULL,
+    [Genre] nvarchar(max)  NOT NULL,
+    [CivilStatus] nvarchar(max)  NOT NULL,
+    [BirthDate] datetime  NOT NULL,
     [CustomerAddress_CustomerAddressId] int  NULL
 );
 GO
@@ -225,6 +240,22 @@ CREATE TABLE [dbo].[WorkCenters] (
     [PhoneNumber] nvarchar(max)  NULL,
     [CustomerId] int  NULL,
     [Customer_CustomerId] int  NULL
+);
+GO
+
+-- Creating table 'Banks'
+CREATE TABLE [dbo].[Banks] (
+    [BankId] int IDENTITY(1,1) NOT NULL,
+    [Name] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'Colonies'
+CREATE TABLE [dbo].[Colonies] (
+    [ColonyId] int IDENTITY(1,1) NOT NULL,
+    [Zipcode] nvarchar(max)  NOT NULL,
+    [Name] nvarchar(max)  NOT NULL,
+    [State] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -303,6 +334,18 @@ GO
 ALTER TABLE [dbo].[WorkCenters]
 ADD CONSTRAINT [PK_WorkCenters]
     PRIMARY KEY CLUSTERED ([WorkCenterId] ASC);
+GO
+
+-- Creating primary key on [BankId] in table 'Banks'
+ALTER TABLE [dbo].[Banks]
+ADD CONSTRAINT [PK_Banks]
+    PRIMARY KEY CLUSTERED ([BankId] ASC);
+GO
+
+-- Creating primary key on [ColonyId] in table 'Colonies'
+ALTER TABLE [dbo].[Colonies]
+ADD CONSTRAINT [PK_Colonies]
+    PRIMARY KEY CLUSTERED ([ColonyId] ASC);
 GO
 
 -- Creating primary key on [CreditRequests_CreditRequestId], [CreditConditions_CreditConditionId] in table 'CreditRequestCreditCondition'
@@ -487,6 +530,21 @@ GO
 CREATE INDEX [IX_FK_CustomerAddressCustomer]
 ON [dbo].[Customers]
     ([CustomerAddress_CustomerAddressId]);
+GO
+
+-- Creating foreign key on [BankBankId] in table 'BankAccounts'
+ALTER TABLE [dbo].[BankAccounts]
+ADD CONSTRAINT [FK_BankBankAccount]
+    FOREIGN KEY ([BankBankId])
+    REFERENCES [dbo].[Banks]
+        ([BankId])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_BankBankAccount'
+CREATE INDEX [IX_FK_BankBankAccount]
+ON [dbo].[BankAccounts]
+    ([BankBankId]);
 GO
 
 -- --------------------------------------------------

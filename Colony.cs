@@ -12,18 +12,11 @@ namespace SGSC
     using System;
     using System.Collections.Generic;
     
-    public partial class CustomerAddress
+    public partial class Colony
     {
-        public int CustomerAddressId { get; set; }
-        public string Street { get; set; }
-        public string ZipCode { get; set; }
-        public string ExternalNumber { get; set; }
-        public string InternalNumber { get; set; }
-        public int CustomerId { get; set; }
-        public string Colony { get; set; }
+        public int ColonyId { get; set; }
+        public string Zipcode { get; set; }
+        public string Name { get; set; }
         public string State { get; set; }
-        public int Type { get; set; }
-    
-        public virtual Customer Customer { get; set; }
     }
 }

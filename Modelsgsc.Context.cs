@@ -36,5 +36,7 @@ namespace SGSC
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<Payment> Payments { get; set; }
         public virtual DbSet<WorkCenter> WorkCenters { get; set; }
+        public virtual DbSet<Bank> Banks { get; set; }
+        public virtual DbSet<Colony> Colonies { get; set; }
     }
 }

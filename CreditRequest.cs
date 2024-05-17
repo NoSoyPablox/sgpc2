@@ -25,7 +25,7 @@ namespace SGSC
         public string FileNumber { get; set; }
         public Nullable<double> Amount { get; set; }
         public Nullable<int> Status { get; set; }
-        public Nullable<System.DateTime> TimePeriod { get; set; }
+        public Nullable<int> TimePeriod { get; set; }
         public string Purpose { get; set; }
         public Nullable<decimal> InterestRate { get; set; }
         public Nullable<System.DateTime> CreationDate { get; set; }

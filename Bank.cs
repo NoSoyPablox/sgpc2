@@ -12,16 +12,18 @@ namespace SGSC
     using System;
     using System.Collections.Generic;
     
-    public partial class Contact
+    public partial class Bank
     {
-        public int ContactId { get; set; }
-        public string Name { get; set; }
-        public string FirstSurname { get; set; }
-        public string SecondSurname { get; set; }
-        public string PhoneNumber { get; set; }
-        public int CustomerId { get; set; }
-        public string Relationship { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Bank()
+        {
+            this.BankAccounts = new HashSet<BankAccount>();
+        }
     
-        public virtual Customer Customer { get; set; }
+        public int BankId { get; set; }
+        public string Name { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BankAccount> BankAccounts { get; set; }
     }
 }

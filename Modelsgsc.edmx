@@ -17,6 +17,8 @@
     <EntitySet Name="Employees" EntityType="sgscModel.Store.Employees" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Payments" EntityType="sgscModel.Store.Payments" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="WorkCenters" EntityType="sgscModel.Store.WorkCenters" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Banks" EntityType="sgscModel.Store.Banks" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Colonies" EntityType="sgscModel.Store.Colonies" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CreditRequestCreditCondition" EntityType="sgscModel.Store.CreditRequestCreditCondition" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK_BankAccountCustomer" Association="sgscModel.Store.FK_BankAccountCustomer">
       <End Role="Customers" EntitySet="Customers" />
@@ -66,6 +68,10 @@
       <End Role="CustomerAddress" EntitySet="CustomerAddresses" />
       <End Role="Customer" EntitySet="Customers" />
     </AssociationSet>
+    <AssociationSet Name="BankBankAccount" Association="sgscModel.Store.BankBankAccount">
+      <End Role="Bank" EntitySet="Banks" />
+      <End Role="BankAccount" EntitySet="BankAccounts" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="BankAccounts">
     <Key>
@@ -76,8 +82,8 @@
     <Property Name="CardNumber" Type="nvarchar(max)" Nullable="true" />
     <Property Name="AccountType" Type="nvarchar(max)" Nullable="true" />
     <Property Name="CardType" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="BankName" Type="nvarchar(max)" Nullable="true" />
     <Property Name="CustomerId" Type="int" Nullable="false" />
+    <Property Name="BankBankId" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="Contacts">
     <Key>
@@ -89,6 +95,7 @@
     <Property Name="SecondSurname" Type="nvarchar(max)" Nullable="true" />
     <Property Name="PhoneNumber" Type="nvarchar(max)" Nullable="true" />
     <Property Name="CustomerId" Type="int" Nullable="false" />
+    <Property Name="Relationship" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="CreditConditions">
     <Key>
@@ -114,7 +121,7 @@
     <Property Name="FileNumber" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Amount" Type="float" Nullable="true" />
     <Property Name="Status" Type="int" Nullable="true" />
-    <Property Name="TimePeriod" Type="datetime" Nullable="true" />
+    <Property Name="TimePeriod" Type="int" Nullable="true" />
     <Property Name="Purpose" Type="nvarchar(max)" Nullable="true" />
     <Property Name="InterestRate" Type="decimal" Nullable="true" Precision="18" Scale="0" />
     <Property Name="CreationDate" Type="datetime" Nullable="true" />
@@ -135,6 +142,8 @@
     <Property Name="InternalNumber" Type="nvarchar(max)" Nullable="true" />
     <Property Name="CustomerId" Type="int" Nullable="false" />
     <Property Name="Colony" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="State" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Type" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="CustomerContactInfoes">
     <Key>
@@ -142,8 +151,8 @@
     </Key>
     <Property Name="CustomerContactInfoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Email" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="PhoneNumberOne" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="PhoneNumberTwo" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="PhoneNumber1" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="PhoneNumber2" Type="nvarchar(max)" Nullable="true" />
     <Property Name="CustomerId" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="Customers">
@@ -156,6 +165,9 @@
     <Property Name="SecondSurname" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Curp" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Rfc" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Genre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CivilStatus" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="BirthDate" Type="datetime" Nullable="false" />
     <Property Name="CustomerAddress_CustomerAddressId" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="Employees">
@@ -195,6 +207,22 @@
     <Property Name="PhoneNumber" Type="nvarchar(max)" Nullable="true" />
     <Property Name="CustomerId" Type="int" Nullable="true" />
     <Property Name="Customer_CustomerId" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Banks">
+    <Key>
+      <PropertyRef Name="BankId" />
+    </Key>
+    <Property Name="BankId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Colonies">
+    <Key>
+      <PropertyRef Name="ColonyId" />
+    </Key>
+    <Property Name="ColonyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Zipcode" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="State" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="CreditRequestCreditCondition">
     <Key>
@@ -324,6 +352,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="BankBankAccount">
+    <End Role="Bank" Type="sgscModel.Store.Banks" Multiplicity="0..1" />
+    <End Role="BankAccount" Type="sgscModel.Store.BankAccounts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bank">
+        <PropertyRef Name="BankId" />
+      </Principal>
+      <Dependent Role="BankAccount">
+        <PropertyRef Name="BankBankId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_CreditRequestCreditCondition_CreditRequest">
     <End Role="CreditRequest" Type="sgscModel.Store.CreditRequests" Multiplicity="1" />
     <End Role="CreditRequestCreditCondition" Type="sgscModel.Store.CreditRequestCreditCondition" Multiplicity="*" />
@@ -361,11 +401,12 @@
           <Property Name="CardNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="AccountType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CardType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="BankName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CustomerId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Customer" Relationship="Self.FK_BankAccountCustomer" FromRole="BankAccounts" ToRole="Customers" />
           <NavigationProperty Name="CreditRequestAsTransferAccount" Relationship="sgscModel.CreditRequestBankAccount" FromRole="BankAccount" ToRole="CreditRequest" />
           <NavigationProperty Name="CreditRequestAsDirectDebitAccount" Relationship="sgscModel.CreditRequestBankAccount1" FromRole="BankAccount" ToRole="CreditRequest" />
+          <NavigationProperty Name="Bank" Relationship="sgscModel.BankBankAccount" FromRole="BankAccount" ToRole="Bank" />
+          <Property Name="BankBankId" Type="Int32" Nullable="true" />
         </EntityType>
         <EntityType Name="Contact">
           <Key>
@@ -378,6 +419,7 @@
           <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CustomerId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Customer" Relationship="Self.FK_CustomerContact" FromRole="Contacts" ToRole="Customers" />
+          <Property Name="Relationship" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="CreditCondition">
           <Key>
@@ -404,7 +446,7 @@
           <Property Name="FileNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Amount" Type="Double" />
           <Property Name="Status" Type="Int32" />
-          <Property Name="TimePeriod" Type="DateTime" Precision="3" />
+          <Property Name="TimePeriod" Type="Int32" />
           <Property Name="Purpose" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="InterestRate" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="CreationDate" Type="DateTime" Precision="3" />
@@ -429,6 +471,8 @@
           <Property Name="CustomerId" Type="Int32" Nullable="false" />
           <Property Name="Colony" Type="String" Nullable="false" />
           <NavigationProperty Name="Customer" Relationship="sgscModel.CustomerAddressCustomer" FromRole="CustomerAddress" ToRole="Customer" />
+          <Property Name="State" Type="String" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="CustomerContactInfo">
           <Key>
@@ -436,8 +480,8 @@
           </Key>
           <Property Name="CustomerContactInfoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumberOne" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumberTwo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CustomerId" Type="Int32" />
           <NavigationProperty Name="Customer" Relationship="Self.CustomerId" FromRole="CustomerContactInfoes" ToRole="Customers" />
         </EntityType>
@@ -457,6 +501,9 @@
           <NavigationProperty Name="CustomerContactInfoes" Relationship="Self.CustomerId" FromRole="Customers" ToRole="CustomerContactInfoes" />
           <NavigationProperty Name="WorkCenters" Relationship="sgscModel.CustomerWorkCenter" FromRole="Customer" ToRole="WorkCenter" />
           <NavigationProperty Name="CustomerAddress" Relationship="sgscModel.CustomerAddressCustomer" FromRole="Customer" ToRole="CustomerAddress" />
+          <Property Name="Genre" Type="String" Nullable="false" />
+          <Property Name="CivilStatus" Type="String" Nullable="false" />
+          <Property Name="BirthDate" Type="DateTime" Nullable="false" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -602,6 +649,12 @@
             <End Role="CustomerAddress" EntitySet="CustomerAddresses" />
             <End Role="Customer" EntitySet="Customers" />
           </AssociationSet>
+          <EntitySet Name="Banks" EntityType="sgscModel.Bank" />
+          <AssociationSet Name="BankBankAccount" Association="sgscModel.BankBankAccount">
+            <End Role="Bank" EntitySet="Banks" />
+            <End Role="BankAccount" EntitySet="BankAccounts" />
+          </AssociationSet>
+          <EntitySet Name="Colonies" EntityType="sgscModel.Colony" />
         </EntityContainer>
         <Association Name="CreditRequestBankAccount">
           <End Type="sgscModel.CreditRequest" Role="CreditRequest" Multiplicity="*" />
@@ -631,6 +684,35 @@
           <End Type="sgscModel.CustomerAddress" Role="CustomerAddress" Multiplicity="0..1" />
           <End Type="sgscModel.Customer" Role="Customer" Multiplicity="0..1" />
         </Association>
+        <EntityType Name="Bank">
+          <Key>
+            <PropertyRef Name="BankId" />
+          </Key>
+          <Property Name="BankId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="BankAccounts" Relationship="sgscModel.BankBankAccount" FromRole="Bank" ToRole="BankAccount" />
+        </EntityType>
+        <Association Name="BankBankAccount">
+          <End Type="sgscModel.Bank" Role="Bank" Multiplicity="0..1" />
+          <End Type="sgscModel.BankAccount" Role="BankAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bank">
+              <PropertyRef Name="BankId" />
+            </Principal>
+            <Dependent Role="BankAccount">
+              <PropertyRef Name="BankBankId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Colony">
+          <Key>
+            <PropertyRef Name="ColonyId" />
+          </Key>
+          <Property Name="ColonyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Zipcode" Type="String" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="State" Type="String" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -645,8 +727,8 @@
           <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
           <ScalarProperty Name="AccountType" ColumnName="AccountType" />
           <ScalarProperty Name="CardType" ColumnName="CardType" />
-          <ScalarProperty Name="BankName" ColumnName="BankName" />
           <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="BankBankId" ColumnName="BankBankId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -659,6 +741,7 @@
           <ScalarProperty Name="SecondSurname" ColumnName="SecondSurname" />
           <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
           <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="Relationship" ColumnName="Relationship" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -706,6 +789,8 @@
           <ScalarProperty Name="InternalNumber" ColumnName="InternalNumber" />
           <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
           <ScalarProperty Name="Colony" ColumnName="Colony" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -714,8 +799,8 @@
         <MappingFragment StoreEntitySet="CustomerContactInfoes">
           <ScalarProperty Name="CustomerContactInfoId" ColumnName="CustomerContactInfoId" />
           <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="PhoneNumberOne" ColumnName="PhoneNumberOne" />
-          <ScalarProperty Name="PhoneNumberTwo" ColumnName="PhoneNumberTwo" />
+          <ScalarProperty Name="PhoneNumber1" ColumnName="PhoneNumber1" />
+          <ScalarProperty Name="PhoneNumber2" ColumnName="PhoneNumber2" />
           <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -729,6 +814,9 @@
           <ScalarProperty Name="SecondSurname" ColumnName="SecondSurname" />
           <ScalarProperty Name="Curp" ColumnName="Curp" />
           <ScalarProperty Name="Rfc" ColumnName="Rfc" />
+          <ScalarProperty Name="Genre" ColumnName="Genre" />
+          <ScalarProperty Name="CivilStatus" ColumnName="CivilStatus" />
+          <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -768,6 +856,24 @@
           <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
           <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
           <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Banks">
+      <EntityTypeMapping TypeName="IsTypeOf(sgscModel.Bank)">
+        <MappingFragment StoreEntitySet="Banks">
+          <ScalarProperty Name="BankId" ColumnName="BankId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Colonies">
+      <EntityTypeMapping TypeName="IsTypeOf(sgscModel.Colony)">
+        <MappingFragment StoreEntitySet="Colonies">
+          <ScalarProperty Name="ColonyId" ColumnName="ColonyId" />
+          <ScalarProperty Name="Zipcode" ColumnName="Zipcode" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="State" ColumnName="State" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
