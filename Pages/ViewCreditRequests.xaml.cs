@@ -39,7 +39,9 @@ namespace SGSC.Pages
             public string AmountString { get; set; }
             public decimal InterestRate { get; set; }
             public string InterestRateString { get; set; }
-            public DateTime TimePeriod { get; set; }
+            public int TimePeriod { get; set; }
+
+            public string TimePeriodString { get; set; }
 
         }
 
@@ -144,7 +146,8 @@ namespace SGSC.Pages
                                 AmountString = cr.Amount.HasValue ? cr.Amount.Value.ToString("C2", new CultureInfo("es-MX")) : "$0.00",
                                 InterestRate = cr.InterestRate.HasValue ? cr.InterestRate.Value : 0.0m,
                                 InterestRateString = cr.InterestRate.HasValue ? $"{cr.InterestRate.Value}%" : "0.0%",
-                                TimePeriod = cr.TimePeriod.Value,
+                                TimePeriod = cr.TimePeriod.HasValue ? cr.TimePeriod.Value : 0,
+                                TimePeriodString = cr.TimePeriod.HasValue ? $"{cr.TimePeriod.Value} Quincenas" : "Quincenas"
                             });
                         }
 
@@ -208,6 +211,7 @@ namespace SGSC.Pages
                                 InterestRate = cr.InterestRate.HasValue ? cr.InterestRate.Value : 0.0m,
                                 InterestRateString = cr.InterestRate.HasValue ? $"{cr.InterestRate.Value}%" : "0.0%",
                                 TimePeriod = cr.TimePeriod.Value,
+                                TimePeriodString = cr.TimePeriod.Value.ToString()
                             });
                         }
 
@@ -281,5 +285,42 @@ namespace SGSC.Pages
             NavigationService.Navigate(new HomePageCreditAdvisor());
         }
 
+        private void ViewCreditRequestsDetails(object sender, RoutedEventArgs e)
+        {
+            CreditRequestData creditRequestData = (CreditRequestData)creditRequestsDataGrid.SelectedItem;
+            if (creditRequestData != null)
+            {
+               /*var creditRequestDetails = new CreditRequestDetails(creditRequestData.CreditRequestId);
+                if (NavigationService != null)
+                {
+                    NavigationService.Navigate(creditRequestDetails);
+                }*/
+               //Pendiente agregar la página CreditRequestDetails
+            }
         }
+
+        private void CorrectCredtiRequests(object sender, RoutedEventArgs e)
+        {
+            CreditRequestData selectedCreditRequest = (CreditRequestData)creditRequestsDataGrid.SelectedItem;
+            if (selectedCreditRequest != null)
+            {
+               NavigationService.Navigate(new CollectionEfficienciesPage(selectedCreditRequest.CreditRequestId));
+            }
+            else
+            {
+                MessageBox.Show("Por favor, seleccione una solicitud de crédito para Consultar .", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+
+
+
+            /*var creditRequestDetails = new correctCreditRequest(creditRequestData.CreditRequestId);
+             if (NavigationService != null)
+             {
+                 NavigationService.Navigate(correctCreditRequest);
+             }*/
+            //Pendiente agregar la página para Corregir solicitudes de crédito
+        
+        }
+    }
 }

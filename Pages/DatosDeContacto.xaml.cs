@@ -32,8 +32,8 @@ namespace SGSC.Pages
 
                 var newCustomerContactInfo = new CustomerContactInfo
                 {
-                    PhoneNumberOne = Tb_PhoneNumberOne.Text,
-                    PhoneNumberTwo = Tb_PhoneNumberTwo.Text,
+                    PhoneNumber1 = Tb_PhoneNumberOne.Text,
+                    PhoneNumber2 = Tb_PhoneNumberTwo.Text,
                     Email = Tb_Email.Text,
                 };
 
@@ -67,8 +67,8 @@ namespace SGSC.Pages
 
                     if (customerData != null)
                     {
-                        Tb_PhoneNumberOne.Text = customerData.PhoneNumberOne;
-                        Tb_PhoneNumberTwo.Text = customerData.PhoneNumberTwo;
+                        Tb_PhoneNumberOne.Text = customerData.PhoneNumber1;
+                        Tb_PhoneNumberTwo.Text = customerData.PhoneNumber2;
                         Tb_Email.Text = customerData.Email;
                     }
                 }
