@@ -60,7 +60,7 @@
                                 <DataGridTextColumn Header="Folio" IsReadOnly="True" CanUserResize="False" Binding="{Binding FileNumber}" Width="100" />
                                 <DataGridTextColumn Header="Cantidad" IsReadOnly="True" CanUserResize="False" Binding="{Binding AmountString}" Width="150" />
                                 <DataGridTextColumn Header="Tasa de interés" IsReadOnly="True" CanUserResize="False" Binding="{Binding InterestRateString}" Width="185"/>
-                                <DataGridTextColumn Header="Plazo" IsReadOnly="True" CanUserResize="False" Binding="{Binding TimePeriod}" Width="100" />
+                                <DataGridTextColumn Header="Plazo" IsReadOnly="True" CanUserResize="False" Binding="{Binding TimePeriodString}" Width="100" />
                                 <DataGridTextColumn Header="RFC" IsReadOnly="True" CanUserResize="False" Binding="{Binding Rfc}" Width="150" />
                                 <DataGridTextColumn Header="Fecha de Creación" IsReadOnly="True" CanUserResize="False" Binding="{Binding CreationDate}" Width="220" />
                                 <DataGridTextColumn Header="Nombre Completo" IsReadOnly="True" CanUserResize="False" Binding="{Binding CustomerName}" Width="229" />
