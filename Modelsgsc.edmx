@@ -421,7 +421,7 @@
           <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CustomerId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Customer" Relationship="Self.FK_CustomerContact" FromRole="Contacts" ToRole="Customers" />
-          <Property Name="Relationship" Type="String" Nullable="false" />
+          <Property Name="Relationship" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
         </EntityType>
         <EntityType Name="CreditCondition">
           <Key>
@@ -474,7 +474,7 @@
           <Property Name="CustomerId" Type="Int32" Nullable="false" />
           <Property Name="Colony" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Customer" Relationship="sgscModel.CustomerAddressCustomer" FromRole="CustomerAddress" ToRole="Customer" />
-          <Property Name="State" Type="String" Nullable="false" />
+          <Property Name="State" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Type" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="CustomerContactInfo">
@@ -504,9 +504,9 @@
           <NavigationProperty Name="CustomerContactInfoes" Relationship="Self.CustomerId" FromRole="Customers" ToRole="CustomerContactInfoes" />
           <NavigationProperty Name="WorkCenters" Relationship="sgscModel.CustomerWorkCenter" FromRole="Customer" ToRole="WorkCenter" />
           <NavigationProperty Name="CustomerAddress" Relationship="sgscModel.CustomerAddressCustomer" FromRole="Customer" ToRole="CustomerAddress" />
-          <Property Name="Genre" Type="String" Nullable="false" />
-          <Property Name="CivilStatus" Type="String" Nullable="false" />
-          <Property Name="BirthDate" Type="DateTime" Nullable="false" />
+          <Property Name="Genre" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="CivilStatus" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -693,7 +693,7 @@
             <PropertyRef Name="BankId" />
           </Key>
           <Property Name="BankId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="BankAccounts" Relationship="sgscModel.BankBankAccount" FromRole="Bank" ToRole="BankAccount" />
         </EntityType>
         <Association Name="BankBankAccount">
@@ -713,9 +713,9 @@
             <PropertyRef Name="ColonyId" />
           </Key>
           <Property Name="ColonyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Zipcode" Type="String" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" />
-          <Property Name="State" Type="String" Nullable="false" />
+          <Property Name="Zipcode" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="State" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
