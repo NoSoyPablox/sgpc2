@@ -37,6 +37,15 @@
         </Style>
             
 
+        <!-- Estilo para filas blancas -->
+        <Style x:Key="WhiteRowStyle" TargetType="DataGridRow">
+            <Setter Property="Background" Value="White"/>
+        </Style>
+
+        <!-- Estilo para filas verdes -->
+        <Style x:Key="GreenRowStyle" TargetType="DataGridRow">
+            <Setter Property="Background" Value="LightGreen"/>
+        </Style>
 
         <Style TargetType="Rectangle" x:Key="RoundedRectangleHomeStyle">
             <Setter Property="Fill" Value="#C2E6B0"/>
@@ -70,6 +79,7 @@
                 <ScrollViewer x:Name="PART_ContentHost"/>
             </Border>
         </ControlTemplate>
+
 
         <Style TargetType="TextBox" x:Key="CustomTextBoxStyle">
             <Setter Property="Template" Value="{StaticResource CustomTextBoxTemplate}"/>
