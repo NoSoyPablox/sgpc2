@@ -139,7 +139,6 @@ namespace SGSC.Pages
             lbPromotionError.Content = "";
 
             //check if all fields are filled
-            var amountIntroduced = 0.0;
             bool isValid = true;
             if (cbCreditPromotions.SelectedIndex == -1)
             {
@@ -154,5 +153,9 @@ namespace SGSC.Pages
             
         }
 
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            App.Current.MainFrame.Content = new HomePageCreditAdvisor();
+        }
     }
 }

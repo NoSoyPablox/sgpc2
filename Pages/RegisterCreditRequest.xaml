@@ -11,7 +11,7 @@
     <Grid>
         <Border Background="White" Margin="0"/>
 
-        <Button Style="{StaticResource ButtonStyleConfirm}" x:Name="btnRegister" Content="Registrar" FontSize="22" HorizontalAlignment="Left" VerticalAlignment="Top" Width="180" Height="54" Margin="1045,634,0,0" Click="btnRegister_Click" />
+        <Button Style="{StaticResource ButtonStyleConfirm}" x:Name="btnRegister" Content="Registrar" FontSize="22" HorizontalAlignment="Left" VerticalAlignment="Top" Width="180" Height="54" Margin="964,617,0,0" Click="btnRegister_Click" />
         <Label FontFamily="{StaticResource FontPoppins}" FontWeight="Bold" FontSize="36" Content="Registrar solicitud de credito" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="204,93,0,0"/>
         <Rectangle Style="{StaticResource RoundedRectangleStyle}" Margin="196,166,136,415"/>
         <Rectangle Style="{StaticResource RoundedRectangleStyle}" Margin="196,330,136,131"/>
@@ -37,6 +37,8 @@
         <Label x:Name="lbPromotionError" Content="Error" HorizontalAlignment="Left" HorizontalContentAlignment="Right" VerticalAlignment="Top" Width="148" Foreground="#FFCE2222" FontStyle="Italic" Margin="523,454,0,0"/>
         <Label x:Name="lbPurposeError" Content="Error" HorizontalAlignment="Left" HorizontalContentAlignment="Right" VerticalAlignment="Top" Width="813" Foreground="#FFCE2222" FontStyle="Italic" Margin="250,558,0,0"/>
         <Label x:Name="lbAmountError" Content="Error" HorizontalAlignment="Left" HorizontalContentAlignment="Right" VerticalAlignment="Top" Width="199" Foreground="#FFCE2222" FontStyle="Italic" Margin="250,454,0,0"/>
+        <Button x:Name="btnCancel" Style="{StaticResource ButtonStyleCancel}" Content="Cancelar" FontSize="22" HorizontalAlignment="Left" Margin="742,617,0,0" VerticalAlignment="Top" Height="54" Width="180" Click="btnCancel_Click" />
+
 
     </Grid>
 </Page>
