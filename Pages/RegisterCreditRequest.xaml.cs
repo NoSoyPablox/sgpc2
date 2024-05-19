@@ -28,6 +28,9 @@ namespace SGSC.Pages
             this.idCustomer = idCustomer;
             retrieveCustomerData();
             retrieveCreditPromotions();
+            lbAmountError.Content = "";
+            lbPromotionError.Content = "";
+            lbPurposeError.Content = "";
         }
 
         private void retrieveCustomerData()
@@ -128,5 +131,28 @@ namespace SGSC.Pages
                 }
             }
         }
+
+        private void btnRegister_Click(object sender, RoutedEventArgs e)
+        {
+            lbPurposeError.Content = "";
+            lbAmountError.Content = "";
+            lbPromotionError.Content = "";
+
+            //check if all fields are filled
+            var amountIntroduced = 0.0;
+            bool isValid = true;
+            if (cbCreditPromotions.SelectedIndex == -1)
+            {
+                lbPromotionError.Content= "Seleccione una promoción";
+                isValid = false;
+            }
+            if (tbAmount.Text.Length < 1)
+            {
+                lbAmountError.Content = "Introduzca un monto";
+                isValid = false;
+            }
+            
+        }
+
     }
 }
