@@ -1,4 +1,5 @@
 ﻿using SGSC.Utils;
+using SGSC.Frames;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +30,7 @@ namespace SGSC.Pages
             public int CreditRequestID { get; set; }
             public string Folio { get; set; }
             public string ClientName { get; set; }
-            public int Term { get; set; } // Plazo en quincenas
+            public int Term { get; set; }
             public decimal TotalAmount { get; set; }
             public string TotalAmountString { get; set; }
             public decimal OutstandingBalance { get; set; }
@@ -42,22 +43,25 @@ namespace SGSC.Pages
             public int CreditRequestID { get; set; }
             public string FileNumber { get; set; }
             public DateTime PaymentDate { get; set; }
-            public decimal Discount { get; set; } // El descuento que corresponde a pagar en ese pago
-            public decimal Charge { get; set; } // Lo que se pagaría en esa quincena
-            public decimal Efficiency { get; set; } // El % calculado de todos los porcentajes
-            public bool IsTotalRow { get; set; } // Indica si es una fila de totales
+            public decimal Discount { get; set; }
+            public decimal Amount { get; set; }
+            public decimal Efficiency { get; set; }
+            public bool IsTotalRow { get; set; }
+
+            public string EfficiencyString => $"{Efficiency:F2}%";
         }
 
         public CollectionEfficienciesPage(int creditRequestId)
         {
             InitializeComponent();
             CreditRequestId = creditRequestId;
+            UserSessionFrame.Content = new UserSessionFrame();
             this.Loaded += CollectionEfficienciesPage_Loaded;
         }
 
         private void CollectionEfficienciesPage_Loaded(object sender, RoutedEventArgs e)
         {
-            // Load the CreditRequest details based on the provided CreditRequestId
+
             var creditRequest = GetCreditRequestById(CreditRequestId);
             if (creditRequest != null)
             {
@@ -66,11 +70,9 @@ namespace SGSC.Pages
             }
             else
             {
-                MessageBox.Show("Solcitud de crédito no encontrada.");
+                MessageBox.Show("Solicitud de crédito no encontrada.");
             }
         }
-
-
 
         private CreditRequest GetCreditRequestById(int creditRequestId)
         {
@@ -88,13 +90,35 @@ namespace SGSC.Pages
                                              ClientName = c.Name + " " + c.FirstSurname + " " + c.SecondSurname,
                                              cr.TimePeriod,
                                              cr.Amount,
-                                             InterestRate = cr.InterestRate ?? 0.0m // Handle null interest rate
+                                             InterestRate = cr.InterestRate ?? 0.0m,
+                                             Payments = db.Payments
+                                                          .Where(p => p.CreditRequestId == cr.CreditRequestId)
+                                                          .Select(p => new
+                                                          {
+                                                              p.PaymentId,
+                                                              p.CreditRequestId,
+                                                              p.FileNumber,
+                                                              p.PaymentDate,
+                                                              p.Amount
+                                                          }).ToList()
                                          }).FirstOrDefault();
 
                     if (creditRequest != null)
                     {
                         decimal totalAmount = creditRequest.Amount.HasValue ? Convert.ToDecimal(creditRequest.Amount.Value) : 0.0m;
                         decimal outstandingBalance = totalAmount * (1 - creditRequest.InterestRate / 100);
+
+                        var payments = creditRequest.Payments.Select(p => new Payment
+                        {
+                            PaymentID = p.PaymentId,
+                            CreditRequestID = p.CreditRequestId ?? 0,
+                            FileNumber = p.FileNumber,
+                            PaymentDate = p.PaymentDate ?? DateTime.MinValue,
+                            Amount = !string.IsNullOrEmpty(p.Amount) ? Convert.ToDecimal(p.Amount) : 0.0m,
+                            Discount = 0.0m,
+                            Efficiency = 0.0m,
+                            IsTotalRow = false
+                        }).ToList();
 
                         CreditRequest mappedCreditRequest = new CreditRequest
                         {
@@ -121,6 +145,7 @@ namespace SGSC.Pages
             }
         }
 
+
         private void DisplayCreditRequestDetails(CreditRequest creditRequest)
         {
             lblCustomerName.Content = creditRequest.ClientName;
@@ -128,11 +153,9 @@ namespace SGSC.Pages
             lblCreditAmount.Content = creditRequest.TotalAmountString;
         }
 
-
         public List<Payment> GeneratePaymentSchedule(CreditRequest creditRequest)
         {
             List<Payment> paymentSchedule = new List<Payment>();
-            decimal biweeklyInterestRate = 0.05m; 
             decimal biweeklyPayment = creditRequest.TotalAmount / creditRequest.Term;
 
             for (int i = 1; i <= creditRequest.Term; i++)
@@ -141,10 +164,10 @@ namespace SGSC.Pages
                 {
                     CreditRequestID = creditRequest.CreditRequestID,
                     FileNumber = i.ToString(),
-                    PaymentDate = DateTime.Now.AddDays(15 * i), 
+                    PaymentDate = DateTime.Now.AddDays(15 * i),
                     Discount = biweeklyPayment,
-                    Charge = biweeklyPayment + (creditRequest.TotalAmount * biweeklyInterestRate),
-                    Efficiency = (biweeklyPayment + (creditRequest.TotalAmount * biweeklyInterestRate)) / biweeklyPayment * 100
+                    Amount = biweeklyPayment, 
+                    Efficiency = 0.0m 
                 };
 
                 paymentSchedule.Add(payment);
@@ -156,40 +179,54 @@ namespace SGSC.Pages
         private void DisplayPaymentSchedule(CreditRequest creditRequest)
         {
             var paymentSchedule = GeneratePaymentSchedule(creditRequest);
-            AddTotalRow(paymentSchedule);
+            CalculateEfficiency(paymentSchedule);
 
             creditRequestsDataGrid.ItemsSource = paymentSchedule;
+        }
+
+        private void CalculateEfficiency(List<Payment> paymentSchedule)
+        {
+            foreach (var payment in paymentSchedule)
+            {
+                if (payment.Discount != 0)
+                {
+                    payment.Efficiency = (payment.Amount / payment.Discount) * 100;
+                }
+                else
+                {
+                    payment.Efficiency = 0.0m;
+                }
+            }
+
+            AddTotalRow(paymentSchedule);
         }
 
         private void AddTotalRow(List<Payment> paymentSchedule)
         {
             var totalDiscount = paymentSchedule.Sum(p => p.Discount);
-            var totalCharge = paymentSchedule.Sum(p => p.Charge);
-            var totalEfficiency = totalCharge / totalDiscount; 
+            var totalAmount = paymentSchedule.Sum(p => p.Amount);
+            var totalEfficiency = paymentSchedule.Average(p => p.Efficiency);
 
             Payment totalRow = new Payment
             {
                 FileNumber = "Cobro total",
                 Discount = totalDiscount,
-                Charge = totalCharge,
-                Efficiency = totalEfficiency * 100, 
+                Amount = totalAmount,
+                Efficiency = totalEfficiency,
                 IsTotalRow = true
             };
 
             paymentSchedule.Add(totalRow);
         }
 
-
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
         {
             UserSession.LogOut();
         }
 
-
         private void HomePageCreditAdvisorMenu(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new HomePageCreditAdvisor());
         }
-
     }
 }
