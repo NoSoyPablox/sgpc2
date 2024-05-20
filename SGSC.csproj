@@ -106,6 +106,9 @@
     <Compile Include="Frames\CollectionExecutiveSidebar.xaml.cs">
       <DependentUpon>CollectionExecutiveSidebar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Frames\AdminSidebar.xaml.cs">
+      <DependentUpon>AdminSidebar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Frames\CreditAdvisorSidebar.xaml.cs">
       <DependentUpon>CreditAdvisorSidebar.xaml</DependentUpon>
     </Compile>
@@ -137,17 +140,27 @@
     <Compile Include="Model\BankAccount.cs" />
     <Compile Include="Model\CreditRequest.cs" />
     <Compile Include="Model\Customer.cs" />
+    <Compile Include="Model\Employee.cs" />
     <Compile Include="Pages\ActiveCreditsPage.xaml.cs">
       <DependentUpon>ActiveCreditsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\CustomerBankAccountsPage.xaml.cs">
       <DependentUpon>CustomerBankAccountsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\EmployeeInfoPage.xaml.cs">
+      <DependentUpon>EmployeeInfoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\HomePageAdmin.xaml.cs">
+      <DependentUpon>HomePageAdmin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\HomePageCollectionExecutive.xaml.cs">
       <DependentUpon>HomePageCollectionExecutive.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\HomePageCreditAdvisor.xaml.cs">
       <DependentUpon>HomePageCreditAdvisor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ManageEmployees.xaml.cs">
+      <DependentUpon>ManageEmployees.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\SearchCustomerPage.xaml.cs">
       <DependentUpon>SearchCustomerPage.xaml</DependentUpon>
@@ -169,6 +182,10 @@
       <DependentUpon>Modelsgsc.tt</DependentUpon>
     </Compile>
     <Page Include="Frames\CollectionExecutiveSidebar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Frames\AdminSidebar.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -196,6 +213,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\EmployeeInfoPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\HomePageAdmin.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pages\HomePageCollectionExecutive.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -211,6 +236,10 @@
     <Page Include="Pages\LogIn.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ManageEmployees.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\SearchCustomerPage.xaml">
       <SubType>Designer</SubType>

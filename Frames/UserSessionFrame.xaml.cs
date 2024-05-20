@@ -25,7 +25,7 @@ namespace SGSC.Frames
         {
             InitializeComponent();
             UserName.Text = UserSession.Instance.FullName;
-            RoleName.Text = UserSession.GetRoleName(UserSession.Instance.Role);
+            RoleName.Text = Employee.GetRoleName(UserSession.Instance.Role);
         }
     }
 }

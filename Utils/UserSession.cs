@@ -10,31 +10,6 @@ namespace SGSC.Utils
 {
     public class UserSession
     {
-        public enum UserRole : short
-        {
-            Admin = 0,
-            CreditAdvisor,
-            CreditAnalyst,
-            CollectionExecutive
-        }
-
-        public static string GetRoleName(short role)
-        {
-            switch(role)
-            {
-                case (short)UserRole.Admin:
-                    return "Administrador(a)";
-                case (short)UserRole.CreditAdvisor:
-                    return "Asesor(a) de crédito";
-                case (short)UserRole.CreditAnalyst:
-                    return "Analista de crédito";
-                case (short)UserRole.CollectionExecutive:
-                    return "Ejecutivo(a) de cobranza";
-                default:
-                    return "Rol no implementado";
-            }
-        }
-
         private static UserSession _instance;
         public static UserSession Instance
         {
@@ -75,16 +50,23 @@ namespace SGSC.Utils
             var mainFrame = App.Current.MainFrame;
             switch(role)
             {
-                case (short)UserRole.CreditAdvisor:
+                case (short)Employee.EmployeeRoles.CreditAdvisor:
                 {
                     var landingPage = new Pages.HomePageCreditAdvisor();
                     mainFrame.Content = landingPage;
                     break;
                 }
 
-                case (short)UserRole.CollectionExecutive:
+                case (short)Employee.EmployeeRoles.CollectionExecutive:
                 {
                     var landingPage = new Pages.HomePageCollectionExecutive();
+                    mainFrame.Content = landingPage;
+                    break;
+                }
+
+                case (short)Employee.EmployeeRoles.Admin:
+                {
+                    var landingPage = new Pages.HomePageAdmin();
                     mainFrame.Content = landingPage;
                     break;
                 }

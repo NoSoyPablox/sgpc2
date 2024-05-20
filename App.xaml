@@ -170,6 +170,21 @@
             </Setter>
         </Style>
 
+        <Style TargetType="Button" x:Key="ButtonStyleCritical">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="#FF5722" CornerRadius="12">
+                            <Border.Effect>
+                                <DropShadowEffect ShadowDepth="2" Direction="320" Color="Black" Opacity="0.5"/>
+                            </Border.Effect>
+                            <TextBlock Text="{TemplateBinding Content}" FontFamily="{StaticResource FuenteNunitoBold}" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
         <Style TargetType="Button" x:Key="ButtonStyle">
             <Setter Property="Margin" Value="5"/>
