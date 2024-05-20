@@ -15,6 +15,7 @@ namespace SGSC.Utils
             Admin = 0,
             CreditAdvisor,
             CreditAnalyst,
+            CollectionExecutive
         }
 
         public static string GetRoleName(short role)
@@ -27,6 +28,8 @@ namespace SGSC.Utils
                     return "Asesor(a) de crédito";
                 case (short)UserRole.CreditAnalyst:
                     return "Analista de crédito";
+                case (short)UserRole.CollectionExecutive:
+                    return "Ejecutivo(a) de cobranza";
                 default:
                     return "Rol no implementado";
             }
@@ -75,6 +78,13 @@ namespace SGSC.Utils
                 case (short)UserRole.CreditAdvisor:
                 {
                     var landingPage = new Pages.HomePageCreditAdvisor();
+                    mainFrame.Content = landingPage;
+                    break;
+                }
+
+                case (short)UserRole.CollectionExecutive:
+                {
+                    var landingPage = new Pages.HomePageCollectionExecutive();
                     mainFrame.Content = landingPage;
                     break;
                 }

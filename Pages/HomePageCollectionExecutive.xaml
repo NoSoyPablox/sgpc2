@@ -1,0 +1,38 @@
+﻿<Page x:Class="SGSC.Pages.HomePageCollectionExecutive"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SGSC.Pages"
+      xmlns:frames="clr-namespace:SGSC.Frames"
+      mc:Ignorable="d" 
+      d:DesignHeight="720" d:DesignWidth="1280"
+      Title="HomePageCreditAdvisor">
+
+    <Grid>
+        <Border Background="White" Margin="0">
+            <Rectangle Style="{StaticResource RoundedRectangleHomeStyle}"  Margin="131,113,20,22"/>
+        </Border>
+
+        <Frame Name="creditAdvisorSidebar" Margin="0,0,1172,0"/>
+
+        <Frame>
+            <Frame.Content>
+                <frames:UserSessionFrame Margin="831,23,38,612"/>
+            </Frame.Content>
+        </Frame>
+
+        <Border CornerRadius="22" BorderBrush="Transparent" BorderThickness="0" Margin="166,142,50,337">
+            <Border.Effect>
+                <DropShadowEffect ShadowDepth="5" Direction="270" Opacity="0.3"/>
+            </Border.Effect>
+            <Border.Background>
+                <ImageBrush ImageSource="../Images/landing-banner.png" Stretch="Fill"/>
+            </Border.Background>
+        </Border>
+
+        <Button Name="btnViewActiveCredits" Style="{StaticResource Button}" Content="Ver créditos activos" FontWeight="Medium"  Background="#FCDC2A" FontSize="28" HorizontalAlignment="Left" Margin="571,456,0,0" VerticalAlignment="Top" Width="294" Height="61" Click="btnViewActiveCredits_Click" />
+
+    </Grid>
+</Page>
+

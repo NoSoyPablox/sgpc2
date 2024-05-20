@@ -44,6 +44,7 @@ namespace SGSC.Pages
         {
             InitializeComponent();
             UserSessionFrame.Content = new UserSessionFrame();
+            collectionExecutiveSidebar.Content = new CollectionExecutiveSidebar("activeCredits");
             GetActiveCredits();
 		}
 
