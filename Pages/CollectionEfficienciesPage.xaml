@@ -10,7 +10,7 @@
       Title="CollectionEfficienciesPage">
 
     <Grid Background="White">
-        
+
         <Frame Name="UserSessionFrame" NavigationUIVisibility="Hidden" Margin="834,10,74,624"/>
 
 
