@@ -22,6 +22,7 @@ namespace SGSC.Pages
     public partial class RegisterCreditRequest : Page
     {
         private int idCustomer = -1;
+        private double totalAmount = 0.0;
         public RegisterCreditRequest(int idCustomer)
         {
             InitializeComponent();
@@ -126,6 +127,7 @@ namespace SGSC.Pages
                     var totalInterest = monthlyInterest * timePeriodInMonths;
                     //aqui calculamos el monto total
                     var totalAmount = amountIntroduced + (amountIntroduced * totalInterest);
+                    this.totalAmount = totalAmount;
                     //format to only 2 decimals
                     lbTotalAmount.Content = totalAmount.ToString("0.00");
                 }
@@ -150,8 +152,70 @@ namespace SGSC.Pages
                 lbAmountError.Content = "Introduzca un monto";
                 isValid = false;
             }
+            if (isValid)
+            {
+                registerCreditRequest();
+            }
             
         }
+
+        private void registerCreditRequest()
+        {
+            //obtain the selected promotion
+            var selectedPromotion = (CreditPromotion)cbCreditPromotions.SelectedItem;
+            using (var context = new sgscEntities())
+            {
+                var creditRequest = new CreditRequest();
+                creditRequest.FileNumber = "CR" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                creditRequest.Amount = this.totalAmount;
+                creditRequest.Status = 1;
+                creditRequest.TimePeriod = selectedPromotion.TimePeriod;
+                creditRequest.Purpose = tbPurpose.Text;
+                creditRequest.InterestRate = (decimal?)selectedPromotion.InterestRate;
+                creditRequest.CreationDate = DateTime.Now;
+                creditRequest.EmployeeId = 1; //Hardcoded for now
+                creditRequest.CustomerId = idCustomer;
+
+                //bring the customer bank account
+                var customerBankAccount = getCustomerBankAccount();
+                creditRequest.TransferBankAccount = customerBankAccount;
+                creditRequest.DirectDebitBankAccount = customerBankAccount;
+
+                //bring the employee
+                //var employee = getEmployee();
+                //creditRequest.Employee = employee;
+
+                context.CreditRequests.Add(creditRequest);
+                try
+                {
+                    context.SaveChanges();
+                    MessageBox.Show("Solicitud de crédito registrada exitosamente");
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Error al registrar la solicitud de crédito");
+                    throw;
+                }
+            }
+        }
+
+        private BankAccount getCustomerBankAccount()
+        {
+            using (var context = new sgscEntities())
+            {
+                var customerBankAccount = context.BankAccounts.Where(c => c.CustomerId == idCustomer).FirstOrDefault();
+                return customerBankAccount;
+            }
+        }
+
+        private Employee getEmployee()
+        {
+            using (var context = new sgscEntities())
+            {
+                var employee = context.Employees.Find(1);
+                return employee;
+            }
+        }   
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {

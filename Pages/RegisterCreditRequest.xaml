@@ -16,7 +16,7 @@
         <Rectangle Style="{StaticResource RoundedRectangleStyle}" Margin="196,166,136,415"/>
         <Rectangle Style="{StaticResource RoundedRectangleStyle}" Margin="196,330,136,131"/>
         <TextBox x:Name="tbAmount" Style="{StaticResource CustomTextBoxStyle}" Margin="246,400,887,278" VerticalContentAlignment="Center" FontSize="20" PreviewTextInput="tbAmount_PreviewTextInput" TextChanged="tbAmount_TextChanged"/>
-        <TextBox x:Name="tbAmount_Copiar" Style="{StaticResource CustomTextBoxStyle}" Margin="245,513,217,165" VerticalContentAlignment="Center" FontSize="20"/>
+        <TextBox x:Name="tbPurpose" Style="{StaticResource CustomTextBoxStyle}" Margin="245,513,217,165" VerticalContentAlignment="Center" FontSize="20"/>
         <ComboBox x:Name="cbCreditPromotions" HorizontalAlignment="Left" VerticalAlignment="Top" Width="148" Height="37" FontFamily="{StaticResource FontNunitoBold}" FontSize="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="523,405,0,0" SelectionChanged="cbCreditPromotions_SelectionChanged">
 
         </ComboBox>
