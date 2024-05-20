@@ -44,6 +44,29 @@ namespace SGSC.Pages
             lbFirstSurname.Content = "";
             lbSecondSurname.Content = "";
             lbCurp.Content = "";
+            lbRfcError.Content = "";
+            lbGenreError.Content = "";
+            lbBirthdateError.Content = "";
+            lbCivilStatusError.Content = "";
+
+            PopulateGenres();
+            PopulateCivilStatus();
+        }
+
+        private void PopulateGenres()
+        {
+            cbGenre.Items.Add("Masculino");
+            cbGenre.Items.Add("Femenino");
+            cbGenre.SelectedIndex = 0;
+        }
+
+        private void PopulateCivilStatus()
+        {
+            cbCivilStatus.Items.Add(Customer.GetCivilStatusString(Customer.CivilStatuses.Single));
+            cbCivilStatus.Items.Add(Customer.GetCivilStatusString(Customer.CivilStatuses.Married));
+            cbCivilStatus.Items.Add(Customer.GetCivilStatusString(Customer.CivilStatuses.Divorced));
+            cbCivilStatus.Items.Add(Customer.GetCivilStatusString(Customer.CivilStatuses.Widowed));
+            cbCivilStatus.SelectedIndex = 0;
         }
 
         private void btnContinue_Click(object sender, RoutedEventArgs e)
@@ -52,6 +75,10 @@ namespace SGSC.Pages
             lbFirstSurname.Content = "";
             lbSecondSurname.Content = "";
             lbCurp.Content = "";
+            lbRfcError.Content = "";
+            lbGenreError.Content = "";
+            lbBirthdateError.Content = "";
+            lbCivilStatusError.Content = "";
 
             bool valid = true;
             if (string.IsNullOrEmpty(tbName.Text))
@@ -79,6 +106,32 @@ namespace SGSC.Pages
                 valid = false;
                 lbCurp.Content = "Por favor introduzca un CURP válido";
             }
+            try
+            {
+                if (!Utils.TextValidator.ValidateRFC(tbRfc.Text))
+                {
+                    valid = false;
+                    lbRfcError.Content = "Por favor introduzca un RFC válido";
+                }
+            }
+            catch(Exception ex)
+            {
+                valid = false;
+                lbRfcError.Content = "Por favor introduzca un RFC válido";
+            }
+            if (dpBirthdate.SelectedDate == null)
+            {
+                valid = false;
+                lbBirthdateError.Content = "Por favor introduzca la fecha de nacimiento";
+            }
+            else
+            {
+                if (dpBirthdate.SelectedDate.Value.AddYears(18) > DateTime.Now)
+                {
+                    valid = false;
+                    lbBirthdateError.Content = "El cliente debe ser mayor de edad";
+                }
+            }
             if (!valid)
             {
                 return;
@@ -100,14 +153,15 @@ namespace SGSC.Pages
                 try
                 {
                     Customer customerToRegister = new Customer();
-                    customerToRegister.Curp = tbCURP.Text;
+                    customerToRegister.Curp = tbCURP.Text.ToUpper();
                     customerToRegister.Name = tbName.Text;
                     customerToRegister.FirstSurname = tbFirstSurname.Text;
                     customerToRegister.SecondSurname = tbSecondSurname.Text;
+                    customerToRegister.Rfc = tbRfc.Text.ToUpper();
+                    customerToRegister.BirthDate = dpBirthdate.SelectedDate.Value;
+                    customerToRegister.Genre = cbGenre.Text == "Masculino" ? "M" : "F";
+                    customerToRegister.CivilStatus = cbCivilStatus.SelectedIndex;
                     customerToRegister = db.Customers.Add(customerToRegister);
-                    customerToRegister.BirthDate = DateTime.Now;
-                    customerToRegister.Genre = "Male";
-                    customerToRegister.CivilStatus = "Single";
 
 					db.SaveChanges();
                     MessageBox.Show("Cliente registrado exitosamente.");
@@ -133,10 +187,14 @@ namespace SGSC.Pages
                 try
                 {
                     Customer customerToUpdate = db.Customers.Find(CustomerId);
-                    customerToUpdate.Curp = tbCURP.Text;
+                    customerToUpdate.Curp = tbCURP.Text.ToUpper();
                     customerToUpdate.Name = tbName.Text;
                     customerToUpdate.FirstSurname = tbFirstSurname.Text;
                     customerToUpdate.SecondSurname = tbSecondSurname.Text;
+                    customerToUpdate.Rfc = tbRfc.Text.ToUpper();
+                    customerToUpdate.BirthDate = dpBirthdate.SelectedDate.Value;
+                    customerToUpdate.Genre = cbGenre.Text == "Masculino" ? "M" : "F";
+                    customerToUpdate.CivilStatus = cbCivilStatus.SelectedIndex;
 
                     db.SaveChanges();
                     MessageBox.Show("Cliente actualizado exitosamente.");

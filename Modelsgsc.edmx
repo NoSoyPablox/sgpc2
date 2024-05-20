@@ -167,7 +167,7 @@
     <Property Name="Curp" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Rfc" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Genre" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="CivilStatus" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CivilStatus" Type="int" Nullable="false" />
     <Property Name="BirthDate" Type="datetime" Nullable="false" />
     <Property Name="CustomerAddress_CustomerAddressId" Type="int" Nullable="true" />
   </EntityType>
@@ -506,7 +506,7 @@
           <NavigationProperty Name="WorkCenters" Relationship="sgscModel.CustomerWorkCenter" FromRole="Customer" ToRole="WorkCenter" />
           <NavigationProperty Name="CustomerAddress" Relationship="sgscModel.CustomerAddressCustomer" FromRole="Customer" ToRole="CustomerAddress" />
           <Property Name="Genre" Type="String" Nullable="false" />
-          <Property Name="CivilStatus" Type="String" Nullable="false" />
+          <Property Name="CivilStatus" Type="Int32" Nullable="false" />
           <Property Name="BirthDate" Type="DateTime" Nullable="false" />
         </EntityType>
         <EntityType Name="Employee">

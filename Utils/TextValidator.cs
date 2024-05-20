@@ -107,5 +107,60 @@ namespace SGSC.Utils
         {
             return Regex.IsMatch(cardNumber, @"^[0-9]{16}$");
         }
+
+        public static bool ValidateRFC(string rfc)
+        {
+            try
+            {
+                if ((string.IsNullOrEmpty(rfc)) || (string.IsNullOrWhiteSpace(rfc)))  
+                {
+                    throw new ArgumentNullException("rfc", "RFC esta vacío");
+                }
+                else
+                {
+                    rfc = String.Concat(rfc.Where(c => !Char.IsWhiteSpace(c))); 
+                    rfc = rfc.ToUpper(); 
+
+                    if (rfc.Length == 13)
+                    {
+                        try
+                        {
+                            string rfcName = (rfc.Substring(0, 4));
+                            string rfcDate = (rfc.Substring(4, 6));
+                            string rfcHomoClave = (rfc.Substring(10, 3));
+
+                            bool isDigitPresent = rfcName.Any(c => char.IsDigit(c));
+                            if (isDigitPresent)
+                            {
+                                throw new Exception("Existe un digito en los primeros 4 caracteres del RFC");
+                            }
+                            else     
+                            {
+                                if (rfcDate.All(char.IsDigit)) 
+                                {
+                                    return true;
+                                }
+                                else 
+                                {
+                                    throw new Exception("Existen caracteres en la fecha de nacimiento del RFC");
+                                }
+                            }
+                        }
+                        catch (Exception)
+                        {
+                            throw;
+                        }
+                    }
+                    else
+                    {
+                        throw new ArgumentException("RFCString", "Error en la longitud del RFC, deben ser 12 caracteres");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }

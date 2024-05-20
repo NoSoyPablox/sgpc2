@@ -10,16 +10,16 @@ namespace SGSC.Pages
         {
             InitializeComponent();
             creditAdvisorSidebar.Content = new Frames.CreditAdvisorSidebar("home");
-		}
+        }
 
         private void ButtonClicNuevo_Cliente(object sender, RoutedEventArgs e)
-        {            
+        {
             var customerInfoPage = new CustomerInfoPage();
             if (NavigationService != null)
             {
                 NavigationService.Navigate(customerInfoPage);
             }
-            
-        }
 
+        }
+    }
 }

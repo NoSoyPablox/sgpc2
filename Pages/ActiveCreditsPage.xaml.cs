@@ -24,7 +24,7 @@ namespace SGSC.Pages
     /// </summary>
     public partial class ActiveCreditsPage : Page
     {
-        public class ActiveCredit
+        private class ActiveCredit
         {
             public string CreditPageNumber { get; set; }
             public string ClientFullName { get; set; }
