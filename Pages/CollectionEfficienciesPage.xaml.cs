@@ -181,8 +181,8 @@ namespace SGSC.Pages
                     FileNumber = i.ToString(),
                     PaymentDate = DateTime.Now.AddDays(15 * i),
                     Discount = biweeklyPayment,
-                    Amount = biweeklyPayment, 
-                    Efficiency = 0.0m 
+                    Amount = biweeklyPayment,
+                    Efficiency = 0.0m
                 };
 
                 paymentSchedule.Add(payment);

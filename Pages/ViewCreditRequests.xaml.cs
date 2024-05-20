@@ -241,13 +241,13 @@ namespace SGSC.Pages
         private void TextBox_CreditRequestSearchCustomerName(object sender, EventArgs e)
         {
             string textSearch = tbCustomerName.Text;
-            FilterCreditRequests(textSearch,"Customer Name");
+            FilterCreditRequests(textSearch, "Customer Name");
         }
 
         private void TextBox_CreditRequestSearchCustomerRfc(object sender, EventArgs e)
         {
             string textSearch = tbRfc.Text;
-            FilterCreditRequests(textSearch,"RFC");
+            FilterCreditRequests(textSearch, "RFC");
         }
 
 
@@ -274,7 +274,7 @@ namespace SGSC.Pages
                     break;
             }
 
-            ObservableCollection<CreditRequestData> creditRequestsDataAux2 = new ObservableCollection<CreditRequestData> (filteredRequests);
+            ObservableCollection<CreditRequestData> creditRequestsDataAux2 = new ObservableCollection<CreditRequestData>(filteredRequests);
             creditRequestsDataGrid.ItemsSource = creditRequestsDataAux2;
 
 
@@ -290,12 +290,12 @@ namespace SGSC.Pages
             CreditRequestData creditRequestData = (CreditRequestData)creditRequestsDataGrid.SelectedItem;
             if (creditRequestData != null)
             {
-               /*var creditRequestDetails = new CreditRequestDetails(creditRequestData.CreditRequestId);
-                if (NavigationService != null)
-                {
-                    NavigationService.Navigate(creditRequestDetails);
-                }*/
-               //Pendiente agregar la página CreditRequestDetails
+                /*var creditRequestDetails = new CreditRequestDetails(creditRequestData.CreditRequestId);
+                 if (NavigationService != null)
+                 {
+                     NavigationService.Navigate(creditRequestDetails);
+                 }*/
+                //Pendiente agregar la página CreditRequestDetails
             }
         }
 
@@ -304,7 +304,7 @@ namespace SGSC.Pages
             CreditRequestData selectedCreditRequest = (CreditRequestData)creditRequestsDataGrid.SelectedItem;
             if (selectedCreditRequest != null)
             {
-               NavigationService.Navigate(new CollectionEfficienciesPage(selectedCreditRequest.CreditRequestId));
+                NavigationService.Navigate(new CollectionEfficienciesPage(selectedCreditRequest.CreditRequestId));
             }
             else
             {
@@ -320,7 +320,7 @@ namespace SGSC.Pages
                  NavigationService.Navigate(correctCreditRequest);
              }*/
             //Pendiente agregar la página para Corregir solicitudes de crédito
-        
+
         }
     }
 }
