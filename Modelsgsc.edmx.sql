@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/19/2024 21:58:45
+-- Date Created: 05/19/2024 22:39:24
 -- Generated from EDMX file: C:\Users\aiwass\source\repos\SGSC\Modelsgsc.edmx
 -- --------------------------------------------------
 
@@ -113,8 +113,8 @@ CREATE TABLE [dbo].[BankAccounts] (
     [BankAccountId] int IDENTITY(1,1) NOT NULL,
     [InterbankCode] nvarchar(max)  NULL,
     [CardNumber] nvarchar(max)  NULL,
-    [AccountType] nvarchar(max)  NULL,
-    [CardType] nvarchar(max)  NULL,
+    [AccountType] int  NULL,
+    [CardType] int  NULL,
     [CustomerId] int  NOT NULL,
     [BankBankId] int  NULL
 );
@@ -248,7 +248,8 @@ GO
 -- Creating table 'Banks'
 CREATE TABLE [dbo].[Banks] (
     [BankId] int IDENTITY(1,1) NOT NULL,
-    [Name] nvarchar(max)  NOT NULL
+    [Name] nvarchar(max)  NOT NULL,
+    [InterbankCodePrefix] nvarchar(max)  NOT NULL
 );
 GO
 

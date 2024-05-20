@@ -78,6 +78,7 @@
     <Compile Include="Colony.cs">
       <DependentUpon>Modelsgsc.tt</DependentUpon>
     </Compile>
+    <Compile Include="Components\NumericBox.cs" />
     <Compile Include="Contact.cs">
       <DependentUpon>Modelsgsc.tt</DependentUpon>
     </Compile>
@@ -126,6 +127,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Modelsgsc.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Model\Bank.cs" />
     <Compile Include="Model\BankAccount.cs" />
     <Compile Include="Model\CreditRequest.cs" />
     <Compile Include="Model\Customer.cs" />
@@ -298,6 +300,7 @@
     <Resource Include="Images\Arrow-Icon.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Model\Scripts\InsertBanks.sql" />
     <Resource Include="Images\icon-error.png" />
     <Resource Include="Images\icon-check.png" />
     <Resource Include="Images\line.png" />

@@ -80,8 +80,8 @@
     <Property Name="BankAccountId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="InterbankCode" Type="nvarchar(max)" Nullable="true" />
     <Property Name="CardNumber" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="AccountType" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="CardType" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="AccountType" Type="int" Nullable="true" />
+    <Property Name="CardType" Type="int" Nullable="true" />
     <Property Name="CustomerId" Type="int" Nullable="false" />
     <Property Name="BankBankId" Type="int" Nullable="true" />
   </EntityType>
@@ -216,6 +216,7 @@
     </Key>
     <Property Name="BankId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="InterbankCodePrefix" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="Colonies">
     <Key>
@@ -401,8 +402,8 @@
           <Property Name="BankAccountId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="InterbankCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CardNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="AccountType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CardType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AccountType" Type="Int32" />
+          <Property Name="CardType" Type="Int32" />
           <Property Name="CustomerId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Customer" Relationship="Self.FK_BankAccountCustomer" FromRole="BankAccounts" ToRole="Customers" />
           <NavigationProperty Name="CreditRequestAsTransferAccount" Relationship="sgscModel.CreditRequestBankAccount" FromRole="BankAccount" ToRole="CreditRequest" />
@@ -695,6 +696,7 @@
           <Property Name="BankId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" />
           <NavigationProperty Name="BankAccounts" Relationship="sgscModel.BankBankAccount" FromRole="Bank" ToRole="BankAccount" />
+          <Property Name="InterbankCodePrefix" Type="String" Nullable="false" />
         </EntityType>
         <Association Name="BankBankAccount">
           <End Type="sgscModel.Bank" Role="Bank" Multiplicity="0..1" />
@@ -870,6 +872,7 @@
         <MappingFragment StoreEntitySet="Banks">
           <ScalarProperty Name="BankId" ColumnName="BankId" />
           <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="InterbankCodePrefix" ColumnName="InterbankCodePrefix" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

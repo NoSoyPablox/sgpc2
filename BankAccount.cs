@@ -24,8 +24,8 @@ namespace SGSC
         public int BankAccountId { get; set; }
         public string InterbankCode { get; set; }
         public string CardNumber { get; set; }
-        public string AccountType { get; set; }
-        public string CardType { get; set; }
+        public Nullable<int> AccountType { get; set; }
+        public Nullable<int> CardType { get; set; }
         public int CustomerId { get; set; }
         public Nullable<int> BankBankId { get; set; }
     

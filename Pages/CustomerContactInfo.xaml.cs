@@ -52,8 +52,8 @@ namespace SGSC.Pages
                     var customerContactInfo = db.CustomerContactInfoes.Where(ci => ci.CustomerId == customerId).FirstOrDefault();
                     if (customerContactInfo != null)
                     {
-                        tbPhoneNumber1.Text = customerContactInfo.PhoneNumberOne;
-                        tbPhoneNumber2.Text = customerContactInfo.PhoneNumberTwo;
+                        tbPhoneNumber1.Text = customerContactInfo.PhoneNumber1;
+                        tbPhoneNumber2.Text = customerContactInfo.PhoneNumber2;
                         tbEmailAddress.Text = customerContactInfo.Email;
                         contactInfoId = customerContactInfo.CustomerContactInfoId;
                     }
@@ -110,8 +110,8 @@ namespace SGSC.Pages
             {
                 var contactInfo = new SGSC.CustomerContactInfo
                 {
-                    PhoneNumberOne = tbPhoneNumber1.Text,
-                    PhoneNumberTwo = tbPhoneNumber2.Text,
+                    PhoneNumber1 = tbPhoneNumber1.Text,
+                    PhoneNumber2 = tbPhoneNumber2.Text,
                     Email = tbEmailAddress.Text,
                     CustomerId = customerId
                 };

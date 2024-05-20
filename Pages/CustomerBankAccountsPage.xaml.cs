@@ -25,8 +25,10 @@ namespace SGSC.Pages
     {
         private int customerId;
         private int? tansferAccountId = null;
+        private int? transferAccountBankId = null;
         private int? directDebitAccountId = null;
-        private bool edited = false;
+		private int? directDebitAccountBankId = null;
+		private bool edited = false;
 
         public CustomerBankAccountsPage(int customerId)
         {
@@ -42,11 +44,9 @@ namespace SGSC.Pages
 
         private void clearErrors()
         {
-            lbTansAccError.Content = "";
             lbTansAccCardNumberError.Content = "";
             lbTansAccInterbankCodeError.Content = "";
             lbDomAccBankInterbankCodeError.Content = "";
-            lbDomAccBankError.Content = "";
             lbDomAccBankCardNumberError.Content = "";
         }
 
@@ -56,23 +56,25 @@ namespace SGSC.Pages
             {
                 using (sgscEntities db = new sgscEntities())
                 {
-                    BankAccount transferAccount = db.BankAccounts.Where(ba => ba.CustomerId == customerId && ba.AccountType == "transfer").FirstOrDefault();
+                    BankAccount transferAccount = db.BankAccounts.Where(ba => ba.CustomerId == customerId && ba.AccountType == (int)BankAccount.AccountTypes.TransferAccount).FirstOrDefault();
                     if(transferAccount != null)
                     {
                         tbTansAccCardNumber.Text = transferAccount.CardNumber;
-                        tbTansAccBank.Text = transferAccount.BankName;
+                        tbTansAccBank.Text = transferAccount.Bank.Name;
                         tbTansAccInterbankCode.Text = transferAccount.InterbankCode;
                         tansferAccountId = transferAccount.BankAccountId;
-                    }
+                        transferAccountBankId = transferAccount.Bank.BankId;
+					}
 
-                    BankAccount directDebitAccount = db.BankAccounts.Where(ba => ba.CustomerId == customerId && ba.AccountType == "directDebit").FirstOrDefault();
+                    BankAccount directDebitAccount = db.BankAccounts.Where(ba => ba.CustomerId == customerId && ba.AccountType == (int)BankAccount.AccountTypes.DirectDebitAccount).FirstOrDefault();
                     if (directDebitAccount != null)
                     {
                         tbDomAccBankCardNumber.Text = directDebitAccount.CardNumber;
-                        tbDomAccBank.Text = directDebitAccount.BankName;
+                        tbDomAccBank.Text = directDebitAccount.Bank.Name;
                         tbDomAccBankInterbankCode.Text = directDebitAccount.InterbankCode;
                         directDebitAccountId = directDebitAccount.BankAccountId;
-                    }
+						directDebitAccountBankId = directDebitAccount.Bank.BankId;
+					}
                 }
             }
             catch (Exception ex)
@@ -100,18 +102,12 @@ namespace SGSC.Pages
                 lbTansAccCardNumberError.Content = "Por favor introduzca un número de tarjeta válido";
             }
 
-            if (string.IsNullOrEmpty(tbTansAccBank.Text))
-            {
-                valid = false;
-                lbTansAccError.Content = "Por favor introduzca el nombre del banco";
-            }
-
             if (string.IsNullOrEmpty(tbTansAccInterbankCode.Text))
             {
                 valid = false;
                 lbTansAccInterbankCodeError.Content = "Por favor introduzca el código interbancario";
             }
-            
+
             // Check if interbank code is valid
             if (!Utils.TextValidator.ValidateTextNumeric(tbTansAccInterbankCode.Text, 20))
             {
@@ -132,12 +128,6 @@ namespace SGSC.Pages
                 lbDomAccBankCardNumberError.Content = "Por favor introduzca un número de tarjeta válido";
             }
 
-            if (string.IsNullOrEmpty(tbDomAccBank.Text))
-            {
-                valid = false;
-                lbDomAccBankError.Content = "Por favor introduzca el nombre del banco";
-            }
-
             if (string.IsNullOrEmpty(tbDomAccBankInterbankCode.Text))
             {
                 valid = false;
@@ -151,7 +141,19 @@ namespace SGSC.Pages
                 lbDomAccBankInterbankCodeError.Content = "Por favor introduzca un código interbancario válido";
             }
 
-            if (!valid)
+            if (transferAccountBankId == null)
+            {
+                valid = false;
+				lbTansAccInterbankCodeError.Content = "Por favor introduzca una CLABE válida";
+			}
+
+			if (directDebitAccountBankId == null)
+			{
+				valid = false;
+				lbDomAccBankInterbankCodeError.Content = "Por favor introduzca una CLABE válida";
+			}
+
+			if (!valid)
             {
                 return;
             }
@@ -163,9 +165,10 @@ namespace SGSC.Pages
                     var transferAccount = new BankAccount
                     {
                         CardNumber = tbTansAccCardNumber.Text,
-                        BankName = tbTansAccBank.Text,
+                        BankBankId = transferAccountBankId,
                         InterbankCode = tbTansAccInterbankCode.Text,
-                        AccountType = "transfer",
+                        AccountType = (int)BankAccount.AccountTypes.TransferAccount,
+                        CardType = (int)BankAccount.CardTypes.Debit,
                         CustomerId = customerId
                     };
 
@@ -177,11 +180,12 @@ namespace SGSC.Pages
                     var directDebitAccount = new BankAccount
                     {
                         CardNumber = tbDomAccBankCardNumber.Text,
-                        BankName = tbDomAccBank.Text,
+                        BankBankId = directDebitAccountBankId,
                         InterbankCode = tbDomAccBankInterbankCode.Text,
-                        AccountType = "directDebit",
+                        AccountType = (int)BankAccount.AccountTypes.DirectDebitAccount,
+                        CardType = (int)BankAccount.CardTypes.Debit,
                         CustomerId = customerId
-                    };
+					};
 
                     if (directDebitAccountId != null)
                     {
@@ -215,21 +219,87 @@ namespace SGSC.Pages
         {
             // Disable debit account fields
             tbDomAccBankCardNumber.IsEnabled = false;
-            tbDomAccBank.IsEnabled = false;
             tbDomAccBankInterbankCode.IsEnabled = false;
 
             // Copy transfer account fields to debit account fields
             tbDomAccBankCardNumber.Text = tbTansAccCardNumber.Text;
             tbDomAccBank.Text = tbTansAccBank.Text;
             tbDomAccBankInterbankCode.Text = tbTansAccInterbankCode.Text;
+            directDebitAccountBankId = transferAccountBankId;
         }
 
         private void cbUseTheSameAccount_Unchecked(object sender, RoutedEventArgs e)
         {
             // Enable debit account fields
             tbDomAccBankCardNumber.IsEnabled = true;
-            tbDomAccBank.IsEnabled = true;
             tbDomAccBankInterbankCode.IsEnabled = true;
         }
-    }
+
+		private void tbTansAccInterbankCode_TextChanged(object sender, TextChangedEventArgs e)
+		{
+            var code = tbTansAccInterbankCode.Text;
+            if(code.Length >= 3)
+            {
+                var bank = Bank.BankFromInterbankCodePrefix(code.Substring(0, 3));
+				if (bank != null)
+				{
+					tbTansAccBank.Text = bank.Name;
+					transferAccountBankId = bank.BankId;
+				}
+				else
+				{
+					tbTansAccBank.Text = "Banco Desconocido";
+                    transferAccountBankId = null;
+				}
+
+				if (transferAccountBankId == null)
+				{
+					lbTansAccInterbankCodeError.Content = "Por favor introduzca una CLABE válida";
+				}
+				else
+				{
+					lbTansAccInterbankCodeError.Content = "";
+				}
+			}
+            else
+            {
+                tbTansAccBank.Text = "";
+                transferAccountBankId = null;
+				lbTansAccInterbankCodeError.Content = "";
+			}
+		}
+		private void tbDomAccBank_TextChanged(object sender, TextChangedEventArgs e)
+		{
+			var code = tbDomAccBankInterbankCode.Text;
+			if (code.Length >= 3)
+			{
+				var bank = Bank.BankFromInterbankCodePrefix(code.Substring(0, 3));
+				if (bank != null)
+				{
+					tbDomAccBank.Text = bank.Name;
+					directDebitAccountBankId = bank.BankId;
+				}
+				else
+				{
+					tbTansAccBank.Text = "Banco Desconocido";
+                    directDebitAccountBankId = null;
+				}
+
+				if (directDebitAccountBankId == null)
+				{
+					lbDomAccBankInterbankCodeError.Content = "Por favor introduzca una CLABE válida";
+				}
+				else
+				{
+					lbDomAccBankInterbankCodeError.Content = "";
+				}
+			}
+			else
+			{
+				tbTansAccBank.Text = "";
+                directDebitAccountBankId = null;
+				lbDomAccBankInterbankCodeError.Content = "";
+			}
+		}
+	}
 }

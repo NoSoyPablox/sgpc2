@@ -24,10 +24,6 @@
         <AssociationConnector Association="sgscModel.CreditRequestBankAccount" />
         <AssociationConnector Association="sgscModel.CreditRequestBankAccount1" ManuallyRouted="true" >
           <ConnectorPoint PointX="4.5" PointY="4.25" />
-          <ConnectorPoint PointX="4.5" PointY="4.0880013671875" />
-          <ConnectorPoint PointX="4.34003709597644" PointY="4.0880013671875" />
-          <ConnectorPoint PointX="4.96503709597644" PointY="3.9210936848958333" />
-          <ConnectorPoint PointX="5.125" PointY="3.9210936848958333" />
           <ConnectorPoint PointX="5.125" PointY="3.7590950520833335" />
         </AssociationConnector>
         <AssociationConnector Association="sgscModel.CreditRequestCreditCondition" />

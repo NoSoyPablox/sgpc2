@@ -8,11 +8,17 @@ namespace SGSC
 {
     public partial class BankAccount
     {
-        public enum AccountTypes
+        public enum AccountTypes : Int32
         {
             TransferAccount,
             DirectDebitAccount
         }
+
+        public enum CardTypes : Int32
+		{
+            Credit,
+			Debit
+		}
 
         public static string AccountTypeToString(AccountTypes accountType)
         {

@@ -105,8 +105,11 @@ namespace SGSC.Pages
                     customerToRegister.FirstSurname = tbFirstSurname.Text;
                     customerToRegister.SecondSurname = tbSecondSurname.Text;
                     customerToRegister = db.Customers.Add(customerToRegister);
+                    customerToRegister.BirthDate = DateTime.Now;
+                    customerToRegister.Genre = "Male";
+                    customerToRegister.CivilStatus = "Single";
 
-                    db.SaveChanges();
+					db.SaveChanges();
                     MessageBox.Show("Cliente registrado exitosamente.");
                     tbCURP.Text = "";
                     tbName.Text = "";
