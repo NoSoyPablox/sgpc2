@@ -743,18 +743,6 @@
           <Property Name="EndDate" Type="DateTime" Precision="3" />
           <Property Name="Interval" Type="Int32" Nullable="true" />
         </EntityType>
-        <EntityType Name="CreditPromotion">
-          <Key>
-            <PropertyRef Name="CreditPromotionId" />
-          </Key>
-          <Property Name="CreditPromotionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="TimePeriod" Type="Int32" />
-          <Property Name="InterestRate" Type="Double" />
-          <Property Name="StartDate" Type="DateTime" Precision="3" />
-          <Property Name="EndDate" Type="DateTime" Precision="3" />
-          <Property Name="Interval" Type="Int32" Nullable="true" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

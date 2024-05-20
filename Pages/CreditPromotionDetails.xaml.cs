@@ -205,6 +205,7 @@ namespace SGSC.Pages
                     db.SaveChanges();
 
                     MessageBox.Show("Promoción actualizada con éxito", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+                    //
                 }
             }
         }

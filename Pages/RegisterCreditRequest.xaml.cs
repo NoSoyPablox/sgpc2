@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SGSC.Frames;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,6 +27,9 @@ namespace SGSC.Pages
         public RegisterCreditRequest(int idCustomer)
         {
             InitializeComponent();
+
+            UserSessionFrame.Content = new UserSessionFrame();
+
             this.idCustomer = idCustomer;
             retrieveCustomerData();
             retrieveCreditPromotions();
@@ -44,6 +48,15 @@ namespace SGSC.Pages
                 {
                     lbName.Content = customer.Name + " " + customer.FirstSurname + " " + customer.SecondSurname ;
                     lbEmail.Content = customerContactInfo.Email;
+                    lbCurp.Content = customer.Curp;
+                    //calculate customer age
+                    var today = DateTime.Today;
+                    var age = today.Year - customer.BirthDate.Year;
+                    if (customer.BirthDate > today.AddYears(-age)) age--;
+                    lbAge.Content = age.ToString()+" años";
+                }else
+                {
+                    MessageBox.Show("Error al recuperar la información del cliente");
                 }
             }
         }
@@ -143,7 +156,6 @@ namespace SGSC.Pages
             lbAmountError.Content = "";
             lbPromotionError.Content = "";
 
-            //check if all fields are filled
             bool isValid = true;
             if (cbCreditPromotions.SelectedIndex == -1)
             {
@@ -155,6 +167,11 @@ namespace SGSC.Pages
                 lbAmountError.Content = "Introduzca un monto";
                 isValid = false;
             }
+            if (tbPurpose.Text.Length < 1)
+            {
+                lbPurposeError.Content = "Introduzca un propósito";
+                isValid = false;
+            }
             if (isValid)
             {
                 registerCreditRequest();
@@ -164,7 +181,6 @@ namespace SGSC.Pages
 
         private void registerCreditRequest()
         {
-            //obtain the selected promotion
             var selectedPromotion = (CreditPromotion)cbCreditPromotions.SelectedItem;
             using (var context = new sgscEntities())
             {
@@ -174,19 +190,14 @@ namespace SGSC.Pages
                 creditRequest.Status = 1;
                 creditRequest.TimePeriod = selectedPromotion.TimePeriod;
                 creditRequest.Purpose = tbPurpose.Text;
-                creditRequest.InterestRate = (decimal?)selectedPromotion.InterestRate;
+                MessageBox.Show("Valor recibido de interes" + selectedPromotion.InterestRate);
+                decimal decimalInterestRate = (decimal)selectedPromotion.InterestRate;
+                creditRequest.InterestRate = decimalInterestRate;
                 creditRequest.CreationDate = DateTime.Now;
                 creditRequest.EmployeeId = 1; //Hardcoded for now
                 creditRequest.CustomerId = idCustomer;
 
-                //bring the customer bank account
-                //var customerBankAccount = getCustomerBankAccount();
-                //creditRequest.TransferBankAccount = customerBankAccount;
-                //creditRequest.DirectDebitBankAccount = customerBankAccount;
 
-                //bring the employee
-                //var employee = getEmployee();
-                //creditRequest.Employee = employee;
 
                 context.CreditRequests.Add(creditRequest);
                 try
@@ -200,25 +211,7 @@ namespace SGSC.Pages
                     throw;
             }
         }
-    }
-
-        private BankAccount getCustomerBankAccount()
-        {
-            using (var context = new sgscEntities())
-            {
-                var customerBankAccount = context.BankAccounts.Where(c => c.CustomerId == idCustomer).FirstOrDefault();
-                return customerBankAccount;
-            }
-        }
-
-        private Employee getEmployee()
-        {
-            using (var context = new sgscEntities())
-            {
-                var employee = context.Employees.Find(1);
-                return employee;
-            }
-        }   
+    }   
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
