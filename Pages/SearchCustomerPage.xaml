@@ -23,9 +23,34 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="CenterGridHeaderStyle" TargetType="DataGridColumnHeader">
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
     </Page.Resources>
 
     <Grid>
-        
+        <DataGrid Name="dgCustomers" AutoGenerateColumns="False" CanUserAddRows="False" AlternatingRowBackground="#DAEFD0" Margin="136,215,28,99" FontSize="22">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Nombre" Binding="{Binding ClientFullName}" Width="360" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
+                <DataGridTextColumn Header="Género" Binding="{Binding CreditPeriod}" Width="150" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
+                <DataGridTextColumn Header="Fecha de nacimiento" Binding="{Binding CreditAmount}" Width="124" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
+                <DataGridTextColumn Header="RFC" Binding="{Binding CreditPendingDebt}" Width="200" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button Name="btnPreviousPage" Style="{StaticResource ButtonStyleCancel}" Content="&lt;" FontSize="20" HorizontalAlignment="Left" Margin="136,655,0,0" VerticalAlignment="Top" Height="28" Width="31" Click="btnPreviousPage_Click" />
+        <Button Name="btnNextPage" Style="{StaticResource ButtonStyleCancel}" Content=">" FontSize="20" HorizontalAlignment="Left" Margin="296,655,0,0" VerticalAlignment="Top" Height="28" Width="31" Click="btnNextPage_Click" />
+        <Label Name="lbCurrentPage" FontSize="20" Content="Página 1/1" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="172,649,0,0" VerticalAlignment="Top" Width="124"/>
+        <ComboBox Name="cbPages" FontSize="17" Margin="354,653,843,38" SelectionChanged="cbPages_SelectionChanged"/>
+
+        <Button Style="{StaticResource ButtonStyleCancel}" Content="Generar layout de cobros" FontSize="22" HorizontalAlignment="Left" Margin="584,646,0,0" VerticalAlignment="Top" Width="278" Height="40" />
+        <Button Style="{StaticResource ButtonStyleCancel}" Content="Registrar cobros" FontSize="22" HorizontalAlignment="Left" Margin="877,646,0,0" VerticalAlignment="Top" Width="180" Height="40" />
+        <Button Style="{StaticResource ButtonStyleConfirm}" Content="Ver eficiencias" FontSize="22" HorizontalAlignment="Left" Margin="1072,646,0,0" VerticalAlignment="Top" Width="180" Height="40" />
+
+        <Label Style="{StaticResource CustomLabelStyle}" FontSize="20" Content="Filtrar por Folio " HorizontalAlignment="Left" Margin="136,124,0,0" VerticalAlignment="Top" Height="34" Width="140"/>
+        <TextBox Name="tbPageNumberFilter" Style="{StaticResource CustomTextBoxStyle}" FontSize="18" VerticalContentAlignment="Center" Margin="136,151,843,524" TextChanged="tbFilter_TextChanged"/>
+
+        <Label Style="{StaticResource CustomLabelStyle}" FontSize="20" Content="Filtrar por cliente " HorizontalAlignment="Left" Margin="466,124,0,0" VerticalAlignment="Top" Height="34" Width="154"/>
+        <TextBox Name="tbCustomerNameFilter" Style="{StaticResource CustomTextBoxStyle}" FontSize="18" VerticalContentAlignment="Center" Margin="466,151,512,524" TextChanged="tbFilter_TextChanged"/>
     </Grid>
 </Page>
