@@ -17,8 +17,9 @@ namespace SGSC
         public int PaymentId { get; set; }
         public string FileNumber { get; set; }
         public Nullable<System.DateTime> PaymentDate { get; set; }
-        public string Amount { get; set; }
+        public Nullable<decimal> Amount { get; set; }
         public Nullable<int> CreditRequestId { get; set; }
+        public decimal AmountCharged { get; set; }
     
         public virtual CreditRequest CreditRequests { get; set; }
     }

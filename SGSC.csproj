@@ -69,7 +69,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Bank.cs">
+      <DependentUpon>Modelsgsc.tt</DependentUpon>
+    </Compile>
     <Compile Include="BankAccount.cs">
+      <DependentUpon>Modelsgsc.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Colony.cs">
       <DependentUpon>Modelsgsc.tt</DependentUpon>
     </Compile>
     <Compile Include="Contact.cs">

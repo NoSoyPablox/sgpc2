@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/16/2024 18:26:28
+-- Date Created: 05/19/2024 21:58:45
 -- Generated from EDMX file: C:\Users\aiwass\source\repos\SGSC\Modelsgsc.edmx
 -- --------------------------------------------------
 
@@ -159,10 +159,11 @@ CREATE TABLE [dbo].[CreditRequests] (
     [InterestRate] decimal(18,0)  NULL,
     [CreationDate] datetime  NULL,
     [EmployeeId] int  NULL,
-    [CustomerId] int  NOT NULL,
-    [TransferBankAccount_BankAccountId] int  NOT NULL,
-    [DirectDebitBankAccount_BankAccountId] int  NOT NULL,
-    [Employee_EmployeeId] int  NOT NULL
+    [CustomerId] int  NULL,
+    [PaymentsInterval] int  NOT NULL,
+    [TransferBankAccount_BankAccountId] int  NULL,
+    [DirectDebitBankAccount_BankAccountId] int  NULL,
+    [Employee_EmployeeId] int  NULL
 );
 GO
 
@@ -222,9 +223,10 @@ CREATE TABLE [dbo].[Payments] (
     [PaymentId] int IDENTITY(1,1) NOT NULL,
     [FileNumber] nvarchar(max)  NULL,
     [PaymentDate] datetime  NULL,
-    [Amount] nvarchar(max)  NULL,
+    [Amount] decimal(18,0)  NULL,
     [CreditRequestId] int  NULL,
-    [CreditRequests_CreditRequestId] int  NOT NULL
+    [AmountCharged] decimal(18,0)  NOT NULL,
+    [CreditRequests_CreditRequestId] int  NULL
 );
 GO
 

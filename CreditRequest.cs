@@ -30,7 +30,8 @@ namespace SGSC
         public Nullable<decimal> InterestRate { get; set; }
         public Nullable<System.DateTime> CreationDate { get; set; }
         public Nullable<int> EmployeeId { get; set; }
-        public int CustomerId { get; set; }
+        public Nullable<int> CustomerId { get; set; }
+        public int PaymentsInterval { get; set; }
     
         public virtual Customer Customer { get; set; }
         public virtual BankAccount TransferBankAccount { get; set; }
