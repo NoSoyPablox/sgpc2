@@ -198,9 +198,9 @@ namespace SGSC.Pages
                 {
                     MessageBox.Show("Error al registrar la solicitud de crédito");
                     throw;
-                }
             }
         }
+    }
 
         private BankAccount getCustomerBankAccount()
         {
