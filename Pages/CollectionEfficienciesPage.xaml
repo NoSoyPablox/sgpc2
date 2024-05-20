@@ -63,7 +63,7 @@
                                 <DataGridTextColumn Header="Fecha" IsReadOnly="True" CanUserResize="False" Binding="{Binding PaymentDate, StringFormat=dd/MM/yyyy}" Width="200" />
                                 <DataGridTextColumn Header="Descuento" IsReadOnly="True" CanUserResize="False" Binding="{Binding Discount}" Width="205"/>
                                 <DataGridTextColumn Header="Cobro" IsReadOnly="True" CanUserResize="False" Binding="{Binding Charge}" Width="200" />
-                                <DataGridTextColumn Header="Eficiencia de Cobro" IsReadOnly="True" CanUserResize="False" Binding="{Binding Efficiency}" Width="250" />
+                                <DataGridTextColumn Header="Eficiencia de Cobro" IsReadOnly="True" CanUserResize="False" Binding="{Binding EfficiencyString }" Width="250" />
                             </DataGrid.Columns>
                             <DataGrid.ColumnHeaderStyle>
                                 <Style TargetType="{x:Type DataGridColumnHeader}">
