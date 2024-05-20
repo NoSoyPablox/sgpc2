@@ -74,17 +74,17 @@
                                 </Style>
                             </DataGrid.ColumnHeaderStyle>
 
-					<!-- Estilo para las celdas -->
-					<DataGrid.CellStyle>
-						<Style TargetType="{x:Type DataGridCell}">
-							<Setter Property="BorderThickness" Value="0"/>
-						</Style>
-					</DataGrid.CellStyle>
-				</DataGrid>
+                            <DataGrid.CellStyle>
+                                <Style TargetType="{x:Type DataGridCell}">
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                </Style>
+                            </DataGrid.CellStyle>
+                        </DataGrid>
+                    </Border>
+                </ScrollViewer>
 
 
 
-				<Grid Margin="0,0,10,481">
 
                 <Grid Margin="0,0,10,481">
                     <Grid.ColumnDefinitions>
