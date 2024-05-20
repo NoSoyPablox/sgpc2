@@ -52,7 +52,10 @@ namespace SGSC.Pages
         {
             using (var context = new sgscEntities())
             {
-                var creditPromotions = context.CreditPromotions.ToList();
+                var currentDate = DateTime.Now;
+                var creditPromotions = context.CreditPromotions
+                    .Where(cp => cp.StartDate <= currentDate && cp.EndDate >= currentDate)
+                    .ToList();
                 if (creditPromotions != null)
                 {
                     foreach (var creditPromotion in creditPromotions)
@@ -177,9 +180,9 @@ namespace SGSC.Pages
                 creditRequest.CustomerId = idCustomer;
 
                 //bring the customer bank account
-                var customerBankAccount = getCustomerBankAccount();
-                creditRequest.TransferBankAccount = customerBankAccount;
-                creditRequest.DirectDebitBankAccount = customerBankAccount;
+                //var customerBankAccount = getCustomerBankAccount();
+                //creditRequest.TransferBankAccount = customerBankAccount;
+                //creditRequest.DirectDebitBankAccount = customerBankAccount;
 
                 //bring the employee
                 //var employee = getEmployee();
