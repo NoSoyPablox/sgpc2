@@ -41,7 +41,7 @@ namespace SGSC.Pages
                 //validate the fields
                 if (Utils.TextValidator.ValidateMultipleNames(names))
                 {
-                    using (SGSCEntities db = new SGSCEntities())
+                    using (sgscEntities db = new sgscEntities())
                     {
                         Contacts contact1 = new Contacts();
                         contact1.Name = tbName.Text;

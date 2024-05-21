@@ -83,7 +83,7 @@ namespace SGSC.Pages
         {
             try
             {
-                using (SGSCEntities db = new SGSCEntities())
+                using (sgscEntities db = new sgscEntities())
                 {
                     db.CreditPolicies.Add(policy);
                     db.SaveChanges();
@@ -99,7 +99,7 @@ namespace SGSC.Pages
         {
             try
             {
-                using (SGSCEntities db = new SGSCEntities())
+                using (sgscEntities db = new sgscEntities())
                 {
                     // Aquí asumimos que `CreditPolicy` es la entidad de tu base de datos que corresponde a `CreditPolicyWithStatus`
                     var dbPolicy = db.CreditPolicies.Find(policy.Id); // Suponiendo que hay una propiedad `Id` que identifica la política

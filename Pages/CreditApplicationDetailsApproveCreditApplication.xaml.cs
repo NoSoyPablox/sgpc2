@@ -36,7 +36,7 @@ namespace SGSC.Pages
         {
             try
             {
-                using (SGSCEntities db = new SGSCEntities())
+                using (sgscEntities db = new sgscEntities())
                 {
                     var comment = db.CreditRequests
                                     .Where(cr => cr.CreditRequestId == requestId)
@@ -55,7 +55,7 @@ namespace SGSC.Pages
         {
             try
             {
-                using (SGSCEntities db = new SGSCEntities())
+                using (sgscEntities db = new sgscEntities())
                 {
                     var status = db.CreditRequests
                                    .Where(cr => cr.CreditRequestId == requestId)
@@ -99,7 +99,7 @@ namespace SGSC.Pages
         {
             try
             {
-                using (SGSCEntities db = new SGSCEntities())
+                using (sgscEntities db = new sgscEntities())
                 {
                     return db.CreditPolicies.ToList();
                 }
@@ -115,7 +115,7 @@ namespace SGSC.Pages
         {
             try
             {
-                using (SGSCEntities db = new SGSCEntities())
+                using (sgscEntities db = new sgscEntities())
                 {
                     return db.CreditRequestCreditPolicy
                              .Where(crcp => crcp.CreditRequestId == requestId && crcp.CreditPolicyId.HasValue)
@@ -191,7 +191,7 @@ namespace SGSC.Pages
                 {
                     if (child is CheckBox cb && cb.IsChecked == true)
                     {
-                        using (SGSCEntities db = new SGSCEntities())
+                        using (sgscEntities db = new sgscEntities())
                         {
                             var policy = db.CreditPolicies.FirstOrDefault(p => p.Description == cb.Content.ToString());
                             if (policy != null)
@@ -204,7 +204,7 @@ namespace SGSC.Pages
 
                 List<int> previousSelectedPolicyIds = GetCreditPolicyIdsForRequest();
 
-                using (SGSCEntities db = new SGSCEntities())
+                using (sgscEntities db = new sgscEntities())
                 {
                     foreach (int previousPolicyId in previousSelectedPolicyIds)
                     {
@@ -246,7 +246,7 @@ namespace SGSC.Pages
         {
             try
             {
-                using (SGSCEntities db = new SGSCEntities())
+                using (sgscEntities db = new sgscEntities())
                 {
                     var solicitud = db.CreditRequests.FirstOrDefault(cr => cr.CreditRequestId == requestId);
 
@@ -283,7 +283,7 @@ namespace SGSC.Pages
         {
             try
             {
-                using (SGSCEntities db = new SGSCEntities())
+                using (sgscEntities db = new sgscEntities())
                 {
                     var solicitud = db.CreditRequests.FirstOrDefault(cr => cr.CreditRequestId == requestId);
 

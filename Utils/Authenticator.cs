@@ -39,7 +39,7 @@ namespace SGSC.Utils
             }
             try
             {
-                SGSCEntities context = new SGSCEntities();
+                sgscEntities context = new sgscEntities();
                 var user = context.Employees.Where(c => c.Email == email).FirstOrDefault();
                 if (user == null)
                 {

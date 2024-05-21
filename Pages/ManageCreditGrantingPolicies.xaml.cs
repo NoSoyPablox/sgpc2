@@ -23,7 +23,7 @@ namespace SGSC.Pages
         {
             try
             {
-                using (SGSCEntities db = new SGSCEntities())
+                using (sgscEntities db = new sgscEntities())
                 {
                     var creditPoliciesFromDb = db.CreditPolicies.ToList();
 

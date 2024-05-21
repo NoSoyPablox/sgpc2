@@ -31,7 +31,7 @@ namespace SGSC.Pages
 
         public void getWorkCenterInformation(int? requestId)
         {
-            using (SGSCEntities db = new SGSCEntities())
+            using (sgscEntities db = new sgscEntities())
             {
                 var workCenterQuery = (from cr in db.CreditRequests
                                        join wc in db.WorkCenters on cr.CustomerId equals wc.Customer_CustomerId

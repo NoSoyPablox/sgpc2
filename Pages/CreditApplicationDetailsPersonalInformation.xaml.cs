@@ -32,7 +32,7 @@ namespace SGSC.Pages
 
         public void getPersonalInformation()
         {
-            using (SGSCEntities db = new SGSCEntities())
+            using (sgscEntities db = new sgscEntities())
             {
                 var creditRequest = (from cr in db.CreditRequests
                                      where cr.CreditRequestId == requestId

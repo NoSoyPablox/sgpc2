@@ -41,7 +41,7 @@ namespace SGSC.Pages
 
         private void getBankAccounts(int requestId)
         {
-            using (SGSCEntities db = new SGSCEntities())
+            using (sgscEntities db = new sgscEntities())
             {
                 // Obtener cuenta de transferencia
                 var transferenciaAccount = (from ba in db.BankAccounts

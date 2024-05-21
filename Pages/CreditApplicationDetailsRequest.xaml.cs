@@ -34,7 +34,7 @@ namespace SGSC.Pages
 
         private void getRequestInfo(int RequestId)
         {
-            using (SGSCEntities db = new SGSCEntities())
+            using (sgscEntities db = new sgscEntities())
             {
                 var requestInfo = (from request in db.CreditRequests
                                    join employee in db.Employees on request.EmployeeId equals employee.EmployeeId

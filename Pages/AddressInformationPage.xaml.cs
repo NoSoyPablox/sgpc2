@@ -45,7 +45,7 @@ namespace SGSC.Pages
                     return;
                 }
 
-                var newCustomerAddressInfoes = new CustomerAddresses
+                var newCustomerAddressInfoes = new CustomerAddress
                 {
                     //Street = txtStreet.Text,
                     ExternalNumber = txtExternalNumber.Text,
@@ -69,7 +69,7 @@ namespace SGSC.Pages
                     newCustomerAddressInfoes.CustomerAddressId = addressId.Value;
                 }
 
-                using (SGSCEntities context = new SGSCEntities())
+                using (sgscEntities context = new sgscEntities())
                 {
                     context.CustomerAddresses.AddOrUpdate(newCustomerAddressInfoes);
                     context.SaveChanges();
@@ -90,7 +90,7 @@ namespace SGSC.Pages
             try
             {
 
-                using (var context = new SGSCEntities())
+                using (var context = new sgscEntities())
                 {
                     var customerData = context.CustomerAddresses
                         .Where(customerDb => customerDb.CustomerId == customerId)

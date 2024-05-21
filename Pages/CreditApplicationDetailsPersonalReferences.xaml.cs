@@ -40,7 +40,7 @@ namespace SGSC.Pages
 
         public void ObtainPersonalReferences()
         {
-            using (SGSCEntities db = new SGSCEntities())
+            using (sgscEntities db = new sgscEntities())
             {
                 var customerId = db.CreditRequests
                                     .Where(cr => cr.CreditRequestId == RequestId)

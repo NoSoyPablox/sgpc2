@@ -96,25 +96,25 @@
     <Compile Include="Contact.cs">
       <DependentUpon>Modelsgsc.tt</DependentUpon>
     </Compile>
-    <Compile Include="CreditConditions.cs">
+    <Compile Include="CreditCondition.cs">
       <DependentUpon>Modelsgsc.tt</DependentUpon>
     </Compile>
-    <Compile Include="CreditPolicies.cs">
+    <Compile Include="CreditPolicy.cs">
       <DependentUpon>Modelsgsc.tt</DependentUpon>
     </Compile>
-    <Compile Include="CreditRequestCreditPolicy.cs">
+    <Compile Include="CreditRequest.cs">
       <DependentUpon>Modelsgsc.tt</DependentUpon>
     </Compile>
-    <Compile Include="CreditRequests.cs">
+    <Compile Include="Customer.cs">
       <DependentUpon>Modelsgsc.tt</DependentUpon>
     </Compile>
-    <Compile Include="CustomerAddresses.cs">
+    <Compile Include="CustomerAddress.cs">
       <DependentUpon>Modelsgsc.tt</DependentUpon>
     </Compile>
-    <Compile Include="CustomerContactInfoes.cs">
+    <Compile Include="CustomerContactInfo.cs">
       <DependentUpon>Modelsgsc.tt</DependentUpon>
     </Compile>
-    <Compile Include="Customers.cs">
+    <Compile Include="Employee.cs">
       <DependentUpon>Modelsgsc.tt</DependentUpon>
     </Compile>
     <Compile Include="Frames\CollectionExecutiveSidebar.xaml.cs">
@@ -179,7 +179,7 @@
     <Compile Include="Pages\SearchCustomerPage.xaml.cs">
       <DependentUpon>SearchCustomerPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Payments.cs">
+    <Compile Include="Payment.cs">
       <DependentUpon>Modelsgsc.tt</DependentUpon>
     </Compile>
     <Compile Include="Utils\AddressCustomer.cs" />
@@ -195,7 +195,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utils\Utils.cs" />
-    <Compile Include="WorkCenters.cs">
+    <Compile Include="WorkCenter.cs">
       <DependentUpon>Modelsgsc.tt</DependentUpon>
     </Compile>
     <Page Include="Frames\CollectionExecutiveSidebar.xaml">
@@ -362,6 +362,7 @@
   <ItemGroup>
     <Content Include="Lib\Microsoft.Vbe.Interop.dll" />
     <Content Include="Lib\OFFICE.DLL" />
+    <Content Include="Modelsgsc.edmx.sql" />
     <Content Include="Model\Scripts\InsertBanks.sql" />
     <Resource Include="Images\icon-error.png" />
     <Resource Include="Images\icon-check.png" />

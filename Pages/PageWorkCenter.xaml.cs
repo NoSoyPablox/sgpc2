@@ -25,14 +25,14 @@ namespace SGSC.Pages
         private int customerId;
         private int? workCenterId = null;
 
-        private SGSCEntities dbContext;
+        private sgscEntities dbContext;
 
         Dictionary<TextBox, Label> textBoxLabelMap;
 
         public PageWorkCenter(int customerId)
         {
             InitializeComponent();
-            dbContext = new SGSCEntities();
+            dbContext = new sgscEntities();
             this.customerId = customerId;
 
             txtWorkCenterName.PreviewTextInput += AllowWriteLetters;
@@ -48,7 +48,7 @@ namespace SGSC.Pages
 
             try
             {
-                WorkCenters workCenter = dbContext.WorkCenters.FirstOrDefault(c => c.CustomerId == customerId);
+                WorkCenter workCenter = dbContext.WorkCenters.FirstOrDefault(c => c.CustomerId == customerId);
                 if(workCenter != null)
                 {
                     ShowInformationWorkCenter(workCenter);
@@ -76,7 +76,7 @@ namespace SGSC.Pages
             }
         }
 
-        public void ShowInformationWorkCenter(SGSC.WorkCenters userWorkCenter)
+        public void ShowInformationWorkCenter(SGSC.WorkCenter userWorkCenter)
         {
             if (userWorkCenter != null)
             {
@@ -147,7 +147,7 @@ namespace SGSC.Pages
                     ZipCode = txtZipCode.Text;
                     int IntZipCode = int.Parse(ZipCode);
 
-                    WorkCenters NewWorkcenter = new WorkCenters
+                    WorkCenter NewWorkcenter = new WorkCenter
                     {
                         CenterName = WorkCenterName,
                         PhoneNumber = Phone,
