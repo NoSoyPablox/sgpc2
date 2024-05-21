@@ -216,7 +216,7 @@
         <Label x:Name="lbCurp" Content="Error" HorizontalAlignment="Left" HorizontalContentAlignment="Right" Margin="786,385,0,0" VerticalAlignment="Top" Width="416" Foreground="#FFCE2222" FontStyle="Italic"/>
 
         <Label Style="{StaticResource CustomLabelStyle}" FontSize="20" Content="RFC" HorizontalAlignment="Left" Margin="314,407,0,0" VerticalAlignment="Top" Height="34"/>
-        <SGSC:TextBoxName x:Name ="tbRfc" Style="{StaticResource CustomTextBoxStyle}" FontSize="18" VerticalContentAlignment="Center" Margin="314,442,559,233"/>
+        <TextBox x:Name ="tbRfc" Style="{StaticResource CustomTextBoxStyle}" FontSize="18" VerticalContentAlignment="Center" Margin="314,442,559,233"/>
         <Label x:Name="lbRfcError" Content="Error" HorizontalAlignment="Left" HorizontalContentAlignment="Right" Margin="314,487,0,0" VerticalAlignment="Top" Width="407" Foreground="#FFCE2222" FontStyle="Italic"/>
         
         <Label Style="{StaticResource CustomLabelStyle}" FontSize="20" Content="Sexo biológico" HorizontalAlignment="Left" Margin="786,407,0,0" VerticalAlignment="Top" Height="34"/>
