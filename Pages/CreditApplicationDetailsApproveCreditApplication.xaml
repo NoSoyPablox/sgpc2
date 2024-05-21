@@ -1,0 +1,67 @@
+﻿<Page x:Class="SGSC.Pages.CreditApplicationDetailsApproveCreditApplication"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SGSC.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="720" d:DesignWidth="1280"
+      Title="CreditApplicationDetailsApproveCreditApplication">
+
+    <Page.Resources>
+        <FontFamily x:Key="FontNunito">/Typografic styles/Nunito-Regular.ttf#Nunito</FontFamily>
+        <Style x:Key="CustomLabelStyle" TargetType="Label">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Label">
+                        <TextBlock FontWeight="Medium" FontFamily="{StaticResource FontNunito}">
+                            <Run Text="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <Run Text="*" Foreground="#F67070"/>
+                        </TextBlock>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <Border Background="White" CornerRadius="22" Margin="0"></Border>
+        <Frame/>
+        <Frame Name="UserSessionFrame" NavigationUIVisibility="Hidden" Margin="888,10,20,624"/>
+
+        <Button x:Name="btnAcept" Style="{StaticResource ButtonStyleConfirm}" Content="Guardar" FontSize="15" HorizontalAlignment="Left" Margin="1118,664,0,0" VerticalAlignment="Top" Width="130" Height="38" Click="BtnClicAcept"/>
+        <Button x:Name="btnCancel" Style="{StaticResource ButtonStyleCancel}" Content="Cancelar" FontSize="15" HorizontalAlignment="Left" Margin="956,664,0,0" VerticalAlignment="Top" Height="39" Width="145" />
+
+        <Button Width="100" Height="50" BorderThickness="0" Background="Transparent" Margin="0,10,1180,660">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="/Images/return.png" Width="62" Height="53" />
+            </StackPanel>
+        </Button>
+
+        <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="12" Background="White" Margin="736,131,59,419">
+            <TextBox x:Name="txtObservations" BorderBrush="Transparent" FontFamily="{StaticResource FontNunito}" FontSize="18" Padding="10" TextWrapping="Wrap" AcceptsReturn="True" Margin="9,-1,9,-1" IsReadOnly="False" IsReadOnlyCaretVisible="False"/>
+        </Border>
+
+        <Label Content="Detalle de solicitud de crédito" FontFamily="{StaticResource FontPoppins}" FontSize="26" HorizontalAlignment="Left" Margin="276,77,0,0" VerticalAlignment="Top"/>
+        <Image Margin="276,126,602,254" Source="/Images/background-Approve.png" Stretch="Fill"/>
+        <Label Content="Observaciones" FontFamily="{StaticResource FontPoppins}" FontSize="26" HorizontalAlignment="Left" Margin="736,77,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="rbtAutorize" FontFamily="{StaticResource FontNunitoBold}" FontSize="19" Content="Autorizar" HorizontalAlignment="Left" Margin="736,337,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="rbtCorrect" FontFamily="{StaticResource FontNunitoBold}" FontSize="19" Content="Corregir" HorizontalAlignment="Left" Margin="876,337,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="rbtReject" FontFamily="{StaticResource FontNunitoBold}" FontSize="19" Content="Rechazar" HorizontalAlignment="Left" Margin="1028,337,0,0" VerticalAlignment="Top"/>
+
+        <Button FontFamily="{StaticResource FontNunitoBold}" FontSize="17" Cursor="Hand" Content="Solicitud" Tag="/Images/User.png" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Left" Margin="26,111,0,0" VerticalAlignment="Top" Height="47" Width="241" Click="BtnClicRequest"/>
+        <Button FontFamily="{StaticResource FontNunitoBold}" FontSize="17" Cursor="Hand" Content="Datos personales" Tag="/Images/address-icon.png" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Left" Margin="26,170,0,0" VerticalAlignment="Top" Height="47" Width="241" Click="BtnClicPersonalInformation"/>
+        <Button FontFamily="{StaticResource FontNunitoBold}" FontSize="17" Cursor="Hand" Content="Centro de trabajo" Tag="/Images/card-icon.png" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Left" Margin="26,226,0,0" VerticalAlignment="Top" Height="47" Width="241" Click="BtnClicWorkCenter"/>
+        <Button FontFamily="{StaticResource FontNunitoBold}" FontSize="17" Cursor="Hand" Content="Cuentas bancarias" Tag="/Images/icon-contact.png" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Left" Margin="26,0,0,0" VerticalAlignment="Center" Height="48" Width="241" Click="BtnClicBankAccounts"/>
+        <Button FontFamily="{StaticResource FontNunitoBold}" FontSize="17" Cursor="Hand" Content="Referencias personales" Tag="/Images/icon-job.png" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Left" Margin="26,279,0,0" VerticalAlignment="Top" Height="48" Width="241" Click="BtnClicPersonalReferences"/>
+        <Button FontFamily="{StaticResource FontNunitoBold}" FontSize="17" Cursor="Hand" Content="Documentación" Tag="/Images/people-icon.png" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Left" Margin="26,392,0,0" VerticalAlignment="Top" Height="48" Width="241"/>
+        <Button FontFamily="{StaticResource FontNunitoBold}" FontSize="17" Cursor="Hand" Content="Dictamen" Tag="/Images/people-icon.png" x:Name="btnApproveCreditRequest" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Left" Margin="26,450,0,0" VerticalAlignment="Top" Height="48" Width="241"/>
+
+        <StackPanel x:Name="CreditPoliciesPanel" Margin="294,150,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="316" Width="384">
+        </StackPanel>
+        <Label x:Name="lbErrorDescription" FontSize="14" Foreground="Red" FontFamily="{StaticResource FontNunito}" FontStyle="Italic" HorizontalAlignment="Left" Margin="736,303,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbErrorCreditPolicies" FontSize="14" Foreground="Red" FontFamily="{StaticResource FontNunito}" FontStyle="Italic" HorizontalAlignment="Left" Margin="282,464,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbErrorCreditStatus" FontSize="14" Foreground="Red" FontFamily="{StaticResource FontNunito}" FontStyle="Italic" HorizontalAlignment="Left" Margin="736,357,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Page>

@@ -1,0 +1,87 @@
+﻿<Page x:Class="SGSC.Pages.ManageCreditGrantingPolicies"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SGSC.Pages"
+      xmlns:frames="clr-namespace:SGSC.Frames"
+      
+      mc:Ignorable="d" 
+      d:DesignHeight="720" d:DesignWidth="1280"
+      Title="Manage_credit_granting_policies">
+
+    <Grid>
+        <Border Background="White" Margin="0">
+
+
+        </Border>
+
+
+
+        <Image Source="../Images/coin-logo.png" Margin="10,8,1186,594" RenderTransformOrigin="0.47,0.339"/>
+
+        <Image Source="../Images/line.png" Margin="97,0,1172,0"></Image>
+        <Rectangle Style="{StaticResource RoundedRectangleHomeStyle}"  Margin="18,146,1190,501"/>
+        <Button Style="{StaticResource Menubutton}" FontSize="15" HorizontalAlignment="Left" Margin="16,140,0,0" VerticalAlignment="Top" Width="72" Height="75">
+            <Image Source="../Images/icon-home-checked.png" Height="70" Width="50"/>
+        </Button>
+        <Button Style="{StaticResource Menubutton}" FontSize="15" HorizontalAlignment="Left" Margin="16,245,0,0" VerticalAlignment="Top" Width="72" Height="75">
+            <Image Source="../Images/groups-icon.png" Height="70" Width="50"/>
+        </Button>
+        <Button Style="{StaticResource Menubutton}" FontSize="15" HorizontalAlignment="Left" Margin="16,323,0,0" VerticalAlignment="Top" Width="72" Height="75" >
+            <Image Source="../Images/icon-policy.png" Height="70" Width="50"/>
+        </Button>
+
+        <Button Style="{StaticResource Menubutton}" FontSize="15" HorizontalAlignment="Left" Margin="16,400,0,0" VerticalAlignment="Top" Width="72" Height="75">
+            <Image Source="../Images/icon-locked.png" Height="70" Width="50"/>
+        </Button>
+
+        <Button Style="{StaticResource Menubutton}" FontSize="15" HorizontalAlignment="Left" Margin="16,480,0,0" VerticalAlignment="Top" Width="72" Height="75">
+            <Image Source="../Images/icon-discount.png" Height="70" Width="50"/>
+        </Button>
+
+        <Button Name="LogoutButton" Background="White" Style="{StaticResource Menubutton}" FontSize="15" HorizontalAlignment="Left" Margin="16,630,0,0" VerticalAlignment="Top" Width="72" Height="75" >
+            <Image Source="../Images/icon-logout.png" Height="70" Width="50"/>
+        </Button>
+
+        <Frame Name="UserSessionFrame" NavigationUIVisibility="Hidden" Margin="888,10,20,624"/>
+
+        <Image Source="../Images/background-credit.png" HorizontalAlignment="Left" Margin="126,187,0,127"  Width="1127"/>
+        <Grid Margin="20">
+            <!-- Otros elementos de la interfaz de usuario aquí -->
+
+            <!-- Lista de políticas de crédito -->
+            <DataGrid FontFamily="{StaticResource FontNunitoSemiBold}" FontSize="16" x:Name="dataGridCreditPolicies" ItemsSource="{Binding CreditPolicies}" Margin="130,222,12,134" AutoGenerateColumns="False" Background="Transparent" 
+    GridLinesVisibility="None" BorderBrush="Transparent" >
+                <DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGridRow}" >
+                        <Setter Property="Margin" Value="0,0,0,10"/>
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="BorderBrush" Value="Transparent"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                    </Style>
+                    <Style TargetType="{x:Type DataGridColumnHeader}" >
+                        <Setter Property="Background" Value="Transparent"/>
+                    </Style>
+                    <Style TargetType="{x:Type DataGridCell}"  >
+                        <Setter Property="Margin" Value="0,12,0,12"/>
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="BorderBrush" Value="Transparent"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Descripción" Binding="{Binding Description}" Width="*" FontFamily="{StaticResource FontNunitoSemiBold}" FontSize="16"/>
+                    <DataGridTextColumn Header="Fecha" Binding="{Binding EffectiveDate}" Width="*" FontFamily="{StaticResource FontNunitoSemiBold}" FontSize="16"/>
+                    <DataGridTextColumn Header="Estatus" Binding="{Binding Status}" Width="*" FontFamily="{StaticResource FontNunitoSemiBold}" FontSize="16"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+        </Grid>
+
+        <Button Style="{StaticResource ButtonStyleDanger}" Content="Agregar" FontSize="20" FontFamily="{StaticResource FontNunitoSemiBold}" HorizontalAlignment="Left" Margin="1075,602,0,0" VerticalAlignment="Top" Width="160" Height="42" Click="BtnClickAddCreditPolicie"/>
+        <Button Style="{StaticResource ButtonStyleConfirm}" Content="Modificar" FontSize="20" HorizontalAlignment="Left" Margin="889,602,0,0" VerticalAlignment="Top" Width="160" Height="42" Click="BtnUpdatePolicyCredit" />
+
+
+    </Grid>
+</Page>

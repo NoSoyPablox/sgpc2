@@ -31,9 +31,8 @@
             </Border.Background>
         </Border>
 
-        <Button Style="{StaticResource Button}" Content="Nuevo Cliente" FontWeight="Medium"  Background="#FCDC2A" FontSize="28" HorizontalAlignment="Left" Margin="571,456,0,0" VerticalAlignment="Top" Width="294" Height="61" Click="ButtonClicNuevo_Cliente"/>
-        <Button Style="{StaticResource Button}" Content="Nueva solicitud" FontWeight="Medium"  Background="#1F3A52" Foreground="White" FontSize="28" HorizontalAlignment="Left" Margin="571,543,0,0" VerticalAlignment="Top" Width="294" Height="61"/>
-
+        <Button Style="{StaticResource Button}" Content="Visualizar solicitud" FontWeight="Medium"  Background="#FCDC2A" FontSize="28" HorizontalAlignment="Left" Margin="571,456,0,0" VerticalAlignment="Top" Width="294" Height="61" Click="ButtonClicNuevo_Cliente"/>
+        
     </Grid>
 </Page>
 

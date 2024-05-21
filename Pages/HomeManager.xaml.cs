@@ -16,13 +16,25 @@ using System.Windows.Shapes;
 namespace SGSC.Pages
 {
     /// <summary>
-    /// Lógica de interacción para CentroDeTrabajo.xaml
+    /// Lógica de interacción para Home_manager.xaml
     /// </summary>
-    public partial class CentroDeTrabajo : Page
+    public partial class Home_manager : Page
     {
-        public CentroDeTrabajo()
+        public List<string> CreditPolicies;
+        public Home_manager()
         {
             InitializeComponent();
         }
+
+        private void BtnClickManagerPolicyCredit(object sender, RoutedEventArgs e)
+        {
+            var ManageCreditPoliciesPage = new ManageCreditGrantingPolicies ();
+            if (NavigationService != null)
+            {
+                NavigationService.Navigate(ManageCreditPoliciesPage);
+            }
+        }
+
+        
     }
 }

@@ -1,0 +1,82 @@
+﻿<Page x:Class="SGSC.Pages.CreditApplicationDetailsWorkCenter"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SGSC.Pages"
+      xmlns:frames="clr-namespace:SGSC.Frames"
+      mc:Ignorable="d" 
+      d:DesignHeight="720" d:DesignWidth="1280"
+      Title="CreditApplicationDetailsWorkCenter">
+
+
+    <Page.Resources>
+        <!-- Definición de la fuente personalizada -->
+        <FontFamily x:Key="FuenteNunito">/Typografic styles/Nunito-Regular.ttf#Nunito</FontFamily>
+
+        <Style x:Key="CustomLabelStyle" TargetType="Label">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Label">
+                        <TextBlock FontWeight="Medium" FontFamily="{StaticResource FuenteNunito}">
+        <Run Text="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}"/>
+        <Run Text="*" Foreground="#F67070"/>
+                        </TextBlock>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+
+    <Grid>
+        <Border Background="White" CornerRadius="22">
+            <!-- Contenido dentro del Border -->
+            <!-- Aquí puedes poner tu contenido -->
+        </Border>
+
+        <Frame Margin="0,-12,0,12"/>
+
+        <Frame Name="UserSessionFrame" NavigationUIVisibility="Hidden" Margin="888,10,20,624"/>
+
+        <!-- Grid con color de fondo -->
+        <Button Style="{StaticResource ButtonStyleConfirm}" Content="Continuar" FontSize="15" HorizontalAlignment="Left" Margin="1126,662,0,0" VerticalAlignment="Top" Width="130" Height="38" Click="btnClicContinue"/>
+
+
+        <Button Width="100" Height="50" BorderThickness="0" Background="Transparent" Margin="0,10,1180,660">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="C:\Users\Dani\Desktop\Desarrollo de Software\sgsc\Images\return.png" Width="62" Height="53" />
+            </StackPanel>
+        </Button>
+        <Label Content="Detalle de solicitud de crédito" FontFamily="{StaticResource FontPoppins}" FontSize="26" HorizontalAlignment="Left" Margin="276,77,0,0" VerticalAlignment="Top"/>
+        <Image Margin="296,158,22,366" Source="C:\Users\Dani\Desktop\Desarrollo de Software\sgsc\Images\Backgroud-workCenter.png" Stretch="Fill"/>
+        <Label FontSize="16" FontWeight="Bold" Content="Empresa:" HorizontalAlignment="Left" Margin="306,214,0,0" VerticalAlignment="Top"/>
+        <Label FontSize="16" FontWeight="Bold" Content="Calle:" HorizontalAlignment="Left" Margin="307,263,0,0" VerticalAlignment="Top"/>
+        <Label FontSize="16" FontWeight="Bold" Content="Número exterior:" HorizontalAlignment="Left" Margin="307,307,0,0" VerticalAlignment="Top"/>
+        <Label FontSize="16" FontWeight="Bold" Content="Número interior:" HorizontalAlignment="Left" Margin="691,308,0,0" VerticalAlignment="Top"/>
+        <Label FontSize="16" x:Name="lbCompanyName" HorizontalAlignment="Left" Margin="381,214,0,0" VerticalAlignment="Top"/>
+        <Label FontSize="16" x:Name="lbOutsideNumber" HorizontalAlignment="Left" Margin="442,307,0,0" VerticalAlignment="Top"/>
+        <Label FontSize="16" x:Name="lbZipCode" HorizontalAlignment="Left" Margin="1117,307,0,0" VerticalAlignment="Top"/>
+        <Label FontSize="16" FontWeight="Bold" Content="Teléfono:" HorizontalAlignment="Left" Margin="305,170,0,0" VerticalAlignment="Top"/>
+        <Label FontSize="16" x:Name="lbPhoneNumber" HorizontalAlignment="Left" Margin="381,169,0,0" VerticalAlignment="Top"/>
+
+
+        <Button FontFamily="{StaticResource FontNunitoBold}" FontSize="17" Cursor="Hand" Content="Solicitud" Tag="../Images/User.png" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Left" Margin="26,111,0,0" VerticalAlignment="Top" Height="47" Width="241" Click="BtnClicRequest" />
+        <Button FontFamily="{StaticResource FontNunitoBold}" FontSize="17" Cursor="Hand" Content="Datos personales" Tag="../Images/address-icon.png" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Left" Margin="26,170,0,0" VerticalAlignment="Top" Height="47" Width="241" Click="BtnClicPersonalInformation"/>
+        <Button FontFamily="{StaticResource FontNunitoBold}" FontSize="17" x:Name="btnWorkCenter"   Cursor="Hand" Content="Centro de trabajo" Tag="../Images/card-icon.png" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Left" Margin="26,226,0,0" VerticalAlignment="Top" Height="47" Width="241"/>
+        <Button  FontFamily="{StaticResource FontNunitoBold}" FontSize="17" Cursor="Hand" Content="Cuentas bancarias" Tag="../Images/icon-contact.png" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Left" Margin="26,0,0,0" VerticalAlignment="Center" Height="48" Width="241" Click="BtnClicBankAccounts"/>
+        <Button FontFamily="{StaticResource FontNunitoBold}" FontSize="17" Cursor="Hand" Content="Referencias personales" Tag="../Images/icon-job.png"  Style="{StaticResource ButtonStyle}" HorizontalAlignment="Left" Margin="26,279,0,0" VerticalAlignment="Top" Height="48" Width="241" Click="BtnClicPersonalReferences"/>
+        <Button FontFamily="{StaticResource FontNunitoBold}" FontSize="17" Cursor="Hand" Content="Documentación" Tag="../Images/icon-contact.png" Style="{StaticResource ButtonStyle}"  HorizontalAlignment="Left" Margin="26,392,0,0" VerticalAlignment="Top" Height="48" Width="241"/>
+        <Button FontFamily="{StaticResource FontNunitoBold}" FontSize="17" Cursor="Hand" Content="Dictamen" Tag="../Images/icon-law.png" Style="{StaticResource ButtonStyle}"  HorizontalAlignment="Left" Margin="26,450,0,0" VerticalAlignment="Top" Height="48" Width="241" Click="BtnClicAproveRequest"/>
+        <Label FontSize="16" FontWeight="Bold" Content="Colonia:" HorizontalAlignment="Left" Margin="791,265,0,0" VerticalAlignment="Top"/>
+        <Label FontSize="16" FontWeight="Bold" Content="Código Postal:" HorizontalAlignment="Left" Margin="1005,307,0,0" VerticalAlignment="Top"/>
+        <Label FontSize="16" x:Name="lbInnerNumber" HorizontalAlignment="Left" Margin="821,308,0,0" VerticalAlignment="Top"/>
+        <Label FontSize="16" x:Name="lbColony" HorizontalAlignment="Left" Margin="857,264,0,0" VerticalAlignment="Top"/>
+        <Label FontSize="16" x:Name="lbStreet" HorizontalAlignment="Left" Margin="352,263,0,0" VerticalAlignment="Top"/>
+
+        <Label Content="Folio:" FontFamily="{StaticResource FontNunitoBold}" FontSize="25" HorizontalAlignment="Left" Margin="278,112,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbRequestRequestNumber" Foreground="Red" FontFamily="{StaticResource FontNunito}" FontSize="25" HorizontalAlignment="Left" Margin="346,112,0,0" VerticalAlignment="Top"/>
+
+
+    </Grid>
+</Page>

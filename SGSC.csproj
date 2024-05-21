@@ -96,25 +96,25 @@
     <Compile Include="Contact.cs">
       <DependentUpon>Modelsgsc.tt</DependentUpon>
     </Compile>
-    <Compile Include="CreditCondition.cs">
+    <Compile Include="CreditConditions.cs">
       <DependentUpon>Modelsgsc.tt</DependentUpon>
     </Compile>
-    <Compile Include="CreditPolicy.cs">
+    <Compile Include="CreditPolicies.cs">
       <DependentUpon>Modelsgsc.tt</DependentUpon>
     </Compile>
-    <Compile Include="CreditRequest.cs">
+    <Compile Include="CreditRequestCreditPolicy.cs">
       <DependentUpon>Modelsgsc.tt</DependentUpon>
     </Compile>
-    <Compile Include="Customer.cs">
+    <Compile Include="CreditRequests.cs">
       <DependentUpon>Modelsgsc.tt</DependentUpon>
     </Compile>
-    <Compile Include="CustomerAddress.cs">
+    <Compile Include="CustomerAddresses.cs">
       <DependentUpon>Modelsgsc.tt</DependentUpon>
     </Compile>
-    <Compile Include="CustomerContactInfo.cs">
+    <Compile Include="CustomerContactInfoes.cs">
       <DependentUpon>Modelsgsc.tt</DependentUpon>
     </Compile>
-    <Compile Include="Employee.cs">
+    <Compile Include="Customers.cs">
       <DependentUpon>Modelsgsc.tt</DependentUpon>
     </Compile>
     <Compile Include="Frames\CollectionExecutiveSidebar.xaml.cs">
@@ -179,9 +179,10 @@
     <Compile Include="Pages\SearchCustomerPage.xaml.cs">
       <DependentUpon>SearchCustomerPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Payment.cs">
+    <Compile Include="Payments.cs">
       <DependentUpon>Modelsgsc.tt</DependentUpon>
     </Compile>
+    <Compile Include="Utils\AddressCustomer.cs" />
     <Compile Include="Utils\Authenticator.cs" />
     <Compile Include="Utils\PaymentLayoutHelper.cs" />
     <Compile Include="Utils\TextValidator.cs" />
@@ -193,7 +194,8 @@
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WorkCenter.cs">
+    <Compile Include="Utils\Utils.cs" />
+    <Compile Include="WorkCenters.cs">
       <DependentUpon>Modelsgsc.tt</DependentUpon>
     </Compile>
     <Page Include="Frames\CollectionExecutiveSidebar.xaml">
@@ -277,10 +279,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\CentroDeTrabajo.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Pages\CustomerInfoPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -299,9 +297,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Pages\CentroDeTrabajo.xaml.cs">
-      <DependentUpon>CentroDeTrabajo.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\CustomerInfoPage.xaml.cs">
       <DependentUpon>CustomerInfoPage.xaml</DependentUpon>
     </Compile>
@@ -379,12 +374,38 @@
     <Resource Include="Images\user-circle-placeholder.png" />
     <Resource Include="Images\landing-banner.png" />
     <Resource Include="Images\login-page-bkg.png" />
+    <Resource Include="Images\return.png" />
+    <Resource Include="Images\background-request.png" />
+    <Resource Include="Images\Background-personal-information.png" />
+    <Resource Include="Images\Background personal information.png" />
+    <Resource Include="Images\Backgroud-workCenter.png" />
+    <Resource Include="Images\Background-bankAccounts.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\icon-discount.png" />
+    <Resource Include="Images\icon-locked.png" />
+    <Resource Include="Images\icon-policy.png" />
+    <Resource Include="Images\groups-icon.png" />
+    <Resource Include="Images\Background-workcenter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\background-Approve.png" />
+    <Resource Include="Images\background-Approve-request.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\background-CreditPolicies.png" />
+    <Resource Include="Images\background-credit.png" />
+    <Resource Include="Images\icons-calendar.png" />
+    <Resource Include="Images\background-request-client.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\background-Personal.png" />
+    <Resource Include="Images\icon-law.png" />
     <Content Include="Modelsgsc.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Modelsgsc.edmx</DependentUpon>
       <LastGenOutput>Modelsgsc.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Modelsgsc.edmx.sql" />
     <Content Include="Modelsgsc.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Modelsgsc.edmx</DependentUpon>

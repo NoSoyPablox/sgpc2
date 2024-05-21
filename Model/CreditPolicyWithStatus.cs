@@ -1,0 +1,22 @@
+﻿using System;
+
+namespace SGSC.Model
+{
+    public class CreditPolicyWithStatus
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public DateTime EffectiveDate { get; set; }
+        public string Status { get; set; }
+
+        public CreditPolicyWithStatus(int id, string name, string description, DateTime effectiveDate, string status)
+        {
+            Id = id;
+            Name = name;
+            Description = description;
+            EffectiveDate = effectiveDate;
+            Status = status;
+        }
+    }
+}

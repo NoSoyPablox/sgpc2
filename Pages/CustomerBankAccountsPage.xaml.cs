@@ -54,7 +54,7 @@ namespace SGSC.Pages
         {
             try
             {
-                using (sgscEntities db = new sgscEntities())
+                using (SGSCEntities db = new SGSCEntities())
                 {
                     BankAccount transferAccount = db.BankAccounts.Where(ba => ba.CustomerId == customerId && ba.AccountType == (int)BankAccount.AccountTypes.TransferAccount).FirstOrDefault();
                     if(transferAccount != null)
@@ -160,9 +160,9 @@ namespace SGSC.Pages
 
             try
             {
-                using (sgscEntities context = new sgscEntities())
+                using (SGSCEntities context = new SGSCEntities())
                 {
-                    var transferAccount = new BankAccount
+                    var transferAccounts = new BankAccounts
                     {
                         CardNumber = tbTansAccCardNumber.Text,
                         BankBankId = transferAccountBankId,
@@ -174,10 +174,10 @@ namespace SGSC.Pages
 
                     if (tansferAccountId != null)
                     {
-                        transferAccount.BankAccountId = tansferAccountId.Value;
+                        transferAccounts.BankAccountId = tansferAccountId.Value;
                     }
 
-                    var directDebitAccount = new BankAccount
+                    var directDebitAccount = new BankAccounts
                     {
                         CardNumber = tbDomAccBankCardNumber.Text,
                         BankBankId = directDebitAccountBankId,
@@ -192,7 +192,7 @@ namespace SGSC.Pages
                         directDebitAccount.BankAccountId = directDebitAccountId.Value;
                     }
 
-                    context.BankAccounts.AddOrUpdate(transferAccount);
+                    context.BankAccounts.AddOrUpdate(transferAccounts);
                     context.BankAccounts.AddOrUpdate(directDebitAccount);
                     context.SaveChanges();
 

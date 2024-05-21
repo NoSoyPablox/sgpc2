@@ -45,9 +45,9 @@ namespace SGSC.Pages
                     return;
                 }
 
-                var newCustomerAddressInfo = new CustomerAddress
+                var newCustomerAddressInfoes = new CustomerAddresses
                 {
-                    Street = txtStreet.Text,
+                    //Street = txtStreet.Text,
                     ExternalNumber = txtExternalNumber.Text,
                     ZipCode = txtZipCode.Text,
                     Colony = txtColony.Text,
@@ -57,21 +57,21 @@ namespace SGSC.Pages
 
                 if(!string.IsNullOrWhiteSpace(txtInternalNumber.Text))
                 {
-                    newCustomerAddressInfo.InternalNumber = txtInternalNumber.Text;
+                    newCustomerAddressInfoes.InternalNumber = txtInternalNumber.Text;
                 }
                 else
                 {
-                    newCustomerAddressInfo.InternalNumber = null;
+                    newCustomerAddressInfoes.InternalNumber = null;
                 }
 
                 if(addressId != null)
                 {
-                    newCustomerAddressInfo.CustomerAddressId = addressId.Value;
+                    newCustomerAddressInfoes.CustomerAddressId = addressId.Value;
                 }
 
-                using (sgscEntities context = new sgscEntities())
+                using (SGSCEntities context = new SGSCEntities())
                 {
-                    context.CustomerAddresses.AddOrUpdate(newCustomerAddressInfo);
+                    context.CustomerAddresses.AddOrUpdate(newCustomerAddressInfoes);
                     context.SaveChanges();
                 }
 
@@ -90,7 +90,7 @@ namespace SGSC.Pages
             try
             {
 
-                using (var context = new sgscEntities())
+                using (var context = new SGSCEntities())
                 {
                     var customerData = context.CustomerAddresses
                         .Where(customerDb => customerDb.CustomerId == customerId)
@@ -99,11 +99,11 @@ namespace SGSC.Pages
 
                     if (customerData != null)
                     {
-                        txtStreet.Text = customerData.Street;
+                        //txtStreet.Text = customerData.Street;
                         txtExternalNumber.Text = customerData.ExternalNumber;
                         txtInternalNumber.Text = customerData.InternalNumber;
-                        txtZipCode.Text = customerData.ZipCode;
-                        txtColony.Text = customerData.Colony;
+                        //txtZipCode.Text = customerData.ZipCode;
+                        //txtColony.Text = customerData.Colony;
                         addressId = customerData.CustomerAddressId;
                     }
                 }
