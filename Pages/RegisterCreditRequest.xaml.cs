@@ -47,9 +47,7 @@ namespace SGSC.Pages
                 if (customer != null && customerContactInfo != null)
                 {
                     lbName.Content = customer.Name + " " + customer.FirstSurname + " " + customer.SecondSurname ;
-                    lbEmail.Content = customerContactInfo.Email;
                     lbCurp.Content = customer.Curp;
-                    //calculate customer age
                     var today = DateTime.Today;
                     var age = today.Year - customer.BirthDate.Year;
                     if (customer.BirthDate > today.AddYears(-age)) age--;

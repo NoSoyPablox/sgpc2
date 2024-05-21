@@ -10,7 +10,9 @@
 
     <Grid>
         <Grid Height="720" Width="1280">
-            <Border Background="White" CornerRadius="22"/>
+            <Border Background="White" CornerRadius="22">
+            </Border>
+            <Button x:Name="btnEliminar" Style="{StaticResource Button}" Content="Eliminar" FontWeight="Medium"  Background="#FCDC2A" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top" Width="234" Height="52" Margin="439,635,0,0" Click="btnEliminar_Click"/>
             <Label FontFamily="{StaticResource FontPoppins}" FontWeight="Bold" FontSize="36" Content="Promociones de credito" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="240,115,0,0"/>
             <Button x:Name="btnSeeDetails" Style="{StaticResource Button}" Content="Ver detalles" FontWeight="Medium"  Background="#FCDC2A" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top" Width="234" Height="52" Margin="713,635,0,0" Click="btnSeeDetails_Click"/>
             <TextBox x:Name="tbSearch" Style="{StaticResource CustomTextBoxStyle}" Margin="640,182,344,499" FontFamily="{StaticResource FontNunito}" FontSize="18" VerticalContentAlignment="Center" TextChanged="tbSearch_TextChanged"/>
@@ -23,7 +25,7 @@
                         <Setter Property="VerticalContentAlignment" Value="Center"/>
                     </Style>
                 </DataGrid.Resources>
-                
+
                 <DataGrid.ColumnHeaderStyle>
                     <Style TargetType="{x:Type DataGridColumnHeader}">
                         <Setter Property="Background" Value="#A3D68A"/>
@@ -56,7 +58,7 @@
                     <DataGridTextColumn Header="Nombre" Binding="{Binding Name}" Width="170" IsReadOnly="True" FontWeight="Normal" FontFamily="{StaticResource FontNunito}" FontSize="16"/>
                     <DataGridTextColumn Header="Tasa de interés" Binding="{Binding InterestRate}" Width="200" IsReadOnly="True" FontFamily="{StaticResource FontNunito}" FontSize="16"/>
                     <DataGridTextColumn Header="Cantidad" Binding="{Binding TimePeriod}" Width="120" IsReadOnly="True" FontFamily="{StaticResource FontNunito}" FontSize="16"/>
-                    
+
                     <DataGridTemplateColumn Header="Intervalo" Width="140" IsReadOnly="True">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -84,7 +86,7 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    
+
                     <DataGridTextColumn Header="Inicio" Width="140" IsReadOnly="True" FontFamily="{StaticResource FontNunito}" FontSize="16" Binding="{Binding StartDate, StringFormat=\{0:dd/MM/yyyy\}}"/>
                     <DataGridTextColumn Header="Fin" Width="120" IsReadOnly="True" FontFamily="{StaticResource FontNunito}" FontSize="16" Binding="{Binding EndDate, StringFormat=\{0:dd/MM/yyyy\}}"/>
                 </DataGrid.Columns>

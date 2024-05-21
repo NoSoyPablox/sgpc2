@@ -113,5 +113,28 @@ namespace SGSC.Pages
         {
             searchCriterias();
         }
+
+        private void btnEliminar_Click(object sender, RoutedEventArgs e)
+        {
+            var promotion = (CreditPromotion)dgPromotions.SelectedItem;
+            if (promotion != null)
+            {
+                MessageBoxResult result = MessageBox.Show("¿Está seguro que desea eliminar la promoción?", "Eliminar promoción", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    using (sgscEntities db = new sgscEntities())
+                    {
+                        db.CreditPromotions.Attach(promotion);
+                        db.CreditPromotions.Remove(promotion);
+                        db.SaveChanges();
+                        retrievePromotions();
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Por favor seleccione una promoción", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }
 }
