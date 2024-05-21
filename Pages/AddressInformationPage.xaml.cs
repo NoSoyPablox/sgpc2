@@ -47,8 +47,8 @@ namespace SGSC.Pages
 
                 var newCustomerAddressInfoes = new CustomerAddress
                 {
-                    //Street = txtStreet.Text,
                     ExternalNumber = txtExternalNumber.Text,
+                    Street = txtStreet.Text,
                     ZipCode = txtZipCode.Text,
                     Colony = txtColony.Text,
                     CustomerId = customerId,
@@ -99,11 +99,11 @@ namespace SGSC.Pages
 
                     if (customerData != null)
                     {
-                        //txtStreet.Text = customerData.Street;
+                        txtStreet.Text = customerData.Street;
                         txtExternalNumber.Text = customerData.ExternalNumber;
                         txtInternalNumber.Text = customerData.InternalNumber;
-                        //txtZipCode.Text = customerData.ZipCode;
-                        //txtColony.Text = customerData.Colony;
+                        txtZipCode.Text = customerData.ZipCode;
+                        txtColony.Text = customerData.Colony;
                         addressId = customerData.CustomerAddressId;
                     }
                 }

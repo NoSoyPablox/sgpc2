@@ -185,26 +185,27 @@ namespace SGSC.Pages
                 var creditRequest = new CreditRequest();
                 creditRequest.FileNumber = "CR" + DateTime.Now.ToString("yyyyMMddHHmmss");
                 creditRequest.Amount = this.totalAmount;
-                creditRequest.Status = 1;
+                creditRequest.Status = 0;
                 creditRequest.TimePeriod = selectedPromotion.TimePeriod;
                 creditRequest.Purpose = tbPurpose.Text;
-                MessageBox.Show("Valor recibido de interes" + selectedPromotion.InterestRate);
                 creditRequest.InterestRate = selectedPromotion.InterestRate;
                 creditRequest.CreationDate = DateTime.Now;
                 creditRequest.EmployeeId = Utils.UserSession.Instance.Id;
                 creditRequest.CustomerId = idCustomer;
-
-
+                creditRequest.PaymentsInterval = selectedPromotion.Interval;
+                creditRequest.Description = "";
 
                 context.CreditRequests.Add(creditRequest);
                 try
                 {
                     context.SaveChanges();
                     MessageBox.Show("Solicitud de crédito registrada exitosamente");
+
+                    App.Current.MainFrame.Content = new HomePageCreditAdvisor();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Error al registrar la solicitud de crédito");
+                    MessageBox.Show("Error al registrar la solicitud de crédito: " + ex.Message);
                     throw;
             }
         }

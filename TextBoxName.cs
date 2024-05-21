@@ -12,7 +12,7 @@ namespace SGSC
     {
         private void previewTextInput(object sender, TextCompositionEventArgs e)
         {
-            if (System.Text.RegularExpressions.Regex.IsMatch(e.Text, @"[^0-9]+"))
+            if (System.Text.RegularExpressions.Regex.IsMatch(e.Text, @"[^a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\s]+$"))
             {
                 e.Handled = true;
             }

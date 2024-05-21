@@ -95,7 +95,7 @@ namespace SGSC.Pages
                 lbEmailAddressError.Content = "Por favor introduzca una dirección de correo.";
             }
 
-            if (TextValidator.ValidateEmail(tbEmailAddress.Text))
+            if (!TextValidator.ValidateEmail(tbEmailAddress.Text))
             {
                 valid = false;
                 lbEmailAddressError.Content = "Por favor una dirección de correo válida.";

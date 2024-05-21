@@ -100,6 +100,7 @@ namespace SGSC.Pages
                         contact1.SecondSurname = tbSecondSurname.Text;
                         contact1.PhoneNumber = tbPhoneNumber.Text;
                         contact1.CustomerId = customerId;
+                        contact1.Relationship = "Primo";
                         if (reference1Id != null)
                         {
                             contact1.ContactId = reference1Id.Value;
@@ -112,6 +113,7 @@ namespace SGSC.Pages
                         contact2.SecondSurname = tbSecondSurname2.Text;
                         contact2.PhoneNumber = tbPhoneNumber2.Text;
                         contact2.CustomerId = customerId;
+                        contact2.Relationship = "Primo";
                         if (reference2Id != null)
                         {
                             contact2.ContactId = reference2Id.Value;
@@ -119,15 +121,15 @@ namespace SGSC.Pages
                         db.Contacts.AddOrUpdate(contact2);
 
                         db.SaveChanges();
+
+                        MessageBox.Show("Referencias guardadas correctamente", "Referencias guardadas", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                        App.Current.MainFrame.Content = new RegisterCreditRequest(customerId);
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine("Error al registrar el cliente: " + ex.Message);
+                        MessageBox.Show("Error al registrar el cliente: " + ex.Message);
                     }
-
-                    MessageBox.Show("Referencias guardadas correctamente", "Referencias guardadas", MessageBoxButton.OK, MessageBoxImage.Information);
-                    
-                    App.Current.MainFrame.Content = new HomePageCreditAdvisor();
                 }
             }
             else
