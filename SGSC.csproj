@@ -99,6 +99,9 @@
     <Compile Include="CustomerContactInfo.cs">
       <DependentUpon>Modelsgsc.tt</DependentUpon>
     </Compile>
+    <Compile Include="Document.cs">
+      <DependentUpon>Modelsgsc.tt</DependentUpon>
+    </Compile>
     <Compile Include="Employee.cs">
       <DependentUpon>Modelsgsc.tt</DependentUpon>
     </Compile>
@@ -122,6 +125,11 @@
       <DependentUpon>Modelsgsc.tt</DependentUpon>
     </Compile>
     <Compile Include="Modelsgsc.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Modelsgsc.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Modelsgsc1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Modelsgsc.edmx</DependentUpon>
@@ -286,7 +294,7 @@
     </EmbeddedResource>
     <EntityDeploy Include="Modelsgsc.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Modelsgsc.Designer.cs</LastGenOutput>
+      <LastGenOutput>Modelsgsc1.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <None Include="App.Config" />
     <None Include="Modelsgsc.edmx.diagram">

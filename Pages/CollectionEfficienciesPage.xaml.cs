@@ -277,5 +277,17 @@ namespace SGSC.Pages
         {
             NavigationService.Navigate(new HomePageCreditAdvisor());
         }
+
+        private void DocumentsManager(object sender, RoutedEventArgs e)
+        {
+            int? creditRequestId = ObtainCreditRequestId();
+
+            NavigationService.Navigate(new DocumentsManagerPage(creditRequestId));
+        }
+
+        private int? ObtainCreditRequestId()
+        {
+            return CreditRequestId;
+        }
     }
 }

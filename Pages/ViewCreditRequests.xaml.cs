@@ -176,7 +176,7 @@ namespace SGSC.Pages
             {
                 using (sgscEntities db = new sgscEntities())
                 {
-
+                    Console.WriteLine("Entro a la funcion");
                     var creditRequests = (from cr in db.CreditRequests
                                           join c in db.Customers on cr.CustomerId equals c.CustomerId
                                           select new
@@ -195,9 +195,11 @@ namespace SGSC.Pages
                                           .ToList();
                     if (creditRequests.Any())
                     {
+                        
                         ObservableCollection<CreditRequestData> creditRequestsData = new ObservableCollection<CreditRequestData>();
                         foreach (var cr in creditRequests)
                         {
+                            
                             creditRequestsData.Add(new CreditRequestData
                             {
                                 CreditRequestId = cr.CreditRequestId,
@@ -214,8 +216,9 @@ namespace SGSC.Pages
                                 TimePeriodString = cr.TimePeriod.Value.ToString()
                             });
                         }
-
+                        
                         creditRequestsDataAux = creditRequestsData;
+                       
                     }
                 }
             }
@@ -322,5 +325,7 @@ namespace SGSC.Pages
             //Pendiente agregar la página para Corregir solicitudes de crédito
 
         }
+
+
     }
 }
