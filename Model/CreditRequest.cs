@@ -8,12 +8,38 @@ namespace SGSC
 {
     public partial class CreditRequest
     {
-        public enum CreditStatus
+
+
+        public enum RequestStatus
         {
-            Requested,
-            Approved,
+            Captured,
+            Pending,
             Rejected,
-            Finished
+            WaitingForCorrection,
+            Authorized,
+            Paid,
+            
+        }
+
+        public static string RequestStatusToString(RequestStatus requestStatus)
+        {
+            switch (requestStatus)
+            {
+                case RequestStatus.Paid:
+                    return "Pagado";
+                case RequestStatus.Authorized:
+                    return "Aprobada";
+                case RequestStatus.Rejected:
+                    return "Rechazada";
+                case RequestStatus.Captured:
+                    return "Capturada";
+                case RequestStatus.WaitingForCorrection:
+                    return "En espera de corrección";
+                 case RequestStatus.Pending:
+                    return "Pendiente";
+                default:
+                    return "Estado de solicitud desconocido";
+            }
         }
     }
 }

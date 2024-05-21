@@ -19,6 +19,7 @@ namespace SGSC
         {
             this.CreditConditions = new HashSet<CreditCondition>();
             this.Payment = new HashSet<Payment>();
+            this.Documents = new HashSet<Document>();
         }
     
         public int CreditRequestId { get; set; }
@@ -42,5 +43,7 @@ namespace SGSC
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Payment> Payment { get; set; }
         public virtual Employee Employee { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Document> Documents { get; set; }
     }
 }
