@@ -56,6 +56,7 @@ namespace SGSC.Pages
             InitializeComponent();
             CreditRequestId = creditRequestId;
             UserSessionFrame.Content = new UserSessionFrame();
+            creditAdvisorSidebar.Content = new CreditAdvisorSidebar("creditRequest");
             this.Loaded += CollectionEfficienciesPage_Loaded;
         }
 
