@@ -51,20 +51,20 @@
             <!-- Otros elementos de la interfaz de usuario aquí -->
 
             <!-- Lista de políticas de crédito -->
-            <DataGrid x:Name="dataGridCreditPolicies" ItemsSource="{Binding CreditPolicies}" Margin="130,222,12,134" AutoGenerateColumns="False" Background="Transparent" 
+            <DataGrid FontFamily="{StaticResource FontNunitoSemiBold}" FontSize="16" x:Name="dataGridCreditPolicies" ItemsSource="{Binding CreditPolicies}" Margin="130,222,12,134" AutoGenerateColumns="False" Background="Transparent" 
     GridLinesVisibility="None" BorderBrush="Transparent" >
                 <DataGrid.Resources>
-                    <Style TargetType="{x:Type DataGridRow}">
+                    <Style TargetType="{x:Type DataGridRow}" >
                         <Setter Property="Margin" Value="0,0,0,10"/>
                         <Setter Property="Background" Value="Transparent"/>
                         <Setter Property="BorderBrush" Value="Transparent"/>
                         <Setter Property="BorderThickness" Value="0"/>
                     </Style>
-                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                    <Style TargetType="{x:Type DataGridColumnHeader}" >
                         <Setter Property="Background" Value="Transparent"/>
                     </Style>
-                    <Style TargetType="{x:Type DataGridCell}">
-                        <Setter Property="Margin" Value="0,11,0,11"/>
+                    <Style TargetType="{x:Type DataGridCell}"  >
+                        <Setter Property="Margin" Value="0,12,0,12"/>
                         <Setter Property="Background" Value="Transparent"/>
                         <Setter Property="BorderBrush" Value="Transparent"/>
                         <Setter Property="BorderThickness" Value="0"/>
