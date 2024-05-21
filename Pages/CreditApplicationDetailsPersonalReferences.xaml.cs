@@ -174,6 +174,11 @@ namespace SGSC.Pages
                 ToastNotification notification = new ToastNotification("No se puede realizar la navegación en este momento. Por favor, inténtelo más tarde.", "Error");
             }
         }
+
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            App.Current.MainFrame.Content = new HomePageCreditAnalyst();
+        }
     }
 }
 

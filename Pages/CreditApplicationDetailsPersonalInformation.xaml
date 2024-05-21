@@ -44,9 +44,9 @@
         <Button Style="{StaticResource ButtonStyleConfirm}" Content="Continuar" FontSize="15" HorizontalAlignment="Left" Margin="1122,666,0,0" VerticalAlignment="Top" Width="130" Height="38" Click="BtnClicContinue"/>
 
 
-        <Button Width="100" Height="50" BorderThickness="0" Background="Transparent" Margin="-4,11,1184,659">
+        <Button Width="100" Height="50" BorderThickness="0" Background="Transparent" Margin="-4,11,1184,659" Click="btnBack_Click">
             <StackPanel Orientation="Horizontal">
-                <Image Source="C:\Users\Dani\Desktop\Desarrollo de Software\sgsc\Images\return.png" Width="62" Height="53" />
+                <Image Source="..\Images\return.png" Width="62" Height="53" />
             </StackPanel>
         </Button>
         <Label Content="Detalle de solicitud de crédito" FontFamily="{StaticResource FontPoppins}" FontSize="26" HorizontalAlignment="Left" Margin="276,77,0,0" VerticalAlignment="Top"/>

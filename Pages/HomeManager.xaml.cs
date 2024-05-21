@@ -20,7 +20,7 @@ namespace SGSC.Pages
     /// </summary>
     public partial class Home_manager : Page
     {
-        public List<string> CreditPolicies;
+        public List<string> CreditPolicy;
         public Home_manager()
         {
             InitializeComponent();

@@ -94,7 +94,7 @@ namespace SGSC.Pages
 
                 lbPhoneOne.Content = creditRequest.PhoneOne;
                 lbPhoneTwo.Content = creditRequest.PhoneTwo;
-                CheckCheckboxMaritalStatus(creditRequest.MaritalStatus);
+                CheckCheckboxMaritalStatus((Customer.CivilStatuses)creditRequest.MaritalStatus);
 
                 lbRequestRequestNumber.Content = creditRequest.FileNumber;
             }
@@ -114,23 +114,23 @@ namespace SGSC.Pages
             }
         }
 
-        public void CheckCheckboxMaritalStatus(String maritalStatus)
+        public void CheckCheckboxMaritalStatus(Customer.CivilStatuses maritalStatus)
         {
-            switch (maritalStatus.ToLower())
+            switch (maritalStatus)
             {
-                case "soltero(a)":
+                case Customer.CivilStatuses.Single:
                     cbxSingle.IsChecked = true;
                     break;
-                case "casado(a)":
+                case Customer.CivilStatuses.Married:
                     cbxMarried.IsChecked = true;
                     break;
-                case "divorciado(a)":
+                case Customer.CivilStatuses.Divorced:
                     cbxDivorced.IsChecked = true;
                     break;
-                case "viudo(a)":
+                case Customer.CivilStatuses.Widowed:
                     cbxMortgaged.IsChecked = true;
                     break;
-                case "unión libre":
+                case Customer.CivilStatuses.Concubinage:
                     cbxFreeUnion.IsChecked = true;
                     break;
             }
@@ -244,6 +244,11 @@ namespace SGSC.Pages
                 ToastNotification notification = new ToastNotification("No se puede realizar la navegación en este momento. Por favor, inténtelo más tarde.", "Error");
 
             }
+        }
+
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            App.Current.MainFrame.Content = new HomePageCreditAnalyst();
         }
     }
 }

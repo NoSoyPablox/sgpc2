@@ -71,6 +71,13 @@ namespace SGSC.Utils
                     break;
                 }
 
+                case (short)Employee.EmployeeRoles.CreditAnalyst:
+                {
+                    var landingPage = new Pages.HomePageCreditAnalyst();
+                    mainFrame.Content = landingPage;
+                    break;
+                }
+
                 default:
                     MessageBox.Show("Rol no implementado.");
                     break;

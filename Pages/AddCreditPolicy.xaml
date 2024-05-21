@@ -46,7 +46,7 @@
 
         <Button Width="100" Height="50" BorderThickness="0" Background="Transparent" Margin="-4,8,898,662" Click="BtnReturn">
             <StackPanel Orientation="Horizontal">
-                <Image Source="C:\Users\Dani\Desktop\Desarrollo de Software\sgsc\Images\return.png" Width="62" Height="53" />
+                <Image Source="..\Images\return.png" Width="62" Height="53" />
             </StackPanel>
         </Button>
 

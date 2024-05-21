@@ -14,6 +14,12 @@ namespace SGSC
     
     public partial class CustomerContactInfo
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public CustomerContactInfo()
+        {
+            this.CreditRequestCreditPolicies = new HashSet<CreditRequestCreditPolicy>();
+        }
+    
         public int CustomerContactInfoId { get; set; }
         public string Email { get; set; }
         public string PhoneNumber1 { get; set; }
@@ -21,5 +27,7 @@ namespace SGSC
         public Nullable<int> CustomerId { get; set; }
     
         public virtual Customer Customer { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CreditRequestCreditPolicy> CreditRequestCreditPolicies { get; set; }
     }
 }

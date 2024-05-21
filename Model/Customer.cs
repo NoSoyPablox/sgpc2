@@ -14,7 +14,8 @@ namespace SGSC
             Single = 0,
             Married,
             Divorced,
-            Widowed
+            Widowed,
+            Concubinage
         }
 
         public string FullName 
@@ -37,6 +38,8 @@ namespace SGSC
                     return "Divorciado(a)";
                 case CivilStatuses.Widowed:
                     return "Viudo(a)";
+                case CivilStatuses.Concubinage:
+                    return "Union libre";
                 default:
                     return "Desconocido";
             }

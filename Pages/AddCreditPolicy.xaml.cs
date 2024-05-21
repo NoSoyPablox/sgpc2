@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using SGSC.Model;
 
 namespace SGSC.Pages
 {
@@ -50,7 +49,7 @@ namespace SGSC.Pages
             if (selectedPolicy == null)
             {
                 // Crear una nueva política de crédito
-                CreditPolicies policy = new CreditPolicies
+                CreditPolicy policy = new CreditPolicy
                 {
                     Name = name,
                     Description = description,
@@ -76,10 +75,10 @@ namespace SGSC.Pages
             }
 
             // Navegar de vuelta a la página anterior
-            NavigationService.GoBack();
+            NavigationService.Content = new ManageCreditGrantingPolicies();
         }
 
-        private void SaveCreditPolicy(CreditPolicies policy)
+        private void SaveCreditPolicy(CreditPolicy policy)
         {
             try
             {

@@ -95,7 +95,7 @@ namespace SGSC.Pages
             }
         }
 
-        public List<CreditPolicies> GetAllCreditPolicies()
+        public List<CreditPolicy> GetAllCreditPolicies()
         {
             try
             {
@@ -107,7 +107,7 @@ namespace SGSC.Pages
             catch (Exception ex)
             {
                 MessageBox.Show($"Error al obtener políticas de crédito: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return new List<CreditPolicies>();
+                return new List<CreditPolicy>();
             }
         }
 
@@ -117,7 +117,7 @@ namespace SGSC.Pages
             {
                 using (sgscEntities db = new sgscEntities())
                 {
-                    return db.CreditRequestCreditPolicy
+                    return db.CreditRequestCreditPolicies
                              .Where(crcp => crcp.CreditRequestId == requestId && crcp.CreditPolicyId.HasValue)
                              .Select(crcp => crcp.CreditPolicyId.Value)
                              .ToList();
@@ -138,13 +138,13 @@ namespace SGSC.Pages
                 CreditPoliciesPanel.Children.Clear();
 
                 // Obtén todas las políticas de crédito
-                List<CreditPolicies> allPolicies = GetAllCreditPolicies();
+                List<CreditPolicy> allPolicies = GetAllCreditPolicies();
 
                 // Obtén los IDs de las políticas de crédito para la solicitud
                 List<int> creditPolicyIdsForRequest = GetCreditPolicyIdsForRequest();
 
                 // Agrega dinámicamente los CheckBox al StackPanel
-                foreach (CreditPolicies policy in allPolicies)
+                foreach (CreditPolicy policy in allPolicies)
                 {
                     CheckBox cb = new CheckBox
                     {
@@ -210,11 +210,11 @@ namespace SGSC.Pages
                     {
                         if (!creditPolicyIds.Contains(previousPolicyId))
                         {
-                            CreditRequestCreditPolicy associationToRemove = db.CreditRequestCreditPolicy.FirstOrDefault(x => x.CreditRequestId == requestId && x.CreditPolicyId == previousPolicyId);
+                            CreditRequestCreditPolicy associationToRemove = db.CreditRequestCreditPolicies.FirstOrDefault(x => x.CreditRequestId == requestId && x.CreditPolicyId == previousPolicyId);
 
                             if (associationToRemove != null)
                             {
-                                db.CreditRequestCreditPolicy.Remove(associationToRemove);
+                                db.CreditRequestCreditPolicies.Remove(associationToRemove);
                             }
                         }
                     }
@@ -229,7 +229,7 @@ namespace SGSC.Pages
                                 CreditPolicyId = policyId
                             };
 
-                            db.CreditRequestCreditPolicy.Add(newAssociation);
+                            db.CreditRequestCreditPolicies.Add(newAssociation);
                         }
                     }
 
@@ -428,6 +428,11 @@ namespace SGSC.Pages
             }
 
             return true;
+        }
+
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            App.Current.MainFrame.Content = new HomePageCreditAnalyst();
         }
     }
 }

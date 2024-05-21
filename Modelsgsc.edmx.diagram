@@ -24,7 +24,7 @@
         <AssociationConnector Association="sgscModel.CreditRequestBankAccount" />
         <AssociationConnector Association="sgscModel.CreditRequestBankAccount1" ManuallyRouted="true" >
           <ConnectorPoint PointX="4.5" PointY="4.25" />
-          <ConnectorPoint PointX="5.125" PointY="3.7590950520833335" />
+          <ConnectorPoint PointX="5.125" PointY="2.1983012437214025" />
         </AssociationConnector>
         <AssociationConnector Association="sgscModel.CreditRequestCreditCondition" />
         <AssociationConnector Association="sgscModel.CustomerWorkCenter" ManuallyRouted="false" >
@@ -35,6 +35,9 @@
         <EntityTypeShape EntityType="sgscModel.Bank" Width="1.5" PointX="3" PointY="1.375" />
         <AssociationConnector Association="sgscModel.BankBankAccount" />
         <EntityTypeShape EntityType="sgscModel.Colony" Width="1.5" PointX="0.75" PointY="0.5" />
+        <EntityTypeShape EntityType="sgscModel.CreditRequestCreditPolicy" Width="1.5" PointX="10.5" PointY="3" />
+        <AssociationConnector Association="sgscModel.CustomerContactInfoCreditRequestCreditPolicy" />
+        <AssociationConnector Association="sgscModel.ContactCreditRequestCreditPolicy" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -49,13 +49,13 @@
 
 
 
-        <Button Width="100" Height="50" BorderThickness="0" Background="Transparent" Margin="4,10,1176,660">
+        <Button Name="btnBack" Width="100" Height="50" BorderThickness="0" Background="Transparent" Margin="4,10,1176,660" Click="btnBack_Click">
             <StackPanel Orientation="Horizontal">
                 <Image Source="..\Images\return.png" Width="62" Height="53" />
             </StackPanel>
         </Button>
         <Label Content="Detalle de solicitud de crédito"  FontFamily="{StaticResource FontPoppins}" FontSize="26" HorizontalAlignment="Left" Margin="276,71,0,0" VerticalAlignment="Top"/>
-        <Image Source="C:\Users\Dani\Desktop\Desarrollo de Software\sgsc\Images\background-request-client.png" HorizontalAlignment="Left" Height="295" Margin="276,156,0,0" VerticalAlignment="Top" Width="994"/>
+        <Image Source="..\Images\background-request-client.png" HorizontalAlignment="Left" Height="295" Margin="276,156,0,0" VerticalAlignment="Top" Width="994"/>
         <Label Content="Vendedor:" FontSize="16" FontWeight="Bold"  FontFamily="{StaticResource FontNunito}" HorizontalAlignment="Left" Margin="294,173,0,0" VerticalAlignment="Top"/>
         <Label Content="Fecha:" FontSize="16" FontWeight="Bold" FontFamily="{StaticResource FontNunito}" HorizontalAlignment="Left" Margin="932,171,0,0" VerticalAlignment="Top"/>
         <Label Content="Cantidad solicitada (número y letra):" FontSize="16" FontWeight="Bold" FontFamily="{StaticResource FontNunito}" HorizontalAlignment="Left" Margin="289,214,0,0" VerticalAlignment="Top"/>

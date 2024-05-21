@@ -168,5 +168,10 @@ namespace SGSC.Pages
 
             }
         }
+
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            App.Current.MainFrame.Content = new HomePageCreditAnalyst();
+        }
     }
 }

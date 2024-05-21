@@ -1,4 +1,4 @@
-﻿using SGSC.Model;
+﻿using SGSC.Frames;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +15,8 @@ namespace SGSC.Pages
         public ManageCreditGrantingPolicies()
         {
             InitializeComponent();
+            adminSidebar.Content = new Frames.AdminSidebar("ManageCreditGrantingPolicies");
+            UserSessionFrame.Content = new UserSessionFrame();
             DataContext = this;
             ShowCreditPolicies();
         }

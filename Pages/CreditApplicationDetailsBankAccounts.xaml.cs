@@ -45,7 +45,7 @@ namespace SGSC.Pages
             {
                 // Obtener cuenta de transferencia
                 var transferenciaAccount = (from ba in db.BankAccounts
-                                            join cr in db.CreditRequests on ba.BankAccountId equals cr.TransferBankAccount_BankAccountId
+                                            join cr in db.CreditRequests on ba.BankAccountId equals cr.TransferBankAccount.BankAccountId
                                             join b in db.Banks on ba.BankBankId equals b.BankId
                                             where cr.CreditRequestId == requestId
                                             select new
@@ -67,7 +67,7 @@ namespace SGSC.Pages
                 }
                 
                 var domicializationAccount = (from ba in db.BankAccounts
-                                              join cr in db.CreditRequests on ba.BankAccountId equals cr.DirectDebitBankAccount_BankAccountId
+                                              join cr in db.CreditRequests on ba.BankAccountId equals cr.DirectDebitBankAccount.BankAccountId
                                               join b in db.Banks on ba.BankBankId
                                               equals b.BankId
                                               where cr.CreditRequestId == requestId
@@ -177,6 +177,11 @@ namespace SGSC.Pages
             {
                 ToastNotification notification = new ToastNotification("No se puede realizar la navegación en este momento. Por favor, inténtelo más tarde.", "Error");
             }
+        }
+
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            App.Current.MainFrame.Content = new HomePageCreditAnalyst();
         }
     }
 }

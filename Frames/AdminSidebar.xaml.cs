@@ -29,24 +29,7 @@ namespace SGSC.Frames
 
 		public void SetActive(string button)
 		{
-			homeButtonBackground.Visibility = Visibility.Hidden;
-			searchCustomerButtonBackground.Visibility = Visibility.Hidden;
-			creditRequestButtonBackground.Visibility = Visibility.Hidden;
-
-			switch(button)
-			{
-				case "home":
-					homeButtonBackground.Visibility = Visibility.Visible;
-					break;
-
-				case "searchCustomer":
-					searchCustomerButtonBackground.Visibility = Visibility.Visible;
-					break;
-
-				case "creditRequest":
-					creditRequestButtonBackground.Visibility = Visibility.Visible;
-					break;
-			}
+			
 		}
 
 		private void LogoutButton_Click(object sender, RoutedEventArgs e)
@@ -54,14 +37,19 @@ namespace SGSC.Frames
 			UserSession.LogOut();
 		}
 
-		private void HomeButton_Click(object sender, RoutedEventArgs e)
-		{
-			App.Current.MainFrame.Content = new Pages.HomePageAdmin();
-		}
-
-		private void SearchCustomerButton_Click(object sender, RoutedEventArgs e)
+		private void ManageEmployeesButton_Click(object sender, RoutedEventArgs e)
 		{
 			App.Current.MainFrame.Content = new Pages.ManageEmployeesPage();
 		}
-	}
+
+        private void btnHome_Click(object sender, RoutedEventArgs e)
+        {
+            App.Current.MainFrame.Content = new Pages.HomePageAdmin();
+        }
+
+        private void btnCreditPolicies_Click(object sender, RoutedEventArgs e)
+        {
+			App.Current.MainFrame.Content = new Pages.ManageCreditGrantingPolicies();
+        }
+    }
 }

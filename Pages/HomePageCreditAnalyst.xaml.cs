@@ -4,9 +4,9 @@ using System.Windows.Navigation;
 
 namespace SGSC.Pages
 {
-    public partial class CreditAnalystHomePage : Page
+    public partial class HomePageCreditAnalyst : Page
     {
-        public CreditAnalystHomePage()
+        public HomePageCreditAnalyst()
         {
             InitializeComponent();
         }

@@ -43,13 +43,13 @@
         <Button Style="{StaticResource ButtonStyleConfirm}" Content="Continuar" FontSize="15" HorizontalAlignment="Left" Margin="1126,662,0,0" VerticalAlignment="Top" Width="130" Height="38" Click="btnClicContinue"/>
 
 
-        <Button Width="100" Height="50" BorderThickness="0" Background="Transparent" Margin="0,10,1180,660">
+        <Button Width="100" Height="50" BorderThickness="0" Background="Transparent" Margin="0,10,1180,660" Click="btnBack_Click">
             <StackPanel Orientation="Horizontal">
-                <Image Source="C:\Users\Dani\Desktop\Desarrollo de Software\sgsc\Images\return.png" Width="62" Height="53" />
+                <Image Source="..\Images\return.png" Width="62" Height="53" />
             </StackPanel>
         </Button>
         <Label Content="Detalle de solicitud de crédito" FontFamily="{StaticResource FontPoppins}" FontSize="26" HorizontalAlignment="Left" Margin="276,77,0,0" VerticalAlignment="Top"/>
-        <Image Margin="296,158,22,366" Source="C:\Users\Dani\Desktop\Desarrollo de Software\sgsc\Images\Backgroud-workCenter.png" Stretch="Fill"/>
+        <Image Margin="296,158,22,366" Source="..\Images\Backgroud-workCenter.png" Stretch="Fill"/>
         <Label FontSize="16" FontWeight="Bold" Content="Empresa:" HorizontalAlignment="Left" Margin="306,214,0,0" VerticalAlignment="Top"/>
         <Label FontSize="16" FontWeight="Bold" Content="Calle:" HorizontalAlignment="Left" Margin="307,263,0,0" VerticalAlignment="Top"/>
         <Label FontSize="16" FontWeight="Bold" Content="Número exterior:" HorizontalAlignment="Left" Margin="307,307,0,0" VerticalAlignment="Top"/>

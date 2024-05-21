@@ -32,7 +32,7 @@
         <Button x:Name="btnAcept" Style="{StaticResource ButtonStyleConfirm}" Content="Guardar" FontSize="15" HorizontalAlignment="Left" Margin="1118,664,0,0" VerticalAlignment="Top" Width="130" Height="38" Click="BtnClicAcept"/>
         <Button x:Name="btnCancel" Style="{StaticResource ButtonStyleCancel}" Content="Cancelar" FontSize="15" HorizontalAlignment="Left" Margin="956,664,0,0" VerticalAlignment="Top" Height="39" Width="145" />
 
-        <Button Width="100" Height="50" BorderThickness="0" Background="Transparent" Margin="0,10,1180,660">
+        <Button Width="100" Height="50" BorderThickness="0" Background="Transparent" Margin="0,10,1180,660"  Click="btnBack_Click">
             <StackPanel Orientation="Horizontal">
                 <Image Source="/Images/return.png" Width="62" Height="53" />
             </StackPanel>

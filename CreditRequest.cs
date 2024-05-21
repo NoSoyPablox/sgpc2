@@ -32,6 +32,7 @@ namespace SGSC
         public Nullable<int> EmployeeId { get; set; }
         public Nullable<int> CustomerId { get; set; }
         public int PaymentsInterval { get; set; }
+        public string Description { get; set; }
     
         public virtual Customer Customer { get; set; }
         public virtual BankAccount TransferBankAccount { get; set; }

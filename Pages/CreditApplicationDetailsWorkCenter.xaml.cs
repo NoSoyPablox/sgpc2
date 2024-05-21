@@ -34,7 +34,7 @@ namespace SGSC.Pages
             using (sgscEntities db = new sgscEntities())
             {
                 var workCenterQuery = (from cr in db.CreditRequests
-                                       join wc in db.WorkCenters on cr.CustomerId equals wc.Customer_CustomerId
+                                       join wc in db.WorkCenters on cr.CustomerId equals wc.Customer.CustomerId
                                        where cr.CreditRequestId == requestId
                                        select new
                                        {
@@ -159,6 +159,11 @@ namespace SGSC.Pages
                 ToastNotification notification = new ToastNotification("No se puede realizar la navegación en este momento. Por favor, inténtelo más tarde.", "Error");
 
             }
+        }
+
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            App.Current.MainFrame.Content = new HomePageCreditAnalyst();
         }
     }
 }

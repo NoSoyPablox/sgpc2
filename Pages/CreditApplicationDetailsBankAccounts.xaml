@@ -42,13 +42,13 @@
         <Button Style="{StaticResource ButtonStyleConfirm}" Content="Continuar" FontSize="15" HorizontalAlignment="Left" Margin="1118,664,0,0" VerticalAlignment="Top" Width="130" Height="38" Click="BtnClicContinue"/>
 
 
-        <Button Width="100" Height="50" BorderThickness="0" Background="Transparent" Margin="0,10,1180,660">
+        <Button Width="100" Height="50" BorderThickness="0" Background="Transparent" Margin="0,10,1180,660"  Click="btnBack_Click">
             <StackPanel Orientation="Horizontal">
-                <Image Source="C:\Users\Dani\Desktop\Desarrollo de Software\sgsc\Images\return.png" Width="62" Height="53" />
+                <Image Source="..\Images\return.png" Width="62" Height="53" />
             </StackPanel>
         </Button>
         <Label Content="Detalle de solicitud de crédito" FontFamily="{StaticResource FontPoppins}" FontSize="26" HorizontalAlignment="Left" Margin="276,77,0,0" VerticalAlignment="Top"/>
-        <Image Margin="276,126,40,320" Source="C:\Users\Dani\Desktop\Desarrollo de Software\sgsc\Images\Background-bankAccounts.png" Stretch="Fill"/>
+        <Image Margin="276,126,40,320" Source="..\Images\Background-bankAccounts.png" Stretch="Fill"/>
         <Label FontSize="16" FontWeight="Bold" Content="Cuenta de transferencia" HorizontalAlignment="Left" Margin="301,130,0,0" VerticalAlignment="Top"/>
         <Label FontSize="16" FontWeight="Bold" Content="Nombre del banco:" HorizontalAlignment="Left" Margin="340,153,0,0" VerticalAlignment="Top"/>
         <Label FontSize="16" FontWeight="Bold" Content="Clabe:" HorizontalAlignment="Left" Margin="283,184,0,0" VerticalAlignment="Top"/>
