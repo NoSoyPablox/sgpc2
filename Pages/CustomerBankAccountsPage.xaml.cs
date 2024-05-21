@@ -24,22 +24,23 @@ namespace SGSC.Pages
     public partial class CustomerBankAccountsPage : Page
     {
         private int customerId;
+        private int creditRequestId;
         private int? tansferAccountId = null;
         private int? transferAccountBankId = null;
         private int? directDebitAccountId = null;
 		private int? directDebitAccountBankId = null;
 		private bool edited = false;
 
-        public CustomerBankAccountsPage(int customerId)
+        public CustomerBankAccountsPage(int customerId, int creditRequestID)
         {
             InitializeComponent();
             this.customerId = customerId;
+            this.creditRequestId = creditRequestID;
 
-            StepsSidebarFrame.Content = new CustomerRegisterStepsSidebar("BankAccounts");
+            creditAdvisorSidebar.Content = new CreditAdvisorSidebar("");
             UserSessionFrame.Content = new UserSessionFrame();
 
             clearErrors();
-            getBankAccounts();
         }
 
         private void clearErrors()
@@ -162,7 +163,7 @@ namespace SGSC.Pages
             {
                 using (sgscEntities context = new sgscEntities())
                 {
-                    var transferAccounts = new BankAccount
+                    var transferAccount = new BankAccount
                     {
                         CardNumber = tbTansAccCardNumber.Text,
                         BankBankId = transferAccountBankId,
@@ -174,7 +175,7 @@ namespace SGSC.Pages
 
                     if (tansferAccountId != null)
                     {
-                        transferAccounts.BankAccountId = tansferAccountId.Value;
+                        transferAccount.BankAccountId = tansferAccountId.Value;
                     }
 
                     var directDebitAccount = new BankAccount
@@ -192,12 +193,16 @@ namespace SGSC.Pages
                         directDebitAccount.BankAccountId = directDebitAccountId.Value;
                     }
 
-                    context.BankAccounts.AddOrUpdate(transferAccounts);
+                    var creditRequest = context.CreditRequests.Where(cr => cr.CreditRequestId == creditRequestId).FirstOrDefault();
+                    creditRequest.TransferBankAccount = transferAccount;
+                    creditRequest.DirectDebitBankAccount = directDebitAccount;
+
+                    context.BankAccounts.AddOrUpdate(transferAccount);
                     context.BankAccounts.AddOrUpdate(directDebitAccount);
                     context.SaveChanges();
 
                     MessageBox.Show("Cuentas bancarias guardadas exitosamente.");
-                    App.Current.MainFrame.Content = new PageWorkCenter(customerId);
+                    App.Current.MainFrame.Content = new HomePageCreditAdvisor();
                 }
             }
             catch (Exception ex)

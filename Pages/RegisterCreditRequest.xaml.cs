@@ -183,7 +183,8 @@ namespace SGSC.Pages
             using (var context = new sgscEntities())
             {
                 var creditRequest = new CreditRequest();
-                creditRequest.FileNumber = "CR" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                var filenumber = "CR" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                creditRequest.FileNumber = filenumber;
                 creditRequest.Amount = this.totalAmount;
                 creditRequest.Status = 0;
                 creditRequest.TimePeriod = selectedPromotion.TimePeriod;
@@ -201,7 +202,8 @@ namespace SGSC.Pages
                     context.SaveChanges();
                     MessageBox.Show("Solicitud de crédito registrada exitosamente");
 
-                    App.Current.MainFrame.Content = new HomePageCreditAdvisor();
+                    var cr = context.CreditRequests.Where(c => c.FileNumber == filenumber).FirstOrDefault();
+                    App.Current.MainFrame.Content = new CustomerBankAccountsPage(idCustomer, cr.CreditRequestId);
                 }
                 catch (Exception ex)
                 {

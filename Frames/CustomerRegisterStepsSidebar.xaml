@@ -22,9 +22,8 @@
                 <RowDefinition Height="39*"/>
             </Grid.RowDefinitions>
 
-            <Button Style="{StaticResource ButtonStyle}" Tag="../Images/User.png"  Content="Datos personales"  HorizontalAlignment="Center" Margin="0,34,0,0" VerticalAlignment="Top" Width="250" Height="40" FontSize="18"/>
-            <Button Style="{StaticResource ButtonStyle}" Tag="../Images/address-icon.png" Content="Dirección" HorizontalAlignment="Center" Margin="0,94,0,0" VerticalAlignment="Top" Width="250" Height="40" FontSize="16"/>
-            <Button Style="{StaticResource ButtonStyle}" Tag="../Images/card-icon.png" Content="Cuentas bancarias" HorizontalAlignment="Center" VerticalAlignment="Top" Width="250" Height="40" Margin="0,154,0,0" FontSize="16"/>
+            <Button Style="{StaticResource ButtonStyle}" Tag="../Images/User.png"  Content="Datos personales"  HorizontalAlignment="Center" Margin="0,94,0,0" VerticalAlignment="Top" Width="250" Height="40" FontSize="18"/>
+            <Button Style="{StaticResource ButtonStyle}" Tag="../Images/address-icon.png" Content="Dirección" HorizontalAlignment="Center" Margin="0,154,0,0" VerticalAlignment="Top" Width="250" Height="40" FontSize="16"/>
             <Button Style="{StaticResource ButtonStyle}" Tag="../Images/icon-job.png" Content="Centro de trabajo" HorizontalAlignment="Center" Margin="0,214,0,0" VerticalAlignment="Top" Width="250" Height="40" FontSize="16"/>
             <Button Style="{StaticResource ButtonStyle}" Tag="../Images/icon-contact.png" Content="Datos de contacto" HorizontalAlignment="Center" Margin="0,274,0,0" VerticalAlignment="Top" Width="250" Height="40" FontSize="16"/>
             <Button Style="{StaticResource ButtonStyle}" Tag="../Images/people-icon.png" Content="Referencias" HorizontalAlignment="Center" Margin="0,334,0,34" VerticalAlignment="Top" Width="250" Height="40" FontSize="16"/>
