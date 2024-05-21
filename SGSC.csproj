@@ -102,6 +102,9 @@
     <Compile Include="CreditPolicy.cs">
       <DependentUpon>Modelsgsc.tt</DependentUpon>
     </Compile>
+    <Compile Include="CreditPromotion.cs">
+      <DependentUpon>Modelsgsc.tt</DependentUpon>
+    </Compile>
     <Compile Include="CreditRequest.cs">
       <DependentUpon>Modelsgsc.tt</DependentUpon>
     </Compile>
@@ -183,6 +186,12 @@
     <Compile Include="Pages\CreditApplicationDetailsWorkCenter.xaml.cs">
       <DependentUpon>CreditApplicationDetailsWorkCenter.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\CreditPromotionDetails.xaml.cs">
+      <DependentUpon>CreditPromotionDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\CreditPromotions.xaml.cs">
+      <DependentUpon>CreditPromotions.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\HomeManager.xaml.cs">
       <DependentUpon>HomeManager.xaml</DependentUpon>
     </Compile>
@@ -209,6 +218,9 @@
     </Compile>
     <Compile Include="Pages\ManageEmployeesPage.xaml.cs">
       <DependentUpon>ManageEmployeesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\RegisterCreditRequest.xaml.cs">
+      <DependentUpon>RegisterCreditRequest.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\SearchCustomerPage.xaml.cs">
       <DependentUpon>SearchCustomerPage.xaml</DependentUpon>
@@ -290,6 +302,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Pages\CreditPromotionDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\CreditPromotions.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pages\HomeManager.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -331,6 +351,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\ManageEmployeesPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\RegisterCreditRequest.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

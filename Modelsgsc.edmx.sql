@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/20/2024 19:52:47
+-- Date Created: 05/20/2024 20:45:38
 -- Generated from EDMX file: C:\Users\aiwass\source\repos\MangoFizz\sgsc\Modelsgsc.edmx
 -- --------------------------------------------------
 
@@ -109,6 +109,9 @@ GO
 IF OBJECT_ID(N'[dbo].[CreditRequestCreditPolicies]', 'U') IS NOT NULL
     DROP TABLE [dbo].[CreditRequestCreditPolicies];
 GO
+IF OBJECT_ID(N'[dbo].[CreditPromotions]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CreditPromotions];
+GO
 IF OBJECT_ID(N'[dbo].[CreditRequestCreditCondition]', 'U') IS NOT NULL
     DROP TABLE [dbo].[CreditRequestCreditCondition];
 GO
@@ -165,7 +168,7 @@ CREATE TABLE [dbo].[CreditRequests] (
     [Status] int  NULL,
     [TimePeriod] int  NULL,
     [Purpose] nvarchar(max)  NULL,
-    [InterestRate] decimal(18,0)  NULL,
+    [InterestRate] float  NULL,
     [CreationDate] datetime  NULL,
     [EmployeeId] int  NULL,
     [CustomerId] int  NULL,
@@ -282,6 +285,18 @@ CREATE TABLE [dbo].[CreditRequestCreditPolicies] (
 );
 GO
 
+-- Creating table 'CreditPromotions'
+CREATE TABLE [dbo].[CreditPromotions] (
+    [CreditPromotionId] int IDENTITY(1,1) NOT NULL,
+    [Name] nvarchar(max)  NOT NULL,
+    [TimePeriod] int  NOT NULL,
+    [InterestRate] float  NOT NULL,
+    [StartDate] datetime  NOT NULL,
+    [EndDate] datetime  NOT NULL,
+    [Interval] int  NOT NULL
+);
+GO
+
 -- Creating table 'CreditRequestCreditCondition'
 CREATE TABLE [dbo].[CreditRequestCreditCondition] (
     [CreditRequests_CreditRequestId] int  NOT NULL,
@@ -375,6 +390,12 @@ GO
 ALTER TABLE [dbo].[CreditRequestCreditPolicies]
 ADD CONSTRAINT [PK_CreditRequestCreditPolicies]
     PRIMARY KEY CLUSTERED ([IdCreditRequestCreditPolicy] ASC);
+GO
+
+-- Creating primary key on [CreditPromotionId] in table 'CreditPromotions'
+ALTER TABLE [dbo].[CreditPromotions]
+ADD CONSTRAINT [PK_CreditPromotions]
+    PRIMARY KEY CLUSTERED ([CreditPromotionId] ASC);
 GO
 
 -- Creating primary key on [CreditRequests_CreditRequestId], [CreditConditions_CreditConditionId] in table 'CreditRequestCreditCondition'

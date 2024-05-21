@@ -189,10 +189,9 @@ namespace SGSC.Pages
                 creditRequest.TimePeriod = selectedPromotion.TimePeriod;
                 creditRequest.Purpose = tbPurpose.Text;
                 MessageBox.Show("Valor recibido de interes" + selectedPromotion.InterestRate);
-                decimal decimalInterestRate = (decimal)selectedPromotion.InterestRate;
-                creditRequest.InterestRate = decimalInterestRate;
+                creditRequest.InterestRate = selectedPromotion.InterestRate;
                 creditRequest.CreationDate = DateTime.Now;
-                creditRequest.EmployeeId = 1; //Hardcoded for now
+                creditRequest.EmployeeId = Utils.UserSession.Instance.Id;
                 creditRequest.CustomerId = idCustomer;
 
 

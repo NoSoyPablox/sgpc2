@@ -1,4 +1,5 @@
-﻿using SGSC.Utils;
+﻿using SGSC.Pages;
+using SGSC.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,6 +51,11 @@ namespace SGSC.Frames
         private void btnCreditPolicies_Click(object sender, RoutedEventArgs e)
         {
 			App.Current.MainFrame.Content = new Pages.ManageCreditGrantingPolicies();
+        }
+
+        private void btnCreditPromotions_Click(object sender, RoutedEventArgs e)
+        {
+			App.Current.MainFrame.Content = new CreditPromotions();
         }
     }
 }

@@ -20,6 +20,7 @@
     <EntitySet Name="Banks" EntityType="sgscModel.Store.Banks" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Colonies" EntityType="sgscModel.Store.Colonies" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CreditRequestCreditPolicies" EntityType="sgscModel.Store.CreditRequestCreditPolicies" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CreditPromotions" EntityType="sgscModel.Store.CreditPromotions" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CreditRequestCreditCondition" EntityType="sgscModel.Store.CreditRequestCreditCondition" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK_BankAccountCustomer" Association="sgscModel.Store.FK_BankAccountCustomer">
       <End Role="Customers" EntitySet="Customers" />
@@ -132,7 +133,7 @@
     <Property Name="Status" Type="int" Nullable="true" />
     <Property Name="TimePeriod" Type="int" Nullable="true" />
     <Property Name="Purpose" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="InterestRate" Type="decimal" Nullable="true" Precision="18" Scale="0" />
+    <Property Name="InterestRate" Type="float" Nullable="true" />
     <Property Name="CreationDate" Type="datetime" Nullable="true" />
     <Property Name="EmployeeId" Type="int" Nullable="true" />
     <Property Name="CustomerId" Type="int" Nullable="true" />
@@ -246,6 +247,18 @@
     <Property Name="CreditRequestId" Type="int" Nullable="false" />
     <Property Name="CustomerContactInfo_CustomerContactInfoId" Type="int" Nullable="true" />
     <Property Name="Contact_ContactId" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="CreditPromotions">
+    <Key>
+      <PropertyRef Name="CreditPromotionId" />
+    </Key>
+    <Property Name="CreditPromotionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TimePeriod" Type="int" Nullable="false" />
+    <Property Name="InterestRate" Type="float" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" Nullable="false" />
+    <Property Name="Interval" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="CreditRequestCreditCondition">
     <Key>
@@ -496,7 +509,7 @@
           <Property Name="Status" Type="Int32" />
           <Property Name="TimePeriod" Type="Int32" />
           <Property Name="Purpose" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="InterestRate" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="InterestRate" Type="Double" />
           <Property Name="CreationDate" Type="DateTime" Precision="3" />
           <Property Name="EmployeeId" Type="Int32" />
           <NavigationProperty Name="Customer" Relationship="Self.FK_CreditRequestCustomer" FromRole="CreditRequests" ToRole="Customer" />
@@ -716,6 +729,7 @@
             <End Role="Contact" EntitySet="Contacts" />
             <End Role="CreditRequestCreditPolicy" EntitySet="CreditRequestCreditPolicies" />
           </AssociationSet>
+          <EntitySet Name="CreditPromotions" EntityType="sgscModel.CreditPromotion" />
         </EntityContainer>
         <Association Name="CreditRequestBankAccount">
           <End Type="sgscModel.CreditRequest" Role="CreditRequest" Multiplicity="*" />
@@ -793,6 +807,18 @@
           <End Type="sgscModel.Contact" Role="Contact" Multiplicity="0..1" />
           <End Type="sgscModel.CreditRequestCreditPolicy" Role="CreditRequestCreditPolicy" Multiplicity="*" />
         </Association>
+        <EntityType Name="CreditPromotion">
+          <Key>
+            <PropertyRef Name="CreditPromotionId" />
+          </Key>
+          <Property Name="CreditPromotionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="TimePeriod" Type="Int32" Nullable="false" />
+          <Property Name="InterestRate" Type="Double" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" />
+          <Property Name="Interval" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -967,6 +993,19 @@
           <ScalarProperty Name="IdCreditRequestCreditPolicy" ColumnName="IdCreditRequestCreditPolicy" />
           <ScalarProperty Name="CreditPolicyId" ColumnName="CreditPolicyId" />
           <ScalarProperty Name="CreditRequestId" ColumnName="CreditRequestId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CreditPromotions">
+      <EntityTypeMapping TypeName="IsTypeOf(sgscModel.CreditPromotion)">
+        <MappingFragment StoreEntitySet="CreditPromotions">
+          <ScalarProperty Name="CreditPromotionId" ColumnName="CreditPromotionId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="TimePeriod" ColumnName="TimePeriod" />
+          <ScalarProperty Name="InterestRate" ColumnName="InterestRate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="Interval" ColumnName="Interval" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

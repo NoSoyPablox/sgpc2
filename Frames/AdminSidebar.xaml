@@ -27,7 +27,7 @@
             <Image Source="../Images/icon-locked.png" Height="70" Width="50"/>
         </Button>
 
-        <Button Style="{StaticResource Menubutton}" FontSize="15" HorizontalAlignment="Left" Margin="16,480,0,0" VerticalAlignment="Top" Width="72" Height="75">
+        <Button Name="btnCreditPromotions" Style="{StaticResource Menubutton}" FontSize="15" HorizontalAlignment="Left" Margin="16,480,0,0" VerticalAlignment="Top" Width="72" Height="75" Click="btnCreditPromotions_Click">
             <Image Source="../Images/icon-discount.png" Height="70" Width="50"/>
         </Button>
 
