@@ -61,7 +61,7 @@ namespace SGSC.Frames
 
 		private void SearchCustomerButton_Click(object sender, RoutedEventArgs e)
 		{
-			App.Current.MainFrame.Content = new Pages.ManageEmployees();
+			App.Current.MainFrame.Content = new Pages.ManageEmployeesPage();
 		}
 	}
 }

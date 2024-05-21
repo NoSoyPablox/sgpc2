@@ -232,6 +232,10 @@ namespace SGSC.Pages
                 tbName.Text = customer.Name;
                 tbFirstSurname.Text = customer.FirstSurname;
                 tbSecondSurname.Text = customer.SecondSurname;
+                tbRfc.Text = customer.Rfc;
+                dpBirthdate.SelectedDate = customer.BirthDate;
+                cbGenre.SelectedIndex = customer.Genre == "M" ? 0 : 1;
+                cbCivilStatus.SelectedIndex = customer.CivilStatus;
             }
         }
 

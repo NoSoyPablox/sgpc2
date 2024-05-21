@@ -57,14 +57,14 @@ namespace SGSC.Utils
             {
                 string csvFilePath = saveFileDialog.FileName;
                 xlWorkBook.SaveAs(csvFilePath, Excel.XlFileFormat.xlCSV, Excel.XlSaveAsAccessMode.xlExclusive);
-
-                xlWorkBook.Close(false, null, null);
-                excelApp.Quit();
-
-                Marshal.ReleaseComObject(xlWorkSheet);
-                Marshal.ReleaseComObject(xlWorkBook);
-                Marshal.ReleaseComObject(excelApp);
             }
+
+            xlWorkBook.Close(false, null, null);
+            excelApp.Quit();
+
+            Marshal.ReleaseComObject(xlWorkSheet);
+            Marshal.ReleaseComObject(xlWorkBook);
+            Marshal.ReleaseComObject(excelApp);
         }
 
         private static DateTime GetNextFortnight()

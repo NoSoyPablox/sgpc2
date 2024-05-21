@@ -144,7 +144,7 @@ namespace SGSC.Pages
             }
 
             MessageBox.Show("Datos guardados correctamente");
-            App.Current.MainFrame.GoBack();
+            App.Current.MainFrame.Content = new ManageEmployeesPage();
         }   
 
         private void GetEmployeeData(int employeeId)
@@ -168,7 +168,7 @@ namespace SGSC.Pages
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            App.Current.MainFrame.GoBack();
+            App.Current.MainFrame.Content = new ManageEmployeesPage();
         }
     }
 }

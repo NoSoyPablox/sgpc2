@@ -173,8 +173,8 @@
     <Compile Include="Pages\HomePageCreditAdvisor.xaml.cs">
       <DependentUpon>HomePageCreditAdvisor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ManageEmployees.xaml.cs">
-      <DependentUpon>ManageEmployees.xaml</DependentUpon>
+    <Compile Include="Pages\ManageEmployeesPage.xaml.cs">
+      <DependentUpon>ManageEmployeesPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\SearchCustomerPage.xaml.cs">
       <DependentUpon>SearchCustomerPage.xaml</DependentUpon>
@@ -252,7 +252,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\ManageEmployees.xaml">
+    <Page Include="Pages\ManageEmployeesPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -1,4 +1,4 @@
-﻿<Page x:Class="SGSC.Pages.ManageEmployees"
+﻿<Page x:Class="SGSC.Pages.ManageEmployeesPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -42,9 +42,9 @@
 
         <DataGrid Name="dgEmployees" AutoGenerateColumns="False" CanUserAddRows="False" AlternatingRowBackground="#DAEFD0" Margin="136,215,28,99" FontSize="22">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Nombre" Binding="{Binding Fullname}" Width="550" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
-                <DataGridTextColumn Header="Correo electrónico" Binding="{Binding Email}" Width="300" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
-                <DataGridTextColumn Header="Rol" Binding="{Binding Role}" Width="260" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
+                <DataGridTextColumn Header="Nombre" Binding="{Binding Fullname}" IsReadOnly="True" Width="550" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
+                <DataGridTextColumn Header="Correo electrónico" Binding="{Binding Email}" IsReadOnly="True" Width="300" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
+                <DataGridTextColumn Header="Rol" Binding="{Binding Role}" IsReadOnly="True" Width="260" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
             </DataGrid.Columns>
         </DataGrid>
 

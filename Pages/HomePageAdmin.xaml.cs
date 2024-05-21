@@ -14,7 +14,7 @@ namespace SGSC.Pages
 
         private void btnViewActiveCredits_Click(object sender, RoutedEventArgs e)
         {
-            var activeCreditsPage = new ManageEmployees();
+            var activeCreditsPage = new ManageEmployeesPage();
             if (NavigationService != null)
             {
                 NavigationService.Navigate(activeCreditsPage);

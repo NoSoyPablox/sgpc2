@@ -42,10 +42,10 @@
 
         <DataGrid Name="dgCustomers" AutoGenerateColumns="False" CanUserAddRows="False" AlternatingRowBackground="#DAEFD0" Margin="136,215,28,99" FontSize="22">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Nombre" Binding="{Binding Fullname}" Width="450" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
-                <DataGridTextColumn Header="Género" Binding="{Binding Genre}" Width="180" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
-                <DataGridTextColumn Header="Fecha de nacimiento" Binding="{Binding Birthdate}" Width="250" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
-                <DataGridTextColumn Header="RFC" Binding="{Binding RFC}" Width="230" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
+                <DataGridTextColumn Header="Nombre" Binding="{Binding Fullname}" IsReadOnly="True" Width="450" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
+                <DataGridTextColumn Header="Género" Binding="{Binding Genre}" IsReadOnly="True" Width="180" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
+                <DataGridTextColumn Header="Fecha de nacimiento" Binding="{Binding Birthdate}" IsReadOnly="True" Width="250" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
+                <DataGridTextColumn Header="RFC" Binding="{Binding RFC}" IsReadOnly="True" Width="230" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
             </DataGrid.Columns>
         </DataGrid>
 

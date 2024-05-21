@@ -25,12 +25,12 @@
 
         <DataGrid Name="dgCredits" AutoGenerateColumns="False" CanUserAddRows="False" AlternatingRowBackground="#DAEFD0" Margin="136,215,28,99" FontSize="22">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Folio" Binding="{Binding CreditPageNumber}" Width="150" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
-                <DataGridTextColumn Header="Nombre del cliente" Binding="{Binding ClientFullName}" Width="360" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
-                <DataGridTextColumn Header="Plazo" Binding="{Binding CreditPeriod}" Width="150" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
-                <DataGridTextColumn Header="Total" Binding="{Binding CreditAmount}" Width="124" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
-                <DataGridTextColumn Header="Saldo pendiente" Binding="{Binding CreditPendingDebt}" Width="200" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
-                <DataGridTextColumn Header="Eficiencia" Binding="{Binding CreditEfficiency}" Width="124" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
+                <DataGridTextColumn Header="Folio" Binding="{Binding CreditPageNumber}" IsReadOnly="True" Width="150" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
+                <DataGridTextColumn Header="Nombre del cliente" Binding="{Binding ClientFullName}" IsReadOnly="True" Width="360" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
+                <DataGridTextColumn Header="Plazo" Binding="{Binding CreditPeriod}" IsReadOnly="True" Width="150" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
+                <DataGridTextColumn Header="Total" Binding="{Binding CreditAmount}" IsReadOnly="True" Width="124" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
+                <DataGridTextColumn Header="Saldo pendiente" Binding="{Binding CreditPendingDebt}" IsReadOnly="True" Width="200" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
+                <DataGridTextColumn Header="Eficiencia" Binding="{Binding CreditEfficiency}" IsReadOnly="True" Width="124" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
             </DataGrid.Columns>
         </DataGrid>
 

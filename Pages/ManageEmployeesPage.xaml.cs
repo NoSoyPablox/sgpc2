@@ -21,7 +21,7 @@ namespace SGSC.Pages
     /// <summary>
     /// Interaction logic for SearchClientPage.xaml
     /// </summary>
-    public partial class ManageEmployees : Page
+    public partial class ManageEmployeesPage : Page
     {
         private class EmployeeEntry
         {
@@ -37,7 +37,7 @@ namespace SGSC.Pages
         private const int ItemsPerPage = 10;
         private bool UpdatingPagination = false;
 
-        public ManageEmployees()
+        public ManageEmployeesPage()
         {
             InitializeComponent();
             creditAdvisorSidebar.Content = new Frames.AdminSidebar("searchCustomer");
@@ -162,7 +162,7 @@ namespace SGSC.Pages
             var employee = dgEmployees.SelectedItem as EmployeeEntry;
             if(employee != null)
             {
-                var result = System.Windows.Forms.MessageBox.Show("Está seguro que desea eliminar el empleado seleccionado?.", "Eliminar empleado", System.Windows.Forms.MessageBoxButtons.YesNo);
+                var result = System.Windows.Forms.MessageBox.Show("¿Está seguro que desea eliminar el empleado seleccionado?", "Eliminar empleado", System.Windows.Forms.MessageBoxButtons.YesNo);
                 if(result == System.Windows.Forms.DialogResult.Yes)
                 {
                     try
