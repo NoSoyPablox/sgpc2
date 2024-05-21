@@ -20,7 +20,7 @@
             <Image Source="../Images/icon-find-customer.png" Height="70" Width="50" RenderTransformOrigin="0.5,0.643"/>
         </Button>
         <Rectangle Name="creditRequestButtonBackground"  Style="{StaticResource RoundedRectangleHomeStyle}"  Margin="16,375,19,270"/>
-        <Button Style="{StaticResource Menubutton}" FontSize="15" HorizontalAlignment="Left" Margin="16,375,0,0" VerticalAlignment="Top" Width="72" Height="75">
+        <Button Name="btnCreditRequests" Style="{StaticResource Menubutton}" FontSize="15" HorizontalAlignment="Left" Margin="16,375,0,0" VerticalAlignment="Top" Width="72" Height="75" Click="btnCreditRequests_Click">
             <Image Source="../Images/icon-board.png" Height="70" Width="50"/>
         </Button>
         <Button Name="LogoutButton" Background="White" Style="{StaticResource Menubutton}" FontSize="15" HorizontalAlignment="Left" Margin="16,630,0,0" VerticalAlignment="Top" Width="72" Height="75" Click="LogoutButton_Click">

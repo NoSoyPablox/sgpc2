@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/20/2024 20:45:38
+-- Date Created: 05/20/2024 22:08:33
 -- Generated from EDMX file: C:\Users\aiwass\source\repos\MangoFizz\sgsc\Modelsgsc.edmx
 -- --------------------------------------------------
 
@@ -62,6 +62,9 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_ContactCreditRequestCreditPolicy]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[CreditRequestCreditPolicies] DROP CONSTRAINT [FK_ContactCreditRequestCreditPolicy];
 GO
+IF OBJECT_ID(N'[dbo].[FK_DocumentCreditRequest]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Documents] DROP CONSTRAINT [FK_DocumentCreditRequest];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -111,6 +114,9 @@ IF OBJECT_ID(N'[dbo].[CreditRequestCreditPolicies]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[CreditPromotions]', 'U') IS NOT NULL
     DROP TABLE [dbo].[CreditPromotions];
+GO
+IF OBJECT_ID(N'[dbo].[Documents]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Documents];
 GO
 IF OBJECT_ID(N'[dbo].[CreditRequestCreditCondition]', 'U') IS NOT NULL
     DROP TABLE [dbo].[CreditRequestCreditCondition];
@@ -297,6 +303,16 @@ CREATE TABLE [dbo].[CreditPromotions] (
 );
 GO
 
+-- Creating table 'Documents'
+CREATE TABLE [dbo].[Documents] (
+    [DocumentId] int IDENTITY(1,1) NOT NULL,
+    [FileName] nvarchar(max)  NOT NULL,
+    [FileContent] varbinary(max)  NOT NULL,
+    [CreditRequestId] int  NOT NULL,
+    [CreditRequest_CreditRequestId] int  NULL
+);
+GO
+
 -- Creating table 'CreditRequestCreditCondition'
 CREATE TABLE [dbo].[CreditRequestCreditCondition] (
     [CreditRequests_CreditRequestId] int  NOT NULL,
@@ -396,6 +412,12 @@ GO
 ALTER TABLE [dbo].[CreditPromotions]
 ADD CONSTRAINT [PK_CreditPromotions]
     PRIMARY KEY CLUSTERED ([CreditPromotionId] ASC);
+GO
+
+-- Creating primary key on [DocumentId] in table 'Documents'
+ALTER TABLE [dbo].[Documents]
+ADD CONSTRAINT [PK_Documents]
+    PRIMARY KEY CLUSTERED ([DocumentId] ASC);
 GO
 
 -- Creating primary key on [CreditRequests_CreditRequestId], [CreditConditions_CreditConditionId] in table 'CreditRequestCreditCondition'
@@ -625,6 +647,21 @@ GO
 CREATE INDEX [IX_FK_ContactCreditRequestCreditPolicy]
 ON [dbo].[CreditRequestCreditPolicies]
     ([Contact_ContactId]);
+GO
+
+-- Creating foreign key on [CreditRequest_CreditRequestId] in table 'Documents'
+ALTER TABLE [dbo].[Documents]
+ADD CONSTRAINT [FK_DocumentCreditRequest]
+    FOREIGN KEY ([CreditRequest_CreditRequestId])
+    REFERENCES [dbo].[CreditRequests]
+        ([CreditRequestId])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_DocumentCreditRequest'
+CREATE INDEX [IX_FK_DocumentCreditRequest]
+ON [dbo].[Documents]
+    ([CreditRequest_CreditRequestId]);
 GO
 
 -- --------------------------------------------------

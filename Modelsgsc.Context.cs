@@ -40,5 +40,6 @@ namespace SGSC
         public virtual DbSet<Colony> Colonies { get; set; }
         public virtual DbSet<CreditRequestCreditPolicy> CreditRequestCreditPolicies { get; set; }
         public virtual DbSet<CreditPromotion> CreditPromotions { get; set; }
+        public virtual DbSet<Document> Documents { get; set; }
     }
 }

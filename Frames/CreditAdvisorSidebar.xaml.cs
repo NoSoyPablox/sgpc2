@@ -63,5 +63,10 @@ namespace SGSC.Frames
 		{
 			App.Current.MainFrame.Content = new Pages.SearchCustomerPage();
 		}
-	}
+
+        private void btnCreditRequests_Click(object sender, RoutedEventArgs e)
+        {
+            App.Current.MainFrame.Content = new Pages.ViewCreditRequests();
+        }
+    }
 }

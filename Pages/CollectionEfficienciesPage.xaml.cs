@@ -31,9 +31,9 @@ namespace SGSC.Pages
             public string Folio { get; set; }
             public string ClientName { get; set; }
             public int Term { get; set; }
-            public decimal TotalAmount { get; set; }
+            public double TotalAmount { get; set; }
             public string TotalAmountString { get; set; }
-            public decimal OutstandingBalance { get; set; }
+            public double OutstandingBalance { get; set; }
             public decimal Efficiency { get; set; }
         }
 
@@ -90,7 +90,7 @@ namespace SGSC.Pages
                                              ClientName = c.Name + " " + c.FirstSurname + " " + c.SecondSurname,
                                              cr.TimePeriod,
                                              cr.Amount,
-                                             InterestRate = cr.InterestRate ?? 0.0m,
+                                             InterestRate = cr.InterestRate ?? 0.0,
                                              Payments = db.Payments
                                                           .Where(p => p.CreditRequestId == cr.CreditRequestId)
                                                           .Select(p => new
@@ -106,8 +106,8 @@ namespace SGSC.Pages
 
                     if (creditRequest != null)
                     {
-                        decimal totalAmount = creditRequest.Amount.HasValue ? Convert.ToDecimal(creditRequest.Amount.Value) : 0.0m;
-                        decimal outstandingBalance = totalAmount * (1 - creditRequest.InterestRate / 100);
+                        double totalAmount = creditRequest.Amount.HasValue ? Convert.ToDouble(creditRequest.Amount.Value) : 0.0;
+                        double outstandingBalance = totalAmount * (1 - creditRequest.InterestRate / 100);
 
                         var payments = creditRequest.Payments.Select(p => new Payment
                         {

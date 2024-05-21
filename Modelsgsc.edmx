@@ -21,6 +21,7 @@
     <EntitySet Name="Colonies" EntityType="sgscModel.Store.Colonies" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CreditRequestCreditPolicies" EntityType="sgscModel.Store.CreditRequestCreditPolicies" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CreditPromotions" EntityType="sgscModel.Store.CreditPromotions" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Documents" EntityType="sgscModel.Store.Documents" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CreditRequestCreditCondition" EntityType="sgscModel.Store.CreditRequestCreditCondition" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK_BankAccountCustomer" Association="sgscModel.Store.FK_BankAccountCustomer">
       <End Role="Customers" EntitySet="Customers" />
@@ -81,6 +82,10 @@
     <AssociationSet Name="ContactCreditRequestCreditPolicy" Association="sgscModel.Store.ContactCreditRequestCreditPolicy">
       <End Role="Contact" EntitySet="Contacts" />
       <End Role="CreditRequestCreditPolicy" EntitySet="CreditRequestCreditPolicies" />
+    </AssociationSet>
+    <AssociationSet Name="DocumentCreditRequest" Association="sgscModel.Store.DocumentCreditRequest">
+      <End Role="Document" EntitySet="Documents" />
+      <End Role="CreditRequest" EntitySet="CreditRequests" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="BankAccounts">
@@ -260,6 +265,16 @@
     <Property Name="EndDate" Type="datetime" Nullable="false" />
     <Property Name="Interval" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="Documents">
+    <Key>
+      <PropertyRef Name="DocumentId" />
+    </Key>
+    <Property Name="DocumentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FileName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="FileContent" Type="varbinary(max)" Nullable="false" />
+    <Property Name="CreditRequestId" Type="int" Nullable="false" />
+    <Property Name="CreditRequest_CreditRequestId" Type="int" Nullable="true" />
+  </EntityType>
   <EntityType Name="CreditRequestCreditCondition">
     <Key>
       <PropertyRef Name="CreditRequests_CreditRequestId" />
@@ -424,6 +439,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="DocumentCreditRequest">
+    <End Role="Document" Type="sgscModel.Store.Documents" Multiplicity="*" />
+    <End Role="CreditRequest" Type="sgscModel.Store.CreditRequests" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="CreditRequest">
+        <PropertyRef Name="CreditRequestId" />
+      </Principal>
+      <Dependent Role="Document">
+        <PropertyRef Name="CreditRequest_CreditRequestId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_CreditRequestCreditCondition_CreditRequest">
     <End Role="CreditRequest" Type="sgscModel.Store.CreditRequests" Multiplicity="1" />
     <End Role="CreditRequestCreditCondition" Type="sgscModel.Store.CreditRequestCreditCondition" Multiplicity="*" />
@@ -521,6 +548,7 @@
           <NavigationProperty Name="Employee" Relationship="sgscModel.EmployeeCreditRequest" FromRole="CreditRequest" ToRole="Employee" />
           <Property Name="PaymentsInterval" Type="Int32" Nullable="false" />
           <Property Name="Description" Type="String" Nullable="false" />
+          <NavigationProperty Name="Documents" Relationship="sgscModel.DocumentCreditRequest" FromRole="CreditRequest" ToRole="Document" />
         </EntityType>
         <EntityType Name="CustomerAddress">
           <Key>
@@ -730,6 +758,11 @@
             <End Role="CreditRequestCreditPolicy" EntitySet="CreditRequestCreditPolicies" />
           </AssociationSet>
           <EntitySet Name="CreditPromotions" EntityType="sgscModel.CreditPromotion" />
+          <EntitySet Name="Documents" EntityType="sgscModel.Document" />
+          <AssociationSet Name="DocumentCreditRequest" Association="sgscModel.DocumentCreditRequest">
+            <End Role="Document" EntitySet="Documents" />
+            <End Role="CreditRequest" EntitySet="CreditRequests" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="CreditRequestBankAccount">
           <End Type="sgscModel.CreditRequest" Role="CreditRequest" Multiplicity="*" />
@@ -819,6 +852,20 @@
           <Property Name="EndDate" Type="DateTime" Nullable="false" />
           <Property Name="Interval" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="Document">
+          <Key>
+            <PropertyRef Name="DocumentId" />
+          </Key>
+          <Property Name="DocumentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FileName" Type="String" Nullable="false" />
+          <Property Name="FileContent" Type="Binary" Nullable="false" />
+          <Property Name="CreditRequestId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CreditRequest" Relationship="sgscModel.DocumentCreditRequest" FromRole="Document" ToRole="CreditRequest" />
+        </EntityType>
+        <Association Name="DocumentCreditRequest">
+          <End Type="sgscModel.Document" Role="Document" Multiplicity="*" />
+          <End Type="sgscModel.CreditRequest" Role="CreditRequest" Multiplicity="0..1" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1009,6 +1056,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Documents">
+      <EntityTypeMapping TypeName="IsTypeOf(sgscModel.Document)">
+        <MappingFragment StoreEntitySet="Documents">
+          <ScalarProperty Name="DocumentId" ColumnName="DocumentId" />
+          <ScalarProperty Name="FileName" ColumnName="FileName" />
+          <ScalarProperty Name="FileContent" ColumnName="FileContent" />
+          <ScalarProperty Name="CreditRequestId" ColumnName="CreditRequestId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <AssociationSetMapping Name="CreditRequestBankAccount" TypeName="sgscModel.CreditRequestBankAccount" StoreEntitySet="CreditRequests">
       <EndProperty Name="BankAccount">
         <ScalarProperty Name="BankAccountId" ColumnName="TransferBankAccount_BankAccountId" />
@@ -1088,6 +1145,15 @@
         <ScalarProperty Name="IdCreditRequestCreditPolicy" ColumnName="IdCreditRequestCreditPolicy" />
       </EndProperty>
       <Condition ColumnName="Contact_ContactId" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="DocumentCreditRequest" TypeName="sgscModel.DocumentCreditRequest" StoreEntitySet="Documents">
+      <EndProperty Name="CreditRequest">
+        <ScalarProperty Name="CreditRequestId" ColumnName="CreditRequest_CreditRequestId" />
+      </EndProperty>
+      <EndProperty Name="Document">
+        <ScalarProperty Name="DocumentId" ColumnName="DocumentId" />
+      </EndProperty>
+      <Condition ColumnName="CreditRequest_CreditRequestId" IsNull="false" />
     </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>

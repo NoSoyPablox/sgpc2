@@ -37,7 +37,7 @@ namespace SGSC.Pages
             public string FileNumber { get; set; }
             public double Amount { get; set; }
             public string AmountString { get; set; }
-            public decimal InterestRate { get; set; }
+            public double InterestRate { get; set; }
             public string InterestRateString { get; set; }
             public int TimePeriod { get; set; }
 
@@ -55,6 +55,7 @@ namespace SGSC.Pages
         {
             InitializeComponent();
             UserSessionFrame.Content = new UserSessionFrame();
+            creditAdvisorSidebar.Content = new CreditAdvisorSidebar("creditRequest");
             GetCreditRequests();
             GetAllCreditRequests();
         }
@@ -144,7 +145,7 @@ namespace SGSC.Pages
                                 FileNumber = cr.FileNumber,
                                 Amount = cr.Amount.HasValue ? cr.Amount.Value : 0.0,
                                 AmountString = cr.Amount.HasValue ? cr.Amount.Value.ToString("C2", new CultureInfo("es-MX")) : "$0.00",
-                                InterestRate = cr.InterestRate.HasValue ? cr.InterestRate.Value : 0.0m,
+                                InterestRate = cr.InterestRate.HasValue ? cr.InterestRate.Value : 0.0,
                                 InterestRateString = cr.InterestRate.HasValue ? $"{cr.InterestRate.Value}%" : "0.0%",
                                 TimePeriod = cr.TimePeriod.HasValue ? cr.TimePeriod.Value : 0,
                                 TimePeriodString = cr.TimePeriod.HasValue ? $"{cr.TimePeriod.Value} Quincenas" : "Quincenas"
@@ -210,7 +211,7 @@ namespace SGSC.Pages
                                 FileNumber = cr.FileNumber,
                                 Amount = cr.Amount.HasValue ? cr.Amount.Value : 0.0,
                                 AmountString = cr.Amount.HasValue ? cr.Amount.Value.ToString("C2") : "$0.00",
-                                InterestRate = cr.InterestRate.HasValue ? cr.InterestRate.Value : 0.0m,
+                                InterestRate = cr.InterestRate.HasValue ? cr.InterestRate.Value : 0.0,
                                 InterestRateString = cr.InterestRate.HasValue ? $"{cr.InterestRate.Value}%" : "0.0%",
                                 TimePeriod = cr.TimePeriod.Value,
                                 TimePeriodString = cr.TimePeriod.Value.ToString()

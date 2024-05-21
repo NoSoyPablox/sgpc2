@@ -74,7 +74,7 @@ namespace SGSC.Pages
                     {
                         FileName = fileName,
                         FileContent = fileContent,
-                        CreditRequestId = creditRequestId 
+                        CreditRequestId = creditRequestId.Value 
                     };
 
                     _context.Documents.Add(document);
