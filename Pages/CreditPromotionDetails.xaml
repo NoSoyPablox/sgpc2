@@ -13,6 +13,10 @@
     <Grid>
         <Grid Height="720" Width="1280">
             <Border Background="White" CornerRadius="22"/>
+            
+            <Frame Name="adminSidebar" Margin="0,0,1172,0"/>
+            <Frame Name="UserSessionFrame" NavigationUIVisibility="Hidden" Margin="888,10,20,624"/>
+
             <Label FontFamily="{StaticResource FontPoppins}" FontWeight="Bold" FontSize="36" Content="Detalles de la promoción" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="212,81,0,0"/>
             <Button x:Name="btnModify" Style="{StaticResource Button}" Content="Modificar" FontWeight="Medium"  Background="#FCDC2A" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top" Width="234" Height="52" Margin="977,619,0,0" Click="btnModify_Click"/>
             <Rectangle Style="{StaticResource RoundedRectangleStyle}" Margin="216,189,175,222"/>

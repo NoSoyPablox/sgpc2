@@ -12,6 +12,10 @@
         <Grid Height="720" Width="1280">
             <Border Background="White" CornerRadius="22">
             </Border>
+
+            <Frame Name="adminSidebar" Margin="0,0,1172,0"/>
+            <Frame Name="UserSessionFrame" NavigationUIVisibility="Hidden" Margin="888,10,20,624"/>
+
             <Button x:Name="btnEliminar" Style="{StaticResource Button}" Content="Eliminar" FontWeight="Medium"  Background="#FCDC2A" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top" Width="234" Height="52" Margin="439,635,0,0" Click="btnEliminar_Click"/>
             <Label FontFamily="{StaticResource FontPoppins}" FontWeight="Bold" FontSize="36" Content="Promociones de credito" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="240,115,0,0"/>
             <Button x:Name="btnSeeDetails" Style="{StaticResource Button}" Content="Ver detalles" FontWeight="Medium"  Background="#FCDC2A" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top" Width="234" Height="52" Margin="713,635,0,0" Click="btnSeeDetails_Click"/>

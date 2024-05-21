@@ -25,6 +25,9 @@ namespace SGSC.Pages
         public CreditPromotionDetails(int idPromotion)
         {
             InitializeComponent();
+            adminSidebar.Content = new Frames.AdminSidebar("ManageCreditGrantingPolicies");
+            UserSessionFrame.Content = new Frames.UserSessionFrame();
+
             this.idPromotion = idPromotion;
             tbName.Focus();
             btnModify.Visibility = Visibility.Hidden;
@@ -92,7 +95,7 @@ namespace SGSC.Pages
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.GoBack();
+            App.Current.MainFrame.Content = new CreditPromotions();
         }
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
@@ -185,6 +188,8 @@ namespace SGSC.Pages
                 dpEndDate.SelectedDate = null;
 
                 MessageBox.Show("Promoción registrada con éxito", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                App.Current.MainFrame.Content = new CreditPromotions();
             }
         }
 
@@ -205,7 +210,7 @@ namespace SGSC.Pages
                     db.SaveChanges();
 
                     MessageBox.Show("Promoción actualizada con éxito", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
-                    //
+                    App.Current.MainFrame.Content = new CreditPromotions();
                 }
             }
         }
