@@ -13,10 +13,10 @@ namespace SGSC
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class sgscEntities : DbContext
+    public partial class SGSCEntities : DbContext
     {
-        public sgscEntities()
-            : base("name=sgscEntities")
+        public SGSCEntities()
+            : base("name=SGSCEntities")
         {
         }
     
@@ -26,18 +26,18 @@ namespace SGSC
         }
     
         public virtual DbSet<BankAccounts> BankAccounts { get; set; }
+        public virtual DbSet<Banks> Banks { get; set; }
+        public virtual DbSet<Colonies> Colonies { get; set; }
         public virtual DbSet<Contacts> Contacts { get; set; }
-        public virtual DbSet<CreditPolicy> CreditPolicy { get; set; }
-        public virtual DbSet<CreditPromotion> CreditPromotion { get; set; }
-        public virtual DbSet<CreditRequestCreditPolicy> CreditRequestCreditPolicy { get; set; }
+        public virtual DbSet<CreditConditions> CreditConditions { get; set; }
+        public virtual DbSet<CreditPolicies> CreditPolicies { get; set; }
         public virtual DbSet<CreditRequests> CreditRequests { get; set; }
         public virtual DbSet<CustomerAddresses> CustomerAddresses { get; set; }
         public virtual DbSet<CustomerContactInfoes> CustomerContactInfoes { get; set; }
         public virtual DbSet<Customers> Customers { get; set; }
         public virtual DbSet<Employees> Employees { get; set; }
         public virtual DbSet<Payments> Payments { get; set; }
-        public virtual DbSet<TypeAddress> TypeAddress { get; set; }
         public virtual DbSet<WorkCenters> WorkCenters { get; set; }
-        public virtual DbSet<Localization> Localization { get; set; }
+        public virtual DbSet<CreditRequestCreditPolicy> CreditRequestCreditPolicy { get; set; }
     }
 }

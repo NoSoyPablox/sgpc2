@@ -2,9 +2,7 @@
 using SGSC.Messages;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity.Core;
 using System.Data.Entity.Migrations;
-using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -12,7 +10,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Navigation;
 
 namespace SGSC.Pages
 {
@@ -28,14 +25,14 @@ namespace SGSC.Pages
         private int customerId;
         private int? workCenterId = null;
 
-        private sgscEntities dbContext;
+        private SGSCEntities dbContext;
 
         Dictionary<TextBox, Label> textBoxLabelMap;
 
         public PageWorkCenter(int customerId)
         {
             InitializeComponent();
-            dbContext = new sgscEntities();
+            dbContext = new SGSCEntities();
             this.customerId = customerId;
 
             txtWorkCenterName.PreviewTextInput += AllowWriteLetters;
@@ -73,7 +70,6 @@ namespace SGSC.Pages
                 {txtZipCode, lbIsEmptyZipCode}
             };
 
-            // hide all error labels
             foreach (var pair in textBoxLabelMap)
             {
                 pair.Value.Visibility = Visibility.Hidden;

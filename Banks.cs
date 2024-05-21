@@ -12,18 +12,18 @@ namespace SGSC
     using System;
     using System.Collections.Generic;
     
-    public partial class CreditPolicy
+    public partial class Banks
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CreditPolicy()
+        public Banks()
         {
-            this.CreditRequestCreditPolicy = new HashSet<CreditRequestCreditPolicy>();
+            this.BankAccounts = new HashSet<BankAccounts>();
         }
     
-        public int CreditPolicyId { get; set; }
-        public string Description { get; set; }
+        public int BankId { get; set; }
+        public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CreditRequestCreditPolicy> CreditRequestCreditPolicy { get; set; }
+        public virtual ICollection<BankAccounts> BankAccounts { get; set; }
     }
 }

@@ -54,14 +54,14 @@ namespace SGSC.Pages
         {
             try
             {
-                using (sgscEntities db = new sgscEntities())
+                using (SGSCEntities db = new SGSCEntities())
                 {
                     BankAccounts transferAccount = db.BankAccounts.Where(ba => ba.CustomerId == customerId && ba.AccountType == "transfer").FirstOrDefault();
                     if(transferAccount != null)
                     {
                         tbTansAccCardNumber.Text = transferAccount.CardNumber;
-                        tbTansAccBank.Text = transferAccount.BankName;
-                        tbTansAccInterbankCode.Text = transferAccount.Clabe;
+                        //tbTansAccBank.Text = transferAccount.Name;
+                        tbTansAccInterbankCode.Text = transferAccount.InterbankCode;
                         tansferAccountId = transferAccount.BankAccountId;
                     }
 
@@ -69,8 +69,8 @@ namespace SGSC.Pages
                     if (directDebitAccount != null)
                     {
                         tbDomAccBankCardNumber.Text = directDebitAccount.CardNumber;
-                        tbDomAccBank.Text = directDebitAccount.BankName;
-                        tbDomAccBankInterbankCode.Text = directDebitAccount.Clabe;
+                        //tbDomAccBank.Text = directDebitAccount.BankName;
+                        tbDomAccBankInterbankCode.Text = directDebitAccount.InterbankCode;
                         directDebitAccountId = directDebitAccount.BankAccountId;
                     }
                 }
@@ -158,13 +158,13 @@ namespace SGSC.Pages
 
             try
             {
-                using (sgscEntities context = new sgscEntities())
+                using (SGSCEntities context = new SGSCEntities())
                 {
                     var transferAccounts = new BankAccounts
                     {
                         CardNumber = tbTansAccCardNumber.Text,
-                        BankName = tbTansAccBank.Text,
-                        Clabe = tbTansAccInterbankCode.Text,
+                        //BankName = tbTansAccBank.Text,
+                        InterbankCode = tbTansAccInterbankCode.Text,
                         AccountType = "Transferencia",
                         CustomerId = customerId
                     };
@@ -177,8 +177,8 @@ namespace SGSC.Pages
                     var directDebitAccount = new BankAccounts
                     {
                         CardNumber = tbDomAccBankCardNumber.Text,
-                        BankName = tbDomAccBank.Text,
-                        Clabe = tbDomAccBankInterbankCode.Text,
+                        //BankName = tbDomAccBank.Text,
+                        InterbankCode = tbDomAccBankInterbankCode.Text,
                         AccountType = "Domicialización",
                         CustomerId = customerId
                     };

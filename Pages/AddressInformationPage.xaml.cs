@@ -68,7 +68,7 @@ namespace SGSC.Pages
                     newCustomerAddressInfoes.CustomerAddressId = addressId.Value;
                 }
 
-                using (sgscEntities context = new sgscEntities())
+                using (SGSCEntities context = new SGSCEntities())
                 {
                     context.CustomerAddresses.AddOrUpdate(newCustomerAddressInfoes);
                     context.SaveChanges();
@@ -89,7 +89,7 @@ namespace SGSC.Pages
             try
             {
 
-                using (var context = new sgscEntities())
+                using (var context = new SGSCEntities())
                 {
                     var customerData = context.CustomerAddresses
                         .Where(customerDb => customerDb.CustomerId == customerId)

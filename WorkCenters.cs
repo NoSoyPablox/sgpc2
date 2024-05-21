@@ -24,10 +24,6 @@ namespace SGSC
         public string PhoneNumber { get; set; }
         public Nullable<int> CustomerId { get; set; }
         public Nullable<int> Customer_CustomerId { get; set; }
-        public Nullable<System.DateTime> dateOfContract { get; set; }
-        public string occupation { get; set; }
-        public string position { get; set; }
-        public string EmployeeNumber { get; set; }
     
         public virtual Customers Customers { get; set; }
     }

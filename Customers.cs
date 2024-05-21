@@ -30,10 +30,10 @@ namespace SGSC
         public string SecondSurname { get; set; }
         public string Curp { get; set; }
         public string Rfc { get; set; }
+        public string Genre { get; set; }
+        public string CivilStatus { get; set; }
+        public System.DateTime BirthDate { get; set; }
         public Nullable<int> CustomerAddress_CustomerAddressId { get; set; }
-        public string Gender { get; set; }
-        public Nullable<System.DateTime> DateOfBirthay { get; set; }
-        public string maritalStatus { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BankAccounts> BankAccounts { get; set; }

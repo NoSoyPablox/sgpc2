@@ -20,7 +20,7 @@ namespace SGSC.Pages
         String PhoneTwo = "";
         String Email = "";
         int CustomerId;
-        private sgscEntities dbContext;
+        private SGSCEntities dbContext;
         SGSC.CustomerContactInfoes userContactInformation = null;
         bool isEditable = false;
         Dictionary<TextBox, System.Windows.Controls.Label> textBoxLabelMap;
@@ -28,7 +28,7 @@ namespace SGSC.Pages
         public PageContactInformation(bool isEditable, int CustomerId)
         {
             InitializeComponent();
-            dbContext = new sgscEntities();
+            dbContext = new SGSCEntities();
             this.CustomerId = CustomerId;
             this.isEditable = isEditable;
             txtPhoneOne.PreviewTextInput += AllowPhoneNumber;
@@ -58,8 +58,8 @@ namespace SGSC.Pages
         {
             if (userContactInformation != null)
             {
-                txtPhoneOne.Text = userContactInformation.PhoneNumberOne;
-                txtPhoneTwo.Text = userContactInformation.PhoneNumberTwo;
+                txtPhoneOne.Text = userContactInformation.PhoneNumber1;
+                txtPhoneTwo.Text = userContactInformation.PhoneNumber2;
                 txtEmail.Text = userContactInformation.Email;
             }
             else
@@ -109,8 +109,8 @@ namespace SGSC.Pages
                 {
                     if (isEditable)
                     {
-                        userContactInformation.PhoneNumberOne = txtPhoneOne.Text;
-                        userContactInformation.PhoneNumberTwo = txtPhoneTwo.Text;
+                        userContactInformation.PhoneNumber1 = txtPhoneOne.Text;
+                        userContactInformation.PhoneNumber2 = txtPhoneTwo.Text;
                         userContactInformation.Email = txtEmail.Text;
                     }
                     else

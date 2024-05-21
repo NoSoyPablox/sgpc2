@@ -1,0 +1,73 @@
+﻿<Page x:Class="SGSC.Pages.AddCreditPolicy"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SGSC.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="720" d:DesignWidth="1280"
+      Title="AddCreditPolicy">
+
+    <Page.Resources>
+        <!-- Definición de la fuente personalizada -->
+        <FontFamily x:Key="FuenteNunito">/Typografic styles/Nunito-Regular.ttf#Nunito</FontFamily>
+
+        <Style x:Key="CustomLabelStyle" TargetType="Label">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Label">
+                        <TextBlock FontWeight="Medium" FontFamily="{StaticResource FuenteNunito}">
+                            <Run Text="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <Run Text="*" Foreground="#F67070"/>
+                        </TextBlock>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="497*"/>
+            <ColumnDefinition Width="143*"/>
+        </Grid.ColumnDefinitions>
+        <Border Background="White" CornerRadius="22" Grid.ColumnSpan="2">
+            <!-- Contenido dentro del Border -->
+            <!-- Aquí puedes poner tu contenido -->
+        </Border>
+
+        <Frame Grid.ColumnSpan="2"/>
+
+        <Frame Name="UserSessionFrame" NavigationUIVisibility="Hidden" Margin="888,10,20,624" Grid.ColumnSpan="2"/>
+        <Frame Name="StepsSidebarFrame" NavigationUIVisibility="Hidden" Margin="9,68,723,98" />
+
+        <Button Style="{StaticResource ButtonStyleConfirm}" Content="Guardar" FontSize="15" HorizontalAlignment="Left" Margin="129,672,0,0" VerticalAlignment="Top" Width="130" Height="38" Grid.Column="1" Click="BtnClickSave"/>
+
+        <Button Width="100" Height="50" BorderThickness="0" Background="Transparent" Margin="-4,8,898,662" Click="BtnReturn">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="C:\Users\Dani\Desktop\Desarrollo de Software\sgsc\Images\return.png" Width="62" Height="53" />
+            </StackPanel>
+        </Button>
+
+        <Label Content="Nueva política de crédito" FontFamily="{StaticResource FontPoppins}" FontSize="26" HorizontalAlignment="Left" Margin="46,74,0,0" VerticalAlignment="Top"/>
+        <Rectangle Style="{StaticResource RoundedRectangleStyle}" Margin="46,123,47,212" Grid.ColumnSpan="2"/>
+
+        <TextBox x:Name="txtWorkPolityCreditName" Style="{StaticResource CustomTextBoxStyle}" FontSize="18" VerticalContentAlignment="Center" Margin="76,190,274,485"/>
+
+        <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="12" Background="White" Margin="76,315,274,263">
+            <TextBox x:Name="txtDescription" BorderBrush="Transparent" FontFamily="{StaticResource FontNunito}" FontSize="18" Padding="10" TextWrapping="Wrap" AcceptsReturn="True" Margin="9,-1,9,-1" IsReadOnly="False" IsReadOnlyCaretVisible="False"/>
+        </Border>
+
+        <Label Style="{StaticResource CustomLabelStyle}" FontSize="20" Content="Nombre de la política" HorizontalAlignment="Left" Margin="76,160,0,0" VerticalAlignment="Top" x:Name="NombreLabel" Width="282" Height="32"/>
+
+        <!-- TextBox con el formato deseado -->
+
+        <!-- Icono del calendario -->
+
+        <Label Style="{StaticResource CustomLabelStyle}" FontSize="20" Content="Descripción" HorizontalAlignment="Left" Margin="76,286,0,0" VerticalAlignment="Top" x:Name="NombreLabel_Copiar" Width="282" Height="32"/>
+        <Label Style="{StaticResource CustomLabelStyle}" FontSize="20" Content="Fecha" HorizontalAlignment="Left" Margin="821,158,0,0" VerticalAlignment="Top" x:Name="NombreLabel_Copiar1" Width="282" Height="32" Grid.ColumnSpan="2"/>
+        <DatePicker x:Name="cdDate" FontFamily="{StaticResource FontNunito}" FontSize="18" HorizontalAlignment="Left" Margin="821,195,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="217"/>
+
+    </Grid>
+</Page>

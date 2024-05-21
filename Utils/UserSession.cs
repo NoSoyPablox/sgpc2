@@ -80,7 +80,7 @@ namespace SGSC.Utils
                 }
 
                 case (short)UserRole.CreditAnalyst:
-                    var landingPageCreditAnalyst = new Pages.Credit_Analyst_home_page();
+                    var landingPageCreditAnalyst = new Pages.CreditAnalystHomePage();
                     mainFrame.Content = landingPageCreditAnalyst;
                     break;
 

@@ -12,13 +12,11 @@ namespace SGSC
     using System;
     using System.Collections.Generic;
     
-    public partial class CreditRequestCreditPolicy
+    public partial class Colonies
     {
-        public Nullable<int> CreditPolicyId { get; set; }
-        public Nullable<int> CreditRequestId { get; set; }
-        public int IdCreditRequestCreditPolicy { get; set; }
-    
-        public virtual CreditPolicies CreditPolicies { get; set; }
-        public virtual CreditRequests CreditRequests { get; set; }
+        public int ColonyId { get; set; }
+        public string Zipcode { get; set; }
+        public string Name { get; set; }
+        public string State { get; set; }
     }
 }

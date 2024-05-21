@@ -21,15 +21,16 @@ namespace SGSC
         }
     
         public int CustomerAddressId { get; set; }
+        public string Street { get; set; }
+        public string ZipCode { get; set; }
         public string ExternalNumber { get; set; }
         public string InternalNumber { get; set; }
         public int CustomerId { get; set; }
-        public Nullable<int> TypeAddressId { get; set; }
-        public Nullable<int> LocalizationId { get; set; }
+        public string Colony { get; set; }
+        public string State { get; set; }
+        public int Type { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Customers> Customers { get; set; }
-        public virtual TypeAddress TypeAddress { get; set; }
-        public virtual Localization Localization { get; set; }
     }
 }

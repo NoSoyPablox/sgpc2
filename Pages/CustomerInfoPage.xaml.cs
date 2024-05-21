@@ -95,7 +95,7 @@ namespace SGSC.Pages
 
         private void registerCustomer()
         {
-            using (sgscEntities db = new sgscEntities())
+            using (SGSCEntities db = new SGSCEntities())
             {
                 try
                 {
@@ -125,7 +125,7 @@ namespace SGSC.Pages
 
         private void updateCustomer()
         {
-            using (sgscEntities db = new sgscEntities())
+            using (SGSCEntities db = new SGSCEntities())
             {
                 try
                 {
@@ -158,7 +158,7 @@ namespace SGSC.Pages
 
         private void getCustomerInfo(int idCustomer)
         {
-            using (sgscEntities db = new sgscEntities())
+            using (SGSCEntities db = new SGSCEntities())
             {
                 Customers customer = db.Customers.Find(idCustomer);
                 if (customer == null)

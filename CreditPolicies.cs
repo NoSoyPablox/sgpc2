@@ -12,22 +12,21 @@ namespace SGSC
     using System;
     using System.Collections.Generic;
     
-    public partial class CreditPromotion
+    public partial class CreditPolicies
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CreditPromotion()
+        public CreditPolicies()
         {
-            this.CreditRequests = new HashSet<CreditRequests>();
+            this.CreditRequestCreditPolicy = new HashSet<CreditRequestCreditPolicy>();
         }
     
-        public int CreditPromotionId { get; set; }
+        public int CreditPolicyId { get; set; }
         public string Name { get; set; }
-        public Nullable<bool> Active { get; set; }
         public Nullable<System.DateTime> EffectiveDate { get; set; }
-        public Nullable<System.DateTime> Deadline { get; set; }
-        public Nullable<double> InterestRate { get; set; }
+        public string Description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CreditRequests> CreditRequests { get; set; }
+        public virtual ICollection<CreditRequestCreditPolicy> CreditRequestCreditPolicy { get; set; }
+        public object Validity { get; internal set; }
     }
 }
