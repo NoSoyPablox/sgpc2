@@ -215,5 +215,30 @@ namespace SGSC.Pages
             }
         }
 
+        private void tbInterestRate_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(e.Text, @"[^0-9.]+"))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void tbTimePeriod_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(e.Text, @"[^0-9]+"))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void tbInterestRate_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            if (tb.Text.Count(x => x == '.') > 1)
+            {
+                tb.Text = tb.Text.Remove(tb.Text.Length - 1);
+                tb.SelectionStart = tb.Text.Length;
+            }
+        }
     }
 }

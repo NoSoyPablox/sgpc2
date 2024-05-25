@@ -21,8 +21,8 @@
             <Button x:Name="btnModify" Style="{StaticResource Button}" Content="Modificar" FontWeight="Medium"  Background="#FCDC2A" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top" Width="234" Height="52" Margin="977,619,0,0" Click="btnModify_Click"/>
             <Rectangle Style="{StaticResource RoundedRectangleStyle}" Margin="216,189,175,222"/>
             <TextBox x:Name="tbName" Style="{StaticResource CustomTextBoxStyle}" Margin="266,278,619,400" VerticalContentAlignment="Center" FontSize="20"/>
-            <TextBox x:Name="tbTimePeriod" Style="{StaticResource CustomTextBoxStyle}" Margin="266,384,863,294" VerticalContentAlignment="Center" FontSize="20"/>
-            <TextBox x:Name="tbInterestRate" Style="{StaticResource CustomTextBoxStyle}" Margin="737,278,436,400" VerticalContentAlignment="Center" FontSize="20"/>
+            <TextBox x:Name="tbTimePeriod" Style="{StaticResource CustomTextBoxStyle}" Margin="266,384,863,294" VerticalContentAlignment="Center" FontSize="20" PreviewTextInput="tbTimePeriod_PreviewTextInput"/>
+            <TextBox x:Name="tbInterestRate" Style="{StaticResource CustomTextBoxStyle}" Margin="737,278,436,400" VerticalContentAlignment="Center" FontSize="20" PreviewTextInput="tbInterestRate_PreviewTextInput" TextChanged="tbInterestRate_TextChanged"/>
             <Label Style="{StaticResource CustomLabelStyle}" FontSize="24" Content="Nombre" HorizontalAlignment="Left" Margin="266,238,0,0" VerticalAlignment="Top" x:Name="NombreLabel" Width="237" Height="27"/>
             <Label Style="{StaticResource CustomLabelStyle}" FontSize="24" Content="Plazo" HorizontalAlignment="Left" Margin="266,345,0,0" VerticalAlignment="Top" x:Name="NombreLabel_Copiar" Width="237" Height="27"/>
             <Label Style="{StaticResource CustomLabelStyle}" FontSize="24" Content="Tasa de interés" HorizontalAlignment="Left" Margin="737,238,0,0" VerticalAlignment="Top" x:Name="NombreLabel_Copiar1" Width="237" Height="27"/>
