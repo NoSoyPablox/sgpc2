@@ -26,7 +26,7 @@
         <Button Style="{StaticResource ButtonStyleConfirm}" Content="Continuar" FontSize="22" HorizontalAlignment="Left" Margin="984,614,0,0" VerticalAlignment="Top" Width="180" Height="54" Click="SaveBankAccounts" />
 
         <SGSC:NumericBox x:Name="tbTansAccInterbankCode" Style="{StaticResource CustomTextBoxStyle}" FontSize="18" VerticalContentAlignment="Center" Margin="250,220,623,455" TextChanged="tbTansAccInterbankCode_TextChanged"/>
-        <Label Style="{StaticResource CustomLabelStyle}" FontSize="20" Content="CLABE " HorizontalAlignment="Left" Margin="250,190,0,0" VerticalAlignment="Top" x:Name="NombreLabel" Width="237" Height="20"/>
+        <Label Style="{StaticResource CustomLabelStyle}" FontSize="20" Content="CLABE " HorizontalAlignment="Left" Margin="250,190,0,0" VerticalAlignment="Top" x:Name="NombreLabel" Width="237" Height="25"/>
         <Label x:Name="lbTansAccInterbankCodeError" Content="Error" HorizontalAlignment="Left" HorizontalContentAlignment="Right" Margin="250,266,0,0" VerticalAlignment="Top" Width="407" Foreground="#FFCE2222" FontStyle="Italic"/>
 
         <SGSC:NumericBox x:Name="tbTansAccCardNumber" Style="{StaticResource CustomTextBoxStyle}" FontSize="18" VerticalContentAlignment="Center" Margin="735,221,138,454"/>
@@ -53,5 +53,11 @@
                 <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
             </CheckBox.LayoutTransform>
         </CheckBox>
+        <ComboBox x:Name="cbTransferAccount" HorizontalAlignment="Left" Margin="735,318,0,0" VerticalAlignment="Top" Width="146" Height="31" FontFamily="{StaticResource FontNunito}" FontSize="15" SelectionChanged="cbTransferAccount_SelectionChanged">
+            <ComboBoxItem Content="Registrar nueva" FontFamily="{StaticResource FontNunito}" FontSize="15"/>
+        </ComboBox>
+        <ComboBox x:Name="cbDirectDebitAccount" HorizontalAlignment="Left" Margin="735,578,0,0" VerticalAlignment="Top" Width="146" Height="31" FontFamily="{StaticResource FontNunito}" FontSize="15" SelectionChanged="cbDirectDebitAccount_SelectionChanged">
+            <ComboBoxItem Content="Registrar nueva" FontFamily="{StaticResource FontNunito}" FontSize="15" />
+        </ComboBox>
     </Grid>
 </Page>

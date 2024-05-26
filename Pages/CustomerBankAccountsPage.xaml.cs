@@ -39,6 +39,7 @@ namespace SGSC.Pages
 
             creditAdvisorSidebar.Content = new CreditAdvisorSidebar("");
             UserSessionFrame.Content = new UserSessionFrame();
+            getBanks();
 
             clearErrors();
         }
@@ -231,6 +232,9 @@ namespace SGSC.Pages
             tbDomAccBank.Text = tbTansAccBank.Text;
             tbDomAccBankInterbankCode.Text = tbTansAccInterbankCode.Text;
             directDebitAccountBankId = transferAccountBankId;
+
+            // Disable debit account combobox
+            cbDirectDebitAccount.IsEnabled = false;
         }
 
         private void cbUseTheSameAccount_Unchecked(object sender, RoutedEventArgs e)
@@ -238,6 +242,7 @@ namespace SGSC.Pages
             // Enable debit account fields
             tbDomAccBankCardNumber.IsEnabled = true;
             tbDomAccBankInterbankCode.IsEnabled = true;
+            cbDirectDebitAccount.IsEnabled = true;
         }
 
 		private void tbTansAccInterbankCode_TextChanged(object sender, TextChangedEventArgs e)
@@ -306,5 +311,79 @@ namespace SGSC.Pages
 				lbDomAccBankInterbankCodeError.Content = "";
 			}
 		}
-	}
+
+        private void getBanks()
+        {
+            try
+            {
+                using (sgscEntities db = new sgscEntities())
+                {
+                    var transferAccount = db.BankAccounts.Where(ba => ba.CustomerId == customerId && ba.AccountType == (int)BankAccount.AccountTypes.TransferAccount).FirstOrDefault();
+                    var directDebitAccount = db.BankAccounts.Where(ba => ba.CustomerId == customerId && ba.AccountType == (int)BankAccount.AccountTypes.DirectDebitAccount).FirstOrDefault();
+
+                    if(transferAccount != null)
+                    {
+                        cbTransferAccount.Items.Add(transferAccount);
+                    }
+                    if(directDebitAccount != null)
+                    {
+                        cbDirectDebitAccount.Items.Add(directDebitAccount);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al obtener los bancos: " + ex.Message);
+            }
+        }
+
+        private void cbTransferAccount_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cbTransferAccount.SelectedIndex != -1)
+            {
+                if (cbTransferAccount.SelectedIndex == 0)
+                {
+                    tbTansAccCardNumber.Text = "";
+                    tbTansAccBank.Text = "";
+                    tbTansAccInterbankCode.Text = "";
+                    tansferAccountId = null;
+                    transferAccountBankId = null;
+                }
+                else
+                {
+
+                    BankAccount bank = (BankAccount)cbTransferAccount.SelectedItem;
+                    tbTansAccCardNumber.Text = bank.CardNumber;
+                    tbTansAccInterbankCode.Text = bank.InterbankCode;
+                    tansferAccountId = bank.BankAccountId;
+
+                }
+
+            }
+        }
+
+        private void cbDirectDebitAccount_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cbDirectDebitAccount.SelectedIndex != -1)
+            {
+                if (cbDirectDebitAccount.SelectedIndex == 0)
+                {
+                    tbDomAccBankCardNumber.Text = "";
+                    tbDomAccBank.Text = "";
+                    tbDomAccBankInterbankCode.Text = "";
+                    directDebitAccountId = null;
+                    directDebitAccountBankId = null;
+                }
+                else
+                {
+                    BankAccount bank = (BankAccount)cbDirectDebitAccount.SelectedItem;
+                    tbDomAccBankCardNumber.Text = bank.CardNumber;
+                    tbDomAccBankInterbankCode.Text = bank.InterbankCode;
+                    directDebitAccountId = bank.BankAccountId;
+                }
+
+            }
+
+        }
+    }
 }
