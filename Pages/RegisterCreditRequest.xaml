@@ -28,20 +28,20 @@
         <Label Content="Tasa de interés" FontFamily="{StaticResource FontNunitoBold}" FontSize="18" HorizontalAlignment="Left" Margin="784,347,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <Label Content="Plazo" FontFamily="{StaticResource FontNunitoBold}" FontSize="18" HorizontalAlignment="Left" Margin="950,347,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="140"/>
         <Label Content="Destino del credito:" FontFamily="{StaticResource FontNunitoBold}" FontSize="18" HorizontalAlignment="Left" Margin="270,465,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lbInterestRate" Content="tasa de interes" FontFamily="{StaticResource FontNunito}" FontSize="18" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="784,391,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="134"/>
-        <Label x:Name="lbTimePeriod" Content="Plazo" FontFamily="{StaticResource FontNunito}" FontSize="18" HorizontalAlignment="Left" Margin="950,391,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="140"/>
+        <Label x:Name="lbInterestRate" Content="" FontFamily="{StaticResource FontNunito}" FontSize="18" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="784,391,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="134"/>
+        <Label x:Name="lbTimePeriod" Content="" FontFamily="{StaticResource FontNunito}" FontSize="18" HorizontalAlignment="Left" Margin="950,391,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="140"/>
         <Label Content="Total:" FontFamily="{StaticResource FontNunitoBold}" FontSize="18" HorizontalAlignment="Left" Margin="257,594,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lbTotalAmount" Content="0.0" FontFamily="{StaticResource FontNunito}" FontSize="18" HorizontalAlignment="Left" Margin="324,594,0,0" VerticalAlignment="Top" Width="176"/>
-        <Label x:Name="lbName" Content="Nombre de cliente" FontFamily="{StaticResource FontNunito}" FontSize="18" HorizontalAlignment="Left" Margin="285,236,0,0" VerticalAlignment="Top" Width="298"/>
+        <Label x:Name="lbName" Content="" FontFamily="{StaticResource FontNunito}" FontSize="18" HorizontalAlignment="Left" Margin="285,236,0,0" VerticalAlignment="Top" Width="286"/>
         <Label Content="MXN" FontFamily="{StaticResource FontNunitoBold}" FontSize="18" HorizontalAlignment="Left" Margin="424,394,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lbPromotionError" Content="Error" HorizontalAlignment="Left" HorizontalContentAlignment="Right" VerticalAlignment="Top" Width="148" Foreground="#FFCE2222" FontStyle="Italic" Margin="548,428,0,0"/>
         <Label x:Name="lbPurposeError" Content="Error" HorizontalAlignment="Left" HorizontalContentAlignment="Right" VerticalAlignment="Top" Width="812" Foreground="#FFCE2222" FontStyle="Italic" Margin="276,545,0,0"/>
         <Label x:Name="lbAmountError" Content="Error" HorizontalAlignment="Left" HorizontalContentAlignment="Right" VerticalAlignment="Top" Width="198" Foreground="#FFCE2222" FontStyle="Italic" Margin="276,428,0,0"/>
         <Button x:Name="btnCancel" Style="{StaticResource ButtonStyleCancel}" Content="Cancelar" FontSize="22" HorizontalAlignment="Left" Margin="742,617,0,0" VerticalAlignment="Top" Height="54" Width="180" Click="btnCancel_Click" />
         <Label Content= "CURP" FontFamily="{StaticResource FontNunitoBold}" FontSize="18" HorizontalAlignment="Left" Margin="668,196,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lbCurp" Content="CURP" FontFamily="{StaticResource FontNunito}" FontSize="18" HorizontalAlignment="Left" Margin="588,236,0,0" VerticalAlignment="Top" Width="219" HorizontalContentAlignment="Center"/>
+        <Label x:Name="lbCurp" Content="" FontFamily="{StaticResource FontNunito}" FontSize="18" HorizontalAlignment="Left" Margin="576,236,0,0" VerticalAlignment="Top" Width="244" HorizontalContentAlignment="Center"/>
         <Label Content= "Edad" FontFamily="{StaticResource FontNunitoBold}" FontSize="18" HorizontalAlignment="Left" Margin="964,196,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lbAge" Content="Edad" FontFamily="{StaticResource FontNunito}" FontSize="18" HorizontalAlignment="Left" Margin="925,236,0,0" VerticalAlignment="Top" Width="129" HorizontalContentAlignment="Center"/>
+        <Label x:Name="lbAge" Content="" FontFamily="{StaticResource FontNunito}" FontSize="18" HorizontalAlignment="Left" Margin="925,236,0,0" VerticalAlignment="Top" Width="129" HorizontalContentAlignment="Center"/>
 
 
     </Grid>

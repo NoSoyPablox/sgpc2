@@ -306,25 +306,28 @@ namespace SGSC.Pages
         private void CorrectCredtiRequests(object sender, RoutedEventArgs e)
         {
             CreditRequestData selectedCreditRequest = (CreditRequestData)creditRequestsDataGrid.SelectedItem;
-            if (selectedCreditRequest != null)
+            Customer customerFromRequest = null;
+            using (sgscEntities db = new sgscEntities())
             {
-                NavigationService.Navigate(new CollectionEfficienciesPage(selectedCreditRequest.CreditRequestId));
+                var creditRequest = db.CreditRequests.Where(cr => cr.CreditRequestId == selectedCreditRequest.CreditRequestId).FirstOrDefault();
+                if (creditRequest != null)
+                {
+                    var customer = db.Customers.Where(c => c.CustomerId == creditRequest.CustomerId).FirstOrDefault();
+                    if (customer != null)
+                    {
+                        customerFromRequest = customer;
+                    }
+                }
+            }
+            if (selectedCreditRequest != null && customerFromRequest != null)
+            {
+                //NavigationService.Navigate(new CollectionEfficienciesPage(selectedCreditRequest.CreditRequestId));
+                NavigationService.Navigate(new RegisterCreditRequest(customerFromRequest.CustomerId ,selectedCreditRequest.CreditRequestId));
             }
             else
             {
                 MessageBox.Show("Por favor, seleccione una solicitud de crédito para Consultar .", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
-
-
-
-            /*var creditRequestDetails = new correctCreditRequest(creditRequestData.CreditRequestId);
-             if (NavigationService != null)
-             {
-                 NavigationService.Navigate(correctCreditRequest);
-             }*/
-            //Pendiente agregar la página para Corregir solicitudes de crédito
-
         }
 
 

@@ -1,6 +1,7 @@
 ﻿using SGSC.Frames;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -23,19 +24,57 @@ namespace SGSC.Pages
     public partial class RegisterCreditRequest : Page
     {
         private int idCustomer = -1;
+        private int idCreditRequest = -1;
         private double totalAmount = 0.0;
-        public RegisterCreditRequest(int idCustomer)
+        private CreditRequest CreditRequest;
+        public RegisterCreditRequest(int idCustomer, int idCreditRequest)
         {
             InitializeComponent();
 
             UserSessionFrame.Content = new UserSessionFrame();
 
             this.idCustomer = idCustomer;
-            retrieveCustomerData();
+            this.idCreditRequest = idCreditRequest;
             retrieveCreditPromotions();
+            if (idCreditRequest != -1)
+            {
+                retrieveCreditRequestData();
+                retrieveCredidPromotionSelectedIfAvailable();
+            }
+
+            retrieveCustomerData();
             lbAmountError.Content = "";
             lbPromotionError.Content = "";
             lbPurposeError.Content = "";
+        }
+
+        private void retrieveCreditRequestData()
+        {
+            using (var context = new sgscEntities())
+            {
+                var creditRequest = context.CreditRequests.Find(idCreditRequest);
+                if (creditRequest != null)
+                {
+                    this.CreditRequest = creditRequest;
+                    tbPurpose.Text = creditRequest.Purpose;
+                    tbAmount.Text = creditRequest.Amount.ToString() + "Este valor es el calculado y no el solicitado";
+                }
+            }
+        }
+
+        private void retrieveCredidPromotionSelectedIfAvailable()
+        {
+            using (var context = new sgscEntities())
+            {
+                var creditPromotion = context.CreditPromotions
+                    .Where(cp => cp.InterestRate == CreditRequest.InterestRate && cp.TimePeriod == CreditRequest.TimePeriod)
+                    .FirstOrDefault();
+                if (creditPromotion != null)
+                {
+                    cbCreditPromotions.SelectedItem = creditPromotion;
+                    cbCreditPromotions.SelectedValue = creditPromotion;
+                }
+            }
         }
 
         private void retrieveCustomerData()
@@ -196,7 +235,17 @@ namespace SGSC.Pages
                 creditRequest.PaymentsInterval = selectedPromotion.Interval;
                 creditRequest.Description = "";
 
-                context.CreditRequests.Add(creditRequest);
+                
+                if(idCreditRequest != -1)
+                {
+                    creditRequest.CreditRequestId = idCreditRequest;
+                    creditRequest.FileNumber = CreditRequest.FileNumber;
+                    //context.CreditRequests.Attach(creditRequest); ver que hace esto
+                    creditRequest.CreationDate = CreditRequest.CreationDate;
+                    filenumber = CreditRequest.FileNumber;
+                }
+
+                context.CreditRequests.AddOrUpdate(creditRequest);
                 try
                 {
                     context.SaveChanges();

@@ -124,7 +124,7 @@ namespace SGSC.Pages
 
                         MessageBox.Show("Referencias guardadas correctamente", "Referencias guardadas", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                        App.Current.MainFrame.Content = new RegisterCreditRequest(customerId);
+                        App.Current.MainFrame.Content = new RegisterCreditRequest(customerId, -1);
                     }
                     catch (Exception ex)
                     {
