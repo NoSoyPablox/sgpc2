@@ -57,7 +57,7 @@ namespace SGSC.Pages
                 {
                     this.CreditRequest = creditRequest;
                     tbPurpose.Text = creditRequest.Purpose;
-                    tbAmount.Text = creditRequest.Amount.ToString() + "Este valor es el calculado y no el solicitado";
+                    tbAmount.Text = creditRequest.Amount.ToString() + " Valor total no valor original solicitado";
                 }
             }
         }
@@ -71,8 +71,19 @@ namespace SGSC.Pages
                     .FirstOrDefault();
                 if (creditPromotion != null)
                 {
-                    cbCreditPromotions.SelectedItem = creditPromotion;
-                    cbCreditPromotions.SelectedValue = creditPromotion;
+                    foreach (var item in cbCreditPromotions.Items)
+                    {
+                        var cp = (CreditPromotion)item;
+                        if (cp.InterestRate == creditPromotion.InterestRate && cp.TimePeriod == creditPromotion.TimePeriod)
+                        {
+                            cbCreditPromotions.SelectedItem = item;
+                        }
+                    }
+                }
+
+                if (cbCreditPromotions.SelectedIndex == -1)
+                {
+                    MessageBox.Show("La promoción de esta soliitud ha cambiado, ya no esta existe o ha caducado, deberá seleccionar una vigente");
                 }
             }
         }
