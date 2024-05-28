@@ -22,18 +22,20 @@ namespace SGSC.Pages
     {
         private int customerId;
         private int? contactInfoId = null;
-        
-        public CustomerContactInfo(int customerId)
+        private int? CreditRequestId = null;
+
+        public CustomerContactInfo(int customerId, int? creditRequestId = null)
         {
             InitializeComponent();
             this.customerId = customerId;
+            CreditRequestId = creditRequestId;
+            MessageBox.Show("El id de la solicitud es: " + creditRequestId);
 
             StepsSidebarFrame.Content = new CustomerRegisterStepsSidebar("ContactInfo");
             UserSessionFrame.Content = new UserSessionFrame();
 
             clearErrors();
             getContactInfo();
-
         }
 
         private void clearErrors()

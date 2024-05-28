@@ -26,11 +26,13 @@ namespace SGSC.Pages
     public partial class CustomerInfoPage : Page
     {
         private int? CustomerId = null;
+        private int? CreditRequestId = null;
 
-        public CustomerInfoPage(int? customerId = null)
+        public CustomerInfoPage(int? customerId = null, int? creditRequestId = null)
         {
             InitializeComponent();
             CustomerId = customerId;
+            CreditRequestId = creditRequestId;
             if (CustomerId != null)
             {
                 getCustomerInfo(CustomerId.Value);
@@ -199,6 +201,14 @@ namespace SGSC.Pages
                     db.SaveChanges();
                     MessageBox.Show("Cliente actualizado exitosamente.");
                     
+                    if (CreditRequestId != null)
+                    {
+                        App.Current.MainFrame.Content = new AddressInformationPage(CustomerId.Value ,CreditRequestId.Value);
+                    }
+                    else
+                    {
+                        // Redirect to the address information page (next step in the customer registration process
+                    }
                     App.Current.MainFrame.Content = new AddressInformationPage(CustomerId.Value);
                 }
                 catch (Exception ex)

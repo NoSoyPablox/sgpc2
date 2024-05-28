@@ -24,16 +24,19 @@ namespace SGSC.Pages
         private string ZipCode = "";
         private int customerId;
         private int? workCenterId = null;
+        private int? CreditRequestId = null;
 
         private sgscEntities dbContext;
 
         Dictionary<TextBox, Label> textBoxLabelMap;
 
-        public PageWorkCenter(int customerId)
+        public PageWorkCenter(int customerId, int? creditRequestId = null)
         {
             InitializeComponent();
             dbContext = new sgscEntities();
             this.customerId = customerId;
+            CreditRequestId = creditRequestId;
+            MessageBox.Show("El id de la solicitud es: " + creditRequestId.Value);
 
             txtWorkCenterName.PreviewTextInput += AllowWriteLetters;
             txtColony.PreviewTextInput += AllowWriteLetters;
@@ -179,7 +182,15 @@ namespace SGSC.Pages
                         pair.Value.Visibility = Visibility.Hidden;
                     }
 
-                    App.Current.MainFrame.Content = new CustomerContactInfo(customerId);
+                    if (CreditRequestId != null)
+                    {
+                        App.Current.MainFrame.Content = new CustomerContactInfo(customerId, CreditRequestId);
+                    }
+                    else
+                    {
+                        App.Current.MainFrame.Content = new CustomerContactInfo(customerId);
+                    }
+
                 }
                 catch (Exception ex)
                 {

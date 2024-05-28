@@ -32,6 +32,8 @@ namespace SGSC.Pages
             InitializeComponent();
             btnModifyCustomer.IsEnabled = false;
             btnModifyCustomer.Visibility = Visibility.Hidden;
+            btnModifyCustomerAccounts.IsEnabled = false;
+            btnModifyCustomerAccounts.Visibility = Visibility.Hidden;
             UserSessionFrame.Content = new UserSessionFrame();
 
             this.idCustomer = idCustomer;
@@ -43,6 +45,10 @@ namespace SGSC.Pages
                 retrieveCredidPromotionSelectedIfAvailable();
                 btnModifyCustomer.IsEnabled = true;
                 btnModifyCustomer.Visibility = Visibility.Visible;
+                btnModifyCustomerAccounts.IsEnabled = true;
+                btnModifyCustomerAccounts.Visibility = Visibility.Visible;
+                btnCancel.Content = "Volver";
+                btnRegister.Content = "Actualizar";
             }
 
             retrieveCustomerData();
@@ -263,10 +269,17 @@ namespace SGSC.Pages
                 try
                 {
                     context.SaveChanges();
-                    MessageBox.Show("Solicitud de crédito registrada exitosamente");
-
                     var cr = context.CreditRequests.Where(c => c.FileNumber == filenumber).FirstOrDefault();
-                    App.Current.MainFrame.Content = new CustomerBankAccountsPage(idCustomer, cr.CreditRequestId);
+
+                    if (idCreditRequest == -1)
+                    {
+                        MessageBox.Show("Solicitud de crédito registrada exitosamente");
+                        App.Current.MainFrame.Content = new CustomerBankAccountsPage(idCustomer, cr.CreditRequestId);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Solicitud de crédito actualizada exitosamente");
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -283,12 +296,17 @@ namespace SGSC.Pages
 
         private void btnModifyCustomer_Click(object sender, RoutedEventArgs e)
         {
-            var customerInfoPage = new CustomerInfoPage(idCustomer);
+            var customerInfoPage = new CustomerInfoPage(idCustomer, idCreditRequest); //Agregar que se mande el id de la solicitud
             if (NavigationService != null)
             {
                 NavigationService.Navigate(customerInfoPage);
 
             }
+        }
+
+        private void btnModifyCustomerAccounts_Click(object sender, RoutedEventArgs e)
+        {
+            //por implementar
         }
     }
 }
