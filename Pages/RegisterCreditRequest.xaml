@@ -9,10 +9,12 @@
       Title="RegisterCreditRequest">
 
     <Grid>
-        <Border Background="White" Margin="0"/>
+        <Border Background="White" Margin="0">
+        </Border>
         <Frame Name="UserSessionFrame" NavigationUIVisibility="Hidden" Margin="831,43,38,592"/>
 
 
+        <Button x:Name="btnModifyCustomer" Style="{StaticResource Button}" Content="Corregir cliente" FontWeight="Medium"  Background="#FCDC2A" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top" Width="234" Height="52" Margin="471,618,0,0" Click="btnModifyCustomer_Click"/>
         <Button Style="{StaticResource ButtonStyleConfirm}" x:Name="btnRegister" Content="Registrar" FontSize="22" HorizontalAlignment="Left" VerticalAlignment="Top" Width="180" Height="54" Margin="964,617,0,0" Click="btnRegister_Click" />
         <Label FontFamily="{StaticResource FontPoppins}" FontWeight="Bold" FontSize="36" Content="Registrar solicitud de credito" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="216,93,0,0"/>
         <Rectangle Style="{StaticResource RoundedRectangleStyle}" Margin="208,166,124,415"/>

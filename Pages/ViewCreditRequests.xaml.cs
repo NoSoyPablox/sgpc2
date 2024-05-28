@@ -294,11 +294,11 @@ namespace SGSC.Pages
             CreditRequestData creditRequestData = (CreditRequestData)creditRequestsDataGrid.SelectedItem;
             if (creditRequestData != null)
             {
-                /*var creditRequestDetails = new CreditRequestDetails(creditRequestData.CreditRequestId);
+                var creditRequestDetails = new CreditApplicationDetailsApproveCreditApplication(creditRequestData.CreditRequestId);
                  if (NavigationService != null)
                  {
                      NavigationService.Navigate(creditRequestDetails);
-                 }*/
+                 }
                 //Pendiente agregar la página CreditRequestDetails
             }
         }

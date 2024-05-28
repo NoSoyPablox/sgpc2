@@ -55,10 +55,10 @@
         <Label FontSize="16" FontWeight="Bold" Content="Número exterior:" HorizontalAlignment="Left" Margin="307,307,0,0" VerticalAlignment="Top"/>
         <Label FontSize="16" FontWeight="Bold" Content="Número interior:" HorizontalAlignment="Left" Margin="691,308,0,0" VerticalAlignment="Top"/>
         <Label FontSize="16" x:Name="lbCompanyName" HorizontalAlignment="Left" Margin="381,214,0,0" VerticalAlignment="Top"/>
-        <Label FontSize="16" x:Name="lbOutsideNumber" HorizontalAlignment="Left" Margin="442,307,0,0" VerticalAlignment="Top"/>
+        <Label FontSize="16" x:Name="lbOutsideNumber" HorizontalAlignment="Left" Margin="453,314,0,0" VerticalAlignment="Top" Height="20" Width="74"/>
         <Label FontSize="16" x:Name="lbZipCode" HorizontalAlignment="Left" Margin="1117,307,0,0" VerticalAlignment="Top"/>
         <Label FontSize="16" FontWeight="Bold" Content="Teléfono:" HorizontalAlignment="Left" Margin="305,170,0,0" VerticalAlignment="Top"/>
-        <Label FontSize="16" x:Name="lbPhoneNumber" HorizontalAlignment="Left" Margin="381,169,0,0" VerticalAlignment="Top"/>
+        <Label FontSize="16" x:Name="lbPhoneNumber" HorizontalAlignment="Left" Margin="387,175,0,0" VerticalAlignment="Top" Height="25" Width="259"/>
 
 
         <Button FontFamily="{StaticResource FontNunitoBold}" FontSize="17" Cursor="Hand" Content="Solicitud" Tag="../Images/User.png" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Left" Margin="26,111,0,0" VerticalAlignment="Top" Height="47" Width="241" Click="BtnClicRequest" />

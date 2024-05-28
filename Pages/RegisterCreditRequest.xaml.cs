@@ -30,7 +30,8 @@ namespace SGSC.Pages
         public RegisterCreditRequest(int idCustomer, int idCreditRequest)
         {
             InitializeComponent();
-
+            btnModifyCustomer.IsEnabled = false;
+            btnModifyCustomer.Visibility = Visibility.Hidden;
             UserSessionFrame.Content = new UserSessionFrame();
 
             this.idCustomer = idCustomer;
@@ -40,6 +41,8 @@ namespace SGSC.Pages
             {
                 retrieveCreditRequestData();
                 retrieveCredidPromotionSelectedIfAvailable();
+                btnModifyCustomer.IsEnabled = true;
+                btnModifyCustomer.Visibility = Visibility.Visible;
             }
 
             retrieveCustomerData();
@@ -276,6 +279,16 @@ namespace SGSC.Pages
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             App.Current.MainFrame.Content = new HomePageCreditAdvisor();
+        }
+
+        private void btnModifyCustomer_Click(object sender, RoutedEventArgs e)
+        {
+            var customerInfoPage = new CustomerInfoPage(idCustomer);
+            if (NavigationService != null)
+            {
+                NavigationService.Navigate(customerInfoPage);
+
+            }
         }
     }
 }
