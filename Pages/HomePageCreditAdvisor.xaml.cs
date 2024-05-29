@@ -24,12 +24,7 @@ namespace SGSC.Pages
 
         private void btnNewRequest_Click(object sender, RoutedEventArgs e)
         {
-            //var searchCustomerPage = new SearchCustomerPage();
-            var registerCreditRequest = new RegisterCreditRequest(1);
-            if (NavigationService != null)
-            {
-                NavigationService.Navigate(registerCreditRequest);
-            }
+            App.Current.MainFrame.Content = new Pages.SearchCustomerPage();
         }
     }
 }

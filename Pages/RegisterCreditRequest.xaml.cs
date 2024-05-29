@@ -1,6 +1,7 @@
 ﻿using SGSC.Frames;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -23,19 +24,77 @@ namespace SGSC.Pages
     public partial class RegisterCreditRequest : Page
     {
         private int idCustomer = -1;
+        private int idCreditRequest = -1;
         private double totalAmount = 0.0;
-        public RegisterCreditRequest(int idCustomer)
+        private CreditRequest CreditRequest;
+        public RegisterCreditRequest(int idCustomer, int idCreditRequest)
         {
             InitializeComponent();
-
+            btnModifyCustomer.IsEnabled = false;
+            btnModifyCustomer.Visibility = Visibility.Hidden;
+            btnModifyCustomerAccounts.IsEnabled = false;
+            btnModifyCustomerAccounts.Visibility = Visibility.Hidden;
             UserSessionFrame.Content = new UserSessionFrame();
 
             this.idCustomer = idCustomer;
-            retrieveCustomerData();
+            this.idCreditRequest = idCreditRequest;
             retrieveCreditPromotions();
+            if (idCreditRequest != -1)
+            {
+                retrieveCreditRequestData();
+                retrieveCredidPromotionSelectedIfAvailable();
+                btnModifyCustomer.IsEnabled = true;
+                btnModifyCustomer.Visibility = Visibility.Visible;
+                btnModifyCustomerAccounts.IsEnabled = true;
+                btnModifyCustomerAccounts.Visibility = Visibility.Visible;
+                btnCancel.Content = "Volver";
+                btnRegister.Content = "Actualizar";
+            }
+
+            retrieveCustomerData();
             lbAmountError.Content = "";
             lbPromotionError.Content = "";
             lbPurposeError.Content = "";
+        }
+
+        private void retrieveCreditRequestData()
+        {
+            using (var context = new sgscEntities())
+            {
+                var creditRequest = context.CreditRequests.Find(idCreditRequest);
+                if (creditRequest != null)
+                {
+                    this.CreditRequest = creditRequest;
+                    tbPurpose.Text = creditRequest.Purpose;
+                    tbAmount.Text = creditRequest.Amount.ToString() + " Valor total no valor original solicitado";
+                }
+            }
+        }
+
+        private void retrieveCredidPromotionSelectedIfAvailable()
+        {
+            using (var context = new sgscEntities())
+            {
+                var creditPromotion = context.CreditPromotions
+                    .Where(cp => cp.InterestRate == CreditRequest.InterestRate && cp.TimePeriod == CreditRequest.TimePeriod)
+                    .FirstOrDefault();
+                if (creditPromotion != null)
+                {
+                    foreach (var item in cbCreditPromotions.Items)
+                    {
+                        var cp = (CreditPromotion)item;
+                        if (cp.InterestRate == creditPromotion.InterestRate && cp.TimePeriod == creditPromotion.TimePeriod)
+                        {
+                            cbCreditPromotions.SelectedItem = item;
+                        }
+                    }
+                }
+
+                if (cbCreditPromotions.SelectedIndex == -1)
+                {
+                    MessageBox.Show("La promoción de esta soliitud ha cambiado, ya no esta existe o ha caducado, deberá seleccionar una vigente");
+                }
+            }
         }
 
         private void retrieveCustomerData()
@@ -196,14 +255,31 @@ namespace SGSC.Pages
                 creditRequest.PaymentsInterval = selectedPromotion.Interval;
                 creditRequest.Description = "";
 
-                context.CreditRequests.Add(creditRequest);
+                
+                if(idCreditRequest != -1)
+                {
+                    creditRequest.CreditRequestId = idCreditRequest;
+                    creditRequest.FileNumber = CreditRequest.FileNumber;
+                    //context.CreditRequests.Attach(creditRequest); ver que hace esto
+                    creditRequest.CreationDate = CreditRequest.CreationDate;
+                    filenumber = CreditRequest.FileNumber;
+                }
+
+                context.CreditRequests.AddOrUpdate(creditRequest);
                 try
                 {
                     context.SaveChanges();
-                    MessageBox.Show("Solicitud de crédito registrada exitosamente");
-
                     var cr = context.CreditRequests.Where(c => c.FileNumber == filenumber).FirstOrDefault();
-                    App.Current.MainFrame.Content = new CustomerBankAccountsPage(idCustomer, cr.CreditRequestId);
+
+                    if (idCreditRequest == -1)
+                    {
+                        MessageBox.Show("Solicitud de crédito registrada exitosamente");
+                        App.Current.MainFrame.Content = new CustomerBankAccountsPage(idCustomer, cr.CreditRequestId);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Solicitud de crédito actualizada exitosamente");
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -216,6 +292,21 @@ namespace SGSC.Pages
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             App.Current.MainFrame.Content = new HomePageCreditAdvisor();
+        }
+
+        private void btnModifyCustomer_Click(object sender, RoutedEventArgs e)
+        {
+            var customerInfoPage = new CustomerInfoPage(idCustomer); //Agregar que se mande el id de la solicitud
+            if (NavigationService != null)
+            {
+                NavigationService.Navigate(customerInfoPage);
+
+            }
+        }
+
+        private void btnModifyCustomerAccounts_Click(object sender, RoutedEventArgs e)
+        {
+            //por implementar
         }
     }
 }

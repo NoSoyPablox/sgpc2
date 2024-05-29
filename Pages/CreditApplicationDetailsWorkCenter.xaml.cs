@@ -45,7 +45,7 @@ namespace SGSC.Pages
                                            InnerNumber = wc.InnerNumber,
                                            OutsideNumber = wc.OutsideNumber,
                                            ZipCode = wc.ZipCode,
-                                           FileNumber = cr.FileNumber
+                                           FileNumber = cr.FileNumber                                     
                                        }).FirstOrDefault();
                 if (workCenterQuery == null)
                 {

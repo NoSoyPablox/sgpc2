@@ -55,7 +55,7 @@ namespace SGSC.Pages
                     State = "Veracruz"
                 };
 
-                if(!string.IsNullOrWhiteSpace(txtInternalNumber.Text))
+                if (!string.IsNullOrWhiteSpace(txtInternalNumber.Text))
                 {
                     newCustomerAddressInfoes.InternalNumber = txtInternalNumber.Text;
                 }
@@ -64,7 +64,7 @@ namespace SGSC.Pages
                     newCustomerAddressInfoes.InternalNumber = null;
                 }
 
-                if(addressId != null)
+                if (addressId != null)
                 {
                     newCustomerAddressInfoes.CustomerAddressId = addressId.Value;
                 }

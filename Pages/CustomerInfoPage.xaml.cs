@@ -114,7 +114,7 @@ namespace SGSC.Pages
                     lbRfcError.Content = "Por favor introduzca un RFC válido";
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 valid = false;
                 lbRfcError.Content = "Por favor introduzca un RFC válido";
@@ -144,7 +144,7 @@ namespace SGSC.Pages
             {
                 updateCustomer();
             }
-        }   
+        }
 
         private void registerCustomer()
         {
@@ -163,13 +163,13 @@ namespace SGSC.Pages
                     customerToRegister.CivilStatus = cbCivilStatus.SelectedIndex;
                     customerToRegister = db.Customers.Add(customerToRegister);
 
-					db.SaveChanges();
+                    db.SaveChanges();
                     MessageBox.Show("Cliente registrado exitosamente.");
                     tbCURP.Text = "";
                     tbName.Text = "";
                     tbFirstSurname.Text = "";
                     tbSecondSurname.Text = "";
-                    
+
                     App.Current.MainFrame.Content = new AddressInformationPage(customerToRegister.CustomerId);
                 }
                 catch (Exception ex)
@@ -198,7 +198,7 @@ namespace SGSC.Pages
 
                     db.SaveChanges();
                     MessageBox.Show("Cliente actualizado exitosamente.");
-                    
+
                     App.Current.MainFrame.Content = new AddressInformationPage(CustomerId.Value);
                 }
                 catch (Exception ex)

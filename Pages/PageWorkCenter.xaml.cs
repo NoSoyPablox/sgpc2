@@ -49,7 +49,7 @@ namespace SGSC.Pages
             try
             {
                 WorkCenter workCenter = dbContext.WorkCenters.FirstOrDefault(c => c.CustomerId == customerId);
-                if(workCenter != null)
+                if (workCenter != null)
                 {
                     ShowInformationWorkCenter(workCenter);
                     workCenterId = workCenter.WorkCenterId;
@@ -95,21 +95,22 @@ namespace SGSC.Pages
         {
             bool IsValidate = true;
 
-            if (string.IsNullOrWhiteSpace(txtWorkCenterName.Text) 
-                || string.IsNullOrWhiteSpace(txtPhone.Text) 
+            if (string.IsNullOrWhiteSpace(txtWorkCenterName.Text)
+                || string.IsNullOrWhiteSpace(txtPhone.Text)
                 || string.IsNullOrWhiteSpace(txtStreet.Text)
-                || string.IsNullOrWhiteSpace(txtColony.Text) 
-                || string.IsNullOrWhiteSpace(txtOutsideNumber.Text) 
+                || string.IsNullOrWhiteSpace(txtColony.Text)
+                || string.IsNullOrWhiteSpace(txtOutsideNumber.Text)
                 || string.IsNullOrWhiteSpace(txtZipCode.Text))
             {
                 IsValidate = false;
-                
+
 
                 foreach (var pair in textBoxLabelMap)
                 {
                     CheckAndSetLabelVisibility(pair.Value, pair.Key);
                 }
-            } else
+            }
+            else
             {
                 IsValidate = true;
             }
@@ -164,7 +165,7 @@ namespace SGSC.Pages
                         NewWorkcenter.InnerNumber = IntInnerNumber;
                     }
 
-                    if(workCenterId != null)
+                    if (workCenterId != null)
                     {
                         NewWorkcenter.WorkCenterId = workCenterId.Value;
                     }
@@ -193,7 +194,7 @@ namespace SGSC.Pages
         {
             e.Handled = !Regex.IsMatch(e.Text, "^[a-zA-Z]+$");
         }
-        
+
         private void AllowPhoneNumber(object sender, TextCompositionEventArgs e)
         {
             TextBox textBox = sender as TextBox;
@@ -204,11 +205,11 @@ namespace SGSC.Pages
 
                 if (newText.Length > 10)
                 {
-                    e.Handled = true; 
+                    e.Handled = true;
                     return;
                 }
             }
-            e.Handled = !Regex.IsMatch(e.Text, "^[0-9]+$"); 
+            e.Handled = !Regex.IsMatch(e.Text, "^[0-9]+$");
         }
 
         private void AllowZipCode(object sender, TextCompositionEventArgs e)
@@ -226,7 +227,7 @@ namespace SGSC.Pages
                     return;
                 }
             }
-            e.Handled = !Regex.IsMatch(e.Text, "^[0-9]+$"); 
+            e.Handled = !Regex.IsMatch(e.Text, "^[0-9]+$");
         }
 
         private void AllowWriteNumbers(object sender, TextCompositionEventArgs e)
@@ -274,5 +275,5 @@ namespace SGSC.Pages
         }
     }
 
-   
+
 }
