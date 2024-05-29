@@ -26,13 +26,11 @@ namespace SGSC.Pages
     public partial class CustomerInfoPage : Page
     {
         private int? CustomerId = null;
-        private int? CreditRequestId = null;
 
-        public CustomerInfoPage(int? customerId = null, int? creditRequestId = null)
+        public CustomerInfoPage(int? customerId = null)
         {
             InitializeComponent();
             CustomerId = customerId;
-            CreditRequestId = creditRequestId;
             if (CustomerId != null)
             {
                 getCustomerInfo(CustomerId.Value);
@@ -116,7 +114,7 @@ namespace SGSC.Pages
                     lbRfcError.Content = "Por favor introduzca un RFC válido";
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 valid = false;
                 lbRfcError.Content = "Por favor introduzca un RFC válido";
@@ -146,7 +144,7 @@ namespace SGSC.Pages
             {
                 updateCustomer();
             }
-        }   
+        }
 
         private void registerCustomer()
         {
@@ -165,13 +163,13 @@ namespace SGSC.Pages
                     customerToRegister.CivilStatus = cbCivilStatus.SelectedIndex;
                     customerToRegister = db.Customers.Add(customerToRegister);
 
-					db.SaveChanges();
+                    db.SaveChanges();
                     MessageBox.Show("Cliente registrado exitosamente.");
                     tbCURP.Text = "";
                     tbName.Text = "";
                     tbFirstSurname.Text = "";
                     tbSecondSurname.Text = "";
-                    
+
                     App.Current.MainFrame.Content = new AddressInformationPage(customerToRegister.CustomerId);
                 }
                 catch (Exception ex)
@@ -200,15 +198,7 @@ namespace SGSC.Pages
 
                     db.SaveChanges();
                     MessageBox.Show("Cliente actualizado exitosamente.");
-                    
-                    if (CreditRequestId != null)
-                    {
-                        App.Current.MainFrame.Content = new AddressInformationPage(CustomerId.Value ,CreditRequestId.Value);
-                    }
-                    else
-                    {
-                        // Redirect to the address information page (next step in the customer registration process
-                    }
+
                     App.Current.MainFrame.Content = new AddressInformationPage(CustomerId.Value);
                 }
                 catch (Exception ex)

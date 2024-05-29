@@ -296,7 +296,7 @@ namespace SGSC.Pages
 
         private void btnModifyCustomer_Click(object sender, RoutedEventArgs e)
         {
-            var customerInfoPage = new CustomerInfoPage(idCustomer, idCreditRequest); //Agregar que se mande el id de la solicitud
+            var customerInfoPage = new CustomerInfoPage(idCustomer); //Agregar que se mande el id de la solicitud
             if (NavigationService != null)
             {
                 NavigationService.Navigate(customerInfoPage);
