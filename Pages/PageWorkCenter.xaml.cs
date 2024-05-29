@@ -157,7 +157,9 @@ namespace SGSC.Pages
                         Colony = Colony,
                         ZipCode = IntZipCode,
                         CustomerId = customerId
+                        
                     };
+                    NewWorkcenter.Customer = dbContext.Customers.FirstOrDefault(c => c.CustomerId == customerId);
 
                     if (!string.IsNullOrWhiteSpace(txtInnerNumber.Text))
                     {
