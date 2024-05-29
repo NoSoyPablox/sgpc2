@@ -108,6 +108,7 @@
           <Property Name="CustomerId" Type="int" />
           <Property Name="PaymentsInterval" Type="int" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AmountRequested" Type="float" />
           <Property Name="TransferBankAccount_BankAccountId" Type="int" />
           <Property Name="DirectDebitBankAccount_BankAccountId" Type="int" />
           <Property Name="Employee_EmployeeId" Type="int" />
@@ -159,6 +160,7 @@
           <Property Name="FileName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="FileContent" Type="varbinary(max)" Nullable="false" />
           <Property Name="CreditRequestId" Type="int" Nullable="false" />
+          <Property Name="DocumentType" Type="int" />
           <Property Name="CreditRequest_CreditRequestId" Type="int" />
         </EntityType>
         <EntityType Name="Employees">
@@ -549,6 +551,7 @@
           <Property Name="PaymentsInterval" Type="Int32" Nullable="false" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Documents" Relationship="sgscModel.DocumentCreditRequest" FromRole="CreditRequest" ToRole="Document" />
+          <Property Name="AmountRequested" Type="Double" Nullable="true" />
         </EntityType>
         <EntityType Name="CustomerAddress">
           <Key>
@@ -861,6 +864,7 @@
           <Property Name="FileContent" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
           <Property Name="CreditRequestId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CreditRequest" Relationship="sgscModel.DocumentCreditRequest" FromRole="Document" ToRole="CreditRequest" />
+          <Property Name="DocumentType" Type="Int32" Nullable="true" />
         </EntityType>
         <Association Name="DocumentCreditRequest">
           <End Type="sgscModel.Document" Role="Document" Multiplicity="*" />
@@ -931,6 +935,7 @@
           <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
           <ScalarProperty Name="PaymentsInterval" ColumnName="PaymentsInterval" />
           <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="AmountRequested" ColumnName="AmountRequested" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1063,6 +1068,7 @@
           <ScalarProperty Name="FileName" ColumnName="FileName" />
           <ScalarProperty Name="FileContent" ColumnName="FileContent" />
           <ScalarProperty Name="CreditRequestId" ColumnName="CreditRequestId" />
+          <ScalarProperty Name="DocumentType" ColumnName="DocumentType" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

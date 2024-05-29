@@ -18,6 +18,7 @@ namespace SGSC
         public string FileName { get; set; }
         public byte[] FileContent { get; set; }
         public int CreditRequestId { get; set; }
+        public Nullable<int> DocumentType { get; set; }
     
         public virtual CreditRequest CreditRequest { get; set; }
     }

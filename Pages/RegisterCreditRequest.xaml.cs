@@ -66,7 +66,7 @@ namespace SGSC.Pages
                 {
                     this.CreditRequest = creditRequest;
                     tbPurpose.Text = creditRequest.Purpose;
-                    tbAmount.Text = creditRequest.Amount.ToString() + " Valor total no valor original solicitado";
+                    tbAmount.Text = creditRequest.AmountRequested.ToString();
                 }
             }
         }
@@ -244,6 +244,7 @@ namespace SGSC.Pages
                 var creditRequest = new CreditRequest();
                 var filenumber = "CR" + DateTime.Now.ToString("yyyyMMddHHmmss");
                 creditRequest.FileNumber = filenumber;
+                creditRequest.AmountRequested = double.Parse(tbAmount.Text);
                 creditRequest.Amount = this.totalAmount;
                 creditRequest.Status = 0;
                 creditRequest.TimePeriod = selectedPromotion.TimePeriod;

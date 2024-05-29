@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/20/2024 22:08:33
--- Generated from EDMX file: C:\Users\aiwass\source\repos\MangoFizz\sgsc\Modelsgsc.edmx
+-- Date Created: 05/28/2024 21:29:36
+-- Generated from EDMX file: C:\Users\pablo\source\repos\sgpc2\Modelsgsc.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -20,14 +20,11 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_BankAccountCustomer]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[BankAccounts] DROP CONSTRAINT [FK_BankAccountCustomer];
 GO
-IF OBJECT_ID(N'[dbo].[FK_CustomerContact]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Contacts] DROP CONSTRAINT [FK_CustomerContact];
+IF OBJECT_ID(N'[dbo].[FK_BankBankAccount]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[BankAccounts] DROP CONSTRAINT [FK_BankBankAccount];
 GO
-IF OBJECT_ID(N'[dbo].[FK_CreditRequestCustomer]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CreditRequests] DROP CONSTRAINT [FK_CreditRequestCustomer];
-GO
-IF OBJECT_ID(N'[dbo].[FK_CustomerId]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CustomerContactInfoes] DROP CONSTRAINT [FK_CustomerId];
+IF OBJECT_ID(N'[dbo].[FK_ContactCreditRequestCreditPolicy]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CreditRequestCreditPolicies] DROP CONSTRAINT [FK_ContactCreditRequestCreditPolicy];
 GO
 IF OBJECT_ID(N'[dbo].[FK_CreditRequestBankAccount]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[CreditRequests] DROP CONSTRAINT [FK_CreditRequestBankAccount];
@@ -35,35 +32,38 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_CreditRequestBankAccount1]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[CreditRequests] DROP CONSTRAINT [FK_CreditRequestBankAccount1];
 GO
-IF OBJECT_ID(N'[dbo].[FK_CreditRequestCreditCondition_CreditRequest]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CreditRequestCreditCondition] DROP CONSTRAINT [FK_CreditRequestCreditCondition_CreditRequest];
-GO
 IF OBJECT_ID(N'[dbo].[FK_CreditRequestCreditCondition_CreditCondition]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[CreditRequestCreditCondition] DROP CONSTRAINT [FK_CreditRequestCreditCondition_CreditCondition];
 GO
-IF OBJECT_ID(N'[dbo].[FK_CustomerWorkCenter]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[WorkCenters] DROP CONSTRAINT [FK_CustomerWorkCenter];
+IF OBJECT_ID(N'[dbo].[FK_CreditRequestCreditCondition_CreditRequest]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CreditRequestCreditCondition] DROP CONSTRAINT [FK_CreditRequestCreditCondition_CreditRequest];
 GO
-IF OBJECT_ID(N'[dbo].[FK_PaymentCreditRequest]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Payments] DROP CONSTRAINT [FK_PaymentCreditRequest];
-GO
-IF OBJECT_ID(N'[dbo].[FK_EmployeeCreditRequest]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CreditRequests] DROP CONSTRAINT [FK_EmployeeCreditRequest];
+IF OBJECT_ID(N'[dbo].[FK_CreditRequestCustomer]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CreditRequests] DROP CONSTRAINT [FK_CreditRequestCustomer];
 GO
 IF OBJECT_ID(N'[dbo].[FK_CustomerAddressCustomer]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Customers] DROP CONSTRAINT [FK_CustomerAddressCustomer];
 GO
-IF OBJECT_ID(N'[dbo].[FK_BankBankAccount]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[BankAccounts] DROP CONSTRAINT [FK_BankBankAccount];
+IF OBJECT_ID(N'[dbo].[FK_CustomerContact]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Contacts] DROP CONSTRAINT [FK_CustomerContact];
 GO
 IF OBJECT_ID(N'[dbo].[FK_CustomerContactInfoCreditRequestCreditPolicy]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[CreditRequestCreditPolicies] DROP CONSTRAINT [FK_CustomerContactInfoCreditRequestCreditPolicy];
 GO
-IF OBJECT_ID(N'[dbo].[FK_ContactCreditRequestCreditPolicy]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CreditRequestCreditPolicies] DROP CONSTRAINT [FK_ContactCreditRequestCreditPolicy];
+IF OBJECT_ID(N'[dbo].[FK_CustomerId]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CustomerContactInfoes] DROP CONSTRAINT [FK_CustomerId];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CustomerWorkCenter]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[WorkCenters] DROP CONSTRAINT [FK_CustomerWorkCenter];
 GO
 IF OBJECT_ID(N'[dbo].[FK_DocumentCreditRequest]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Documents] DROP CONSTRAINT [FK_DocumentCreditRequest];
+GO
+IF OBJECT_ID(N'[dbo].[FK_EmployeeCreditRequest]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CreditRequests] DROP CONSTRAINT [FK_EmployeeCreditRequest];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PaymentCreditRequest]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Payments] DROP CONSTRAINT [FK_PaymentCreditRequest];
 GO
 
 -- --------------------------------------------------
@@ -73,6 +73,12 @@ GO
 IF OBJECT_ID(N'[dbo].[BankAccounts]', 'U') IS NOT NULL
     DROP TABLE [dbo].[BankAccounts];
 GO
+IF OBJECT_ID(N'[dbo].[Banks]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Banks];
+GO
+IF OBJECT_ID(N'[dbo].[Colonies]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Colonies];
+GO
 IF OBJECT_ID(N'[dbo].[Contacts]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Contacts];
 GO
@@ -81,6 +87,15 @@ IF OBJECT_ID(N'[dbo].[CreditConditions]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[CreditPolicies]', 'U') IS NOT NULL
     DROP TABLE [dbo].[CreditPolicies];
+GO
+IF OBJECT_ID(N'[dbo].[CreditPromotions]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CreditPromotions];
+GO
+IF OBJECT_ID(N'[dbo].[CreditRequestCreditCondition]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CreditRequestCreditCondition];
+GO
+IF OBJECT_ID(N'[dbo].[CreditRequestCreditPolicies]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CreditRequestCreditPolicies];
 GO
 IF OBJECT_ID(N'[dbo].[CreditRequests]', 'U') IS NOT NULL
     DROP TABLE [dbo].[CreditRequests];
@@ -94,6 +109,9 @@ GO
 IF OBJECT_ID(N'[dbo].[Customers]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Customers];
 GO
+IF OBJECT_ID(N'[dbo].[Documents]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Documents];
+GO
 IF OBJECT_ID(N'[dbo].[Employees]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Employees];
 GO
@@ -102,24 +120,6 @@ IF OBJECT_ID(N'[dbo].[Payments]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[WorkCenters]', 'U') IS NOT NULL
     DROP TABLE [dbo].[WorkCenters];
-GO
-IF OBJECT_ID(N'[dbo].[Banks]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Banks];
-GO
-IF OBJECT_ID(N'[dbo].[Colonies]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Colonies];
-GO
-IF OBJECT_ID(N'[dbo].[CreditRequestCreditPolicies]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[CreditRequestCreditPolicies];
-GO
-IF OBJECT_ID(N'[dbo].[CreditPromotions]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[CreditPromotions];
-GO
-IF OBJECT_ID(N'[dbo].[Documents]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Documents];
-GO
-IF OBJECT_ID(N'[dbo].[CreditRequestCreditCondition]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[CreditRequestCreditCondition];
 GO
 
 -- --------------------------------------------------
@@ -180,6 +180,7 @@ CREATE TABLE [dbo].[CreditRequests] (
     [CustomerId] int  NULL,
     [PaymentsInterval] int  NOT NULL,
     [Description] nvarchar(max)  NOT NULL,
+    [AmountRequested] float  NULL,
     [TransferBankAccount_BankAccountId] int  NULL,
     [DirectDebitBankAccount_BankAccountId] int  NULL,
     [Employee_EmployeeId] int  NULL
@@ -309,6 +310,7 @@ CREATE TABLE [dbo].[Documents] (
     [FileName] nvarchar(max)  NOT NULL,
     [FileContent] varbinary(max)  NOT NULL,
     [CreditRequestId] int  NOT NULL,
+    [DocumentType] int  NULL,
     [CreditRequest_CreditRequestId] int  NULL
 );
 GO

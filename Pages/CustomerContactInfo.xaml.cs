@@ -22,20 +22,18 @@ namespace SGSC.Pages
     {
         private int customerId;
         private int? contactInfoId = null;
-        private int? CreditRequestId = null;
 
-        public CustomerContactInfo(int customerId, int? creditRequestId = null)
+        public CustomerContactInfo(int customerId)
         {
             InitializeComponent();
             this.customerId = customerId;
-            CreditRequestId = creditRequestId;
-            MessageBox.Show("El id de la solicitud es: " + creditRequestId);
 
             StepsSidebarFrame.Content = new CustomerRegisterStepsSidebar("ContactInfo");
             UserSessionFrame.Content = new UserSessionFrame();
 
             clearErrors();
             getContactInfo();
+
         }
 
         private void clearErrors()
@@ -73,7 +71,7 @@ namespace SGSC.Pages
 
             clearErrors();
 
-            if(!TextValidator.ValidateTextNumeric(tbPhoneNumber1.Text, 10, 10, false))
+            if (!TextValidator.ValidateTextNumeric(tbPhoneNumber1.Text, 10, 10, false))
             {
                 valid = false;
                 lbPhoneNumber1Error.Content = "Por favor introduzca un número de teléfono válido.";
@@ -85,7 +83,7 @@ namespace SGSC.Pages
                 lbPhoneNumber2Error.Content = "Por favor introduzca un número de teléfono válido.";
             }
 
-            if(tbPhoneNumber1.Text.Equals(tbPhoneNumber2.Text))
+            if (tbPhoneNumber1.Text.Equals(tbPhoneNumber2.Text))
             {
                 valid = false;
                 lbPhoneNumber2Error.Content = "Los números de teléfono no pueden ser iguales.";
@@ -103,7 +101,7 @@ namespace SGSC.Pages
                 lbEmailAddressError.Content = "Por favor una dirección de correo válida.";
             }
 
-            if(!valid)
+            if (!valid)
             {
                 return;
             }
@@ -118,7 +116,7 @@ namespace SGSC.Pages
                     CustomerId = customerId
                 };
 
-                if(contactInfoId != null)
+                if (contactInfoId != null)
                 {
                     contactInfo.CustomerContactInfoId = contactInfoId.Value;
                 }
