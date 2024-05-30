@@ -133,7 +133,7 @@ namespace SGSC.Pages
 
         private void btnRegisterCustomer_Click(object sender, RoutedEventArgs e)
         {
-            var customerInfoPage = new CustomerInfoPage();
+            var customerInfoPage = new CustomerInfoPage(-1);
             if (NavigationService != null)
             {
                 NavigationService.Navigate(customerInfoPage);

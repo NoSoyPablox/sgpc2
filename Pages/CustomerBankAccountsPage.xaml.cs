@@ -29,18 +29,22 @@ namespace SGSC.Pages
         private int? transferAccountBankId = null;
         private int? directDebitAccountId = null;
 		private int? directDebitAccountBankId = null;
-		private bool edited = false;
+		private bool edit = false;
 
-        public CustomerBankAccountsPage(int customerId, int creditRequestID)
+        public CustomerBankAccountsPage(int customerId, int creditRequestID, bool edit)
         {
             InitializeComponent();
             this.customerId = customerId;
             this.creditRequestId = creditRequestID;
-
+            this.edit = edit;
             creditAdvisorSidebar.Content = new CreditAdvisorSidebar("");
             UserSessionFrame.Content = new UserSessionFrame();
             getBankAccounts();
             clearErrors();
+            if (edit)
+            {
+                retrieveCurrentAccounts();
+            }
         }
 
         private void clearErrors()
@@ -53,6 +57,10 @@ namespace SGSC.Pages
 
         private void getBankAccounts()
         {
+            BankAccount newBank = new BankAccount();
+            newBank.CardNumber = "Nueva cuenta";
+            cbTransferAccount.Items.Add(newBank);
+            cbDirectDebitAccount.Items.Add(newBank);
             try
             {
                 using (sgscEntities db = new sgscEntities())
@@ -156,6 +164,19 @@ namespace SGSC.Pages
 				lbDomAccBankInterbankCodeError.Content = "Por favor introduzca una CLABE válida";
 			}
 
+            if (cbTransferAccount.SelectedIndex == -1)
+            {
+                valid = false;
+                MessageBox.Show("Por favor seleccione una cuenta de transferencia");
+            }
+
+            if (cbDirectDebitAccount.SelectedIndex == -1) //Osea que nada este seleccionado
+            {
+                valid = false;
+                MessageBox.Show("Por favor seleccione una cuenta de débito");
+            }
+
+
 			if (!valid)
             {
                 return;
@@ -204,7 +225,14 @@ namespace SGSC.Pages
                     context.SaveChanges();
 
                     MessageBox.Show("Cuentas bancarias guardadas exitosamente.");
-                    App.Current.MainFrame.Content = new HomePageCreditAdvisor();
+                    if(edit)
+                    {
+                        App.Current.MainFrame.Content = new RegisterCreditRequest(customerId, creditRequestId);
+                    }
+                    else
+                    {
+                        App.Current.MainFrame.Content = new HomePageCreditAdvisor();
+                    }
                 }
             }
             catch (Exception ex)
@@ -357,12 +385,58 @@ namespace SGSC.Pages
                     tbDomAccBankCardNumber.Text = directDebitAccountSelected.CardNumber;
                     tbDomAccBank.Text = directDebitAccountSelected.Bank.Name;
                     tbDomAccBankInterbankCode.Text = directDebitAccountSelected.InterbankCode;
-                    directDebitAccountId = directDebitAccountSelected.BankAccountId;
+                    this.directDebitAccountBankId = directDebitAccountSelected.Bank.BankId;
                     directDebitAccountBankId = directDebitAccountSelected.Bank.BankId;
                 }
 
             }
 
         }
+
+        private void retrieveCurrentAccounts()
+        {
+            //retrieve current accounts with creditRequestId
+            try
+            {
+                using (sgscEntities db = new sgscEntities())
+                {
+                    var creditRequest = db.CreditRequests.Where(cr => cr.CreditRequestId == creditRequestId).FirstOrDefault();
+                    if (creditRequest != null)
+                    {
+                        if (creditRequest.TransferBankAccount != null)
+                        {
+                            BankAccount transferAccount = creditRequest.TransferBankAccount;
+                            tbTansAccCardNumber.Text = transferAccount.CardNumber;
+                            tbTansAccBank.Text = transferAccount.Bank.Name;
+                            tbTansAccInterbankCode.Text = transferAccount.InterbankCode;
+                            tansferAccountId = transferAccount.BankAccountId;
+                            transferAccountBankId = transferAccount.Bank.BankId;
+                            cbTransferAccount.Items.Add(transferAccount);
+                            //set combobox to this account
+                            cbTransferAccount.SelectedIndex = 2;
+                        }
+
+                        if (creditRequest.DirectDebitBankAccount != null)
+                        {
+                            BankAccount directDebitAccount = creditRequest.DirectDebitBankAccount;
+                            tbDomAccBankCardNumber.Text = directDebitAccount.CardNumber;
+                            tbDomAccBank.Text = directDebitAccount.Bank.Name;
+                            tbDomAccBankInterbankCode.Text = directDebitAccount.InterbankCode;
+                            directDebitAccountId = directDebitAccount.BankAccountId;
+                            directDebitAccountBankId = directDebitAccount.Bank.BankId;
+                            cbDirectDebitAccount.Items.Add(directDebitAccount);
+                            //set combobox to this account
+                            cbDirectDebitAccount.SelectedIndex = 2;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al obtener las cuentas bancarias del cliente: " + ex.Message);
+            }
+        }
+
     }
+
 }

@@ -53,13 +53,11 @@
                 <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
             </CheckBox.LayoutTransform>
         </CheckBox>
-        <ComboBox x:Name="cbTransferAccount" HorizontalAlignment="Left" Margin="938,318,0,0" VerticalAlignment="Top" Width="146" Height="31" FontFamily="{StaticResource FontNunito}" FontSize="15" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SelectionChanged="cbTransferAccount_SelectionChanged">
-            <ComboBoxItem Content="Registrar nueva" FontFamily="{StaticResource FontNunito}" FontSize="15" IsSelected="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <ComboBox x:Name="cbTransferAccount" HorizontalAlignment="Left" Margin="938,302,0,0" VerticalAlignment="Top" Width="181" Height="31" FontFamily="{StaticResource FontNunito}" FontSize="15" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SelectionChanged="cbTransferAccount_SelectionChanged" DisplayMemberPath="CardNumber">
         </ComboBox>
-        <ComboBox x:Name="cbDirectDebitAccount" HorizontalAlignment="Left" Margin="938,569,0,0" VerticalAlignment="Top" Width="146" Height="32" FontFamily="{StaticResource FontNunito}" FontSize="15" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SelectionChanged="cbDirectDebitAccount_SelectionChanged">
-            <ComboBoxItem Content="Registrar nueva" FontFamily="{StaticResource FontNunito}" FontSize="15" IsSelected="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+        <ComboBox x:Name="cbDirectDebitAccount" HorizontalAlignment="Left" Margin="938,569,0,0" VerticalAlignment="Top" Width="181" Height="32" FontFamily="{StaticResource FontNunito}" FontSize="15" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SelectionChanged="cbDirectDebitAccount_SelectionChanged" DisplayMemberPath="CardNumber">
         </ComboBox>
-        <Label Style="{StaticResource CustomLabelStyle}" FontSize="20" Content="Selección de tarjeta" HorizontalAlignment="Left" Margin="735,320,0,0" VerticalAlignment="Top" x:Name="NombreLabel_Copy1_Copiar" Width="237" Height="26"/>
+        <Label Style="{StaticResource CustomLabelStyle}" FontSize="20" Content="Selección de tarjeta" HorizontalAlignment="Left" Margin="735,304,0,0" VerticalAlignment="Top" x:Name="NombreLabel_Copy1_Copiar" Width="237" Height="26"/>
         <Label Style="{StaticResource CustomLabelStyle}" FontSize="20" Content="Selección de tarjeta" HorizontalAlignment="Left" Margin="735,569,0,0" VerticalAlignment="Top" x:Name="NombreLabel_Copy1_Copiar1" Width="236" Height="26"/>
     </Grid>
 </Page>

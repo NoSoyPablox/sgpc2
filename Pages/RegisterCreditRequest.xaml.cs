@@ -27,6 +27,7 @@ namespace SGSC.Pages
         private int idCreditRequest = -1;
         private double totalAmount = 0.0;
         private CreditRequest CreditRequest;
+        private string fileNumber = "";
         public RegisterCreditRequest(int idCustomer, int idCreditRequest)
         {
             InitializeComponent();
@@ -67,6 +68,7 @@ namespace SGSC.Pages
                     this.CreditRequest = creditRequest;
                     tbPurpose.Text = creditRequest.Purpose;
                     tbAmount.Text = creditRequest.AmountRequested.ToString();
+                    fileNumber = creditRequest.FileNumber;
                 }
             }
         }
@@ -275,7 +277,12 @@ namespace SGSC.Pages
                     if (idCreditRequest == -1)
                     {
                         MessageBox.Show("Solicitud de crédito registrada exitosamente");
-                        App.Current.MainFrame.Content = new CustomerBankAccountsPage(idCustomer, cr.CreditRequestId);
+                        //if interval is monthly then register payments
+                        if (selectedPromotion.Interval == 2)
+                        {
+                            registerMonthlyPayments(filenumber);
+                        }
+                        App.Current.MainFrame.Content = new CustomerBankAccountsPage(idCustomer, cr.CreditRequestId, false);
                     }
                     else
                     {
@@ -297,7 +304,7 @@ namespace SGSC.Pages
 
         private void btnModifyCustomer_Click(object sender, RoutedEventArgs e)
         {
-            var customerInfoPage = new CustomerInfoPage(idCustomer); //Agregar que se mande el id de la solicitud
+            var customerInfoPage = new CustomerInfoPage(idCreditRequest, idCustomer); //Agregar que se mande el id de la solicitud
             if (NavigationService != null)
             {
                 NavigationService.Navigate(customerInfoPage);
@@ -307,7 +314,44 @@ namespace SGSC.Pages
 
         private void btnModifyCustomerAccounts_Click(object sender, RoutedEventArgs e)
         {
-            //por implementar
+            App.Current.MainFrame.Content = new CustomerBankAccountsPage(idCustomer, idCreditRequest, true);
         }
+
+        private void registerMonthlyPayments(string fileNumberAddPayments)
+        {
+            using (var context = new sgscEntities())
+            {
+                var creditRequest = context.CreditRequests.Where(cr => cr.FileNumber == fileNumberAddPayments).FirstOrDefault();
+                MessageBox.Show("Proposito: " + creditRequest.Purpose);
+                if (creditRequest != null)
+                {
+                    var payments = new List<Payment>();
+                    var totalAmount = creditRequest.Amount;
+                    var amountPerPayment = totalAmount / creditRequest.TimePeriod;
+                    var currentDate = DateTime.Now;
+                    var nextPaymentDate = currentDate;
+                    for (int i = 0; i < creditRequest.TimePeriod; i++)
+                    {
+                        var payment = new Payment();
+                        payment.Amount = (decimal?)amountPerPayment;
+                        payment.PaymentDate = nextPaymentDate;
+                        payment.CreditRequestId = creditRequest.CreditRequestId;
+                        payments.Add(payment);
+                        nextPaymentDate = nextPaymentDate.AddMonths(1);
+                    }
+                    context.Payments.AddRange(payments);
+                    try
+                    {
+                        context.SaveChanges();
+                    }
+                    catch (Exception)
+                    {
+                        Console.WriteLine("Error al registrar los pagos");
+                    }
+                }
+            }
+
+        }
+
     }
 }
