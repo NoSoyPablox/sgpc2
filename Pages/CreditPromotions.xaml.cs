@@ -70,15 +70,15 @@ namespace SGSC.Pages
                             var promotions = db.CreditPromotions.ToList();
                             dgPromotions.ItemsSource = promotions;
                             break;
-                        case 1: //vigente
+                        case 1: //Vigente
                             var activePromotions = db.CreditPromotions.Where(predicate: p => p.StartDate <= currentDate && p.EndDate >= currentDate).ToList();
                             dgPromotions.ItemsSource = activePromotions;
                             break;
-                        case 2: //vencida
+                        case 2: //Vencida
                             var inactivePromotions = db.CreditPromotions.Where(predicate: p => p.EndDate < currentDate).ToList();
                             dgPromotions.ItemsSource = inactivePromotions;
                             break;
-                        case 3:
+                        case 3: //Proximas
                             var upcomingPromotions = db.CreditPromotions.Where(predicate: p => p.StartDate > currentDate).ToList();
                             dgPromotions.ItemsSource = upcomingPromotions;
                             break;
@@ -93,13 +93,17 @@ namespace SGSC.Pages
                             var promotions = db.CreditPromotions.Where(p => p.Name.Contains(searchCriteria)).ToList();
                             dgPromotions.ItemsSource = promotions;
                             break;
-                        case 1: //vigente
+                        case 1: //Vigente
                             var activePromotions = db.CreditPromotions.Where(predicate: p => p.StartDate <= currentDate && p.EndDate >= currentDate && p.Name.Contains(searchCriteria)).ToList();
                             dgPromotions.ItemsSource = activePromotions;
                             break;
-                        case 2: //vencida
+                        case 2: //Vencida
                             var inactivePromotions = db.CreditPromotions.Where(predicate: p => p.EndDate < currentDate && p.Name.Contains(searchCriteria)).ToList();
                             dgPromotions.ItemsSource = inactivePromotions;
+                            break;
+                        case 3: //Proximas
+                            var upcomingPromotions = db.CreditPromotions.Where(predicate: p => p.StartDate > currentDate && p.Name.Contains(searchCriteria)).ToList();
+                            dgPromotions.ItemsSource = upcomingPromotions;
                             break;
                     }
                 }

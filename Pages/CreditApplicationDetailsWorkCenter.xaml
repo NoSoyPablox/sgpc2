@@ -54,11 +54,11 @@
         <Label FontSize="16" FontWeight="Bold" Content="Calle:" HorizontalAlignment="Left" Margin="307,263,0,0" VerticalAlignment="Top"/>
         <Label FontSize="16" FontWeight="Bold" Content="Número exterior:" HorizontalAlignment="Left" Margin="307,307,0,0" VerticalAlignment="Top"/>
         <Label FontSize="16" FontWeight="Bold" Content="Número interior:" HorizontalAlignment="Left" Margin="691,308,0,0" VerticalAlignment="Top"/>
-        <Label FontSize="16" x:Name="lbCompanyName" HorizontalAlignment="Left" Margin="381,214,0,0" VerticalAlignment="Top"/>
-        <Label FontSize="16" x:Name="lbOutsideNumber" HorizontalAlignment="Left" Margin="453,314,0,0" VerticalAlignment="Top" Height="20" Width="74"/>
-        <Label FontSize="16" x:Name="lbZipCode" HorizontalAlignment="Left" Margin="1117,307,0,0" VerticalAlignment="Top"/>
+        <Label FontSize="16" x:Name="lbCompanyName" HorizontalAlignment="Left" Margin="389,216,0,0" VerticalAlignment="Top" Height="32" Width="831" VerticalContentAlignment="Center"/>
+        <Label FontSize="16" x:Name="lbOutsideNumber" HorizontalAlignment="Left" Margin="453,308,0,0" VerticalAlignment="Top" Height="31" Width="193"/>
+        <Label FontSize="16" x:Name="lbZipCode" HorizontalAlignment="Left" Margin="1117,307,0,0" VerticalAlignment="Top" Height="31" Width="115"/>
         <Label FontSize="16" FontWeight="Bold" Content="Teléfono:" HorizontalAlignment="Left" Margin="305,170,0,0" VerticalAlignment="Top"/>
-        <Label FontSize="16" x:Name="lbPhoneNumber" HorizontalAlignment="Left" Margin="387,175,0,0" VerticalAlignment="Top" Height="25" Width="259"/>
+        <Label FontSize="16" x:Name="lbPhoneNumber" HorizontalAlignment="Left" Margin="387,170,0,0" VerticalAlignment="Top" Height="33" Width="259" VerticalContentAlignment="Center"/>
 
 
         <Button FontFamily="{StaticResource FontNunitoBold}" FontSize="17" Cursor="Hand" Content="Solicitud" Tag="../Images/User.png" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Left" Margin="26,111,0,0" VerticalAlignment="Top" Height="47" Width="241" Click="BtnClicRequest" />
@@ -70,9 +70,9 @@
         <Button FontFamily="{StaticResource FontNunitoBold}" FontSize="17" Cursor="Hand" Content="Dictamen" Tag="../Images/icon-law.png" Style="{StaticResource ButtonStyle}"  HorizontalAlignment="Left" Margin="26,450,0,0" VerticalAlignment="Top" Height="48" Width="241" Click="BtnClicAproveRequest"/>
         <Label FontSize="16" FontWeight="Bold" Content="Colonia:" HorizontalAlignment="Left" Margin="791,265,0,0" VerticalAlignment="Top"/>
         <Label FontSize="16" FontWeight="Bold" Content="Código Postal:" HorizontalAlignment="Left" Margin="1005,307,0,0" VerticalAlignment="Top"/>
-        <Label FontSize="16" x:Name="lbInnerNumber" HorizontalAlignment="Left" Margin="821,308,0,0" VerticalAlignment="Top"/>
-        <Label FontSize="16" x:Name="lbColony" HorizontalAlignment="Left" Margin="857,264,0,0" VerticalAlignment="Top"/>
-        <Label FontSize="16" x:Name="lbStreet" HorizontalAlignment="Left" Margin="352,263,0,0" VerticalAlignment="Top"/>
+        <Label FontSize="16" x:Name="lbInnerNumber" HorizontalAlignment="Left" Margin="833,314,0,0" VerticalAlignment="Top" Height="20" Width="167" VerticalContentAlignment="Center"/>
+        <Label FontSize="16" x:Name="lbColony" HorizontalAlignment="Left" Margin="867,264,0,0" VerticalAlignment="Top" Height="32" Width="365" VerticalContentAlignment="Center"/>
+        <Label FontSize="16" x:Name="lbStreet" HorizontalAlignment="Left" Margin="363,263,0,0" VerticalAlignment="Top" Height="31" Width="414" VerticalContentAlignment="Center"/>
 
         <Label Content="Folio:" FontFamily="{StaticResource FontNunitoBold}" FontSize="25" HorizontalAlignment="Left" Margin="278,112,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lbRequestRequestNumber" Foreground="Red" FontFamily="{StaticResource FontNunito}" FontSize="25" HorizontalAlignment="Left" Margin="346,112,0,0" VerticalAlignment="Top"/>

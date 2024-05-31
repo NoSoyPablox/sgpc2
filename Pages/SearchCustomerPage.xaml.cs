@@ -135,7 +135,7 @@ namespace SGSC.Pages
 
         private void btnRegisterCustomer_Click(object sender, RoutedEventArgs e)
         {
-            var customerInfoPage = new CustomerInfoPage();
+            var customerInfoPage = new CustomerInfoPage(-2);
             if (NavigationService != null)
             {
                 NavigationService.Navigate(customerInfoPage);
@@ -147,7 +147,7 @@ namespace SGSC.Pages
             var customer = dgCustomers.SelectedItem as CustomerEntry;
             if(customer != null)
             {
-                var customerInfoPage = new CustomerInfoPage(customer.CustomerId);
+                var customerInfoPage = new CustomerInfoPage(-1 ,customer.CustomerId);
                 if (NavigationService != null)
                 {
                     NavigationService.Navigate(customerInfoPage);

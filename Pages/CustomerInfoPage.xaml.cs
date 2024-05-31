@@ -26,8 +26,9 @@ namespace SGSC.Pages
     public partial class CustomerInfoPage : Page
     {
         private int? CustomerId = null;
+        private int CreditRequestId = -1;
 
-        public CustomerInfoPage(int? customerId = null)
+        public CustomerInfoPage(int creditRequest ,int? customerId = null)
         {
             InitializeComponent();
             CustomerId = customerId;
@@ -35,6 +36,7 @@ namespace SGSC.Pages
             {
                 getCustomerInfo(CustomerId.Value);
             }
+            CreditRequestId = creditRequest;
 
             StepsSidebarFrame.Content = new CustomerRegisterStepsSidebar("PersonalInfo");
             UserSessionFrame.Content = new UserSessionFrame();
@@ -170,7 +172,7 @@ namespace SGSC.Pages
                     tbFirstSurname.Text = "";
                     tbSecondSurname.Text = "";
 
-                    App.Current.MainFrame.Content = new AddressInformationPage(customerToRegister.CustomerId);
+                    App.Current.MainFrame.Content = new AddressInformationPage(customerToRegister.CustomerId, CreditRequestId);
                 }
                 catch (Exception ex)
                 {
@@ -199,7 +201,7 @@ namespace SGSC.Pages
                     db.SaveChanges();
                     MessageBox.Show("Cliente actualizado exitosamente.");
 
-                    App.Current.MainFrame.Content = new AddressInformationPage(CustomerId.Value);
+                    App.Current.MainFrame.Content = new AddressInformationPage(CustomerId.Value, CreditRequestId);
                 }
                 catch (Exception ex)
                 {

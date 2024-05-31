@@ -24,16 +24,18 @@ namespace SGSC.Pages
         private string ZipCode = "";
         private int customerId;
         private int? workCenterId = null;
+        private int creditRequestId = -1;
 
         private sgscEntities dbContext;
 
         Dictionary<TextBox, Label> textBoxLabelMap;
 
-        public PageWorkCenter(int customerId)
+        public PageWorkCenter(int customerId, int creditRequestId)
         {
             InitializeComponent();
             dbContext = new sgscEntities();
             this.customerId = customerId;
+            this.creditRequestId = creditRequestId;
 
             txtWorkCenterName.PreviewTextInput += AllowWriteLetters;
             txtColony.PreviewTextInput += AllowWriteLetters;
@@ -157,7 +159,9 @@ namespace SGSC.Pages
                         Colony = Colony,
                         ZipCode = IntZipCode,
                         CustomerId = customerId
+                        
                     };
+                    NewWorkcenter.Customer = dbContext.Customers.FirstOrDefault(c => c.CustomerId == customerId);
 
                     if (!string.IsNullOrWhiteSpace(txtInnerNumber.Text))
                     {
@@ -180,7 +184,7 @@ namespace SGSC.Pages
                         pair.Value.Visibility = Visibility.Hidden;
                     }
 
-                    App.Current.MainFrame.Content = new CustomerContactInfo(customerId);
+                    App.Current.MainFrame.Content = new CustomerContactInfo(customerId, creditRequestId);
                 }
                 catch (Exception ex)
                 {

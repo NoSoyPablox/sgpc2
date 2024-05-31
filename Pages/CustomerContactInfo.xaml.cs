@@ -22,8 +22,9 @@ namespace SGSC.Pages
     {
         private int customerId;
         private int? contactInfoId = null;
+        private int creditRequestId = -1;
 
-        public CustomerContactInfo(int customerId)
+        public CustomerContactInfo(int customerId, int creditRequestId)
         {
             InitializeComponent();
             this.customerId = customerId;
@@ -33,7 +34,7 @@ namespace SGSC.Pages
 
             clearErrors();
             getContactInfo();
-
+            this.creditRequestId = creditRequestId;
         }
 
         private void clearErrors()
@@ -129,7 +130,7 @@ namespace SGSC.Pages
 
                 MessageBox.Show("Información de contacto guardada exitosamente.");
 
-                App.Current.MainFrame.Content = new CustomerReferencesPage(customerId);
+                App.Current.MainFrame.Content = new CustomerReferencesPage(customerId, creditRequestId);
             }
             catch (Exception ex)
             {

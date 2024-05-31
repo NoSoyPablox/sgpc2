@@ -143,6 +143,9 @@
     <Compile Include="Frames\UserSessionFrame.xaml.cs">
       <DependentUpon>UserSessionFrame.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LayoutPayment.cs">
+      <DependentUpon>Modelsgsc.tt</DependentUpon>
+    </Compile>
     <Compile Include="Messages\ToastNotification.xaml.cs">
       <DependentUpon>ToastNotification.xaml</DependentUpon>
     </Compile>

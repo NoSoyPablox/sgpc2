@@ -15,8 +15,9 @@ namespace SGSC.Pages
     {
         private int customerId;
         private int? addressId = null;
+        private int creditRequestId = -1;
 
-        public AddressInformationPage(int customerId)
+        public AddressInformationPage(int customerId, int creditRequestId)
         {
             this.customerId = customerId;
             InitializeComponent();
@@ -24,6 +25,7 @@ namespace SGSC.Pages
 
             StepsSidebarFrame.Content = new CustomerRegisterStepsSidebar("Address");
             UserSessionFrame.Content = new UserSessionFrame();
+            this.creditRequestId = creditRequestId;
         }
 
         private void AddAddressInformation(object sender, RoutedEventArgs e)
@@ -77,7 +79,7 @@ namespace SGSC.Pages
 
                 MessageBox.Show("Los datos de contacto se han guardado correctamente.");
 
-                App.Current.MainFrame.Content = new PageWorkCenter(customerId);
+                App.Current.MainFrame.Content = new PageWorkCenter(customerId, creditRequestId);
             }
             catch (Exception ex)
             {

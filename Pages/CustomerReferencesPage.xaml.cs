@@ -26,7 +26,8 @@ namespace SGSC.Pages
         private int customerId;
         private int? reference1Id;
         private int? reference2Id;
-        public CustomerReferencesPage(int customerId)
+        private int creditRequestId = -1;
+        public CustomerReferencesPage(int customerId, int creditRequestId)
         {
             InitializeComponent();
 
@@ -36,6 +37,7 @@ namespace SGSC.Pages
             UserSessionFrame.Content = new UserSessionFrame();
 
             GetReferences();
+            this.creditRequestId = creditRequestId;
         }
 
         private void GetReferences()
@@ -124,7 +126,14 @@ namespace SGSC.Pages
 
                         MessageBox.Show("Referencias guardadas correctamente", "Referencias guardadas", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                        App.Current.MainFrame.Content = new RegisterCreditRequest(customerId, -1);
+                        if(creditRequestId == -2)
+                        {
+                            App.Current.MainFrame.Content = new HomePageCreditAdvisor();
+                        }
+                        else
+                        {
+                            App.Current.MainFrame.Content = new RegisterCreditRequest(customerId, creditRequestId);
+                        }
                     }
                     catch (Exception ex)
                     {
