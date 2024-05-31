@@ -82,7 +82,7 @@ namespace SGSC.Pages
                         //tbDomAccBankCardNumber.Text = directDebitAccount.CardNumber;
                         //tbDomAccBank.Text = directDebitAccount.Bank.Name;
                         //tbDomAccBankInterbankCode.Text = directDebitAccount.InterbankCode;
-                        directDebitAccountId = directDebitAccount.BankAccountId;
+                        this.directDebitAccountId = directDebitAccount.BankAccountId;
 						directDebitAccountBankId = directDebitAccount.Bank.BankId;
                         cbDirectDebitAccount.Items.Add(directDebitAccount);
 					}
@@ -320,7 +320,7 @@ namespace SGSC.Pages
 				}
 				else
 				{
-					tbTansAccBank.Text = "Banco Desconocido";
+					tbDomAccBank.Text = "Banco Desconocido";
                     directDebitAccountBankId = null;
 				}
 
@@ -335,7 +335,7 @@ namespace SGSC.Pages
 			}
 			else
 			{
-				tbTansAccBank.Text = "";
+				tbDomAccBank.Text = "";
                 directDebitAccountBankId = null;
 				lbDomAccBankInterbankCodeError.Content = "";
 			}

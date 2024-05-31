@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/28/2024 21:29:36
+-- Date Created: 05/30/2024 23:06:22
 -- Generated from EDMX file: C:\Users\pablo\source\repos\sgpc2\Modelsgsc.edmx
 -- --------------------------------------------------
 
@@ -120,6 +120,9 @@ IF OBJECT_ID(N'[dbo].[Payments]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[WorkCenters]', 'U') IS NOT NULL
     DROP TABLE [dbo].[WorkCenters];
+GO
+IF OBJECT_ID(N'[sgscModelStoreContainer].[LayoutPayment]', 'U') IS NOT NULL
+    DROP TABLE [sgscModelStoreContainer].[LayoutPayment];
 GO
 
 -- --------------------------------------------------
@@ -245,7 +248,7 @@ CREATE TABLE [dbo].[Payments] (
     [PaymentDate] datetime  NULL,
     [Amount] decimal(18,0)  NULL,
     [CreditRequestId] int  NULL,
-    [AmountCharged] decimal(18,0)  NOT NULL,
+    [AmountCharged] decimal(18,0)  NULL,
     [CreditRequests_CreditRequestId] int  NULL
 );
 GO
@@ -312,6 +315,17 @@ CREATE TABLE [dbo].[Documents] (
     [CreditRequestId] int  NOT NULL,
     [DocumentType] int  NULL,
     [CreditRequest_CreditRequestId] int  NULL
+);
+GO
+
+-- Creating table 'LayoutPayments'
+CREATE TABLE [dbo].[LayoutPayments] (
+    [FileNumber] nvarchar(max)  NULL,
+    [PaymentDate] datetime  NULL,
+    [Amount] decimal(18,0)  NULL,
+    [InterbankCode] nvarchar(max)  NULL,
+    [Name] nvarchar(max)  NOT NULL,
+    [Status] int  NULL
 );
 GO
 
@@ -420,6 +434,12 @@ GO
 ALTER TABLE [dbo].[Documents]
 ADD CONSTRAINT [PK_Documents]
     PRIMARY KEY CLUSTERED ([DocumentId] ASC);
+GO
+
+-- Creating primary key on [Name] in table 'LayoutPayments'
+ALTER TABLE [dbo].[LayoutPayments]
+ADD CONSTRAINT [PK_LayoutPayments]
+    PRIMARY KEY CLUSTERED ([Name] ASC);
 GO
 
 -- Creating primary key on [CreditRequests_CreditRequestId], [CreditConditions_CreditConditionId] in table 'CreditRequestCreditCondition'
