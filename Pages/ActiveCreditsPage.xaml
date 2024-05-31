@@ -17,6 +17,13 @@
     <Grid>
         <Border Background="White" CornerRadius="22"/>
 
+        <Label Content="Fecha Inicio:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="810,156,0,0"/>
+        <DatePicker x:Name="dpStartDate" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="912,158,0,0"/>
+
+        <Label Content="Fecha Fin:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1072,156,0,0"/>
+        <DatePicker x:Name="dpEndDate" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1139,158,0,0"/>
+
+
         <Label FontFamily="{StaticResource FontPoppins}" FontWeight="Bold" FontSize="36" Content="Créditos activos" HorizontalAlignment="Left" Margin="136,39,0,0" VerticalAlignment="Top"/>
 
         <Frame Name="collectionExecutiveSidebar" Margin="0,0,1172,0"/>
@@ -39,7 +46,7 @@
         <Label Name="lbCurrentPage" FontSize="20" Content="Página 1/1" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="172,649,0,0" VerticalAlignment="Top" Width="124"/>
         <ComboBox Name="cbPages" FontSize="17" Margin="354,653,843,38" SelectionChanged="cbPages_SelectionChanged"/>
 
-        <Button Style="{StaticResource ButtonStyleCancel}" Content="Generar layout de cobros" FontSize="22" HorizontalAlignment="Left" Margin="584,646,0,0" VerticalAlignment="Top" Width="278" Height="40" />
+        <Button Style="{StaticResource ButtonStyleCancel}" Content="Generar layout de cobros" FontSize="22" HorizontalAlignment="Left" Margin="584,646,0,0" VerticalAlignment="Top" Width="278" Height="40" Click="GenerateCollectionLayout" />
         <Button Style="{StaticResource ButtonStyleCancel}" Content="Registrar cobros" FontSize="22" HorizontalAlignment="Left" Margin="877,646,0,0" VerticalAlignment="Top" Width="180" Height="40" />
         <Button Style="{StaticResource ButtonStyleConfirm}" Content="Ver eficiencias" FontSize="22" HorizontalAlignment="Left" Margin="1072,646,0,0" VerticalAlignment="Top" Width="180" Height="40" />
 
