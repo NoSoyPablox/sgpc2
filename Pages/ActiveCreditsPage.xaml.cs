@@ -33,6 +33,8 @@ namespace SGSC.Pages
             public string CreditAmount { get; set; }
             public string CreditPendingDebt { get; set; }
             public string CreditEfficiency { get; set; }
+
+
         }
 
         private ObservableCollection<ActiveCredit> ActiveCredits;
@@ -169,22 +171,18 @@ namespace SGSC.Pages
             {
                 using (var context = new sgscEntities())
                 {
-                    var activeCredits = from cr in context.CreditRequests
-                                        join p in context.Payments on cr.CreditRequestId equals p.CreditRequestId
-                                        join ba in context.BankAccounts on new { cr.TransferBankAccount, cr.DirectDebitBankAccount } equals new { TransferBankAccount_BankAccountId = ba.BankAccountId, DirectDebitBankAccount_BankAccountId = ba.BankAccountId }
-                                        join b in context.Banks on ba.BankBankId equals b.BankId
-                                        where cr.Status == 4 && p.PaymentDate >= startDate && p.PaymentDate <= endDate
+                    var activeCredits = from lc in context.LayoutPayments
+                                        where lc.Status == 4 && lc.PaymentDate >= startDate && lc.PaymentDate <= endDate
                                         select new
                                         {
-                                            cr.FileNumber,
-                                            p.PaymentDate,
-                                            p.Amount,
-                                            BankName = b.Name,
-                                            ba.InterbankCode,
-                                            cr.DirectDebitBankAccount_BankAccountId
+                                            lc.FileNumber,
+                                            lc.PaymentDate,
+                                            lc.Amount,
+                                            lc.Name,
+                                            lc.InterbankCode
                                         };
 
-                    string csvFilePath = "C:\\path\\to\\your\\directory\\ActiveCreditsCollectionLayout.csv";
+                    string csvFilePath = "C:\\Users\\wero1\\Documents\\Layout\\ActiveCreditsCollectionLayout.csv";
 
                     using (var writer = new StreamWriter(csvFilePath))
                     {
@@ -193,10 +191,10 @@ namespace SGSC.Pages
                         foreach (var credit in activeCredits)
                         {
                             string folio = credit.FileNumber;
-                            string importeACobrar = credit.Amount.ToString("F2");
-                            string fechaPago = credit.PaymentDate.ToString("yyyy-MM-dd");
+                            string importeACobrar = credit.Amount.HasValue ? credit.Amount.Value.ToString("F2") : "0.00";
+                            string fechaPago = credit.PaymentDate.HasValue ? credit.PaymentDate.Value.ToString("yyyy-MM-dd") : "0.00";
                             string cuenta = credit.InterbankCode;
-                            string banco = credit.BankName;
+                            string banco = credit.Name;
 
                             writer.WriteLine($"{folio},{importeACobrar},{fechaPago},{cuenta},{banco}");
                         }
@@ -210,6 +208,7 @@ namespace SGSC.Pages
                 MessageBox.Show("Error al intentar generar el layout de cobro: " + ex.Message);
             }
         }
+
     }
-   }
+}
   
