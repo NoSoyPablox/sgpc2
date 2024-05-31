@@ -254,6 +254,7 @@ namespace SGSC.Pages
                 creditRequest.InterestRate = selectedPromotion.InterestRate;
                 creditRequest.CreationDate = DateTime.Now;
                 creditRequest.EmployeeId = Utils.UserSession.Instance.Id;
+                creditRequest.Employee = context.Employees.Find(Utils.UserSession.Instance.Id);
                 creditRequest.CustomerId = idCustomer;
                 creditRequest.PaymentsInterval = selectedPromotion.Interval;
                 creditRequest.Description = "";
@@ -277,7 +278,10 @@ namespace SGSC.Pages
                     if (idCreditRequest == -1)
                     {
                         MessageBox.Show("Solicitud de crédito registrada exitosamente");
-                        //if interval is monthly then register payments
+                        if (selectedPromotion.Interval == 1)
+                        {
+                            registerFortnightPayments(filenumber);
+                        }
                         if (selectedPromotion.Interval == 2)
                         {
                             registerMonthlyPayments(filenumber);
@@ -329,13 +333,17 @@ namespace SGSC.Pages
                     var totalAmount = creditRequest.Amount;
                     var amountPerPayment = totalAmount / creditRequest.TimePeriod;
                     var currentDate = DateTime.Now;
-                    var nextPaymentDate = currentDate;
+                    var nextPaymentDate = currentDate.AddDays(15);
                     for (int i = 0; i < creditRequest.TimePeriod; i++)
                     {
                         var payment = new Payment();
                         payment.Amount = (decimal?)amountPerPayment;
                         payment.PaymentDate = nextPaymentDate;
                         payment.CreditRequestId = creditRequest.CreditRequestId;
+                        payment.FileNumber = creditRequest.FileNumber;
+                        //add the navigation column creditRequest_creditRequestId to the payment
+                        payment.CreditRequests = creditRequest;
+
                         payments.Add(payment);
                         nextPaymentDate = nextPaymentDate.AddMonths(1);
                     }
@@ -351,6 +359,46 @@ namespace SGSC.Pages
                 }
             }
 
+        }
+
+        private void registerFortnightPayments(string fileNumberAddPayments)
+        {
+            using (var context = new sgscEntities())
+            {
+                var creditRequest = context.CreditRequests.Where(cr => cr.FileNumber == fileNumberAddPayments).FirstOrDefault();
+                MessageBox.Show("Proposito: " + creditRequest.Purpose);
+                if (creditRequest != null)
+                {
+                    var payments = new List<Payment>();
+                    var totalAmount = creditRequest.Amount;
+                    var amountPerPayment = totalAmount / creditRequest.TimePeriod;
+                    var currentDate = DateTime.Now;
+                    currentDate = currentDate.AddDays(15);
+                    var nextPaymentDate = currentDate;
+                    for (int i = 0; i < creditRequest.TimePeriod; i++)
+                    {
+                        var payment = new Payment();
+                        payment.Amount = (decimal?)amountPerPayment;
+                        payment.PaymentDate = nextPaymentDate;
+                        payment.CreditRequestId = creditRequest.CreditRequestId;
+                        payment.FileNumber = creditRequest.FileNumber;
+                        //add the navigation column creditRequest_creditRequestId to the payment
+                        payment.CreditRequests = creditRequest;
+
+                        payments.Add(payment);
+                        nextPaymentDate = nextPaymentDate.AddDays(15);
+                    }
+                    context.Payments.AddRange(payments);
+                    try
+                    {
+                        context.SaveChanges();
+                    }
+                    catch (Exception)
+                    {
+                        Console.WriteLine("Error al registrar los pagos");
+                    }
+                }
+            }
         }
 
     }
