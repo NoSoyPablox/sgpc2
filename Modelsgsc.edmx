@@ -202,6 +202,19 @@
           <Property Name="CustomerId" Type="int" />
           <Property Name="Customer_CustomerId" Type="int" />
         </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'sgsc.dbo.LayoutPayment' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="LayoutPayment">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="FileNumber" Type="nvarchar(max)" />
+          <Property Name="PaymentDate" Type="datetime" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="InterbankCode" Type="nvarchar(max)" />
+          <Property Name="Status" Type="int" />
+        </EntityType>
         <Association Name="FK_BankAccountCustomer">
           <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
           <End Role="BankAccounts" Type="Self.BankAccounts" Multiplicity="*" />
@@ -412,6 +425,16 @@
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Payments" EntityType="Self.Payments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WorkCenters" EntityType="Self.WorkCenters" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LayoutPayment" EntityType="Self.LayoutPayment" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [LayoutPayment].[FileNumber] AS [FileNumber], 
+    [LayoutPayment].[PaymentDate] AS [PaymentDate], 
+    [LayoutPayment].[Amount] AS [Amount], 
+    [LayoutPayment].[Name] AS [Name], 
+    [LayoutPayment].[InterbankCode] AS [InterbankCode], 
+    [LayoutPayment].[Status] AS [Status]
+    FROM [dbo].[LayoutPayment] AS [LayoutPayment]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_BankAccountCustomer" Association="Self.FK_BankAccountCustomer">
             <End Role="Customers" EntitySet="Customers" />
             <End Role="BankAccounts" EntitySet="BankAccounts" />
@@ -766,6 +789,7 @@
             <End Role="Document" EntitySet="Documents" />
             <End Role="CreditRequest" EntitySet="CreditRequests" />
           </AssociationSet>
+          <EntitySet Name="LayoutPayments" EntityType="sgscModel.LayoutPayment" />
         </EntityContainer>
         <Association Name="CreditRequestBankAccount">
           <End Type="sgscModel.CreditRequest" Role="CreditRequest" Multiplicity="*" />
@@ -870,6 +894,17 @@
           <End Type="sgscModel.Document" Role="Document" Multiplicity="*" />
           <End Type="sgscModel.CreditRequest" Role="CreditRequest" Multiplicity="0..1" />
         </Association>
+        <EntityType Name="LayoutPayment">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="FileNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PaymentDate" Type="DateTime" Precision="3" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InterbankCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1161,6 +1196,18 @@
       </EndProperty>
       <Condition ColumnName="CreditRequest_CreditRequestId" IsNull="false" />
     </AssociationSetMapping>
+          <EntitySetMapping Name="LayoutPayments">
+            <EntityTypeMapping TypeName="sgscModel.LayoutPayment">
+              <MappingFragment StoreEntitySet="LayoutPayment">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="InterbankCode" ColumnName="InterbankCode" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+                <ScalarProperty Name="FileNumber" ColumnName="FileNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
