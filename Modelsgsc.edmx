@@ -1197,6 +1197,18 @@
       </EndProperty>
       <Condition ColumnName="CreditRequest_CreditRequestId" IsNull="false" />
     </AssociationSetMapping>
+          <EntitySetMapping Name="LayoutPayments">
+            <EntityTypeMapping TypeName="sgscModel.LayoutPayment">
+              <MappingFragment StoreEntitySet="LayoutPayment">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="InterbankCode" ColumnName="InterbankCode" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+                <ScalarProperty Name="FileNumber" ColumnName="FileNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>

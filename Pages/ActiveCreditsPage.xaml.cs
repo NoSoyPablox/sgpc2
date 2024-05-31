@@ -184,7 +184,71 @@ namespace SGSC.Pages
                 return;
             }
             CurrentPage = cbPages.SelectedIndex + 1;
-			GetActiveCredits();
-		}
-	}
+            GetActiveCredits();
+        }
+
+        private void GenerateCollectionLayout(object sender, RoutedEventArgs e)
+        {
+            if (dpStartDate.SelectedDate == null || dpEndDate.SelectedDate == null)
+            {
+                MessageBox.Show("Por favor, selecciona un rango de fechas válido.");
+                return;
+            }
+
+            DateTime startDate = dpStartDate.SelectedDate.Value;
+            DateTime endDate = dpEndDate.SelectedDate.Value;
+
+            if (startDate > endDate)
+            {
+                MessageBox.Show("La fecha de inicio no puede ser mayor que la fecha de fin.");
+                return;
+            }
+
+            try
+            {
+                using (var context = new sgscEntities())
+                {
+                    var activeCredits = from lc in context.LayoutPayments
+                                        where lc.Status == 4 && lc.PaymentDate >= startDate && lc.PaymentDate <= endDate
+                                        select new
+                                        {
+                                            lc.FileNumber,
+                                            lc.PaymentDate,
+                                            lc.Amount,
+                                            lc.Name,
+                                            lc.InterbankCode
+                                        };
+
+                    string csvFilePath = "C:\\Users\\wero1\\Documents\\Layout\\ActiveCreditsCollectionLayout.csv";
+
+                    using (var writer = new StreamWriter(csvFilePath))
+                    {
+                        writer.WriteLine("Folio,ImporteACobrar,FechaPago,Cuenta,Banco");
+
+                        foreach (var credit in activeCredits)
+                        {
+                            string folio = credit.FileNumber;
+                            string importeACobrar = credit.Amount.HasValue ? credit.Amount.Value.ToString("F2") : "0.00";
+                            string fechaPago = credit.PaymentDate.HasValue ? credit.PaymentDate.Value.ToString("yyyy-MM-dd") : "0.00";
+                            string cuenta = credit.InterbankCode;
+                            string banco = credit.Name;
+
+                            writer.WriteLine($"{folio},{importeACobrar},{fechaPago},{cuenta},{banco}");
+                        }
+                    }
+
+                    MessageBox.Show("El layout de cobro ha sido generado exitosamente.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al intentar generar el layout de cobro: " + ex.Message);
+            }
+        }
+
+    }
 }
+  
+    }
+   }
+  
