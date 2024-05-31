@@ -101,6 +101,7 @@ namespace SGSC.Pages
                         .Take(ItemsPerPage)
                         .ToList();
 
+					var activeCreditsArray = activeCredits.ToList();
                     ActiveCredits = new ObservableCollection<ActiveCredit>();
                     foreach (var item in activeCredits)
                     {
@@ -183,99 +184,7 @@ namespace SGSC.Pages
                 return;
             }
             CurrentPage = cbPages.SelectedIndex + 1;
-            GetActiveCredits();
-        }
-
-        private void GenerateCollectionLayout(object sender, RoutedEventArgs e)
-        {
-            if (dpStartDate.SelectedDate == null || dpEndDate.SelectedDate == null)
-            {
-                MessageBox.Show("Por favor, selecciona un rango de fechas válido.");
-                return;
-            }
-
-            DateTime startDate = dpStartDate.SelectedDate.Value;
-            DateTime endDate = dpEndDate.SelectedDate.Value;
-
-            if (startDate > endDate)
-            {
-                MessageBox.Show("La fecha de inicio no puede ser mayor que la fecha de fin.");
-                return;
-            }
-
-            try
-            {
-                using (var context = new sgscEntities())
-                {
-                    var activeCredits = from lc in context.LayoutPayments
-                                        where lc.Status == 4 && lc.PaymentDate >= startDate && lc.PaymentDate <= endDate
-                                        select new
-                                        {
-                                            lc.FileNumber,
-                                            lc.PaymentDate,
-                                            lc.Amount,
-                                            lc.Name,
-                                            lc.InterbankCode
-                                        };
-
-                    SaveFileDialog saveFileDialog = new SaveFileDialog();
-                    saveFileDialog.Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*";
-                    saveFileDialog.Title = "Guardar layout de cobro";
-                    saveFileDialog.FileName = $"ActiveCreditsCollectionLayout_{startDate.ToString("yyyyMMdd")}_to_{endDate.ToString("yyyyMMdd")}.csv";
-
-                    if (saveFileDialog.ShowDialog() == true)
-                    {
-                        string csvFilePath = saveFileDialog.FileName;
-
-                        using (var writer = new StreamWriter(csvFilePath))
-                        {
-                            writer.WriteLine($"Layout de cobro desde {startDate.ToString("yyyy-MM-dd")} hasta {endDate.ToString("yyyy-MM-dd")}");
-                            writer.WriteLine("Folio,ImporteACobrar,FechaPago,Cuenta,Banco");
-
-                            foreach (var credit in activeCredits)
-                            {
-                                string folio = credit.FileNumber;
-                                string importeACobrar = credit.Amount.HasValue ? credit.Amount.Value.ToString("F2") : "0.00";
-                                string fechaPago = credit.PaymentDate.HasValue ? credit.PaymentDate.Value.ToString("yyyy-MM-dd") : "N/A";
-                                string cuenta = credit.InterbankCode;
-                                string banco = credit.Name;
-
-                                writer.WriteLine($"\"{folio}\",\"{importeACobrar}\",\"{fechaPago}\",\"{cuenta}\",\"{banco}\"");
-                            }
-                        }
-
-                        MessageBox.Show("El layout de cobro ha sido generado exitosamente.");
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al intentar generar el layout de cobro: " + ex.Message);
-            }
-        }
-
-        private void ViewCollectionEfficiencies(object sender, RoutedEventArgs e)
-        {
-            var button = sender as Button;
-            if (button != null)
-            {
-                var dataContext = button.DataContext;
-                if (dataContext is ActiveCredit activeCredit)
-                {
-                    int creditRequestId = activeCredit.CreditRequestId;
-                    var collectionEfficienciesPage = new CollectionEfficienciesPage(creditRequestId);
-                    NavigationService.Navigate(collectionEfficienciesPage);
-                }
-                else
-                {
-                    MessageBox.Show("Error: DataContext is not ActiveCredit");
-                }
-            }
-            else
-            {
-                MessageBox.Show("Error: Sender is not a button");
-            }
-        }
-    }
+			GetActiveCredits();
+		}
+	}
 }
-  
