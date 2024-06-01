@@ -153,6 +153,8 @@ namespace SGSC.Pages
             }
         }
 
+
+
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
         {
             UserSession.LogOut();
