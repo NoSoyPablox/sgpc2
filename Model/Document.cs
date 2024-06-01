@@ -8,7 +8,6 @@ namespace SGSC.Model
 {
     public partial class Document
     {
-
         public enum DocumentTypes : short
         {
             NationalId,
@@ -17,6 +16,10 @@ namespace SGSC.Model
             CreditRequestFormSigned,
             CollectionLayoutSender,
             CollectionLayoutReceiver,
+            CreditContractCoverSheet,
+            CreditContractCoverSheetSigned,
+            DirectDebitAuthorization,
+            DirectDebitAuthorizationSigned,
         }
 
         public static string RequestDocumentTypeToString(DocumentTypes documentType)
@@ -35,6 +38,14 @@ namespace SGSC.Model
                     return "Layout de cobranza (enviado)";
                 case DocumentTypes.CollectionLayoutReceiver:
                     return "Layout de cobranza (recibido)";
+                case DocumentTypes.CreditContractCoverSheet:
+                    return "Caratula de contrato de crédito";
+                case DocumentTypes.CreditContractCoverSheetSigned:
+                    return "Caratula de contrato de crédito firmada";
+                case DocumentTypes.DirectDebitAuthorization:
+                    return "Autorizacion para domiciliazion de pagos";
+                case DocumentTypes.DirectDebitAuthorizationSigned:
+                    return "Autorizacion para domiciliazion de pagos firmada";
                 default:
                     return "Tipo de documento desconocido";
             }
