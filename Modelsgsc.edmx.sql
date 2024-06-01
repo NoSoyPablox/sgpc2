@@ -318,17 +318,6 @@ CREATE TABLE [dbo].[Documents] (
 );
 GO
 
--- Creating table 'LayoutPayments'
-CREATE TABLE [dbo].[LayoutPayments] (
-    [FileNumber] nvarchar(max)  NULL,
-    [PaymentDate] datetime  NULL,
-    [Amount] decimal(18,0)  NULL,
-    [InterbankCode] nvarchar(max)  NULL,
-    [Name] nvarchar(max)  NOT NULL,
-    [Status] int  NULL
-);
-GO
-
 -- Creating table 'CreditRequestCreditCondition'
 CREATE TABLE [dbo].[CreditRequestCreditCondition] (
     [CreditRequests_CreditRequestId] int  NOT NULL,

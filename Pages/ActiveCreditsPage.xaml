@@ -48,7 +48,7 @@
 
         <Button Style="{StaticResource ButtonStyleCancel}" Content="Generar layout de cobros" FontSize="22" HorizontalAlignment="Left" Margin="584,646,0,0" VerticalAlignment="Top" Width="278" Height="40" Click="GenerateCollectionLayout" />
         <Button Style="{StaticResource ButtonStyleCancel}" Content="Registrar cobros" FontSize="22" HorizontalAlignment="Left" Margin="877,646,0,0" VerticalAlignment="Top" Width="180" Height="40" />
-        <Button Style="{StaticResource ButtonStyleConfirm}" Content="Ver eficiencias" FontSize="22" HorizontalAlignment="Left" Margin="1072,646,0,0" VerticalAlignment="Top" Width="180" Height="40" />
+        <Button Style="{StaticResource ButtonStyleConfirm}" Content="Ver eficiencias" FontSize="22" HorizontalAlignment="Left" Margin="1072,646,0,0" VerticalAlignment="Top" Width="180" Height="40"  Click="ViewCollectionEfficiencies" />
 
         <Label Style="{StaticResource CustomLabelStyle}" FontSize="20" Content="Filtrar por Folio " HorizontalAlignment="Left" Margin="136,124,0,0" VerticalAlignment="Top" Height="34" Width="140"/>
         <TextBox Name="tbPageNumberFilter" Style="{StaticResource CustomTextBoxStyle}" FontSize="18" VerticalContentAlignment="Center" Margin="136,151,843,524" TextChanged="tbFilter_TextChanged"/>
