@@ -43,7 +43,7 @@ namespace SGSC.Pages
             public int CreditRequestID { get; set; }
             public string FileNumber { get; set; }
             public DateTime PaymentDate { get; set; }
-            public decimal Amount { get; set; }
+            public decimal? Amount { get; set; }
             public decimal? Efficiency { get; set; }
             public decimal? AmountCharged { get; set; }
             public bool IsTotalRow { get; set; }

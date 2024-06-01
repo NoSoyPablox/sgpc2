@@ -17,6 +17,13 @@
     <Grid>
         <Border Background="White" CornerRadius="22"/>
 
+        <Label Content="Fecha Inicio:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="810,156,0,0"/>
+        <DatePicker x:Name="dpStartDate" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="912,158,0,0"/>
+
+        <Label Content="Fecha Fin:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1072,156,0,0"/>
+        <DatePicker x:Name="dpEndDate" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1139,158,0,0"/>
+
+
         <Label FontFamily="{StaticResource FontPoppins}" FontWeight="Bold" FontSize="36" Content="Créditos activos" HorizontalAlignment="Left" Margin="136,39,0,0" VerticalAlignment="Top"/>
 
         <Frame Name="collectionExecutiveSidebar" Margin="0,0,1172,0"/>
@@ -31,17 +38,25 @@
                 <DataGridTextColumn Header="Total" Binding="{Binding CreditAmount}" IsReadOnly="True" Width="124" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
                 <DataGridTextColumn Header="Saldo pendiente" Binding="{Binding CreditPendingDebt}" IsReadOnly="True" Width="200" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
                 <DataGridTextColumn Header="Eficiencia" Binding="{Binding CreditEfficiency}" IsReadOnly="True" Width="124" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
+                <DataGridTemplateColumn Header="Acciones" Width="180">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Style="{StaticResource ButtonStyleConfirm}" Content="Ver eficiencias" FontSize="22" Click="ViewCollectionEfficiencies"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+
 
         <Button Name="btnPreviousPage" Style="{StaticResource ButtonStyleCancel}" Content="&lt;" FontSize="20" HorizontalAlignment="Left" Margin="136,655,0,0" VerticalAlignment="Top" Height="28" Width="31" Click="btnPreviousPage_Click" />
         <Button Name="btnNextPage" Style="{StaticResource ButtonStyleCancel}" Content=">" FontSize="20" HorizontalAlignment="Left" Margin="296,655,0,0" VerticalAlignment="Top" Height="28" Width="31" Click="btnNextPage_Click" />
         <Label Name="lbCurrentPage" FontSize="20" Content="Página 1/1" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="172,649,0,0" VerticalAlignment="Top" Width="124"/>
         <ComboBox Name="cbPages" FontSize="17" Margin="354,653,843,38" SelectionChanged="cbPages_SelectionChanged"/>
 
-        <Button Style="{StaticResource ButtonStyleCancel}" Content="Generar layout de cobros" FontSize="22" HorizontalAlignment="Left" Margin="584,646,0,0" VerticalAlignment="Top" Width="278" Height="40" />
+        <Button Style="{StaticResource ButtonStyleCancel}" Content="Generar layout de cobros" FontSize="22" HorizontalAlignment="Left" Margin="584,646,0,0" VerticalAlignment="Top" Width="278" Height="40" Click="GenerateCollectionLayout" />
         <Button Style="{StaticResource ButtonStyleCancel}" Content="Registrar cobros" FontSize="22" HorizontalAlignment="Left" Margin="877,646,0,0" VerticalAlignment="Top" Width="180" Height="40" />
-        <Button Style="{StaticResource ButtonStyleConfirm}" Content="Ver eficiencias" FontSize="22" HorizontalAlignment="Left" Margin="1072,646,0,0" VerticalAlignment="Top" Width="180" Height="40" />
+       
 
         <Label Style="{StaticResource CustomLabelStyle}" FontSize="20" Content="Filtrar por Folio " HorizontalAlignment="Left" Margin="136,124,0,0" VerticalAlignment="Top" Height="34" Width="140"/>
         <TextBox Name="tbPageNumberFilter" Style="{StaticResource CustomTextBoxStyle}" FontSize="18" VerticalContentAlignment="Center" Margin="136,151,843,524" TextChanged="tbFilter_TextChanged"/>
