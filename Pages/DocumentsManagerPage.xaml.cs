@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using SGSC.Model; // Ensure correct reference to SGSC.Model
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -25,8 +26,6 @@ namespace SGSC.Pages
     /// </summary>
     public partial class DocumentsManagerPage : Page
     {
-
-
         private sgscEntities _context;
         private ObservableCollection<Document> documentsDataAux;
         private int? creditRequestId;
@@ -47,10 +46,6 @@ namespace SGSC.Pages
                 {
                     var documents = db.Documents.ToList();
                     documentsDataAux = new ObservableCollection<Document>(documents);
-                    foreach (var document in documents)
-                    {
-                        CreateDocumentCard(document.FileName, document.DocumentId, creditRequestId);
-                    }
                 }
             }
             catch (Exception ex)
@@ -59,8 +54,7 @@ namespace SGSC.Pages
             }
         }
 
-
-        private void UploadButton_Click(object sender, RoutedEventArgs e)
+        private void UploadDocument(Document.DocumentTypes documentType)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog() == true)
@@ -74,14 +68,14 @@ namespace SGSC.Pages
                     {
                         FileName = fileName,
                         FileContent = fileContent,
-                        CreditRequestId = creditRequestId.Value 
+                        CreditRequestId = creditRequestId.Value,
+                        DocumentType = (short)documentType
                     };
 
                     _context.Documents.Add(document);
                     _context.SaveChanges();
 
                     documentsDataAux.Add(document);
-                    CreateDocumentCard(document.FileName, document.DocumentId, document.CreditRequestId);
 
                     MessageBox.Show("Documento subido con éxito.");
                 }
@@ -92,70 +86,62 @@ namespace SGSC.Pages
             }
         }
 
-        private void CreateDocumentCard(string fileName, int documentId, int? creditRequestId)
+        private void DownloadDocument(Document.DocumentTypes documentType)
         {
-            StackPanel cardPanel = new StackPanel
+            var document = _context.Documents.FirstOrDefault(d => d.DocumentType == (short)documentType && d.CreditRequestId == creditRequestId);
+            if (document != null)
             {
-                Margin = new Thickness(10),
-                Background = new SolidColorBrush(Color.FromRgb(240, 240, 240)),
-                Width = 200,
-                Height = 100
-            };
-
-            Label nameLabel = new Label
-            {
-                Content = fileName,
-                Margin = new Thickness(5)
-            };
-
-            Button downloadButton = new Button
-            {
-                Content = "Descargar",
-                Tag = documentId,
-                Margin = new Thickness(5)
-            };
-            downloadButton.Click += DownloadButton_Click;
-            downloadButton.DataContext = creditRequestId; 
-
-            cardPanel.Children.Add(nameLabel);
-            cardPanel.Children.Add(downloadButton);
-
-            DocumentsPanel.Children.Add(cardPanel);
-        }
-
-        private void DownloadButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (sender is Button button && button.Tag is int documentId)
-            {
-                var document = _context.Documents.FirstOrDefault(d => d.DocumentId == documentId);
-                if (document != null)
+                SaveFileDialog saveFileDialog = new SaveFileDialog
                 {
-                    SaveFileDialog saveFileDialog = new SaveFileDialog
-                    {
-                        FileName = document.FileName
-                    };
+                    FileName = document.FileName
+                };
 
-                    if (saveFileDialog.ShowDialog() == true)
-                    {
-                        File.WriteAllBytes(saveFileDialog.FileName, document.FileContent);
-                        MessageBox.Show("Documento descargado con éxito.");
-
-                        
-                        int? creditRequestId = (int?)((Button)sender).DataContext;
-                        
-                    }
+                if (saveFileDialog.ShowDialog() == true)
+                {
+                    File.WriteAllBytes(saveFileDialog.FileName, document.FileContent);
+                    MessageBox.Show("Documento descargado con éxito.");
                 }
+            }
+            else
+            {
+                MessageBox.Show("No se encontró el documento solicitado.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
-        private void LogoutButton_Click(object sender, RoutedEventArgs e)
+        private void GenerateDocument(Document.DocumentTypes documentType)
         {
-            UserSession.LogOut();
+            // Logic to generate document using Crystal Reports
+            // Example:
+            // CrystalReportGenerator.Generate(documentType, creditRequestId);
         }
 
-        private void HomePageCreditAdvisorMenu(object sender, RoutedEventArgs e)
+        private void DownloadDocumentKit_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new HomePageCreditAdvisor());
+            // Logic to download the document kit (a collection of specified documents)
+            // Example:
+            // DocumentKitDownloader.Download(creditRequestId);
         }
+
+        private void UploadINE_Click(object sender, RoutedEventArgs e) => UploadDocument(Document.DocumentTypes.NationalId);
+        private void DownloadINE_Click(object sender, RoutedEventArgs e) => DownloadDocument(Document.DocumentTypes.NationalId);
+
+        private void UploadDomicile_Click(object sender, RoutedEventArgs e) => UploadDocument(Document.DocumentTypes.Domicile);
+        private void DownloadDomicile_Click(object sender, RoutedEventArgs e) => DownloadDocument(Document.DocumentTypes.Domicile);
+
+        private void GenerateCreditRequestForm_Click(object sender, RoutedEventArgs e) => GenerateDocument(Document.DocumentTypes.CreditRequestForm);
+        private void UploadSignedCreditRequestForm_Click(object sender, RoutedEventArgs e) => UploadDocument(Document.DocumentTypes.CreditRequestFormSigned);
+        private void DownloadSignedCreditRequestForm_Click(object sender, RoutedEventArgs e) => DownloadDocument(Document.DocumentTypes.CreditRequestFormSigned);
+
+        private void GenerateCreditContractCoverSheet_Click(object sender, RoutedEventArgs e) => GenerateDocument(Document.DocumentTypes.CreditContractCoverSheet);
+        private void UploadSignedCreditContractCoverSheet_Click(object sender, RoutedEventArgs e) => UploadDocument(Document.DocumentTypes.CreditContractCoverSheetSigned);
+        private void DownloadSignedCreditContractCoverSheet_Click(object sender, RoutedEventArgs e) => DownloadDocument(Document.DocumentTypes.CreditContractCoverSheetSigned);
+
+        private void GenerateDirectDebitAuthorization_Click(object sender, RoutedEventArgs e) => GenerateDocument(Document.DocumentTypes.DirectDebitAuthorization);
+        private void UploadSignedDirectDebitAuthorization_Click(object sender, RoutedEventArgs e) => UploadDocument(Document.DocumentTypes.DirectDebitAuthorizationSigned);
+        private void DownloadSignedDirectDebitAuthorization_Click(object sender, RoutedEventArgs e) => DownloadDocument(Document.DocumentTypes.DirectDebitAuthorizationSigned);
+
+        private void LogoutButton_Click(object sender, RoutedEventArgs e) => UserSession.LogOut();
+
+        private void HomePageCreditAdvisorMenu(object sender, RoutedEventArgs e) => NavigationService.Navigate(new HomePageCreditAdvisor());
     }
 }
