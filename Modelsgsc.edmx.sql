@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/30/2024 23:34:18
+-- Date Created: 05/31/2024 21:24:39
 -- Generated from EDMX file: C:\Users\wero1\source\repos\NoSoyPablox\sgpc2\Modelsgsc.edmx
 -- --------------------------------------------------
 
@@ -319,8 +319,7 @@ CREATE TABLE [dbo].[Documents] (
 GO
 
 -- Creating table 'LayoutPayments'
-CREATE TABLE [dbo].[LayoutPayments] 
-(
+CREATE TABLE [dbo].[LayoutPayments] (
     [FileNumber] nvarchar(max)  NULL,
     [PaymentDate] datetime  NULL,
     [Amount] decimal(18,0)  NULL,

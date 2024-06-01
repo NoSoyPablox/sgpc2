@@ -15,10 +15,10 @@ namespace SGSC
     public partial class LayoutPayment
     {
         public string FileNumber { get; set; }
+        public Nullable<int> Status { get; set; }
         public Nullable<System.DateTime> PaymentDate { get; set; }
         public Nullable<decimal> Amount { get; set; }
-        public string Name { get; set; }
         public string InterbankCode { get; set; }
-        public Nullable<int> Status { get; set; }
+        public string Name { get; set; }
     }
 }

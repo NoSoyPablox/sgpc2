@@ -36,7 +36,6 @@ namespace SGSC.Pages
             public string CreditEfficiency { get; set; }
             public int CreditRequestId { get; set; }
 
-
         }
 
         private ObservableCollection<ActiveCredit> ActiveCredits;
@@ -153,8 +152,6 @@ namespace SGSC.Pages
             }
         }
 
-
-
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
         {
             UserSession.LogOut();
@@ -260,8 +257,8 @@ namespace SGSC.Pages
             var button = sender as Button;
             if (button != null)
             {
-                var dataContext = button.DataContext;
-                if (dataContext is ActiveCredit activeCredit)
+                var activeCredit = button.DataContext as ActiveCredit;
+                if (activeCredit != null)
                 {
                     int creditRequestId = activeCredit.CreditRequestId;
                     var collectionEfficienciesPage = new CollectionEfficienciesPage(creditRequestId);
@@ -277,9 +274,9 @@ namespace SGSC.Pages
                 MessageBox.Show("Error: Sender is not a button");
             }
         }
+
     }
 }
   
-    }
-   }
+    
   

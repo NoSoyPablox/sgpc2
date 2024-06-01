@@ -184,7 +184,7 @@
           <Property Name="PaymentDate" Type="datetime" />
           <Property Name="Amount" Type="decimal" Precision="18" Scale="0" />
           <Property Name="CreditRequestId" Type="int" />
-          <Property Name="AmountCharged" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="AmountCharged" Type="decimal" Precision="18" Scale="0" />
           <Property Name="CreditRequests_CreditRequestId" Type="int" />
         </EntityType>
         <EntityType Name="WorkCenters">
@@ -209,11 +209,11 @@ warning 6002: The table/view 'sgsc.dbo.LayoutPayment' does not have a primary ke
             <PropertyRef Name="Name" />
           </Key>
           <Property Name="FileNumber" Type="nvarchar(max)" />
+          <Property Name="Status" Type="int" />
           <Property Name="PaymentDate" Type="datetime" />
           <Property Name="Amount" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
           <Property Name="InterbankCode" Type="nvarchar(max)" />
-          <Property Name="Status" Type="int" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <Association Name="FK_BankAccountCustomer">
           <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
@@ -428,11 +428,11 @@ warning 6002: The table/view 'sgsc.dbo.LayoutPayment' does not have a primary ke
           <EntitySet Name="LayoutPayment" EntityType="Self.LayoutPayment" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [LayoutPayment].[FileNumber] AS [FileNumber], 
+    [LayoutPayment].[Status] AS [Status], 
     [LayoutPayment].[PaymentDate] AS [PaymentDate], 
     [LayoutPayment].[Amount] AS [Amount], 
-    [LayoutPayment].[Name] AS [Name], 
     [LayoutPayment].[InterbankCode] AS [InterbankCode], 
-    [LayoutPayment].[Status] AS [Status]
+    [LayoutPayment].[Name] AS [Name]
     FROM [dbo].[LayoutPayment] AS [LayoutPayment]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_BankAccountCustomer" Association="Self.FK_BankAccountCustomer">
@@ -899,11 +899,11 @@ warning 6002: The table/view 'sgsc.dbo.LayoutPayment' does not have a primary ke
             <PropertyRef Name="Name" />
           </Key>
           <Property Name="FileNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
           <Property Name="PaymentDate" Type="DateTime" Precision="3" />
           <Property Name="Amount" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="InterbankCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Int32" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1107,18 +1107,6 @@ warning 6002: The table/view 'sgsc.dbo.LayoutPayment' does not have a primary ke
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="LayoutPayments">
-      <EntityTypeMapping TypeName="IsTypeOf(sgscModel.LayoutPayment)">
-        <MappingFragment StoreEntitySet="LayoutPayments">
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="FileNumber" ColumnName="FileNumber" />
-          <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
-          <ScalarProperty Name="Amount" ColumnName="Amount" />
-          <ScalarProperty Name="InterbankCode" ColumnName="InterbankCode" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <AssociationSetMapping Name="CreditRequestBankAccount" TypeName="sgscModel.CreditRequestBankAccount" StoreEntitySet="CreditRequests">
       <EndProperty Name="BankAccount">
         <ScalarProperty Name="BankAccountId" ColumnName="TransferBankAccount_BankAccountId" />
@@ -1211,11 +1199,11 @@ warning 6002: The table/view 'sgsc.dbo.LayoutPayment' does not have a primary ke
           <EntitySetMapping Name="LayoutPayments">
             <EntityTypeMapping TypeName="sgscModel.LayoutPayment">
               <MappingFragment StoreEntitySet="LayoutPayment">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="InterbankCode" ColumnName="InterbankCode" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="InterbankCode" ColumnName="InterbankCode" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
                 <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="FileNumber" ColumnName="FileNumber" />
               </MappingFragment>
             </EntityTypeMapping>
