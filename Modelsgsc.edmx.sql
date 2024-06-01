@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/30/2024 14:09:21
+-- Date Created: 05/30/2024 23:34:18
 -- Generated from EDMX file: C:\Users\wero1\source\repos\NoSoyPablox\sgpc2\Modelsgsc.edmx
 -- --------------------------------------------------
 
@@ -120,6 +120,9 @@ IF OBJECT_ID(N'[dbo].[Payments]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[WorkCenters]', 'U') IS NOT NULL
     DROP TABLE [dbo].[WorkCenters];
+GO
+IF OBJECT_ID(N'[sgscModelStoreContainer].[LayoutPayment]', 'U') IS NOT NULL
+    DROP TABLE [sgscModelStoreContainer].[LayoutPayment];
 GO
 
 -- --------------------------------------------------
@@ -315,6 +318,18 @@ CREATE TABLE [dbo].[Documents] (
 );
 GO
 
+-- Creating table 'LayoutPayments'
+CREATE TABLE [dbo].[LayoutPayments] 
+(
+    [FileNumber] nvarchar(max)  NULL,
+    [PaymentDate] datetime  NULL,
+    [Amount] decimal(18,0)  NULL,
+    [Name] nvarchar(max)  NOT NULL,
+    [InterbankCode] nvarchar(max)  NULL,
+    [Status] int  NULL
+);
+GO
+
 -- Creating table 'CreditRequestCreditCondition'
 CREATE TABLE [dbo].[CreditRequestCreditCondition] (
     [CreditRequests_CreditRequestId] int  NOT NULL,
@@ -420,6 +435,12 @@ GO
 ALTER TABLE [dbo].[Documents]
 ADD CONSTRAINT [PK_Documents]
     PRIMARY KEY CLUSTERED ([DocumentId] ASC);
+GO
+
+-- Creating primary key on [Name] in table 'LayoutPayments'
+ALTER TABLE [dbo].[LayoutPayments]
+ADD CONSTRAINT [PK_LayoutPayments]
+    PRIMARY KEY CLUSTERED ([Name] ASC);
 GO
 
 -- Creating primary key on [CreditRequests_CreditRequestId], [CreditConditions_CreditConditionId] in table 'CreditRequestCreditCondition'

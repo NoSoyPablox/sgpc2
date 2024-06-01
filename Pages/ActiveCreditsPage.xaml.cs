@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using Microsoft.Win32;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -33,6 +34,7 @@ namespace SGSC.Pages
             public string CreditAmount { get; set; }
             public string CreditPendingDebt { get; set; }
             public string CreditEfficiency { get; set; }
+            public int CreditRequestId { get; set; }
 
 
         }
@@ -90,22 +92,28 @@ namespace SGSC.Pages
             {
                 using (var context = new sgscEntities())
                 {
-                    var activeCredits = context.CreditRequests.Where(request => request.FileNumber.Contains(tbPageNumberFilter.Text) &&
+                    var activeCredits = context.CreditRequests
+                        .Where(request => request.FileNumber.Contains(tbPageNumberFilter.Text) &&
                         (request.Customer.Name + " " + request.Customer.FirstSurname + " " + request.Customer.SecondSurname).Contains(tbCustomerNameFilter.Text) &&
-                        request.Status == 4).OrderBy(request => request.FileNumber).Skip((CurrentPage - 1) * ItemsPerPage).Take(ItemsPerPage);
+                        request.Status == 4)
+                        .OrderBy(request => request.FileNumber)
+                        .Skip((CurrentPage - 1) * ItemsPerPage)
+                        .Take(ItemsPerPage)
+                        .ToList();
 
-                    var activeCreditsArray = activeCredits.ToList();
                     ActiveCredits = new ObservableCollection<ActiveCredit>();
-                    foreach (var item in activeCreditsArray)
+                    foreach (var item in activeCredits)
                     {
+                        var efficiency = GetEfficiency(item.CreditRequestId);
                         ActiveCredits.Add(new ActiveCredit
                         {
                             CreditPageNumber = item.FileNumber,
                             ClientFullName = item.Customer.FullName,
-                            CreditPeriod = item.TimePeriod.Value.ToString(),
+                            CreditPeriod = item.TimePeriod.HasValue ? item.TimePeriod.Value.ToString() : "N/A",
                             CreditAmount = $"$ {item.Amount}",
-                            CreditPendingDebt = "$ 0",
-                            CreditEfficiency = "0%"
+                            CreditPendingDebt = $"Pendiente de calculo",
+                            CreditEfficiency = $"{efficiency:F2}%",
+                            CreditRequestId = item.CreditRequestId
                         });
                     }
                     dgCredits.ItemsSource = ActiveCredits;
@@ -117,6 +125,34 @@ namespace SGSC.Pages
                 MessageBox.Show("Error al intentar obtener los datos de los créditos activos: " + ex.Message);
             }
         }
+
+        private decimal GetEfficiency(int creditRequestId)
+        {
+            try
+            {
+                using (var context = new sgscEntities())
+                {
+                    var totalAmount = (decimal?)context.CreditRequests
+                        .Where(cr => cr.CreditRequestId == creditRequestId)
+                        .Select(cr => cr.Amount)
+                        .FirstOrDefault() ?? 0m;
+
+                    var totalCharged = context.Payments
+                        .Where(p => p.CreditRequestId == creditRequestId)
+                        .Sum(p => (decimal?)p.AmountCharged ?? 0m);
+
+                    var efficiency = totalAmount != 0m ? (totalCharged / totalAmount) * 100 : 0;
+                    return efficiency;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error retrieving efficiency data: {ex.Message}");
+                return 0;
+            }
+        }
+
+
 
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
         {
@@ -182,25 +218,34 @@ namespace SGSC.Pages
                                             lc.InterbankCode
                                         };
 
-                    string csvFilePath = "C:\\Users\\wero1\\Documents\\Layout\\ActiveCreditsCollectionLayout.csv";
+                    SaveFileDialog saveFileDialog = new SaveFileDialog();
+                    saveFileDialog.Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*";
+                    saveFileDialog.Title = "Guardar layout de cobro";
+                    saveFileDialog.FileName = $"ActiveCreditsCollectionLayout_{startDate.ToString("yyyyMMdd")}_to_{endDate.ToString("yyyyMMdd")}.csv";
 
-                    using (var writer = new StreamWriter(csvFilePath))
+                    if (saveFileDialog.ShowDialog() == true)
                     {
-                        writer.WriteLine("Folio,ImporteACobrar,FechaPago,Cuenta,Banco");
+                        string csvFilePath = saveFileDialog.FileName;
 
-                        foreach (var credit in activeCredits)
+                        using (var writer = new StreamWriter(csvFilePath))
                         {
-                            string folio = credit.FileNumber;
-                            string importeACobrar = credit.Amount.HasValue ? credit.Amount.Value.ToString("F2") : "0.00";
-                            string fechaPago = credit.PaymentDate.HasValue ? credit.PaymentDate.Value.ToString("yyyy-MM-dd") : "0.00";
-                            string cuenta = credit.InterbankCode;
-                            string banco = credit.Name;
+                            writer.WriteLine($"Layout de cobro desde {startDate.ToString("yyyy-MM-dd")} hasta {endDate.ToString("yyyy-MM-dd")}");
+                            writer.WriteLine("Folio,ImporteACobrar,FechaPago,Cuenta,Banco");
 
-                            writer.WriteLine($"{folio},{importeACobrar},{fechaPago},{cuenta},{banco}");
+                            foreach (var credit in activeCredits)
+                            {
+                                string folio = credit.FileNumber;
+                                string importeACobrar = credit.Amount.HasValue ? credit.Amount.Value.ToString("F2") : "0.00";
+                                string fechaPago = credit.PaymentDate.HasValue ? credit.PaymentDate.Value.ToString("yyyy-MM-dd") : "N/A";
+                                string cuenta = credit.InterbankCode;
+                                string banco = credit.Name;
+
+                                writer.WriteLine($"\"{folio}\",\"{importeACobrar}\",\"{fechaPago}\",\"{cuenta}\",\"{banco}\"");
+                            }
                         }
-                    }
 
-                    MessageBox.Show("El layout de cobro ha sido generado exitosamente.");
+                        MessageBox.Show("El layout de cobro ha sido generado exitosamente.");
+                    }
                 }
             }
             catch (Exception ex)
@@ -209,6 +254,28 @@ namespace SGSC.Pages
             }
         }
 
+        private void ViewCollectionEfficiencies(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            if (button != null)
+            {
+                var dataContext = button.DataContext;
+                if (dataContext is ActiveCredit activeCredit)
+                {
+                    int creditRequestId = activeCredit.CreditRequestId;
+                    var collectionEfficienciesPage = new CollectionEfficienciesPage(creditRequestId);
+                    NavigationService.Navigate(collectionEfficienciesPage);
+                }
+                else
+                {
+                    MessageBox.Show("Error: DataContext is not ActiveCredit");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Error: Sender is not a button");
+            }
+        }
     }
 }
   
