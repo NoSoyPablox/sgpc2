@@ -101,7 +101,7 @@ namespace SGSC.Pages
                         .Take(ItemsPerPage)
                         .ToList();
 
-					var activeCreditsArray = activeCredits.ToList();
+                    var activeCreditsArray = activeCredits.ToList();
                     ActiveCredits = new ObservableCollection<ActiveCredit>();
                     foreach (var item in activeCredits)
                     {
@@ -152,8 +152,6 @@ namespace SGSC.Pages
                 return 0;
             }
         }
-
-
 
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
         {
@@ -219,25 +217,34 @@ namespace SGSC.Pages
                                             lc.InterbankCode
                                         };
 
-                    string csvFilePath = "C:\\Users\\wero1\\Documents\\Layout\\ActiveCreditsCollectionLayout.csv";
+                    SaveFileDialog saveFileDialog = new SaveFileDialog();
+                    saveFileDialog.Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*";
+                    saveFileDialog.Title = "Guardar layout de cobro";
+                    saveFileDialog.FileName = $"ActiveCreditsCollectionLayout_{startDate.ToString("yyyyMMdd")}_to_{endDate.ToString("yyyyMMdd")}.csv";
 
-                    using (var writer = new StreamWriter(csvFilePath))
+                    if (saveFileDialog.ShowDialog() == true)
                     {
-                        writer.WriteLine("Folio,ImporteACobrar,FechaPago,Cuenta,Banco");
+                        string csvFilePath = saveFileDialog.FileName;
 
-                        foreach (var credit in activeCredits)
+                        using (var writer = new StreamWriter(csvFilePath))
                         {
-                            string folio = credit.FileNumber;
-                            string importeACobrar = credit.Amount.HasValue ? credit.Amount.Value.ToString("F2") : "0.00";
-                            string fechaPago = credit.PaymentDate.HasValue ? credit.PaymentDate.Value.ToString("yyyy-MM-dd") : "0.00";
-                            string cuenta = credit.InterbankCode;
-                            string banco = credit.Name;
+                            writer.WriteLine($"Layout de cobro desde {startDate.ToString("yyyy-MM-dd")} hasta {endDate.ToString("yyyy-MM-dd")}");
+                            writer.WriteLine("Folio,ImporteACobrar,FechaPago,Cuenta,Banco");
 
-                            writer.WriteLine($"{folio},{importeACobrar},{fechaPago},{cuenta},{banco}");
+                            foreach (var credit in activeCredits)
+                            {
+                                string folio = credit.FileNumber;
+                                string importeACobrar = credit.Amount.HasValue ? credit.Amount.Value.ToString("F2") : "0.00";
+                                string fechaPago = credit.PaymentDate.HasValue ? credit.PaymentDate.Value.ToString("yyyy-MM-dd") : "N/A";
+                                string cuenta = credit.InterbankCode;
+                                string banco = credit.Name;
+
+                                writer.WriteLine($"\"{folio}\",\"{importeACobrar}\",\"{fechaPago}\",\"{cuenta}\",\"{banco}\"");
+                            }
                         }
-                    }
 
-                    MessageBox.Show("El layout de cobro ha sido generado exitosamente.");
+                        MessageBox.Show("El layout de cobro ha sido generado exitosamente.");
+                    }
                 }
             }
             catch (Exception ex)
@@ -246,6 +253,28 @@ namespace SGSC.Pages
             }
         }
 
+        private void ViewCollectionEfficiencies(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            if (button != null)
+            {
+                var dataContext = button.DataContext;
+                if (dataContext is ActiveCredit activeCredit)
+                {
+                    int creditRequestId = activeCredit.CreditRequestId;
+                    var collectionEfficienciesPage = new CollectionEfficienciesPage(creditRequestId);
+                    NavigationService.Navigate(collectionEfficienciesPage);
+                }
+                else
+                {
+                    MessageBox.Show("Error: DataContext is not ActiveCredit");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Error: Sender is not a button");
+            }
+        }
     }
 }
   
