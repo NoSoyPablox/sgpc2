@@ -254,7 +254,7 @@ namespace SGSC.Pages
                     {
                         if (rbtAutorize.IsChecked == true)
                         {
-                            solicitud.Status = 0; // "Autorizado"
+                            solicitud.Status = 4; // "Autorizado"
                         }
                         else if (rbtCorrect.IsChecked == true)
                         {

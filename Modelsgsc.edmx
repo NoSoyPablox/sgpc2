@@ -202,8 +202,8 @@
           <Property Name="CustomerId" Type="int" />
           <Property Name="Customer_CustomerId" Type="int" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'sgsc.dbo.LayoutPayment' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'sgsc.dbo.LayoutPayment' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="LayoutPayment">
           <Key>
             <PropertyRef Name="Name" />
