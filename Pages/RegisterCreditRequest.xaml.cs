@@ -286,7 +286,7 @@ namespace SGSC.Pages
                         {
                             registerMonthlyPayments(filenumber);
                         }
-                        App.Current.MainFrame.Content = new CustomerBankAccountsPage(idCustomer, cr.CreditRequestId, false);
+                        App.Current.MainFrame.Content = new CreditRequestPaymentsPreview(cr.CreditRequestId);
                     }
                     else
                     {
