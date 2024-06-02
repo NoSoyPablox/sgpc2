@@ -1,4 +1,5 @@
 ﻿using SGSC.Frames;
+using SGSC.Model;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
@@ -39,12 +40,13 @@ namespace SGSC.Pages
             this.edit = edit;
             creditAdvisorSidebar.Content = new CreditAdvisorSidebar("");
             UserSessionFrame.Content = new UserSessionFrame();
-            getBankAccounts();
             clearErrors();
-            if (edit)
+            getBankAccounts();
+            if(edit)
             {
                 retrieveCurrentAccounts();
             }
+            //retrieveCurrentAccounts();
         }
 
         private void clearErrors()
@@ -57,10 +59,12 @@ namespace SGSC.Pages
 
         private void getBankAccounts()
         {
-            BankAccount newBank = new BankAccount();
-            newBank.CardNumber = "Nueva cuenta";
-            cbTransferAccount.Items.Add(newBank);
-            cbDirectDebitAccount.Items.Add(newBank);
+            if(edit != true)
+            {
+                CreditCardWithNames newCreditCard = new CreditCardWithNames();
+                cbTransferAccount.Items.Add(newCreditCard);
+                cbDirectDebitAccount.Items.Add(newCreditCard);
+            }
             try
             {
                 using (sgscEntities db = new sgscEntities())
@@ -68,23 +72,37 @@ namespace SGSC.Pages
                     BankAccount transferAccount = db.BankAccounts.Where(ba => ba.CustomerId == customerId && ba.AccountType == (int)BankAccount.AccountTypes.TransferAccount).FirstOrDefault();
                     if(transferAccount != null)
                     {
-                        //tbTansAccCardNumber.Text = transferAccount.CardNumber;
-                        //tbTansAccBank.Text = transferAccount.Bank.Name;
-                        //tbTansAccInterbankCode.Text = transferAccount.InterbankCode;
-                        tansferAccountId = transferAccount.BankAccountId;
+                        /*tansferAccountId = transferAccount.BankAccountId;
                         transferAccountBankId = transferAccount.Bank.BankId;
-                        cbTransferAccount.Items.Add(transferAccount);
+                        cbTransferAccount.Items.Add(transferAccount);*/
+                        //obtain name of bank
+                        Bank bank = db.Banks.Where(b => b.BankId == transferAccount.BankBankId).FirstOrDefault();
+                        CreditCardWithNames newCreditCard = new CreditCardWithNames();
+                        newCreditCard.CardNumber = transferAccount.CardNumber;
+                        newCreditCard.bankName = bank.Name;
+                        newCreditCard.InterbankCode = transferAccount.InterbankCode;
+                        newCreditCard.AssociationName = "Cliente";
+                        newCreditCard.BankAccountId = transferAccount.BankAccountId;
+                        newCreditCard.BankBankId = (int)transferAccount.BankBankId;
+                        cbTransferAccount.Items.Add(newCreditCard);
 					}
 
                     BankAccount directDebitAccount = db.BankAccounts.Where(ba => ba.CustomerId == customerId && ba.AccountType == (int)BankAccount.AccountTypes.DirectDebitAccount).FirstOrDefault();
                     if (directDebitAccount != null)
                     {
-                        //tbDomAccBankCardNumber.Text = directDebitAccount.CardNumber;
-                        //tbDomAccBank.Text = directDebitAccount.Bank.Name;
-                        //tbDomAccBankInterbankCode.Text = directDebitAccount.InterbankCode;
-                        this.directDebitAccountId = directDebitAccount.BankAccountId;
+                        /*this.directDebitAccountId = directDebitAccount.BankAccountId;
 						directDebitAccountBankId = directDebitAccount.Bank.BankId;
-                        cbDirectDebitAccount.Items.Add(directDebitAccount);
+                        cbDirectDebitAccount.Items.Add(directDebitAccount);*/
+                        //obtain name of bank
+                        Bank bank = db.Banks.Where(b => b.BankId == directDebitAccount.BankBankId).FirstOrDefault();
+                        CreditCardWithNames newCreditCard = new CreditCardWithNames();
+                        newCreditCard.CardNumber = directDebitAccount.CardNumber;
+                        newCreditCard.bankName = bank.Name;
+                        newCreditCard.InterbankCode = directDebitAccount.InterbankCode;
+                        newCreditCard.AssociationName = "Cliente";
+                        newCreditCard.BankAccountId = directDebitAccount.BankAccountId;
+                        newCreditCard.BankBankId = (int)directDebitAccount.BankBankId;
+                        cbDirectDebitAccount.Items.Add(newCreditCard);
 					}
                 }
             }
@@ -186,10 +204,13 @@ namespace SGSC.Pages
             {
                 using (sgscEntities context = new sgscEntities())
                 {
+                    //obtain bankId from interbank code
+                    var bank = Bank.BankFromInterbankCodePrefix(tbTansAccInterbankCode.Text.Substring(0, 3));
                     var transferAccount = new BankAccount
                     {
                         CardNumber = tbTansAccCardNumber.Text,
-                        BankBankId = transferAccountBankId,
+                        //BankBankId = transferAccountBankId,
+                        BankBankId = bank.BankId,
                         InterbankCode = tbTansAccInterbankCode.Text,
                         AccountType = (int)BankAccount.AccountTypes.TransferAccount,
                         CardType = (int)BankAccount.CardTypes.Debit,
@@ -201,10 +222,13 @@ namespace SGSC.Pages
                         transferAccount.BankAccountId = tansferAccountId.Value;
                     }
 
+                    //obtain bankId from interbank code
+                    bank = Bank.BankFromInterbankCodePrefix(tbDomAccBankInterbankCode.Text.Substring(0, 3));
                     var directDebitAccount = new BankAccount
                     {
                         CardNumber = tbDomAccBankCardNumber.Text,
-                        BankBankId = directDebitAccountBankId,
+                        //BankBankId = directDebitAccountBankId,
+                        BankBankId = bank.BankId,
                         InterbankCode = tbDomAccBankInterbankCode.Text,
                         AccountType = (int)BankAccount.AccountTypes.DirectDebitAccount,
                         CardType = (int)BankAccount.CardTypes.Debit,
@@ -345,7 +369,9 @@ namespace SGSC.Pages
         {
             if (cbTransferAccount.SelectedIndex != -1)
             {
-                if (cbTransferAccount.SelectedIndex == 0)
+                //get the selected item
+                CreditCardWithNames cbTransferAccountSelected = (CreditCardWithNames)cbTransferAccount.SelectedItem;
+                if (cbTransferAccountSelected.BankAccountId == 0)
                 {
                     tbTansAccCardNumber.Text = "";
                     tbTansAccBank.Text = "";
@@ -355,12 +381,19 @@ namespace SGSC.Pages
                 }
                 else
                 {
-                    BankAccount transferAccountSelected = (BankAccount)cbTransferAccount.SelectedItem;
+                    CreditCardWithNames transferAccountSelected = (CreditCardWithNames)cbTransferAccount.SelectedItem;
+                    tbTansAccCardNumber.Text = transferAccountSelected.CardNumber;
+                    tbTansAccBank.Text = transferAccountSelected.bankName;
+                    tbTansAccInterbankCode.Text = transferAccountSelected.InterbankCode;
+                    tansferAccountId = transferAccountSelected.BankAccountId;
+                    //transferAccountBankId = transferAccountSelected.BankBankId;
+
+                    /*BankAccount transferAccountSelected = (BankAccount)cbTransferAccount.SelectedItem;
                     tbTansAccCardNumber.Text = transferAccountSelected.CardNumber;
                     tbTansAccBank.Text = transferAccountSelected.Bank.Name;
                     tbTansAccInterbankCode.Text = transferAccountSelected.InterbankCode;
                     tansferAccountId = transferAccountSelected.BankAccountId;
-                    transferAccountBankId = transferAccountSelected.Bank.BankId;
+                    transferAccountBankId = transferAccountSelected.Bank.BankId;*/
 
                 }
 
@@ -371,7 +404,9 @@ namespace SGSC.Pages
         {
             if (cbDirectDebitAccount.SelectedIndex != -1)
             {
-                if (cbDirectDebitAccount.SelectedIndex == 0)
+                //get the selected item
+                CreditCardWithNames cbDirectDebitAccountSelected = (CreditCardWithNames)cbDirectDebitAccount.SelectedItem;
+                if (cbDirectDebitAccountSelected.BankAccountId == 0)
                 {
                     tbDomAccBankCardNumber.Text = "";
                     tbDomAccBank.Text = "";
@@ -381,12 +416,20 @@ namespace SGSC.Pages
                 }
                 else
                 {
-                    BankAccount directDebitAccountSelected = (BankAccount)cbDirectDebitAccount.SelectedItem;
+                    CreditCardWithNames directDebitAccountSelected = (CreditCardWithNames)cbDirectDebitAccount.SelectedItem;
+                    tbDomAccBankCardNumber.Text = directDebitAccountSelected.CardNumber;
+                    tbDomAccBank.Text = directDebitAccountSelected.bankName;
+                    tbDomAccBankInterbankCode.Text = directDebitAccountSelected.InterbankCode;
+                    directDebitAccountId = directDebitAccountSelected.BankAccountId;
+
+                    //directDebitAccountBankId = directDebitAccountSelected.BankBankId;
+
+                    /*BankAccount directDebitAccountSelected = (BankAccount)cbDirectDebitAccount.SelectedItem;
                     tbDomAccBankCardNumber.Text = directDebitAccountSelected.CardNumber;
                     tbDomAccBank.Text = directDebitAccountSelected.Bank.Name;
                     tbDomAccBankInterbankCode.Text = directDebitAccountSelected.InterbankCode;
                     this.directDebitAccountBankId = directDebitAccountSelected.Bank.BankId;
-                    directDebitAccountBankId = directDebitAccountSelected.Bank.BankId;
+                    directDebitAccountBankId = directDebitAccountSelected.Bank.BankId;*/
                 }
 
             }
@@ -405,7 +448,16 @@ namespace SGSC.Pages
                     {
                         if (creditRequest.TransferBankAccount != null)
                         {
-                            BankAccount transferAccount = creditRequest.TransferBankAccount;
+                            CreditCardWithNames transferAccountFromRequest = new CreditCardWithNames();
+                            transferAccountFromRequest.BankAccountId = creditRequest.TransferBankAccount.BankAccountId;
+                            transferAccountFromRequest.InterbankCode = creditRequest.TransferBankAccount.InterbankCode;
+                            transferAccountFromRequest.CardNumber = creditRequest.TransferBankAccount.CardNumber;
+                            transferAccountFromRequest.bankName = creditRequest.TransferBankAccount.Bank.Name;
+                            transferAccountFromRequest.AssociationName = "Solicitud";
+                            cbTransferAccount.Items.Add(transferAccountFromRequest);
+                            //set combobox to this account
+                            cbTransferAccount.SelectedIndex = 1;
+                            /*BankAccount transferAccount = creditRequest.TransferBankAccount;
                             tbTansAccCardNumber.Text = transferAccount.CardNumber;
                             tbTansAccBank.Text = transferAccount.Bank.Name;
                             tbTansAccInterbankCode.Text = transferAccount.InterbankCode;
@@ -413,12 +465,21 @@ namespace SGSC.Pages
                             transferAccountBankId = transferAccount.Bank.BankId;
                             cbTransferAccount.Items.Add(transferAccount);
                             //set combobox to this account
-                            cbTransferAccount.SelectedIndex = 2;
+                            cbTransferAccount.SelectedIndex = 2;*/
                         }
 
                         if (creditRequest.DirectDebitBankAccount != null)
                         {
-                            BankAccount directDebitAccount = creditRequest.DirectDebitBankAccount;
+                            CreditCardWithNames directDebitAccountFromRequest = new CreditCardWithNames();
+                            directDebitAccountFromRequest.BankAccountId = creditRequest.DirectDebitBankAccount.BankAccountId;
+                            directDebitAccountFromRequest.InterbankCode = creditRequest.DirectDebitBankAccount.InterbankCode;
+                            directDebitAccountFromRequest.CardNumber = creditRequest.DirectDebitBankAccount.CardNumber;
+                            directDebitAccountFromRequest.bankName = creditRequest.DirectDebitBankAccount.Bank.Name;
+                            directDebitAccountFromRequest.AssociationName = "Solicitud";
+                            cbDirectDebitAccount.Items.Add(directDebitAccountFromRequest);
+                            //set combobox to this account
+                            cbDirectDebitAccount.SelectedIndex = 1;
+                            /*BankAccount directDebitAccount = creditRequest.DirectDebitBankAccount;
                             tbDomAccBankCardNumber.Text = directDebitAccount.CardNumber;
                             tbDomAccBank.Text = directDebitAccount.Bank.Name;
                             tbDomAccBankInterbankCode.Text = directDebitAccount.InterbankCode;
@@ -426,7 +487,7 @@ namespace SGSC.Pages
                             directDebitAccountBankId = directDebitAccount.Bank.BankId;
                             cbDirectDebitAccount.Items.Add(directDebitAccount);
                             //set combobox to this account
-                            cbDirectDebitAccount.SelectedIndex = 2;
+                            cbDirectDebitAccount.SelectedIndex = 2;*/
                         }
                     }
                 }

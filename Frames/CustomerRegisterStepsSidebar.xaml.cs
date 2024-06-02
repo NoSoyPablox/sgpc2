@@ -52,6 +52,9 @@ namespace SGSC.Frames
                 case "References":
                     ReferencesActive.Visibility = Visibility.Visible;
                     break;
+                case "BankAccounts":
+                    PersonalInfoActive.Visibility = Visibility.Visible;
+                    break;
             }
         }
     }

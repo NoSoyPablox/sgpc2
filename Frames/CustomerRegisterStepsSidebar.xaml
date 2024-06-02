@@ -9,7 +9,7 @@
       Title="CustomerRegisterSidebar">
 
     <Grid>
-        <Border Name="PersonalInfoActive" CornerRadius="22" BorderBrush="Transparent" Background="#FFF3F3F3" BorderThickness="0" Margin="-10,26,10,472"/>
+        <Border Name="PersonalInfoActive" CornerRadius="22" BorderBrush="Transparent" Background="#FFF3F3F3" BorderThickness="0" Margin="-10,388,10,110"/>
         <Border Name="AddressActive" CornerRadius="22" BorderBrush="Transparent" Background="#FFF3F3F3" BorderThickness="0" Margin="-10,86,10,412"/>
         <Border Name="BankAccountsActive" CornerRadius="22" BorderBrush="Transparent" Background="#FFF3F3F3" BorderThickness="0" Margin="-10,146,10,352"/>
         <Border Name="WorkCenterActive" CornerRadius="22" BorderBrush="Transparent" Background="#FFF3F3F3" BorderThickness="0" Margin="-10,206,10,292"/>
@@ -27,6 +27,8 @@
             <Button Style="{StaticResource ButtonStyle}" Tag="../Images/icon-job.png" Content="Centro de trabajo" HorizontalAlignment="Center" Margin="0,214,0,0" VerticalAlignment="Top" Width="250" Height="40" FontSize="16"/>
             <Button Style="{StaticResource ButtonStyle}" Tag="../Images/icon-contact.png" Content="Datos de contacto" HorizontalAlignment="Center" Margin="0,274,0,0" VerticalAlignment="Top" Width="250" Height="40" FontSize="16"/>
             <Button Style="{StaticResource ButtonStyle}" Tag="../Images/people-icon.png" Content="Referencias" HorizontalAlignment="Center" Margin="0,334,0,34" VerticalAlignment="Top" Width="250" Height="40" FontSize="16"/>
+            <Button Style="{StaticResource ButtonStyle}" Tag="../Images/card-icon.png" Content="Cuentas bancarias" HorizontalAlignment="Center" Margin="0,394,0,0" VerticalAlignment="Top" Width="250" Height="40" FontSize="16"/>
+
         </Grid>
 
     </Grid>
