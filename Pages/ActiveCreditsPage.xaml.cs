@@ -60,9 +60,26 @@ namespace SGSC.Pages
             {
                 using (var context = new sgscEntities())
                 {
-                    var activeCreditsCount = context.CreditRequests.Where(request => request.FileNumber.Contains(tbPageNumberFilter.Text) &&
+                    DateTime? startDate = dpStartDate.SelectedDate;
+                    DateTime? endDate = dpEndDate.SelectedDate;
+
+                    var activeCreditsCountQuery = context.CreditRequests
+                        .Where(request => request.FileNumber.Contains(tbPageNumberFilter.Text) &&
                         (request.Customer.Name + " " + request.Customer.FirstSurname + " " + request.Customer.SecondSurname).Contains(tbCustomerNameFilter.Text) &&
-                        request.Status == 4).Count();
+                        request.Status == 4);
+
+                    if (startDate.HasValue)
+                    {
+                        activeCreditsCountQuery = activeCreditsCountQuery.Where(request => request.CreationDate >= startDate.Value);
+                    }
+
+                    if (endDate.HasValue)
+                    {
+                        activeCreditsCountQuery = activeCreditsCountQuery.Where(request => request.CreationDate <= endDate.Value);
+                    }
+
+                    var activeCreditsCount = activeCreditsCountQuery.Count();
+
                     TotalPages = (int)Math.Ceiling((double)activeCreditsCount / ItemsPerPage);
                     lbCurrentPage.Content = $"Página {CurrentPage}/{TotalPages}";
                     cbPages.Items.Clear();
@@ -82,8 +99,8 @@ namespace SGSC.Pages
             }
 
             UpdatingPagination = false;
-
         }
+
 
         private void GetActiveCredits()
         {
@@ -91,27 +108,42 @@ namespace SGSC.Pages
             {
                 using (var context = new sgscEntities())
                 {
-                    var activeCredits = context.CreditRequests
+                    DateTime? startDate = dpStartDate.SelectedDate;
+                    DateTime? endDate = dpEndDate.SelectedDate;
+
+                    var activeCreditsQuery = context.CreditRequests
                         .Where(request => request.FileNumber.Contains(tbPageNumberFilter.Text) &&
                         (request.Customer.Name + " " + request.Customer.FirstSurname + " " + request.Customer.SecondSurname).Contains(tbCustomerNameFilter.Text) &&
-                        request.Status == 4)
+                        request.Status == 4);
+
+                    if (startDate.HasValue)
+                    {
+                        activeCreditsQuery = activeCreditsQuery.Where(request => request.CreationDate >= startDate.Value);
+                    }
+
+                    if (endDate.HasValue)
+                    {
+                        activeCreditsQuery = activeCreditsQuery.Where(request => request.CreationDate <= endDate.Value);
+                    }
+
+                    var activeCredits = activeCreditsQuery
                         .OrderBy(request => request.FileNumber)
                         .Skip((CurrentPage - 1) * ItemsPerPage)
                         .Take(ItemsPerPage)
                         .ToList();
 
-                    var activeCreditsArray = activeCredits.ToList();
                     ActiveCredits = new ObservableCollection<ActiveCredit>();
                     foreach (var item in activeCredits)
                     {
                         var efficiency = GetEfficiency(item.CreditRequestId);
+                        var pendingDebt = GetPendingDebt(item.CreditRequestId);
                         ActiveCredits.Add(new ActiveCredit
                         {
                             CreditPageNumber = item.FileNumber,
                             ClientFullName = item.Customer.FullName,
                             CreditPeriod = item.TimePeriod.HasValue ? item.TimePeriod.Value.ToString() : "N/A",
                             CreditAmount = $"$ {item.Amount}",
-                            CreditPendingDebt = $"Pendiente de calculo",
+                            CreditPendingDebt = $"$ {pendingDebt:F2}",
                             CreditEfficiency = $"{efficiency:F2}%",
                             CreditRequestId = item.CreditRequestId
                         });
@@ -125,6 +157,13 @@ namespace SGSC.Pages
                 MessageBox.Show("Error al intentar obtener los datos de los créditos activos: " + ex.Message);
             }
         }
+
+
+        private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            GetActiveCredits();
+        }
+
 
         private decimal GetEfficiency(int creditRequestId)
         {
@@ -148,6 +187,31 @@ namespace SGSC.Pages
             catch (Exception ex)
             {
                 MessageBox.Show($"Error retrieving efficiency data: {ex.Message}");
+                return 0;
+            }
+        }
+        private decimal GetPendingDebt(int creditRequestId)
+          {
+            try
+            {
+                using (var context = new sgscEntities())
+                {
+                    var totalAmount = context.CreditRequests
+                        .Where(cr => cr.CreditRequestId == creditRequestId)
+                        .Select(cr => (decimal?)cr.Amount)
+                        .FirstOrDefault() ?? 0m;
+
+                    var totalPaid = context.Payments
+                        .Where(p => p.CreditRequestId == creditRequestId && p.PaymentDate <= DateTime.Now)
+                        .Sum(p => (decimal?)p.AmountCharged ?? 0m);
+
+                    var pendingDebt = totalAmount - totalPaid;
+                    return pendingDebt;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al intentar obtener el saldo pendiente: {ex.Message}");
                 return 0;
             }
         }
