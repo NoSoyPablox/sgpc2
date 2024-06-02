@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using SGSC.Model; // Ensure correct reference to SGSC.Model
+using SGSC; // Ensure correct reference to SGSC.Model
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;

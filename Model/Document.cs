@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SGSC.Model
+namespace SGSC
 {
     public partial class Document
     {
-        public enum DocumentTypes : short
+        public enum DocumentTypes 
         {
             NationalId,
             Domicile,
