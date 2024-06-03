@@ -18,6 +18,7 @@ using System.Windows.Shapes;
 using System.Xml.Linq;
 using Microsoft.Win32;
 using SGSC.Utils;
+using SGSC.Frames;
 
 namespace SGSC.Pages
 {
@@ -28,14 +29,20 @@ namespace SGSC.Pages
     {
         private sgscEntities _context;
         private ObservableCollection<Document> documentsDataAux;
-        private int? creditRequestId;
+        private int customerId = 0;
+        private int creditRequestId = -1;
 
-        public DocumentsManagerClientPage(int? creditRequestId)
+        public DocumentsManagerClientPage(int customerId, int creditRequestId)
         {
             InitializeComponent();
             _context = new sgscEntities();
+            this.customerId = customerId;
             this.creditRequestId = creditRequestId;
-            LoadDocuments(creditRequestId);
+            LoadDocuments(customerId);
+
+            StepsSidebarFrame.Content = new CustomerRegisterStepsSidebar("Documents");
+            UserSessionFrame.Content = new UserSessionFrame();
+            this.creditRequestId = creditRequestId;
         }
 
         private void LoadDocuments(int? creditRequestId)
@@ -56,6 +63,18 @@ namespace SGSC.Pages
 
         private void UploadDocument(Document.DocumentTypes documentType)
         {
+            //search if already exists
+            var actualDocument = _context.Documents.FirstOrDefault(d => d.DocumentType == (short)documentType && d.CreditRequestId == customerId);
+            bool needsToReplace = false;
+            //if already exists replace it
+            if (actualDocument != null)
+            {
+                MessageBoxResult result = MessageBox.Show("Ya existe un documento de este tipo. ¿Desea reemplazarlo?", "Documento existente", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                       needsToReplace = true;
+                }
+            }
             OpenFileDialog openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog() == true)
             {
@@ -68,10 +87,14 @@ namespace SGSC.Pages
                     {
                         FileName = fileName,
                         FileContent = fileContent,
-                        CreditRequestId = creditRequestId.Value,
+                        CreditRequestId = customerId, //
                         DocumentType = (short)documentType
                     };
 
+                    if(needsToReplace)
+                    {
+                        _context.Documents.Remove(actualDocument);
+                    }
                     _context.Documents.Add(document);
                     _context.SaveChanges();
 
@@ -88,7 +111,7 @@ namespace SGSC.Pages
 
         private void DownloadDocument(Document.DocumentTypes documentType)
         {
-            var document = _context.Documents.FirstOrDefault(d => d.DocumentType == (short)documentType && d.CreditRequestId == creditRequestId);
+            var document = _context.Documents.FirstOrDefault(d => d.DocumentType == (short)documentType && d.CreditRequestId == customerId);
             if (document != null)
             {
                 SaveFileDialog saveFileDialog = new SaveFileDialog
@@ -114,6 +137,11 @@ namespace SGSC.Pages
         private void UploadDomicile_Click(object sender, RoutedEventArgs e) => UploadDocument(Document.DocumentTypes.Domicile);
         private void DownloadDomicile_Click(object sender, RoutedEventArgs e) => DownloadDocument(Document.DocumentTypes.Domicile);
 
+        private void btnContinue_Click(object sender, RoutedEventArgs e)
+        {
+            //go to workcenter page
+            App.Current.MainFrame.Content = new PageWorkCenter(customerId, creditRequestId);
+        }
     }
 }
 

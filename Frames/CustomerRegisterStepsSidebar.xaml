@@ -9,12 +9,14 @@
       Title="CustomerRegisterSidebar">
 
     <Grid>
-        <Border Name="PersonalInfoActive" CornerRadius="22" BorderBrush="Transparent" Background="#FFF3F3F3" BorderThickness="0" Margin="-10,388,10,110"/>
-        <Border Name="AddressActive" CornerRadius="22" BorderBrush="Transparent" Background="#FFF3F3F3" BorderThickness="0" Margin="-10,86,10,412"/>
-        <Border Name="BankAccountsActive" CornerRadius="22" BorderBrush="Transparent" Background="#FFF3F3F3" BorderThickness="0" Margin="-10,146,10,352"/>
-        <Border Name="WorkCenterActive" CornerRadius="22" BorderBrush="Transparent" Background="#FFF3F3F3" BorderThickness="0" Margin="-10,206,10,292"/>
-        <Border Name="ContactInfoActive" CornerRadius="22" BorderBrush="Transparent" Background="#FFF3F3F3" BorderThickness="0" Margin="-10,266,10,232"/>
-        <Border Name="ReferencesActive" CornerRadius="22" BorderBrush="Transparent" Background="#FFF3F3F3" BorderThickness="0" Margin="-10,326,10,172"/>
+        <Border Name="AddressActive" CornerRadius="22" BorderBrush="Transparent" Background="#FFF3F3F3" BorderThickness="0" Margin="-10,42,10,456"/>
+        <Border Name="BankAccountsActive" CornerRadius="22" BorderBrush="Transparent" Background="#FFF3F3F3" BorderThickness="0" Margin="-10,102,10,396"/>
+        <Border Name="DocumentationActive" CornerRadius="22" BorderBrush="Transparent" Background="#FFF3F3F3" BorderThickness="0" Margin="-10,161,10,337"/>
+        
+        <Border Name="WorkCenterActive" CornerRadius="22" BorderBrush="Transparent" Background="#FFF3F3F3" BorderThickness="0" Margin="-10,218,10,280"/>
+        <Border Name="ContactInfoActive" CornerRadius="22" BorderBrush="Transparent" Background="#FFF3F3F3" BorderThickness="0" Margin="-10,278,10,220"/>
+        <Border Name="ReferencesActive" CornerRadius="22" BorderBrush="Transparent" Background="#FFF3F3F3" BorderThickness="0" Margin="-10,336,10,162"/>
+        <Border Name="PersonalInfoActive" CornerRadius="22" BorderBrush="Transparent" Background="#FFF3F3F3" BorderThickness="0" Margin="-10,397,10,101"/>
 
         <Grid>
             <Grid.RowDefinitions>
@@ -22,12 +24,14 @@
                 <RowDefinition Height="39*"/>
             </Grid.RowDefinitions>
 
-            <Button Style="{StaticResource ButtonStyle}" Tag="../Images/User.png"  Content="Datos personales"  HorizontalAlignment="Center" Margin="0,94,0,0" VerticalAlignment="Top" Width="250" Height="40" FontSize="18"/>
-            <Button Style="{StaticResource ButtonStyle}" Tag="../Images/address-icon.png" Content="Dirección" HorizontalAlignment="Center" Margin="0,154,0,0" VerticalAlignment="Top" Width="250" Height="40" FontSize="16"/>
-            <Button Style="{StaticResource ButtonStyle}" Tag="../Images/icon-job.png" Content="Centro de trabajo" HorizontalAlignment="Center" Margin="0,214,0,0" VerticalAlignment="Top" Width="250" Height="40" FontSize="16"/>
-            <Button Style="{StaticResource ButtonStyle}" Tag="../Images/icon-contact.png" Content="Datos de contacto" HorizontalAlignment="Center" Margin="0,274,0,0" VerticalAlignment="Top" Width="250" Height="40" FontSize="16"/>
-            <Button Style="{StaticResource ButtonStyle}" Tag="../Images/people-icon.png" Content="Referencias" HorizontalAlignment="Center" Margin="0,334,0,34" VerticalAlignment="Top" Width="250" Height="40" FontSize="16"/>
-            <Button Style="{StaticResource ButtonStyle}" Tag="../Images/card-icon.png" Content="Cuentas bancarias" HorizontalAlignment="Center" Margin="0,394,0,0" VerticalAlignment="Top" Width="250" Height="40" FontSize="16"/>
+            <Button Style="{StaticResource ButtonStyle}" Tag="../Images/User.png"  Content="Datos personales"  HorizontalAlignment="Center" Margin="0,50,0,0" VerticalAlignment="Top" Width="250" Height="40" FontSize="18"/>
+            <Button Style="{StaticResource ButtonStyle}" Tag="../Images/address-icon.png" Content="Dirección" HorizontalAlignment="Center" Margin="0,110,0,0" VerticalAlignment="Top" Width="250" Height="40" FontSize="16"/>
+            <Button Style="{StaticResource ButtonStyle}" Tag="../Images/icon-board.png" Content="Documentación" HorizontalAlignment="Center" Margin="0,169,0,0" VerticalAlignment="Top" Width="250" Height="40" FontSize="16"/>
+
+            <Button Style="{StaticResource ButtonStyle}" Tag="../Images/icon-job.png" Content="Centro de trabajo" HorizontalAlignment="Center" Margin="0,227,0,0" VerticalAlignment="Top" Width="250" Height="40" FontSize="16"/>
+            <Button Style="{StaticResource ButtonStyle}" Tag="../Images/icon-contact.png" Content="Datos de contacto" HorizontalAlignment="Center" Margin="0,283,0,0" VerticalAlignment="Top" Width="250" Height="40" FontSize="16"/>
+            <Button Style="{StaticResource ButtonStyle}" Tag="../Images/people-icon.png" Content="Referencias" HorizontalAlignment="Center" Margin="0,342,0,0" VerticalAlignment="Top" Width="250" Height="40" FontSize="16"/>
+            <Button Style="{StaticResource ButtonStyle}" Tag="../Images/card-icon.png" Content="Cuentas bancarias" HorizontalAlignment="Center" Margin="0,402,0,0" VerticalAlignment="Top" Width="250" Height="40" FontSize="16"/>
 
         </Grid>
 

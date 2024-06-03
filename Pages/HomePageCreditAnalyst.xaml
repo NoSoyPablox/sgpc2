@@ -23,7 +23,7 @@
         <Button Style="{StaticResource Menubutton}" FontSize="15" HorizontalAlignment="Left" Margin="16,295,0,0" VerticalAlignment="Top" Width="72" Height="75">
             <Image Source="../Images/icon-find-customer.png" Height="70" Width="50"/>
         </Button>
-        <Button Style="{StaticResource Menubutton}" FontSize="15" HorizontalAlignment="Left" Margin="16,375,0,0" VerticalAlignment="Top" Width="72" Height="75">
+        <Button x:Name="btnCreditRequest" Style="{StaticResource Menubutton}" FontSize="15" HorizontalAlignment="Left" Margin="16,375,0,0" VerticalAlignment="Top" Width="72" Height="75" Click="btnCreditRequest_Click">
             <Image Source="../Images/icon-board.png" Height="70" Width="50"/>
         </Button>
 

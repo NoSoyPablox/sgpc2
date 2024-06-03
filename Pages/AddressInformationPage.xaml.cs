@@ -78,8 +78,9 @@ namespace SGSC.Pages
                 }
 
                 MessageBox.Show("Los datos de contacto se han guardado correctamente.");
+                App.Current.MainFrame.Content = new DocumentsManagerClientPage(customerId, creditRequestId);
 
-                App.Current.MainFrame.Content = new PageWorkCenter(customerId, creditRequestId);
+                //App.Current.MainFrame.Content = new PageWorkCenter(customerId, creditRequestId);
             }
             catch (Exception ex)
             {
