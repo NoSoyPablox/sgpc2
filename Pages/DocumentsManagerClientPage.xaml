@@ -1,0 +1,48 @@
+﻿<Page x:Class="SGSC.Pages.DocumentsManagerClientPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SGSC.Pages"
+      xmlns:frames="clr-namespace:SGSC.Frames"
+      mc:Ignorable="d" 
+      d:DesignHeight="720" d:DesignWidth="1280"
+      Title="DocumentsManagerClientPage">
+
+    <Grid Background="White">
+
+        <Frame Name="UserSessionFrame" NavigationUIVisibility="Hidden" Margin="834,10,74,624"/>
+
+
+        <Grid Margin="241,140,46,10" RenderTransformOrigin="0.502,0.571">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="116*"/>
+                <RowDefinition Height="116*"/>
+                <RowDefinition Height="113*"/>
+                <RowDefinition Height="118*"/>
+                <RowDefinition Height="116*"/>
+            </Grid.RowDefinitions>
+
+            <!-- INE Section -->
+            <GroupBox Header="Cédula de Identidad (INE)" Margin="10,100,39,27" Grid.RowSpan="2">
+                <StackPanel>
+                    <Button Content="Subir INE" Height="30" Click="UploadINE_Click" Style="{StaticResource ButtonStyleConfirm}"/>
+                    <Button Content="Descargar INE" Height="30" Click="DownloadINE_Click" Style="{StaticResource ButtonStyleDownload}" />
+                </StackPanel>
+            </GroupBox>
+
+            <!-- Comprobante de Domicilio Section -->
+            <GroupBox Header="Comprobante de Domicilio" Margin="0,43,39,76" Grid.Row="2" Grid.RowSpan="2">
+                <StackPanel>
+                    <Button Content="Subir Comprobante de Domicilio" Height="30" Click="UploadDomicile_Click" Style="{StaticResource ButtonStyleConfirm}" />
+                    <Button Content="Descargar Comprobante de Domicilio" Height="30" Click="DownloadDomicile_Click" Style="{StaticResource ButtonStyleDownload}"/>
+                </StackPanel>
+            </GroupBox>
+
+
+        </Grid>
+
+
+        <Label Content="Gestión de documentos de expediente del cliente" HorizontalAlignment="Left" Margin="241,140,0,0" VerticalAlignment="Top" Width="639" FontWeight="Bold" FontSize="24" />
+    </Grid>
+</Page>
