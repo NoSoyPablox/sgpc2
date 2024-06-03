@@ -208,6 +208,9 @@
     <Compile Include="Pages\CreditRequestPaymentsPreview.xaml.cs">
       <DependentUpon>CreditRequestPaymentsPreview.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\DocumentsManagerClientPage.xaml.cs">
+      <DependentUpon>DocumentsManagerClientPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\CustomerBankAccounts.xaml.cs">
       <DependentUpon>CustomerBankAccounts.xaml</DependentUpon>
     </Compile>
@@ -341,6 +344,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\CustomerBankAccounts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\DocumentsManagerClientPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
