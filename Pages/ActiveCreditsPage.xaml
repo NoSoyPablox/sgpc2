@@ -18,10 +18,10 @@
         <Border Background="White" CornerRadius="22"/>
 
         <Label Content="Fecha Inicio:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="810,156,0,0"/>
-        <DatePicker x:Name="dpStartDate" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="912,158,0,0"/>
+        <DatePicker x:Name="dpStartDate" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="912,158,0,0" SelectedDateChanged="DatePicker_SelectedDateChanged"/>
 
         <Label Content="Fecha Fin:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1072,156,0,0"/>
-        <DatePicker x:Name="dpEndDate" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1139,158,0,0"/>
+        <DatePicker x:Name="dpEndDate" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1139,158,0,0" SelectedDateChanged="DatePicker_SelectedDateChanged"/>
 
 
         <Label FontFamily="{StaticResource FontPoppins}" FontWeight="Bold" FontSize="36" Content="Créditos activos" HorizontalAlignment="Left" Margin="136,39,0,0" VerticalAlignment="Top"/>
