@@ -4,60 +4,53 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SGSC.Pages"
-      xmlns:SGSC="clr-namespace:SGSC" x:Class="SGSC.Pages.CustomerBankAccountsPage"
+      xmlns:SGSC="clr-namespace:SGSC" x:Class="SGSC.Pages.CustomerBankAccounts"
       mc:Ignorable="d" 
       d:DesignHeight="720" d:DesignWidth="1280"
-      Title="CustomerBankAccountsPage">
+      Title="CustomerBankAccounts">
 
     <Grid>
         <Border Background="White" CornerRadius="22"/>
 
-        <Label FontFamily="{StaticResource FontPoppins}" FontWeight="Bold" FontSize="36" Content="Elegir cuentas bancarias" HorizontalAlignment="Left" Margin="174,48,0,0" VerticalAlignment="Top"/>
+        <Frame Name="UserSessionFrame" NavigationUIVisibility="Hidden" Margin="831,43,38,592"/>
+        <Frame Name="StepsSidebarFrame" NavigationUIVisibility="Hidden" Margin="27,138,1009,28"/>
 
-        <Frame x:Name="UserSessionFrame" NavigationUIVisibility="Hidden" Margin="831,28,38,607"/>
-        <Frame x:Name="creditAdvisorSidebar" NavigationUIVisibility="Hidden" Margin="0,0,1172,0"/>
-
+        <Label FontFamily="{StaticResource FontPoppins}" FontWeight="Bold" FontSize="36" Content="Registrar cuentas bancarias" HorizontalAlignment="Left" Margin="174,48,0,0" VerticalAlignment="Top"/>
         <Rectangle Style="{StaticResource RoundedRectangleStyle}" Margin="207,123,92,306"/>
-
         <Label Style="{StaticResource CustomLabelStyle}" FontSize="30" Content="Cuentas de transferencias " HorizontalAlignment="Left" Margin="250,141,0,0" VerticalAlignment="Top" Width="382" Height="37"/>
         <Label Style="{StaticResource CustomLabelStyle}" FontSize="30" Content="Cuentas de domiciliación " HorizontalAlignment="Left" Margin="250,419,0,0" VerticalAlignment="Top" Width="382" Height="37"/>
-
-        <Button Style="{StaticResource ButtonStyleCancel}" Content="Cancelar" FontSize="22" HorizontalAlignment="Left" Margin="780,614,0,0" VerticalAlignment="Top" Height="54" Width="180" Click="CancelRegister" />
-        <Button Style="{StaticResource ButtonStyleConfirm}" Content="Continuar" FontSize="22" HorizontalAlignment="Left" Margin="984,614,0,0" VerticalAlignment="Top" Width="180" Height="54" Click="SaveBankAccounts" />
-
+        <Button Style="{StaticResource ButtonStyleCancel}" Content="Cancelar" FontSize="22" HorizontalAlignment="Left" Margin="784,642,0,0" VerticalAlignment="Top" Height="54" Width="180" Click="CancelRegister" />
+        <Button Style="{StaticResource ButtonStyleConfirm}" Content="Continuar" FontSize="22" HorizontalAlignment="Left" Margin="988,642,0,0" VerticalAlignment="Top" Width="180" Height="54" Click="SaveBankAccounts" />
         <SGSC:NumericBox x:Name="tbTansAccInterbankCode" Style="{StaticResource CustomTextBoxStyle}" FontSize="18" VerticalContentAlignment="Center" Margin="250,220,623,455" TextChanged="tbTansAccInterbankCode_TextChanged"/>
         <Label Style="{StaticResource CustomLabelStyle}" FontSize="20" Content="CLABE " HorizontalAlignment="Left" Margin="250,190,0,0" VerticalAlignment="Top" x:Name="NombreLabel" Width="237" Height="25"/>
         <Label x:Name="lbTansAccInterbankCodeError" Content="Error" HorizontalAlignment="Left" HorizontalContentAlignment="Right" Margin="250,266,0,0" VerticalAlignment="Top" Width="407" Foreground="#FFCE2222" FontStyle="Italic"/>
-
         <SGSC:NumericBox x:Name="tbTansAccCardNumber" Style="{StaticResource CustomTextBoxStyle}" FontSize="18" VerticalContentAlignment="Center" Margin="735,221,138,454"/>
         <Label Style="{StaticResource CustomLabelStyle}" FontSize="20" Content="Número de tarjeta " HorizontalAlignment="Left" Margin="735,190,0,0" VerticalAlignment="Top" x:Name="NombreLabel_Copy1" Width="237" Height="21"/>
         <Label x:Name="lbTansAccCardNumberError" Content="Error" HorizontalAlignment="Left" HorizontalContentAlignment="Right" Margin="735,266,0,0" VerticalAlignment="Top" Width="407" Foreground="#FFCE2222" FontStyle="Italic"/>
-
         <TextBox x:Name="tbTansAccBank" Style="{StaticResource CustomTextBoxStyle}" IsEnabled="False" FontSize="18" VerticalContentAlignment="Center" Margin="250,318,623,356"/>
         <Label Style="{StaticResource CustomLabelStyle}" FontSize="20" Content="Banco " HorizontalAlignment="Left" Margin="250,288,0,0" VerticalAlignment="Top" Width="58" Height="20"/>
-
-
         <SGSC:NumericBox x:Name="tbDomAccBankInterbankCode" Style="{StaticResource CustomTextBoxStyle}" FontSize="18" VerticalContentAlignment="Center" Margin="250,502,623,173" TextChanged="tbDomAccBank_TextChanged"/>
         <Label Style="{StaticResource CustomLabelStyle}" FontSize="20" Content="CLABE " HorizontalAlignment="Left" Margin="250,472,0,0" VerticalAlignment="Top" Width="237" Height="20"/>
-        <Label Name="lbDomAccBankInterbankCodeError" Content="Error" HorizontalAlignment="Left" HorizontalContentAlignment="Right" Margin="250,548,0,0" VerticalAlignment="Top" Width="407" Foreground="#FFCE2222" FontStyle="Italic"/>
-
+        <Label x:Name="lbDomAccBankInterbankCodeError" Content="Error" HorizontalAlignment="Left" HorizontalContentAlignment="Right" Margin="250,548,0,0" VerticalAlignment="Top" Width="407" Foreground="#FFCE2222" FontStyle="Italic"/>
         <SGSC:NumericBox x:Name="tbDomAccBankCardNumber" Style="{StaticResource CustomTextBoxStyle}" FontSize="18" VerticalContentAlignment="Center" Margin="735,503,138,172"/>
         <Label Style="{StaticResource CustomLabelStyle}" FontSize="20" Content="Número de tarjeta " HorizontalAlignment="Left" Margin="735,472,0,0" VerticalAlignment="Top" Width="237" Height="21"/>
-        <Label Name="lbDomAccBankCardNumberError" Content="Error" HorizontalAlignment="Left" HorizontalContentAlignment="Right" Margin="735,548,0,0" VerticalAlignment="Top" Width="407" Foreground="#FFCE2222" FontStyle="Italic"/>
-
+        <Label x:Name="lbDomAccBankCardNumberError" Content="Error" HorizontalAlignment="Left" HorizontalContentAlignment="Right" Margin="735,548,0,0" VerticalAlignment="Top" Width="407" Foreground="#FFCE2222" FontStyle="Italic"/>
         <TextBox x:Name="tbDomAccBank" Style="{StaticResource CustomTextBoxStyle}" IsEnabled="False" FontSize="18" VerticalContentAlignment="Center" Margin="250,600,623,74"/>
         <Label Style="{StaticResource CustomLabelStyle}" FontSize="20" Content="Banco " HorizontalAlignment="Left" Margin="250,570,0,0" VerticalAlignment="Top" Width="58" Height="20"/>
-
-        <CheckBox Name="cbUseTheSameAccount" Content="Usar como cuenta de domiciliación" HorizontalAlignment="Left" Margin="834,368,0,0" VerticalAlignment="Top" Checked="cbUseTheSameAccount_Checked" FontSize="12" Unchecked="cbUseTheSameAccount_Unchecked">
+        <CheckBox x:Name="cbUseTheSameAccount" Content="Usar como cuenta de domiciliación" HorizontalAlignment="Left" Margin="834,368,0,0" VerticalAlignment="Top" Checked="cbUseTheSameAccount_Checked" FontSize="12" Unchecked="cbUseTheSameAccount_Unchecked">
             <CheckBox.LayoutTransform>
                 <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
             </CheckBox.LayoutTransform>
         </CheckBox>
-        <ComboBox x:Name="cbTransferAccount" HorizontalAlignment="Left" Margin="938,302,0,0" VerticalAlignment="Top" Width="181" Height="31" FontFamily="{StaticResource FontNunito}" FontSize="15" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SelectionChanged="cbTransferAccount_SelectionChanged">
+        <ComboBox x:Name="cbTransferCardType" HorizontalAlignment="Left" Margin="912,302,0,0" VerticalAlignment="Top" Width="206" Height="39">
+            <ComboBoxItem Content="Credito"/>
+            <ComboBoxItem Content="Debito"/>
         </ComboBox>
-        <ComboBox x:Name="cbDirectDebitAccount" HorizontalAlignment="Left" Margin="938,569,0,0" VerticalAlignment="Top" Width="181" Height="32" FontFamily="{StaticResource FontNunito}" FontSize="15" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SelectionChanged="cbDirectDebitAccount_SelectionChanged">
+        <ComboBox x:Name="cbDirectDebitCardType" HorizontalAlignment="Left" Margin="912,584,0,0" VerticalAlignment="Top" Width="206" Height="39">
+            <ComboBoxItem Content="Credito"/>
+            <ComboBoxItem Content="Debito"/>
         </ComboBox>
-        <Label Style="{StaticResource CustomLabelStyle}" FontSize="20" Content="Selección de tarjeta" HorizontalAlignment="Left" Margin="735,304,0,0" VerticalAlignment="Top" x:Name="NombreLabel_Copy1_Copiar" Width="237" Height="26"/>
-        <Label Style="{StaticResource CustomLabelStyle}" FontSize="20" Content="Selección de tarjeta" HorizontalAlignment="Left" Margin="735,569,0,0" VerticalAlignment="Top" x:Name="NombreLabel_Copy1_Copiar1" Width="236" Height="26"/>
+        <Label Style="{StaticResource CustomLabelStyle}" FontSize="20" Content="Tipo de cuenta:" HorizontalAlignment="Left" Margin="735,311,0,0" VerticalAlignment="Top" x:Name="NombreLabel_Copy1_Copiar" Width="237" Height="21"/>
+        <Label Style="{StaticResource CustomLabelStyle}" FontSize="20" Content="Tipo de cuenta:" HorizontalAlignment="Left" Margin="735,590,0,0" VerticalAlignment="Top" x:Name="NombreLabel_Copy1_Copiar1" Width="237" Height="21"/>
     </Grid>
 </Page>

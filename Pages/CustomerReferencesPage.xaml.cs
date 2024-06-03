@@ -126,14 +126,7 @@ namespace SGSC.Pages
 
                         MessageBox.Show("Referencias guardadas correctamente", "Referencias guardadas", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                        if(creditRequestId == -2)
-                        {
-                            App.Current.MainFrame.Content = new HomePageCreditAdvisor();
-                        }
-                        else
-                        {
-                            App.Current.MainFrame.Content = new RegisterCreditRequest(customerId, creditRequestId);
-                        }
+                        App.Current.MainFrame.Content = new CustomerBankAccounts(customerId, creditRequestId);
                     }
                     catch (Exception ex)
                     {

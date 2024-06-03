@@ -166,6 +166,7 @@
     </Compile>
     <Compile Include="Model\Bank.cs" />
     <Compile Include="Model\BankAccount.cs" />
+    <Compile Include="Model\CreditCardWithNames.cs" />
     <Compile Include="Model\CreditPolicyWithStatus.cs" />
     <Compile Include="Model\CreditRequest.cs" />
     <Compile Include="Model\Customer.cs" />
@@ -203,6 +204,9 @@
     </Compile>
     <Compile Include="Pages\CreditPromotions.xaml.cs">
       <DependentUpon>CreditPromotions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\CustomerBankAccounts.xaml.cs">
+      <DependentUpon>CustomerBankAccounts.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\DocumentsManagerPage.xaml.cs">
       <DependentUpon>DocumentsManagerPage.xaml</DependentUpon>
@@ -328,6 +332,10 @@
     <Page Include="Pages\CreditPromotions.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\CustomerBankAccounts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\DocumentsManagerPage.xaml">
       <Generator>MSBuild:Compile</Generator>
