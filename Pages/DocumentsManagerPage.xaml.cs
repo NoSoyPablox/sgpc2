@@ -135,5 +135,12 @@ namespace SGSC.Pages
         private void UploadSignedDirectDebitAuthorization_Click(object sender, RoutedEventArgs e) => UploadDocument(Document.DocumentTypes.DirectDebitAuthorizationSigned);
         private void DownloadSignedDirectDebitAuthorization_Click(object sender, RoutedEventArgs e) => DownloadDocument(Document.DocumentTypes.DirectDebitAuthorizationSigned);
 
+        private void btnContinue_Click(object sender, RoutedEventArgs e)
+        {
+            //return to homepage
+            //Aqui se tendria que validar que en sistema ya esten subidos los documentos
+            MessageBox.Show("Documentos subidos con éxito.");
+            App.Current.MainFrame.Content = new HomePageCreditAdvisor();
+        }
     }
 }

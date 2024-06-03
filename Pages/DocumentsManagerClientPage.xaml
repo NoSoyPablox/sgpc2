@@ -44,6 +44,7 @@
 
 
         <Label Content="Gestión de documentos de expediente del cliente" HorizontalAlignment="Left" Margin="241,140,0,0" VerticalAlignment="Top" Width="639" FontWeight="Bold" FontSize="24" />
+        <Button x:Name="btnCancel" Style="{StaticResource ButtonStyleCancel}" Content="Cancelar" FontSize="15" HorizontalAlignment="Left" Margin="818,614,0,0" VerticalAlignment="Top" Height="54" Width="180" Click="CancelRegister"/>
         <Button x:Name="btnContinue" Style="{StaticResource ButtonStyleConfirm}" Content="Continuar" FontSize="22" HorizontalAlignment="Left" Margin="1048,614,0,0" VerticalAlignment="Top" Width="180" Height="54" Click="btnContinue_Click"/>
     </Grid>
 </Page>

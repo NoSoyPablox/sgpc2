@@ -206,7 +206,7 @@ namespace SGSC.Pages
                     registerNewRequestTransfer();
                     registerNewRequestDirectAccount();
                     MessageBox.Show("Cuentas bancarias guardadas exitosamente, aqui deberias viajar a ver los pagos que hizo cardone");
-                    App.Current.MainFrame.Content = new HomePageCreditAdvisor();
+                    App.Current.MainFrame.Content = new DocumentsManagerPage(creditRequestId);
                 }
             }
             catch (Exception ex)
