@@ -244,6 +244,25 @@ namespace SGSC.Pages
 
         public void SaveCreditRequestStatus()
         {
+            //get how many policies there are in total
+            int totalPolicies = 0;
+            foreach (var child in CreditPoliciesPanel.Children)
+            {
+                if (child is CheckBox cb)
+                {
+                    totalPolicies++;
+                }
+            }
+
+            int policies = 0;
+            foreach (var child in CreditPoliciesPanel.Children)
+            {
+                if (child is CheckBox cb && cb.IsChecked == true)
+                {
+                    policies++;
+                }
+            }
+
             try
             {
                 using (sgscEntities db = new sgscEntities())
@@ -254,11 +273,18 @@ namespace SGSC.Pages
                     {
                         if (rbtAutorize.IsChecked == true)
                         {
-                            solicitud.Status = 4; // "Autorizado"
+                            if (policies != totalPolicies)
+                            {
+                                MessageBox.Show("No se puede autorizar si no cumple con las politicas");
+                            }
+                            else
+                            {
+                                solicitud.Status = 4; // "Autorizado"
+                            }
                         }
                         else if (rbtCorrect.IsChecked == true)
                         {
-                            solicitud.Status = 1; // "Corregir"
+                            solicitud.Status = 3; // "Corregir"
                         }
                         else if (rbtReject.IsChecked == true)
                         {

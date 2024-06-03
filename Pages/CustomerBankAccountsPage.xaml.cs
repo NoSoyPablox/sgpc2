@@ -199,7 +199,7 @@ namespace SGSC.Pages
                     registerExistingTransferAccount();
                     registerExistingDirectAccount();
                     MessageBox.Show("Cuentas bancarias guardadas exitosamente.");
-                    App.Current.MainFrame.Content = new RegisterCreditRequest(customerId, creditRequestId);
+                    App.Current.MainFrame.Content = new DocumentsManagerPage(creditRequestId);
                 }
                 else
                 {

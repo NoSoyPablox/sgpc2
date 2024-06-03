@@ -74,6 +74,10 @@ namespace SGSC.Pages
                 {
                        needsToReplace = true;
                 }
+                else
+                {
+                    return;
+                }
             }
             OpenFileDialog openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog() == true)

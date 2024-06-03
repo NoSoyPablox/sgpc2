@@ -286,11 +286,12 @@ namespace SGSC.Pages
                         {
                             registerMonthlyPayments(filenumber);
                         }
-                        App.Current.MainFrame.Content = new CreditRequestPaymentsPreview(cr.CreditRequestId, this.idCustomer);
+                        App.Current.MainFrame.Content = new CreditRequestPaymentsPreview(cr.CreditRequestId, this.idCustomer, false);
                     }
                     else
                     {
                         MessageBox.Show("Solicitud de crédito actualizada exitosamente");
+                        App.Current.MainFrame.Content = new CreditRequestPaymentsPreview(cr.CreditRequestId, this.idCustomer, true);
                     }
                 }
                 catch (Exception ex)

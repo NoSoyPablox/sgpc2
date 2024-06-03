@@ -53,7 +53,7 @@ namespace SGSC.Pages
             public string EfficiencyString => $"{Efficiency:F2}%";
         }
 
-        public CreditRequestPaymentsPreview(int creditRequestId, int customerId)
+        public CreditRequestPaymentsPreview(int creditRequestId, int customerId, bool edit)
         {
             InitializeComponent();
             CreditRequestId = creditRequestId;

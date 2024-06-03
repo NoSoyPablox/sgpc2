@@ -56,6 +56,21 @@ namespace SGSC.Pages
 
         private void UploadDocument(Document.DocumentTypes documentType)
         {
+            //search if already exists
+            var actualDocument = _context.Documents.FirstOrDefault(d => d.DocumentType == (short)documentType && d.CreditRequestId == creditRequestId);
+            bool needToReplace = false;
+            if (actualDocument != null)
+            {
+                MessageBoxResult result = MessageBox.Show("Ya existe un documento de este tipo. ¿Desea reemplazarlo?", "Documento existente", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    needToReplace = true;
+                }else
+                {
+                    return;
+                }
+            }
+
             OpenFileDialog openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog() == true)
             {
@@ -71,6 +86,12 @@ namespace SGSC.Pages
                         CreditRequestId = creditRequestId.Value,
                         DocumentType = (short)documentType
                     };
+
+                    if (needToReplace)
+                    {
+                        _context.Documents.Remove(actualDocument);
+                        _context.SaveChanges();
+                    }
 
                     _context.Documents.Add(document);
                     _context.SaveChanges();
@@ -140,6 +161,10 @@ namespace SGSC.Pages
             //return to homepage
             //Aqui se tendria que validar que en sistema ya esten subidos los documentos
             MessageBox.Show("Documentos subidos con éxito.");
+            //get the credit request
+            var creditRequest = _context.CreditRequests.FirstOrDefault(cr => cr.CreditRequestId == creditRequestId);
+            creditRequest.Status = (short)CreditRequest.RequestStatus.Pending;
+            _context.SaveChanges();
             App.Current.MainFrame.Content = new HomePageCreditAdvisor();
         }
     }
