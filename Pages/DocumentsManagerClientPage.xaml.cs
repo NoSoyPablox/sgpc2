@@ -22,15 +22,15 @@ using SGSC.Utils;
 namespace SGSC.Pages
 {
     /// <summary>
-    /// Interaction logic for DocumentsManagerPage.xaml
+    /// Interaction logic for DocumentsManagerClientPage.xaml
     /// </summary>
-    public partial class DocumentsManagerPage : Page
+    public partial class DocumentsManagerClientPage : Page
     {
         private sgscEntities _context;
         private ObservableCollection<Document> documentsDataAux;
         private int? creditRequestId;
 
-        public DocumentsManagerPage(int? creditRequestId)
+        public DocumentsManagerClientPage(int? creditRequestId)
         {
             InitializeComponent();
             _context = new sgscEntities();
@@ -108,32 +108,12 @@ namespace SGSC.Pages
             }
         }
 
-        private void GenerateDocument(Document.DocumentTypes documentType)
-        {
-            // Logic to generate document using Crystal Reports
-            // Example:
-            // CrystalReportGenerator.Generate(documentType, creditRequestId);
-        }
+        private void UploadINE_Click(object sender, RoutedEventArgs e) => UploadDocument(Document.DocumentTypes.NationalId);
+        private void DownloadINE_Click(object sender, RoutedEventArgs e) => DownloadDocument(Document.DocumentTypes.NationalId);
 
-        private void DownloadDocumentKit_Click(object sender, RoutedEventArgs e)
-        {
-            // Logic to download the document kit (a collection of specified documents)
-            // Example:
-            // DocumentKitDownloader.Download(creditRequestId);
-        }
-
-
-        private void GenerateCreditRequestForm_Click(object sender, RoutedEventArgs e) => GenerateDocument(Document.DocumentTypes.CreditRequestForm);
-        private void UploadSignedCreditRequestForm_Click(object sender, RoutedEventArgs e) => UploadDocument(Document.DocumentTypes.CreditRequestFormSigned);
-        private void DownloadSignedCreditRequestForm_Click(object sender, RoutedEventArgs e) => DownloadDocument(Document.DocumentTypes.CreditRequestFormSigned);
-
-        private void GenerateCreditContractCoverSheet_Click(object sender, RoutedEventArgs e) => GenerateDocument(Document.DocumentTypes.CreditContractCoverSheet);
-        private void UploadSignedCreditContractCoverSheet_Click(object sender, RoutedEventArgs e) => UploadDocument(Document.DocumentTypes.CreditContractCoverSheetSigned);
-        private void DownloadSignedCreditContractCoverSheet_Click(object sender, RoutedEventArgs e) => DownloadDocument(Document.DocumentTypes.CreditContractCoverSheetSigned);
-
-        private void GenerateDirectDebitAuthorization_Click(object sender, RoutedEventArgs e) => GenerateDocument(Document.DocumentTypes.DirectDebitAuthorization);
-        private void UploadSignedDirectDebitAuthorization_Click(object sender, RoutedEventArgs e) => UploadDocument(Document.DocumentTypes.DirectDebitAuthorizationSigned);
-        private void DownloadSignedDirectDebitAuthorization_Click(object sender, RoutedEventArgs e) => DownloadDocument(Document.DocumentTypes.DirectDebitAuthorizationSigned);
+        private void UploadDomicile_Click(object sender, RoutedEventArgs e) => UploadDocument(Document.DocumentTypes.Domicile);
+        private void DownloadDomicile_Click(object sender, RoutedEventArgs e) => DownloadDocument(Document.DocumentTypes.Domicile);
 
     }
 }
+
