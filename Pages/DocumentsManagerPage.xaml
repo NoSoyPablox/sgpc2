@@ -13,19 +13,9 @@
 
         <Frame Name="UserSessionFrame" NavigationUIVisibility="Hidden" Margin="834,10,74,624"/>
 
-        <Button Name="LogoutButton" Background="White" Style="{StaticResource Menubutton}" FontSize="15" HorizontalAlignment="Left" Margin="16,630,0,0" VerticalAlignment="Top" Width="72" Height="75" Click="LogoutButton_Click">
-            <Image Source="../Images/icon-logout.png" Height="70" Width="50"/>
-        </Button>
 
-        <Button Style="{StaticResource Menubutton}" FontSize="15" HorizontalAlignment="Left" Margin="16,215,0,0" VerticalAlignment="Top" Width="72" Height="75" Click="HomePageCreditAdvisorMenu">
-            <Image Source="../Images/icon-home-checked.png" Height="70" Width="50"/>
-        </Button>
 
-        <Image Source="../Images/coin-logo.png" Margin="10,8,1186,594" RenderTransformOrigin="0.47,0.339"/>
-
-        <Image Source="../Images/line.png" Margin="97,0,1172,0"></Image>
-
-        <Grid Margin="118,75,22,67" RenderTransformOrigin="0.502,0.571">
+        <Grid Margin="235,83,22,22" RenderTransformOrigin="0.502,0.571">
             <Grid.RowDefinitions>
                 <RowDefinition Height="150*"/>
                 <RowDefinition Height="150*"/>
@@ -34,24 +24,10 @@
                 <RowDefinition Height="150*"/>
             </Grid.RowDefinitions>
 
-            <!-- INE Section -->
-            <GroupBox Header="Cédula de Identidad (INE)" Margin="10,20,10,115" Grid.RowSpan="2">
-                <StackPanel>
-                    <Button Content="Subir INE" Click="UploadINE_Click" Style="{StaticResource ButtonStyleConfirm}"/>
-                    <Button Content="Descargar INE" Click="DownloadINE_Click" Style="{StaticResource ButtonStyleDownload}" />
-                </StackPanel>
-            </GroupBox>
 
-            <!-- Comprobante de Domicilio Section -->
-            <GroupBox Header="Comprobante de Domicilio" Margin="10,19,10,0" Grid.Row="1">
-                <StackPanel>
-                    <Button Content="Subir Comprobante de Domicilio" Click="UploadDomicile_Click" Style="{StaticResource ButtonStyleConfirm}" />
-                    <Button Content="Descargar Comprobante de Domicilio" Click="DownloadDomicile_Click" Style="{StaticResource ButtonStyleDownload}"/>
-                </StackPanel>
-            </GroupBox>
 
             <!-- Solicitud de Crédito Section -->
-            <GroupBox Header="Solicitud de Crédito" Margin="10,10,10,10" Grid.Row="2">
+            <GroupBox Header="Solicitud de Crédito" Margin="10,78,10,57" Grid.RowSpan="2">
                 <StackPanel>
                     <Button Content="Generar Formato de Solicitud de Crédito" Click="GenerateCreditRequestForm_Click" Style="{StaticResource ButtonStyleCancel}"/>
                     <Button Content="Subir Solicitud de Crédito Firmada" Click="UploadSignedCreditRequestForm_Click" Style="{StaticResource ButtonStyleConfirm}" />
@@ -60,7 +36,7 @@
             </GroupBox>
 
             <!-- Carátula de Contrato Section -->
-            <GroupBox Header="Carátula de Contrato" Margin="10,20,10,0" Grid.Row="3">
+            <GroupBox Header="Carátula de Contrato" Margin="10,2,10,10" Grid.Row="2">
                 <StackPanel>
                     <Button Content="Generar Carátula de Contrato" Click="GenerateCreditContractCoverSheet_Click" Style="{StaticResource ButtonStyleCancel}" />
                     <Button Content="Subir Carátula de Contrato Firmada" Click="UploadSignedCreditContractCoverSheet_Click" Style="{StaticResource ButtonStyleConfirm}" />
@@ -69,7 +45,7 @@
             </GroupBox>
 
             <!-- Domiciliación Section -->
-            <GroupBox Header="Autorización para Domiciliación de Pagos" Margin="10,9,10,10" Grid.Row="4">
+            <GroupBox Header="Autorización para Domiciliación de Pagos" Margin="10,28,10,105" Grid.Row="3" Grid.RowSpan="2">
                 <StackPanel>
                     <Button Content="Generar Autorización para Domiciliación de Pagos" Click="GenerateDirectDebitAuthorization_Click" Style="{StaticResource ButtonStyleCancel}" />
                     <Button Content="Subir Autorización para Domiciliación de Pagos Firmada" Click="UploadSignedDirectDebitAuthorization_Click" Style="{StaticResource ButtonStyleConfirm}" />
@@ -78,8 +54,8 @@
             </GroupBox>
         </Grid>
 
-        <Button Content="Descargar Kit de Documentos" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="604,648,0,0" Style="{StaticResource ButtonStyleConfirm}" Width="168" Height="40" Click="DownloadDocumentKit_Click"/>
+        <Button Content="Descargar Kit de Documentos" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="662,640,0,0" Style="{StaticResource ButtonStyleConfirm}" Width="168" Height="40" Click="DownloadDocumentKit_Click"/>
 
-        <Label Content="Visualización de documentos de solicitud" HorizontalAlignment="Left" Margin="133,30,0,0" VerticalAlignment="Top" Width="539" FontWeight="Bold" FontSize="24" />
+        <Label Content="Gestión de documentos de solicitud de crédito" HorizontalAlignment="Left" Margin="261,98,0,0" VerticalAlignment="Top" Width="539" FontWeight="Bold" FontSize="24" />
     </Grid>
 </Page>
