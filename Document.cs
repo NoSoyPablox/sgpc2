@@ -21,6 +21,5 @@ namespace SGSC
         public Nullable<int> DocumentType { get; set; }
     
         public virtual CreditRequest CreditRequest { get; set; }
-
     }
 }
