@@ -112,13 +112,6 @@
     </Compile>
     <Compile Include="CreditRequest.cs">
       <DependentUpon>Modelsgsc.tt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="CreditRequest1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CreditRequest.rpt</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="CreditRequestCreditPolicy.cs">
       <DependentUpon>Modelsgsc.tt</DependentUpon>
@@ -178,9 +171,7 @@
     <Compile Include="Model\BankAccount.cs" />
     <Compile Include="Model\CreditCardWithNames.cs" />
     <Compile Include="Model\CreditPolicyWithStatus.cs" />
-    <Compile Include="Model\CreditRequest.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Model\CreditRequest.cs" />
     <Compile Include="Model\Customer.cs" />
     <Compile Include="Model\Document.cs" />
     <Compile Include="Model\Employee.cs" />
@@ -479,10 +470,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="CreditRequest.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>CreditRequest1.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
