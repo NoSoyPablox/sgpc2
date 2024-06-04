@@ -52,5 +52,7 @@ namespace SGSC
         public string PhoneNumber2 { get; set; }
         public string Email { get; set; }
         public string PromotionName { get; set; }
+        public int CreditRequestId { get; set; }
+        public int PaymentsInterval { get; set; }
     }
 }

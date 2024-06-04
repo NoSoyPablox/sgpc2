@@ -18,6 +18,8 @@ using System.Windows.Shapes;
 using System.Xml.Linq;
 using Microsoft.Win32;
 using SGSC.Utils;
+using CrystalDecisions.Shared;
+using CrystalDecisions.CrystalReports.Engine;
 
 namespace SGSC.Pages
 {
@@ -129,30 +131,85 @@ namespace SGSC.Pages
             }
         }
 
-        private void GenerateDocument(Document.DocumentTypes documentType)
+        private void GenerateDocumentCreditRequest(Document.DocumentTypes documentType)
         {
-            // Logic to generate document using Crystal Reports
-            // Example:
-            // CrystalReportGenerator.Generate(documentType, creditRequestId);
+            CreditRequestDocument creditRequestDocument = _context.CreditRequestDocuments.FirstOrDefault(crd => crd.CreditRequestId == creditRequestId);
+            if (creditRequestDocument == null)
+            {
+                MessageBox.Show("No se encontró la información necesaria para generar el documento.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            CreditRequestDocumentForm creditRequestDocumentForm = new CreditRequestDocumentForm();
+
+            creditRequestDocumentForm.SetParameterValue("pVendedor", creditRequestDocument.EmployeeId);
+            creditRequestDocumentForm.SetParameterValue("pFolio", creditRequestDocument.FileNumber);
+            creditRequestDocumentForm.SetParameterValue("pPromocion", creditRequestDocument.PromotionName);
+            creditRequestDocumentForm.SetParameterValue("pCreationDate", creditRequestDocument.CreationDateRequest);
+            creditRequestDocumentForm.SetParameterValue("pMonto", creditRequestDocument.Amount);
+            creditRequestDocumentForm.SetParameterValue("pPlazoSolicitado", creditRequestDocument);
+            creditRequestDocumentForm.SetParameterValue("pInteres", creditRequestDocument.PromotionName);
+            creditRequestDocumentForm.SetParameterValue("pProposito", creditRequestDocument.PromotionName);
+            creditRequestDocumentForm.SetParameterValue("pClabe", creditRequestDocument.PromotionName);
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                Filter = "PDF files (.pdf)|.pdf",
+                Title = "Guardar Documento de Solicitud de Crédito",
+                FileName = "CreditRequestForm.pdf"
+            };
+
+            bool? result = saveFileDialog.ShowDialog();
+
+            if (result == true)
+            {
+                string filePath = saveFileDialog.FileName;
+                try
+                {
+                    creditRequestDocumentForm.ExportToDisk(ExportFormatType.PortableDocFormat, filePath);
+                    MessageBox.Show("Documento generado con éxito.");
+                }
+                catch (ParameterFieldCurrentValueException ex)
+                {
+                    MessageBox.Show("Error: Faltan valores de parámetros. " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al generar el documento: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("La operación fue cancelada.", "Cancelado", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
+
+        private void GenerateDocumentDomicilePaymentsAuth(Document.DocumentTypes documentType)
+        {
+
+        }
+
+        private void GenerateDocumentCreditOpeningForm(Document.DocumentTypes documentType)
+        {
+
+        }
+
 
         private void DownloadDocumentKit_Click(object sender, RoutedEventArgs e)
         {
-            // Logic to download the document kit (a collection of specified documents)
-            // Example:
-            // DocumentKitDownloader.Download(creditRequestId);
+            
         }
 
 
-        private void GenerateCreditRequestForm_Click(object sender, RoutedEventArgs e) => GenerateDocument(Document.DocumentTypes.CreditRequestForm);
+        private void GenerateCreditRequestForm_Click(object sender, RoutedEventArgs e) => GenerateDocumentCreditRequest(Document.DocumentTypes.CreditRequestForm);
         private void UploadSignedCreditRequestForm_Click(object sender, RoutedEventArgs e) => UploadDocument(Document.DocumentTypes.CreditRequestFormSigned);
         private void DownloadSignedCreditRequestForm_Click(object sender, RoutedEventArgs e) => DownloadDocument(Document.DocumentTypes.CreditRequestFormSigned);
 
-        private void GenerateCreditContractCoverSheet_Click(object sender, RoutedEventArgs e) => GenerateDocument(Document.DocumentTypes.CreditContractCoverSheet);
+        private void GenerateCreditContractCoverSheet_Click(object sender, RoutedEventArgs e) => GenerateDocumentCreditOpeningForm(Document.DocumentTypes.CreditContractCoverSheet);
         private void UploadSignedCreditContractCoverSheet_Click(object sender, RoutedEventArgs e) => UploadDocument(Document.DocumentTypes.CreditContractCoverSheetSigned);
         private void DownloadSignedCreditContractCoverSheet_Click(object sender, RoutedEventArgs e) => DownloadDocument(Document.DocumentTypes.CreditContractCoverSheetSigned);
 
-        private void GenerateDirectDebitAuthorization_Click(object sender, RoutedEventArgs e) => GenerateDocument(Document.DocumentTypes.DirectDebitAuthorization);
+        private void GenerateDirectDebitAuthorization_Click(object sender, RoutedEventArgs e) => GenerateDocumentDomicilePaymentsAuth(Document.DocumentTypes.DirectDebitAuthorization);
         private void UploadSignedDirectDebitAuthorization_Click(object sender, RoutedEventArgs e) => UploadDocument(Document.DocumentTypes.DirectDebitAuthorizationSigned);
         private void DownloadSignedDirectDebitAuthorization_Click(object sender, RoutedEventArgs e) => DownloadDocument(Document.DocumentTypes.DirectDebitAuthorizationSigned);
 
