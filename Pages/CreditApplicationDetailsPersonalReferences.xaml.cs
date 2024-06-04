@@ -179,6 +179,19 @@ namespace SGSC.Pages
         {
             App.Current.MainFrame.Content = new HomePageCreditAnalyst();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var creditApplicacionDocumens = new CrediApplicationDocuments(RequestId);
+            if (NavigationService != null)
+            {
+                NavigationService.Navigate(creditApplicacionDocumens);
+            }
+            else
+            {
+                ToastNotification notification = new ToastNotification("No se puede realizar la navegación en este momento. Por favor, inténtelo más tarde.", "Error");
+            }
+        }
     }
 }
 

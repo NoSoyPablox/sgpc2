@@ -1,0 +1,36 @@
+﻿<Page x:Class="SGSC.Pages.CrediApplicationDocuments"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SGSC.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="720" d:DesignWidth="1280"
+      Title="CrediApplicationDocuments">
+
+    <Grid Background="White">
+        <Frame Name="UserSessionFrame" NavigationUIVisibility="Hidden" Margin="834,10,74,624"/>
+
+        <Button FontFamily="{StaticResource FontNunitoBold}" FontSize="17" Cursor="Hand" x:Name="btnRequest" Content="Solicitud" Tag="../Images/User.png" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Left" Margin="26,111,0,0" VerticalAlignment="Top" Height="47" Width="241" Click="btnRequest_Click" />
+        <Button FontFamily="{StaticResource FontNunitoBold}" FontSize="17" Cursor="Hand" Content="Datos personales" Tag="../Images/address-icon.png" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Left" Margin="26,170,0,0" VerticalAlignment="Top" Height="47" Width="241" Click="BtnClicPersonalInformation"/>
+        <Button FontFamily="{StaticResource FontNunitoBold}" FontSize="17" Cursor="Hand" Content="Centro de trabajo" Tag="../Images/card-icon.png" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Left" Margin="26,226,0,0" VerticalAlignment="Top" Height="47" Width="241" Click="BtnClicWorkCenter"/>
+        <Button FontFamily="{StaticResource FontNunitoBold}" FontSize="17" Cursor="Hand" Content="Cuentas bancarias" Tag="../Images/icon-contact.png" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Left" Margin="26,0,0,0" VerticalAlignment="Center" Height="48" Width="241" Click="BtnClicBankAccounts"/>
+        <Button FontFamily="{StaticResource FontNunitoBold}" FontSize="17" Cursor="Hand" Content="Referencias personales" Tag="../Images/icon-job.png"  Style="{StaticResource ButtonStyle}" HorizontalAlignment="Left" Margin="26,279,0,0" VerticalAlignment="Top" Height="48" Width="241" Click="BtnClicPersonalReferences"/>
+        <Button FontFamily="{StaticResource FontNunitoBold}" FontSize="17" Cursor="Hand" Content="Documentación" Tag="../Images/icon-board.png" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Left" Margin="26,392,0,0" VerticalAlignment="Top" Height="48" Width="241"/>
+        <Button FontFamily="{StaticResource FontNunitoBold}" FontSize="17" Cursor="Hand" Content="Dictamen" Tag="../Images/icon-law.png" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Left" Margin="26,450,0,0" VerticalAlignment="Top" Height="48" Width="241" Click="BtnClicAproveRequest"/>
+
+        <Label Content="Documentos de la solicitud" FontFamily="{StaticResource FontPoppins}" FontSize="26" HorizontalAlignment="Left" Margin="318,62,0,0" VerticalAlignment="Top" Height="60" Width="420"/>
+
+        <Label Content="Solicitud de credito" FontFamily="{StaticResource FontNunitoBold}" FontSize="26" HorizontalAlignment="Left" Margin="445,176,0,0" VerticalAlignment="Top" Height="37" Width="311"/>
+        <Label Content="Cáratula de contrato" FontFamily="{StaticResource FontNunitoBold}" FontSize="26" HorizontalAlignment="Left" Margin="445,283,0,0" VerticalAlignment="Top"/>
+        <Label Content="Autorización para domiciliación de pagos" FontFamily="{StaticResource FontNunitoBold}" FontSize="26" HorizontalAlignment="Left" Margin="445,387,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnDownloadCreditRequestDocument" Content="Descargar documento de solicitud" FontFamily="{StaticResource FontNunitoBold}" FontSize="22" HorizontalAlignment="Left" Margin="445,218,0,0" VerticalAlignment="Top" Style="{StaticResource ButtonStyleDownload}" Height="41" Width="582" Click="btnDownloadCreditRequestDocument_Click"/>
+        <Button x:Name="btnDownloadCreditOpeningForm" Content="Descargar carátula de contrato" FontFamily="{StaticResource FontNunitoBold}" FontSize="22" HorizontalAlignment="Left" Margin="445,319,0,0" VerticalAlignment="Top" Style="{StaticResource ButtonStyleDownload}" Height="41" Width="582" Click="btnDownloadCreditOpeningForm_Click"/>
+        <Button x:Name="btnDownloadCreditDomicileForm" Content="Descargar autorización para domiciliación de pagos" FontFamily="{StaticResource FontNunitoBold}" FontSize="22" HorizontalAlignment="Left" Margin="450,432,0,0" VerticalAlignment="Top" Style="{StaticResource ButtonStyleDownload}" Height="41" Width="577" Click="btnDownloadCreditDomicileForm_Click"/>
+        <Button x:Name="btnDownloadKit" Content="Descargar kit" FontFamily="{StaticResource FontNunitoBold}" FontSize="26" HorizontalAlignment="Left" Margin="600,518,0,0" VerticalAlignment="Top" Style="{StaticResource ButtonStyleConfirm}" Height="51" Width="268" Click="btnDownloadKit_Click"/>
+
+        <Button Style="{StaticResource ButtonStyleConfirm}" Content="Continuar" FontSize="15" HorizontalAlignment="Left" Margin="1122,666,0,0" VerticalAlignment="Top" Width="130" Height="38" Click="BtnClicContinue"/>
+
+
+    </Grid>
+</Page>
