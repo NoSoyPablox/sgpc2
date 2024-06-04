@@ -262,16 +262,26 @@ namespace SGSC.Pages
         {
             //use CreditOpeningForm class wich is a sql view
             CreditOpeningForm creditOpeningForm = _context.CreditOpeningForms.FirstOrDefault(cof => cof.CreditRequestId == creditRequestId);
+            //obtain the credit request
+            var creditRequestFormato = _context.CreditRequests.FirstOrDefault(cr => cr.CreditRequestId == creditRequestId);
             //obtain first payment date
             var payment = _context.Payments.FirstOrDefault(p => p.CreditRequestId == creditRequestId);
             string periodicidad = "";
+            string plazoCredito = "";
+            //get payment date only dd:mm:yyyy
+            string firstPaymentDate = payment.PaymentDate.ToString();
+            firstPaymentDate = firstPaymentDate.Substring(0, 10);
+
+            plazoCredito = creditOpeningForm.TimePeriod + " ";
             switch (creditOpeningForm.PaymentsInterval)
             {
                 case 1:
-                    periodicidad = "Los pagos serán cada 15 dias";
+                    periodicidad = "Los pagos serán cada 15 dias a partir del primera fecha de pago ";
+                    plazoCredito += "Quincenas";
                     break;
                 case 2:
-                    periodicidad = "Los pagos serán el dia " + payment.PaymentDate.ToString();
+                    periodicidad = "Los pagos serán el dia " + payment.PaymentDate + " o último dia de mes si hay discrepancia entre los dias del mes";
+                    plazoCredito += "Meses";
                     break;
             }
 
@@ -282,16 +292,16 @@ namespace SGSC.Pages
             report.SetParameterValue("pRequestedAmount", creditOpeningForm.AmountRequested);
             report.SetParameterValue("pTotalAmount", creditOpeningForm.Amount);
             report.SetParameterValue("pPaymentAmount", creditOpeningForm.PaymentsAmount);
-            report.SetParameterValue("pTimePeriod", creditOpeningForm.TimePeriod);
-            report.SetParameterValue("pFirstPaymentDate", payment.PaymentDate);
+            report.SetParameterValue("pTimePeriod", plazoCredito);
+            report.SetParameterValue("pFirstPaymentDate", firstPaymentDate);
             report.SetParameterValue("pInterval", periodicidad);
 
             //Exportar a pdf
             SaveFileDialog saveFileDialog = new SaveFileDialog
             {
                 Filter = "PDF Files (*.pdf)|*.pdf",
-                Title = "Save Document",
-                FileName = "reportePrueba.pdf"
+                Title = "Guardar documento de apertura",
+                FileName = $"CaratulaApertura_{creditRequestFormato.FileNumber}_Pendiente de Firma.pdf"
             };
 
             if (saveFileDialog.ShowDialog() == true)
