@@ -143,6 +143,12 @@
     <Compile Include="DomicilePaymentsAuth.cs">
       <DependentUpon>Modelsgsc.tt</DependentUpon>
     </Compile>
+    <Compile Include="DomicilePaymentsAuthForm.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DomicilePaymentsAuthForm.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Employee.cs">
       <DependentUpon>Modelsgsc.tt</DependentUpon>
     </Compile>
@@ -489,6 +495,10 @@
     <EmbeddedResource Include="CreditRequestDocumentForm.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CreditRequestDocumentForm.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DomicilePaymentsAuthForm.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DomicilePaymentsAuthForm.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

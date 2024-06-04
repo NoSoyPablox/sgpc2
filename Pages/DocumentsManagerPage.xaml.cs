@@ -154,7 +154,8 @@ namespace SGSC.Pages
             creditRequestDocumentForm.SetParameterValue("pFolio", creditRequestDocument.FileNumber);
             creditRequestDocumentForm.SetParameterValue("pPromocion", creditRequestDocument.PromotionName);
             creditRequestDocumentForm.SetParameterValue("pCreationDate", creditRequestDocument.CreationDateRequest);
-            creditRequestDocumentForm.SetParameterValue("pMonto", creditRequestDocument.Amount);
+            string formattedAmount = (creditRequestDocument.Amount ?? 0).ToString("C");
+            creditRequestDocumentForm.SetParameterValue("pMonto", formattedAmount);
             creditRequestDocumentForm.SetParameterValue("pPlazoSolicitado", CreditRequestDocument.RequestPaymentIntervalToString((CreditRequestDocument.RequestPaymentInterval)creditRequestDocument.PaymentsInterval));
             creditRequestDocumentForm.SetParameterValue("pInteres", creditRequestDocument.InterestRate);
             creditRequestDocumentForm.SetParameterValue("pProposito", creditRequestDocument.Purpose);
@@ -252,6 +253,57 @@ namespace SGSC.Pages
         private void GenerateDocumentDomicilePaymentsAuth(Document.DocumentTypes documentType)
         {
 
+            DomicilePaymentsAuth domicilePaymentsAuth = _context.DomicilePaymentsAuths.FirstOrDefault(crd => crd.CreditRequestId == creditRequestId);
+            if (domicilePaymentsAuth == null)
+            {
+                MessageBox.Show("No se encontró la información necesaria para generar el documento.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            DomicilePaymentsAuthForm domicilePaymentsAuthForm = new DomicilePaymentsAuthForm();
+
+            domicilePaymentsAuthForm.SetParameterValue("pFolioAuth", domicilePaymentsAuth.FileNumber);
+            domicilePaymentsAuthForm.SetParameterValue("pFechaHoy", DateTime.Today);
+            domicilePaymentsAuthForm.SetParameterValue("pEmpresa", "FinancieraRunaterraCredit");
+            domicilePaymentsAuthForm.SetParameterValue("pPeriocidadPago", CreditRequestDocument.RequestPaymentIntervalToString((CreditRequestDocument.RequestPaymentInterval)domicilePaymentsAuth.PaymentsInterval));
+            string formattedAmount = (domicilePaymentsAuth.PaymentAmount ?? 0).ToString("C");
+            domicilePaymentsAuthForm.SetParameterValue("pMontoCargo", formattedAmount);
+            domicilePaymentsAuthForm.SetParameterValue("pPlazo", domicilePaymentsAuth.TimePeriod);
+            domicilePaymentsAuthForm.SetParameterValue("pNombreBancoAuth", domicilePaymentsAuth.BankName);
+            domicilePaymentsAuthForm.SetParameterValue("pTarjetaDebito", domicilePaymentsAuth.CardNumber);
+            domicilePaymentsAuthForm.SetParameterValue("pCLABE", domicilePaymentsAuth.InterbankCode);
+            domicilePaymentsAuthForm.SetParameterValue("pTelefonoAuth", domicilePaymentsAuth.PhoneNumber1);
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                Filter = "PDF files (.pdf)|.pdf",
+                Title = "Autorización para Domiciliación de Pagos",
+                FileName = $"AutorizaciónParaDomiciliacióndePagos_{domicilePaymentsAuth.FileNumber}_Pendiente de Firma.pdf"
+            };
+
+            bool? result = saveFileDialog.ShowDialog();
+
+            if (result == true)
+            {
+                string filePath = saveFileDialog.FileName;
+                try
+                {
+                    domicilePaymentsAuthForm.ExportToDisk(ExportFormatType.PortableDocFormat, filePath);
+                    MessageBox.Show("Documento generado con éxito.");
+                }
+                catch (ParameterFieldCurrentValueException ex)
+                {
+                    MessageBox.Show("Error: Faltan valores de parámetros. " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al generar el documento: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("La operación fue cancelada.", "Cancelado", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
 
         private void GenerateDocumentCreditOpeningForm(Document.DocumentTypes documentType)
