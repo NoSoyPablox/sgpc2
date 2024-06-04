@@ -41,5 +41,6 @@ namespace SGSC
                     return "Estado de solicitud desconocido";
             }
         }
+
     }
 }

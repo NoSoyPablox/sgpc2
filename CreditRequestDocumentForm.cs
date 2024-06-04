@@ -274,7 +274,7 @@ namespace SGSC {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_pCuidad {
+        public CrystalDecisions.Shared.IParameterField Parameter_pTelefono1 {
             get {
                 return this.DataDefinition.ParameterFields[23];
             }
@@ -282,7 +282,7 @@ namespace SGSC {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_pTelefono1 {
+        public CrystalDecisions.Shared.IParameterField Parameter_pTelefono2 {
             get {
                 return this.DataDefinition.ParameterFields[24];
             }
@@ -290,7 +290,7 @@ namespace SGSC {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_pTelefono2 {
+        public CrystalDecisions.Shared.IParameterField Parameter_pEstadoCivil {
             get {
                 return this.DataDefinition.ParameterFields[25];
             }
@@ -298,7 +298,7 @@ namespace SGSC {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_pEstadoCivil {
+        public CrystalDecisions.Shared.IParameterField Parameter_pCorreoElectronico {
             get {
                 return this.DataDefinition.ParameterFields[26];
             }
@@ -306,7 +306,7 @@ namespace SGSC {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_pCorreoElectronico {
+        public CrystalDecisions.Shared.IParameterField Parameter_pCentroTrabajoTelefono {
             get {
                 return this.DataDefinition.ParameterFields[27];
             }
@@ -314,7 +314,7 @@ namespace SGSC {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_pCentroTrabajoTelefono {
+        public CrystalDecisions.Shared.IParameterField Parameter_pCentroTrabajoColonia {
             get {
                 return this.DataDefinition.ParameterFields[28];
             }
@@ -322,7 +322,7 @@ namespace SGSC {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_pCentroTrabajoColonia {
+        public CrystalDecisions.Shared.IParameterField Parameter_pCentroTrabajoCalle {
             get {
                 return this.DataDefinition.ParameterFields[29];
             }
@@ -330,7 +330,7 @@ namespace SGSC {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_pCentroTrabajoCalle {
+        public CrystalDecisions.Shared.IParameterField Parameter_pCentroTrabajoNombre {
             get {
                 return this.DataDefinition.ParameterFields[30];
             }
@@ -338,7 +338,7 @@ namespace SGSC {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_pCentroTrabajoNombre {
+        public CrystalDecisions.Shared.IParameterField Parameter_pCentroTrabajoCodigoPostal {
             get {
                 return this.DataDefinition.ParameterFields[31];
             }
@@ -346,7 +346,7 @@ namespace SGSC {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_pCentroTrabajoCodigoPostal {
+        public CrystalDecisions.Shared.IParameterField Parameter_pCentroTrabajoNumeroExterior {
             get {
                 return this.DataDefinition.ParameterFields[32];
             }
@@ -354,7 +354,7 @@ namespace SGSC {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_pCentroTrabajoNumeroExterior {
+        public CrystalDecisions.Shared.IParameterField Parameter_pCentroTrabajoNumeroInterior {
             get {
                 return this.DataDefinition.ParameterFields[33];
             }
@@ -362,7 +362,7 @@ namespace SGSC {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_pCentroTrabajoNumeroInterior {
+        public CrystalDecisions.Shared.IParameterField Parameter_pNombreReferencia1 {
             get {
                 return this.DataDefinition.ParameterFields[34];
             }
@@ -370,7 +370,7 @@ namespace SGSC {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_pNombreReferencia1 {
+        public CrystalDecisions.Shared.IParameterField Parameter_pApellidoPaternoReferencia1 {
             get {
                 return this.DataDefinition.ParameterFields[35];
             }
@@ -378,7 +378,7 @@ namespace SGSC {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_pApellidoPaternoReferencia1 {
+        public CrystalDecisions.Shared.IParameterField Parameter_pApellidoMaternoReferencia1 {
             get {
                 return this.DataDefinition.ParameterFields[36];
             }
@@ -386,7 +386,7 @@ namespace SGSC {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_pApellidoMaternoReferencia1 {
+        public CrystalDecisions.Shared.IParameterField Parameter_pRelacionReferencia1 {
             get {
                 return this.DataDefinition.ParameterFields[37];
             }
@@ -394,7 +394,7 @@ namespace SGSC {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_pRelacionReferencia1 {
+        public CrystalDecisions.Shared.IParameterField Parameter_pApellidoPaternoReferencia2 {
             get {
                 return this.DataDefinition.ParameterFields[38];
             }
@@ -402,7 +402,7 @@ namespace SGSC {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_pApellidoPaternoReferencia2 {
+        public CrystalDecisions.Shared.IParameterField Parameter_pApellidoMaternoReferencia2 {
             get {
                 return this.DataDefinition.ParameterFields[39];
             }
@@ -410,7 +410,7 @@ namespace SGSC {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_pApellidoMaternoReferencia2 {
+        public CrystalDecisions.Shared.IParameterField Parameter_pNombreReferencia2 {
             get {
                 return this.DataDefinition.ParameterFields[40];
             }
@@ -418,7 +418,7 @@ namespace SGSC {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_pNombreReferencia2 {
+        public CrystalDecisions.Shared.IParameterField Parameter_pRelacionReferencia2 {
             get {
                 return this.DataDefinition.ParameterFields[41];
             }
@@ -426,7 +426,7 @@ namespace SGSC {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_pRelacionReferencia2 {
+        public CrystalDecisions.Shared.IParameterField Parameter_pTelefonoReferencia2 {
             get {
                 return this.DataDefinition.ParameterFields[42];
             }
@@ -434,17 +434,9 @@ namespace SGSC {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_pTelefonoReferencia2 {
-            get {
-                return this.DataDefinition.ParameterFields[43];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
         public CrystalDecisions.Shared.IParameterField Parameter_pTelefonoReferencia1 {
             get {
-                return this.DataDefinition.ParameterFields[44];
+                return this.DataDefinition.ParameterFields[43];
             }
         }
     }

@@ -35,6 +35,13 @@ namespace SGSC.Pages
         public DocumentsManagerPage(int? creditRequestId)
         {
             InitializeComponent();
+            btnDownloadKit.Visibility = Visibility.Hidden;
+            btnDownloadKit.IsEnabled = false;
+            if(UserSession.Instance.Role == 2)
+            {
+                btnDownloadKit.IsEnabled = true;
+                btnDownloadKit.Visibility = Visibility.Visible;
+            }
             _context = new sgscEntities();
             this.creditRequestId = creditRequestId;
             LoadDocuments(creditRequestId);
@@ -147,10 +154,67 @@ namespace SGSC.Pages
             creditRequestDocumentForm.SetParameterValue("pPromocion", creditRequestDocument.PromotionName);
             creditRequestDocumentForm.SetParameterValue("pCreationDate", creditRequestDocument.CreationDateRequest);
             creditRequestDocumentForm.SetParameterValue("pMonto", creditRequestDocument.Amount);
-            creditRequestDocumentForm.SetParameterValue("pPlazoSolicitado", creditRequestDocument);
-            creditRequestDocumentForm.SetParameterValue("pInteres", creditRequestDocument.PromotionName);
-            creditRequestDocumentForm.SetParameterValue("pProposito", creditRequestDocument.PromotionName);
-            creditRequestDocumentForm.SetParameterValue("pClabe", creditRequestDocument.PromotionName);
+            creditRequestDocumentForm.SetParameterValue("pPlazoSolicitado", CreditRequestDocument.RequestPaymentIntervalToString((CreditRequestDocument.RequestPaymentInterval)creditRequestDocument.PaymentsInterval));
+            creditRequestDocumentForm.SetParameterValue("pInteres", creditRequestDocument.InterestRate);
+            creditRequestDocumentForm.SetParameterValue("pProposito", creditRequestDocument.Purpose);
+            creditRequestDocumentForm.SetParameterValue("pClabe", creditRequestDocument.InterbankCode);
+            creditRequestDocumentForm.SetParameterValue("pBankName", creditRequestDocument.BankName);
+            creditRequestDocumentForm.SetParameterValue("pApellidoPaterno", creditRequestDocument.FirstSurname);
+            creditRequestDocumentForm.SetParameterValue("pApellidoMaterno", creditRequestDocument.SecondSurname);
+            creditRequestDocumentForm.SetParameterValue("pName", creditRequestDocument.CustomerName);
+            creditRequestDocumentForm.SetParameterValue("pBirthDate", creditRequestDocument.BirthDate);
+            creditRequestDocumentForm.SetParameterValue("pGenero", creditRequestDocument.Genre);
+            creditRequestDocumentForm.SetParameterValue("pRFC", creditRequestDocument.Rfc);
+            creditRequestDocumentForm.SetParameterValue("pCURP", creditRequestDocument.Curp);
+            creditRequestDocumentForm.SetParameterValue("pColonia", creditRequestDocument.Colony);
+            creditRequestDocumentForm.SetParameterValue("pCodigoPostal", creditRequestDocument.ZipCode);
+            creditRequestDocumentForm.SetParameterValue("pEstado", creditRequestDocument.State);
+            creditRequestDocumentForm.SetParameterValue("pCalle", creditRequestDocument.Street);
+            creditRequestDocumentForm.SetParameterValue("pNumeroExterior", creditRequestDocument.ExternalNumber);
+            creditRequestDocumentForm.SetParameterValue("pNumeroInterior", creditRequestDocument.InternalNumber);
+            creditRequestDocumentForm.SetParameterValue("pTelefono1", creditRequestDocument.PhoneNumber1);
+            creditRequestDocumentForm.SetParameterValue("pTelefono2", creditRequestDocument.PhoneNumber2);
+            creditRequestDocumentForm.SetParameterValue("pCorreoElectronico", creditRequestDocument.Email);
+            creditRequestDocumentForm.SetParameterValue("pEstadoCivil", CreditRequestDocument.RequestCivilStatusToString((CreditRequestDocument.CivilStatuses)creditRequestDocument.CivilStatus));
+            creditRequestDocumentForm.SetParameterValue("pCentroTrabajoTelefono", creditRequestDocument.WorkCenterPhoneNumber);
+            creditRequestDocumentForm.SetParameterValue("pCentroTrabajoColonia", creditRequestDocument.WorkCenterColony);
+            creditRequestDocumentForm.SetParameterValue("pCentroTrabajoCalle", creditRequestDocument.WorkCenterStreet);
+            creditRequestDocumentForm.SetParameterValue("pCentroTrabajoNombre", creditRequestDocument.CenterName);
+            creditRequestDocumentForm.SetParameterValue("pCentroTrabajoCodigoPostal", creditRequestDocument.WorkCenterZipCode);
+            creditRequestDocumentForm.SetParameterValue("pCentroTrabajoNumeroExterior", creditRequestDocument.WorkCenterOutsideNumber);
+
+            if (creditRequestDocument.WorkCenterInnerNumber != null)
+            {
+                  creditRequestDocumentForm.SetParameterValue("pCentroTrabajoNumeroInterior", creditRequestDocument.WorkCenterInnerNumber);
+            }
+            else
+            {
+                creditRequestDocumentForm.SetParameterValue("pCentroTrabajoNumeroInterior", "");
+            }
+            
+
+            
+            var contacts = _context.Contacts.Where(c => c.CustomerId == creditRequestDocument.CustomerId).Take(2).ToList();
+
+            if (contacts.Count > 0)
+            {
+                creditRequestDocumentForm.SetParameterValue("pNombreReferencia1", contacts[0].Name);
+                creditRequestDocumentForm.SetParameterValue("pApellidoPaternoReferencia1", contacts[0].FirstSurname);
+                creditRequestDocumentForm.SetParameterValue("pApellidoMaternoReferencia1", contacts[0].SecondSurname);
+                creditRequestDocumentForm.SetParameterValue("pRelacionReferencia1", contacts[0].Relationship);
+                creditRequestDocumentForm.SetParameterValue("pTelefonoReferencia1", contacts[0].PhoneNumber);
+            }
+
+            if (contacts.Count > 1)
+            {
+                creditRequestDocumentForm.SetParameterValue("pNombreReferencia2", contacts[1].Name);
+                creditRequestDocumentForm.SetParameterValue("pApellidoPaternoReferencia2", contacts[1].FirstSurname);
+                creditRequestDocumentForm.SetParameterValue("pApellidoMaternoReferencia2", contacts[1].SecondSurname);
+                creditRequestDocumentForm.SetParameterValue("pRelacionReferencia2", contacts[1].Relationship);
+                creditRequestDocumentForm.SetParameterValue("pTelefonoReferencia2", contacts[1].PhoneNumber);
+            }
+
+
 
             SaveFileDialog saveFileDialog = new SaveFileDialog
             {
@@ -197,7 +261,9 @@ namespace SGSC.Pages
 
         private void DownloadDocumentKit_Click(object sender, RoutedEventArgs e)
         {
-            
+            DownloadSignedCreditRequestForm_Click(sender, e);
+            DownloadSignedCreditContractCoverSheet_Click(sender, e);
+            DownloadSignedDirectDebitAuthorization_Click(sender, e);
         }
 
 

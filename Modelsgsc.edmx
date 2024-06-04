@@ -235,6 +235,7 @@ warning 6002: The table/view 'sgsc.dbo.CreditRequestDocument' does not have a pr
             <PropertyRef Name="PromotionName" />
             <PropertyRef Name="CreditRequestId" />
             <PropertyRef Name="PaymentsInterval" />
+            <PropertyRef Name="CustomerId" />
           </Key>
           <Property Name="FileNumber" Type="nvarchar(max)" />
           <Property Name="Amount" Type="float" />
@@ -276,6 +277,7 @@ warning 6002: The table/view 'sgsc.dbo.CreditRequestDocument' does not have a pr
           <Property Name="PromotionName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="CreditRequestId" Type="int" Nullable="false" />
           <Property Name="PaymentsInterval" Type="int" Nullable="false" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'sgsc.dbo.DomicilePaymentsAuth' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -580,7 +582,8 @@ warning 6002: The table/view 'sgsc.dbo.LayoutPayment' does not have a primary ke
     [CreditRequestDocument].[Email] AS [Email], 
     [CreditRequestDocument].[PromotionName] AS [PromotionName], 
     [CreditRequestDocument].[CreditRequestId] AS [CreditRequestId], 
-    [CreditRequestDocument].[PaymentsInterval] AS [PaymentsInterval]
+    [CreditRequestDocument].[PaymentsInterval] AS [PaymentsInterval], 
+    [CreditRequestDocument].[CustomerId] AS [CustomerId]
     FROM [dbo].[CreditRequestDocument] AS [CreditRequestDocument]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="DomicilePaymentsAuth" EntityType="Self.DomicilePaymentsAuth" store:Type="Views" store:Schema="dbo">
@@ -1104,6 +1107,7 @@ warning 6002: The table/view 'sgsc.dbo.LayoutPayment' does not have a primary ke
             <PropertyRef Name="PromotionName" />
             <PropertyRef Name="CreditRequestId" />
             <PropertyRef Name="PaymentsInterval" />
+            <PropertyRef Name="CustomerId" />
           </Key>
           <Property Name="FileNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Amount" Type="Double" />
@@ -1145,6 +1149,7 @@ warning 6002: The table/view 'sgsc.dbo.LayoutPayment' does not have a primary ke
           <Property Name="PromotionName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CreditRequestId" Type="Int32" Nullable="false" />
           <Property Name="PaymentsInterval" Type="Int32" Nullable="false" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="DomicilePaymentsAuth">
           <Key>
@@ -1490,6 +1495,7 @@ warning 6002: The table/view 'sgsc.dbo.LayoutPayment' does not have a primary ke
           <EntitySetMapping Name="CreditRequestDocuments">
             <EntityTypeMapping TypeName="sgscModel.CreditRequestDocument">
               <MappingFragment StoreEntitySet="CreditRequestDocument">
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
                 <ScalarProperty Name="PaymentsInterval" ColumnName="PaymentsInterval" />
                 <ScalarProperty Name="CreditRequestId" ColumnName="CreditRequestId" />
                 <ScalarProperty Name="PromotionName" ColumnName="PromotionName" />

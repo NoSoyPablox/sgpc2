@@ -187,6 +187,7 @@
     <Compile Include="Model\CreditCardWithNames.cs" />
     <Compile Include="Model\CreditPolicyWithStatus.cs" />
     <Compile Include="Model\CreditRequest.cs" />
+    <Compile Include="Model\CreditRequestDocument.cs" />
     <Compile Include="Model\Customer.cs" />
     <Compile Include="Model\Document.cs" />
     <Compile Include="Model\Employee.cs" />
