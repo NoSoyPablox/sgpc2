@@ -20,6 +20,7 @@ using Microsoft.Win32;
 using SGSC.Utils;
 using CrystalDecisions.Shared;
 using CrystalDecisions.CrystalReports.Engine;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace SGSC.Pages
 {
@@ -220,7 +221,7 @@ namespace SGSC.Pages
             {
                 Filter = "PDF files (.pdf)|.pdf",
                 Title = "Guardar Documento de Solicitud de Crédito",
-                FileName = "CreditRequestForm.pdf"
+                FileName = $"CreditRequestForm_{creditRequestDocument.FileNumber}_.pdf"
             };
 
             bool? result = saveFileDialog.ShowDialog();
