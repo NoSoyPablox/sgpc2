@@ -220,6 +220,12 @@ namespace SGSC.Pages
             }
 
 
+            report.SetParameterValue("pClientName", creditOpeningForm.Name + " " + creditOpeningForm.FirstSurname + " " + creditOpeningForm.SecondSurname);
+            report.SetParameterValue("pAnualInterest", creditOpeningForm.InterestRate);
+            report.SetParameterValue("pRequestedAmount", creditOpeningForm.AmountRequested);
+            report.SetParameterValue("pTotalAmount", creditOpeningForm.Amount);
+            report.SetParameterValue("pPaymentAmount", creditOpeningForm.PaymentsAmount);
+            report.SetParameterValue("pTimePeriod", creditOpeningForm.TimePeriod);
 
             SaveFileDialog saveFileDialog = new SaveFileDialog
             {
