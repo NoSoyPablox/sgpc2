@@ -38,6 +38,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -109,6 +112,13 @@
     </Compile>
     <Compile Include="CreditRequest.cs">
       <DependentUpon>Modelsgsc.tt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CreditRequest1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CreditRequest.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="CreditRequestCreditPolicy.cs">
       <DependentUpon>Modelsgsc.tt</DependentUpon>
@@ -168,7 +178,9 @@
     <Compile Include="Model\BankAccount.cs" />
     <Compile Include="Model\CreditCardWithNames.cs" />
     <Compile Include="Model\CreditPolicyWithStatus.cs" />
-    <Compile Include="Model\CreditRequest.cs" />
+    <Compile Include="Model\CreditRequest.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Model\Customer.cs" />
     <Compile Include="Model\Document.cs" />
     <Compile Include="Model\Employee.cs" />
@@ -467,6 +479,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="CreditRequest.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CreditRequest1.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -500,6 +516,7 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Arrow-Icon.png" />
@@ -558,7 +575,9 @@
       <LastGenOutput>Modelsgsc.cs</LastGenOutput>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Documents\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
