@@ -235,6 +235,7 @@ advertencia 6002: La tabla o vista 'sgsc.dbo.CreditRequestDocument' no tiene def
             <PropertyRef Name="PromotionName" />
             <PropertyRef Name="CreditRequestId" />
             <PropertyRef Name="PaymentsInterval" />
+            <PropertyRef Name="CustomerId" />
           </Key>
           <Property Name="FileNumber" Type="nvarchar(max)" />
           <Property Name="Amount" Type="float" />
@@ -276,6 +277,7 @@ advertencia 6002: La tabla o vista 'sgsc.dbo.CreditRequestDocument' no tiene def
           <Property Name="PromotionName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="CreditRequestId" Type="int" Nullable="false" />
           <Property Name="PaymentsInterval" Type="int" Nullable="false" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'sgsc.dbo.DomicilePaymentsAuth' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -577,7 +579,8 @@ advertencia 6002: La tabla o vista 'sgsc.dbo.LayoutPayment' no tiene definida ni
     [CreditRequestDocument].[Email] AS [Email], 
     [CreditRequestDocument].[PromotionName] AS [PromotionName], 
     [CreditRequestDocument].[CreditRequestId] AS [CreditRequestId], 
-    [CreditRequestDocument].[PaymentsInterval] AS [PaymentsInterval]
+    [CreditRequestDocument].[PaymentsInterval] AS [PaymentsInterval], 
+    [CreditRequestDocument].[CustomerId] AS [CustomerId]
     FROM [dbo].[CreditRequestDocument] AS [CreditRequestDocument]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="DomicilePaymentsAuth" EntityType="Self.DomicilePaymentsAuth" store:Type="Views" store:Schema="dbo">
@@ -1099,6 +1102,7 @@ advertencia 6002: La tabla o vista 'sgsc.dbo.LayoutPayment' no tiene definida ni
             <PropertyRef Name="PromotionName" />
             <PropertyRef Name="CreditRequestId" />
             <PropertyRef Name="PaymentsInterval" />
+            <PropertyRef Name="CustomerId" />
           </Key>
           <Property Name="FileNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Amount" Type="Double" />
@@ -1140,6 +1144,7 @@ advertencia 6002: La tabla o vista 'sgsc.dbo.LayoutPayment' no tiene definida ni
           <Property Name="PromotionName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CreditRequestId" Type="Int32" Nullable="false" />
           <Property Name="PaymentsInterval" Type="Int32" Nullable="false" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="DomicilePaymentsAuth">
           <Key>
@@ -1482,6 +1487,7 @@ advertencia 6002: La tabla o vista 'sgsc.dbo.LayoutPayment' no tiene definida ni
           <EntitySetMapping Name="CreditRequestDocuments">
             <EntityTypeMapping TypeName="sgscModel.CreditRequestDocument">
               <MappingFragment StoreEntitySet="CreditRequestDocument">
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
                 <ScalarProperty Name="PaymentsInterval" ColumnName="PaymentsInterval" />
                 <ScalarProperty Name="CreditRequestId" ColumnName="CreditRequestId" />
                 <ScalarProperty Name="PromotionName" ColumnName="PromotionName" />

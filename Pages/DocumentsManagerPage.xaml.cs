@@ -139,10 +139,17 @@ namespace SGSC.Pages
         {
             //use CreditOpeningForm class wich is a sql view
             CreditOpeningForm creditOpeningForm = _context.CreditOpeningForms.FirstOrDefault(cof => cof.CreditRequestId == creditRequestId);
-            if (creditOpeningForm == null)
+            //obtain first payment date
+            var payment = _context.Payments.FirstOrDefault(p => p.CreditRequestId == creditRequestId);
+            string periodicidad = "";
+            switch (creditOpeningForm.PaymentsInterval)
             {
-                MessageBox.Show("No se encontró la información necesaria para generar el documento.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
+                case 1:
+                    periodicidad = "Los pagos serán cada 15 dias";
+                    break;
+                case 2:
+                    periodicidad = "Los pagos serán el dia " + payment.PaymentDate.ToString();
+                    break;
             }
 
             CreditOpeningFormReport report = new CreditOpeningFormReport();
@@ -153,6 +160,8 @@ namespace SGSC.Pages
             report.SetParameterValue("pTotalAmount", creditOpeningForm.Amount);
             report.SetParameterValue("pPaymentAmount", creditOpeningForm.PaymentsAmount);
             report.SetParameterValue("pTimePeriod", creditOpeningForm.TimePeriod);
+            report.SetParameterValue("pFirstPaymentDate", payment.PaymentDate);
+            report.SetParameterValue("pInterval", periodicidad);
 
             //Exportar a pdf
             SaveFileDialog saveFileDialog = new SaveFileDialog

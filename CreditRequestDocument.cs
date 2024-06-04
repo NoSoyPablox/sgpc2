@@ -54,5 +54,6 @@ namespace SGSC
         public string PromotionName { get; set; }
         public int CreditRequestId { get; set; }
         public int PaymentsInterval { get; set; }
+        public int CustomerId { get; set; }
     }
 }
