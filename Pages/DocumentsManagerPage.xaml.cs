@@ -266,7 +266,45 @@ namespace SGSC.Pages
 
         private void GenerateDocumentCreditOpeningForm(Document.DocumentTypes documentType)
         {
+            //use CreditOpeningForm class wich is a sql view
+            CreditOpeningForm creditOpeningForm = _context.CreditOpeningForms.FirstOrDefault(cof => cof.CreditRequestId == creditRequestId);
+            //obtain first payment date
+            var payment = _context.Payments.FirstOrDefault(p => p.CreditRequestId == creditRequestId);
+            string periodicidad = "";
+            switch (creditOpeningForm.PaymentsInterval)
+            {
+                case 1:
+                    periodicidad = "Los pagos serán cada 15 dias";
+                    break;
+                case 2:
+                    periodicidad = "Los pagos serán el dia " + payment.PaymentDate.ToString();
+                    break;
+            }
 
+            CreditOpeningFormReport report = new CreditOpeningFormReport();
+
+            report.SetParameterValue("pClientName", creditOpeningForm.Name + " " + creditOpeningForm.FirstSurname + " " + creditOpeningForm.SecondSurname);
+            report.SetParameterValue("pAnualInterest", creditOpeningForm.InterestRate);
+            report.SetParameterValue("pRequestedAmount", creditOpeningForm.AmountRequested);
+            report.SetParameterValue("pTotalAmount", creditOpeningForm.Amount);
+            report.SetParameterValue("pPaymentAmount", creditOpeningForm.PaymentsAmount);
+            report.SetParameterValue("pTimePeriod", creditOpeningForm.TimePeriod);
+            report.SetParameterValue("pFirstPaymentDate", payment.PaymentDate);
+            report.SetParameterValue("pInterval", periodicidad);
+
+            //Exportar a pdf
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                Filter = "PDF Files (*.pdf)|*.pdf",
+                Title = "Save Document",
+                FileName = "reportePrueba.pdf"
+            };
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                report.ExportToDisk(ExportFormatType.PortableDocFormat, saveFileDialog.FileName);
+                MessageBox.Show("Documento generado con éxito.");
+            }
         }
 
 
