@@ -12,13 +12,17 @@ namespace SGSC
     using System;
     using System.Collections.Generic;
     
-    public partial class CreditRequestCreditPolicy
+    public partial class CreditOpeningForm
     {
-        public int IdCreditRequestCreditPolicy { get; set; }
-        public Nullable<int> CreditPolicyId { get; set; }
+        public Nullable<double> Amount { get; set; }
+        public Nullable<double> InterestRate { get; set; }
+        public Nullable<double> AmountRequested { get; set; }
+        public int PaymentsInterval { get; set; }
+        public Nullable<decimal> PaymentsAmount { get; set; }
         public int CreditRequestId { get; set; }
-    
-        public virtual CustomerContactInfo CustomerContactInfo { get; set; }
-        public virtual Contact Contact { get; set; }
+        public string Name { get; set; }
+        public string FirstSurname { get; set; }
+        public string SecondSurname { get; set; }
+        public Nullable<int> TimePeriod { get; set; }
     }
 }

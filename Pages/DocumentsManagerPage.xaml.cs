@@ -18,6 +18,7 @@ using System.Windows.Shapes;
 using System.Xml.Linq;
 using Microsoft.Win32;
 using SGSC.Utils;
+using CrystalDecisions.Shared;
 
 namespace SGSC.Pages
 {
@@ -114,12 +115,17 @@ namespace SGSC.Pages
             {
                 SaveFileDialog saveFileDialog = new SaveFileDialog
                 {
-                    FileName = document.FileName
+                    FileName = document.FileName,
+                    Filter = "PDF Files (*.pdf)|*.pdf" // Set the filter to save as PDF
                 };
 
                 if (saveFileDialog.ShowDialog() == true)
                 {
-                    File.WriteAllBytes(saveFileDialog.FileName, document.FileContent);
+                    using (FileStream fileStream = new FileStream(saveFileDialog.FileName, FileMode.Create))
+                    {
+                        fileStream.Write(document.FileContent, 0, document.FileContent.Length);
+                    }
+
                     MessageBox.Show("Documento descargado con éxito.");
                 }
             }
@@ -131,9 +137,36 @@ namespace SGSC.Pages
 
         private void GenerateDocument(Document.DocumentTypes documentType)
         {
-            // Logic to generate document using Crystal Reports
-            // Example:
-            // CrystalReportGenerator.Generate(documentType, creditRequestId);
+            //use CreditOpeningForm class wich is a sql view
+            CreditOpeningForm creditOpeningForm = _context.CreditOpeningForms.FirstOrDefault(cof => cof.CreditRequestId == creditRequestId);
+            if (creditOpeningForm == null)
+            {
+                MessageBox.Show("No se encontró la información necesaria para generar el documento.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            CreditOpeningFormReport report = new CreditOpeningFormReport();
+
+            report.SetParameterValue("pClientName", creditOpeningForm.Name + " " + creditOpeningForm.FirstSurname + " " + creditOpeningForm.SecondSurname);
+            report.SetParameterValue("pAnualInterest", creditOpeningForm.InterestRate);
+            report.SetParameterValue("pRequestedAmount", creditOpeningForm.AmountRequested);
+            report.SetParameterValue("pTotalAmount", creditOpeningForm.Amount);
+            report.SetParameterValue("pPaymentAmount", creditOpeningForm.PaymentsAmount);
+            report.SetParameterValue("pTimePeriod", creditOpeningForm.TimePeriod);
+
+            //Exportar a pdf
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                Filter = "PDF Files (*.pdf)|*.pdf",
+                Title = "Save Document",
+                FileName = "reportePrueba.pdf"
+            };
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                report.ExportToDisk(ExportFormatType.PortableDocFormat, saveFileDialog.FileName);
+                MessageBox.Show("Documento generado con éxito.");
+            }
         }
 
         private void DownloadDocumentKit_Click(object sender, RoutedEventArgs e)

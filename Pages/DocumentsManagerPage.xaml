@@ -38,7 +38,7 @@
             <!-- Carátula de Contrato Section -->
             <GroupBox Header="Carátula de Contrato" Margin="10,2,10,10" Grid.Row="2">
                 <StackPanel>
-                    <Button Content="Generar Carátula de Contrato" Click="GenerateCreditContractCoverSheet_Click" Style="{StaticResource ButtonStyleCancel}" />
+                    <Button x:Name="btnGenerateCreditOpeningForm" Content="Generar Carátula de Contrato" Click="GenerateCreditContractCoverSheet_Click" Style="{StaticResource ButtonStyleCancel}" />
                     <Button Content="Subir Carátula de Contrato Firmada" Click="UploadSignedCreditContractCoverSheet_Click" Style="{StaticResource ButtonStyleConfirm}" />
                     <Button Content="Descargar Carátula de Contrato Firmada" Click="DownloadSignedCreditContractCoverSheet_Click" Style="{StaticResource ButtonStyleDownload}"/>
                 </StackPanel>
