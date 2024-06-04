@@ -4,17 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace SGSC.Pages
 {
@@ -47,13 +39,22 @@ namespace SGSC.Pages
                 using (sgscEntities db = new sgscEntities())
                 {
                     var customerContacts = db.Contacts.Where(ba => ba.CustomerId == customerId).ToArray();
-                    if(customerContacts.Length > 0)
+                    if (customerContacts.Length > 0)
                     {
                         tbName.Text = customerContacts[0].Name;
                         tbFirstSurname.Text = customerContacts[0].FirstSurname;
                         tbSecondSurname.Text = customerContacts[0].SecondSurname;
                         tbPhoneNumber.Text = customerContacts[0].PhoneNumber;
                         reference1Id = customerContacts[0].ContactId;
+                        //set the relationship
+                        foreach (ComboBoxItem item in cbRelationship1.Items)
+                        {
+                            if (item.Content.ToString() == customerContacts[0].Relationship)
+                            {
+                                cbRelationship1.SelectedItem = item;
+                                break;
+                            }
+                        }
                     }
 
                     if (customerContacts.Length > 1)
@@ -63,6 +64,16 @@ namespace SGSC.Pages
                         tbSecondSurname2.Text = customerContacts[1].SecondSurname;
                         tbPhoneNumber2.Text = customerContacts[1].PhoneNumber;
                         reference2Id = customerContacts[1].ContactId;
+
+                        //set the relationship
+                        foreach (ComboBoxItem item in cbRelationship2.Items)
+                        {
+                            if (item.Content.ToString() == customerContacts[1].Relationship)
+                            {
+                                cbRelationship2.SelectedItem = item;
+                                break;
+                            }
+                        }
                     }
                 }
             }
@@ -83,12 +94,17 @@ namespace SGSC.Pages
                 return;
             }
 
-            if(!phoneNumbers.All(phoneNumber => TextValidator.ValidateTextNumeric(phoneNumber, 10, 10, false)))
+            if (!phoneNumbers.All(phoneNumber => TextValidator.ValidateTextNumeric(phoneNumber, 10, 10, false)))
             {
                 MessageBox.Show("Los campos de teléfono no cumplen con el formato correcto", "Campos incorrectos", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            
+            if (cbRelationship1.SelectedIndex == -1 || cbRelationship2.SelectedIndex == -1)
+            {
+                MessageBox.Show("Debe seleccionar la relación de los contactos", "Campos incompletos", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             //validate the fields
             if (Utils.TextValidator.ValidateMultipleNames(names))
             {
@@ -102,7 +118,8 @@ namespace SGSC.Pages
                         contact1.SecondSurname = tbSecondSurname.Text;
                         contact1.PhoneNumber = tbPhoneNumber.Text;
                         contact1.CustomerId = customerId;
-                        contact1.Relationship = "Primo";
+                        ComboBoxItem item1 = (ComboBoxItem)cbRelationship1.SelectedItem;
+                        contact1.Relationship = item1.Content.ToString();
                         if (reference1Id != null)
                         {
                             contact1.ContactId = reference1Id.Value;
@@ -115,7 +132,10 @@ namespace SGSC.Pages
                         contact2.SecondSurname = tbSecondSurname2.Text;
                         contact2.PhoneNumber = tbPhoneNumber2.Text;
                         contact2.CustomerId = customerId;
-                        contact2.Relationship = "Primo";
+                        //get selected item 
+                        ComboBoxItem item2 = (ComboBoxItem)cbRelationship2.SelectedItem;
+                        //set the relationship of the contact to the content of the selected item
+                        contact2.Relationship = item2.Content.ToString();
                         if (reference2Id != null)
                         {
                             contact2.ContactId = reference2Id.Value;
