@@ -199,14 +199,13 @@ namespace SGSC.Pages
                     registerExistingTransferAccount();
                     registerExistingDirectAccount();
                     MessageBox.Show("Cuentas bancarias guardadas exitosamente.");
-                    App.Current.MainFrame.Content = new RegisterCreditRequest(customerId, creditRequestId);
+                    App.Current.MainFrame.Content = new DocumentsManagerPage(creditRequestId);
                 }
                 else
                 {
                     registerNewRequestTransfer();
                     registerNewRequestDirectAccount();
-                    MessageBox.Show("Cuentas bancarias guardadas exitosamente, aqui deberias viajar a ver los pagos que hizo cardone");
-                    App.Current.MainFrame.Content = new HomePageCreditAdvisor();
+                    App.Current.MainFrame.Content = new DocumentsManagerPage(creditRequestId);
                 }
             }
             catch (Exception ex)
@@ -247,7 +246,6 @@ namespace SGSC.Pages
 
                             context.SaveChanges();
                             
-                            MessageBox.Show("Has elegido la cuenta del cliente y elegido como cuenta de la transferencia");
                         }
 
                         break;
@@ -262,7 +260,6 @@ namespace SGSC.Pages
                             requestTransferAccount.AccountType = (int)BankAccount.AccountTypes.TransferAccount;
 
                             context.SaveChanges();
-                            MessageBox.Show("Has elegido la cuenta asociada con la solicitud");
                         }
                         break;
                 }
@@ -299,7 +296,6 @@ namespace SGSC.Pages
 
 
                             context.SaveChanges();
-                            MessageBox.Show("Has elegido la cuenta del cliente y elegido como cuenta de la transferencia");
                         }
 
                         break;
@@ -315,7 +311,6 @@ namespace SGSC.Pages
                             //update database
                             
                             context.SaveChanges();
-                            MessageBox.Show("Has elegido la cuenta asociada con la solicitud");
                         }
                         break;
                 }

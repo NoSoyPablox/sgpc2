@@ -23,6 +23,9 @@ namespace SGSC.Pages
     public partial class CreditRequestPaymentsPreview : Page
     {
         public int CreditRequestId { get; set; }
+        public int customerId { get; set; }
+
+        public bool edit { get; set;}
 
         public class CreditRequest
         {
@@ -50,13 +53,15 @@ namespace SGSC.Pages
             public string EfficiencyString => $"{Efficiency:F2}%";
         }
 
-        public CreditRequestPaymentsPreview(int creditRequestId)
+        public CreditRequestPaymentsPreview(int creditRequestId, int customerId, bool edit)
         {
             InitializeComponent();
             CreditRequestId = creditRequestId;
             UserSessionFrame.Content = new UserSessionFrame();
             creditAdvisorSidebar.Content = new CreditAdvisorSidebar("creditRequest");
             this.Loaded += CreditRequestPaymentsPreviewPage_Loaded;
+            this.customerId = customerId;
+            this.edit = edit;
         }
 
         private void CreditRequestPaymentsPreviewPage_Loaded(object sender, RoutedEventArgs e)
@@ -266,6 +271,12 @@ namespace SGSC.Pages
         private int? ObtainCreditRequestId()
         {
             return CreditRequestId;
+        }
+
+        private void btnContinue_Click(object sender, RoutedEventArgs e)
+        {
+            //
+            App.Current.MainFrame.Content = new CustomerBankAccountsPage(this.customerId, this.CreditRequestId , this.edit);
         }
     }
 }

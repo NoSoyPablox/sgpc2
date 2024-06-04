@@ -67,5 +67,6 @@
             </Grid>
         </Grid>
         <Label Content="Visualización de calendario de pagos" HorizontalAlignment="Left" Margin="160,28,0,0" VerticalAlignment="Top" Width="454" FontWeight="Bold" FontSize="24" />
+        <Button x:Name="btnContinue" Style="{StaticResource ButtonStyleConfirm}" Content="Continuar" FontSize="22" HorizontalAlignment="Left" Margin="1045,653,0,0" VerticalAlignment="Top" Width="180" Height="54" Click="btnContinue_Click"/>
     </Grid>
 </Page>

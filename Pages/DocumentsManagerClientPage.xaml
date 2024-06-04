@@ -11,8 +11,8 @@
 
     <Grid Background="White">
 
-        <Frame Name="UserSessionFrame" NavigationUIVisibility="Hidden" Margin="834,10,74,624"/>
-
+        <Frame Name="UserSessionFrame" NavigationUIVisibility="Hidden" Margin="831,43,38,592"/>
+        <Frame Name="StepsSidebarFrame" NavigationUIVisibility="Hidden" Margin="27,138,1009,28"/>
 
         <Grid Margin="241,140,46,10" RenderTransformOrigin="0.502,0.571">
             <Grid.RowDefinitions>
@@ -44,5 +44,7 @@
 
 
         <Label Content="Gestión de documentos de expediente del cliente" HorizontalAlignment="Left" Margin="241,140,0,0" VerticalAlignment="Top" Width="639" FontWeight="Bold" FontSize="24" />
+        <Button x:Name="btnCancel" Style="{StaticResource ButtonStyleCancel}" Content="Cancelar" FontSize="15" HorizontalAlignment="Left" Margin="818,614,0,0" VerticalAlignment="Top" Height="54" Width="180" Click="CancelRegister"/>
+        <Button x:Name="btnContinue" Style="{StaticResource ButtonStyleConfirm}" Content="Continuar" FontSize="22" HorizontalAlignment="Left" Margin="1048,614,0,0" VerticalAlignment="Top" Width="180" Height="54" Click="btnContinue_Click"/>
     </Grid>
 </Page>

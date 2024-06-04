@@ -34,6 +34,7 @@ namespace SGSC.Frames
             WorkCenterActive.Visibility = Visibility.Hidden;
             ContactInfoActive.Visibility = Visibility.Hidden;
             ReferencesActive.Visibility = Visibility.Hidden;
+            DocumentationActive.Visibility = Visibility.Hidden;
 
             switch (active)
             {
@@ -54,6 +55,9 @@ namespace SGSC.Frames
                     break;
                 case "BankAccounts":
                     PersonalInfoActive.Visibility = Visibility.Visible;
+                    break;
+                case "Documents":
+                    DocumentationActive.Visibility = Visibility.Visible;
                     break;
             }
         }

@@ -100,8 +100,8 @@
             </StackPanel>
 
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal" Margin="414,0,0,0" Width="411" Height="52" RenderTransformOrigin="0.5,0.5">
-                <Button Content="Ver Detalles" Style="{StaticResource Button}" Background="#FFFCDC2A" FontSize="22" Height="33" Width="170" Click="ViewCreditRequestsDetails"/>
-                <Button Content="Corregir Solicitud" Style="{StaticResource Button}" Background="#FF114232" Foreground="White" FontSize="22" Click="CorrectCredtiRequests" Height="32" RenderTransformOrigin="0.5,0.5" Width="197"/>
+                <Button x:Name="btnViewDetails" Content="Ver Detalles" Style="{StaticResource Button}" Background="#FFFCDC2A" FontSize="22" Height="33" Width="170" Click="ViewCreditRequestsDetails"/>
+                <Button x:Name="btnModifyRequest" Content="Corregir Solicitud" Style="{StaticResource Button}" Background="#FF114232" Foreground="White" FontSize="22" Click="CorrectCredtiRequests" Height="32" RenderTransformOrigin="0.5,0.5" Width="197"/>
             </StackPanel>
 
 

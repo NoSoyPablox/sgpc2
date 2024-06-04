@@ -42,7 +42,18 @@ namespace SGSC.Pages
             retrieveCreditPromotions();
             if (idCreditRequest != -1)
             {
+
                 retrieveCreditRequestData();
+
+                if(this.CreditRequest.Status == 4)
+                {
+                    btnRegister.IsEnabled = false;
+                    btnRegister.Visibility = Visibility.Hidden;
+                    tbPurpose.IsEnabled = false;
+                    tbAmount.IsEnabled = false;
+                    cbCreditPromotions.IsEnabled = false;
+                }
+
                 retrieveCredidPromotionSelectedIfAvailable();
                 btnModifyCustomer.IsEnabled = true;
                 btnModifyCustomer.Visibility = Visibility.Visible;
@@ -286,11 +297,12 @@ namespace SGSC.Pages
                         {
                             registerMonthlyPayments(filenumber);
                         }
-                        App.Current.MainFrame.Content = new CreditRequestPaymentsPreview(cr.CreditRequestId);
+                        App.Current.MainFrame.Content = new CreditRequestPaymentsPreview(cr.CreditRequestId, this.idCustomer, false);
                     }
                     else
                     {
                         MessageBox.Show("Solicitud de crédito actualizada exitosamente");
+                        App.Current.MainFrame.Content = new CreditRequestPaymentsPreview(cr.CreditRequestId, this.idCustomer, true);
                     }
                 }
                 catch (Exception ex)

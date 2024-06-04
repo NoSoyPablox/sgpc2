@@ -58,6 +58,24 @@ namespace SGSC.Pages
             creditAdvisorSidebar.Content = new CreditAdvisorSidebar("creditRequest");
             GetCreditRequests();
             GetAllCreditRequests();
+            btnViewDetails.IsEnabled = false;
+            btnViewDetails.Visibility = Visibility.Hidden;
+
+            btnModifyRequest.IsEnabled = false;
+            btnModifyRequest.Visibility = Visibility.Hidden;
+
+            //if user session is credit advisor then activate button
+            if (UserSession.Instance.Role == 1)
+            {
+                btnModifyRequest.IsEnabled = true;
+                btnModifyRequest.Visibility = Visibility.Visible;
+            }
+            //if user session is analyst then activate button
+            if (UserSession.Instance.Role == 2)
+            {
+                btnViewDetails.IsEnabled = true;
+                btnViewDetails.Visibility = Visibility.Visible;
+            }
         }
 
         private void NextPageRequest(object sender, RoutedEventArgs e)

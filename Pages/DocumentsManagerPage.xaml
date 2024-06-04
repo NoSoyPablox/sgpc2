@@ -57,5 +57,6 @@
         <Button Content="Descargar Kit de Documentos" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="662,640,0,0" Style="{StaticResource ButtonStyleConfirm}" Width="168" Height="40" Click="DownloadDocumentKit_Click"/>
 
         <Label Content="Gestión de documentos de solicitud de crédito" HorizontalAlignment="Left" Margin="261,98,0,0" VerticalAlignment="Top" Width="539" FontWeight="Bold" FontSize="24" />
+        <Button x:Name="btnContinue" Style="{StaticResource ButtonStyleConfirm}" Content="Continuar" FontSize="22" HorizontalAlignment="Left" Margin="1048,626,0,0" VerticalAlignment="Top" Width="180" Height="54" Click="btnContinue_Click"/>
     </Grid>
 </Page>

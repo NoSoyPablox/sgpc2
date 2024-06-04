@@ -13,7 +13,7 @@
 
         <Frame Name="UserSessionFrame" NavigationUIVisibility="Hidden" Margin="834,10,74,624"/>
 
-        <Frame Name="creditAdvisorSidebar" Margin="0,0,1172,0"/>
+        <Frame Name="CollectionExecutiveFrame" Margin="0,0,1172,0"/>
 
         <Grid Margin="118,75,22,67">
             <Grid.RowDefinitions>
