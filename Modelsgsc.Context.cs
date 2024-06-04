@@ -42,5 +42,8 @@ namespace SGSC
         public virtual DbSet<CreditPromotion> CreditPromotions { get; set; }
         public virtual DbSet<Document> Documents { get; set; }
         public virtual DbSet<LayoutPayment> LayoutPayments { get; set; }
+        public virtual DbSet<CreditOpeningForm> CreditOpeningForms { get; set; }
+        public virtual DbSet<CreditRequestDocument> CreditRequestDocuments { get; set; }
+        public virtual DbSet<DomicilePaymentsAuth> DomicilePaymentsAuths { get; set; }
     }
 }

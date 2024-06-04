@@ -104,6 +104,9 @@
     <Compile Include="CreditCondition.cs">
       <DependentUpon>Modelsgsc.tt</DependentUpon>
     </Compile>
+    <Compile Include="CreditOpeningForm.cs">
+      <DependentUpon>Modelsgsc.tt</DependentUpon>
+    </Compile>
     <Compile Include="CreditPolicy.cs">
       <DependentUpon>Modelsgsc.tt</DependentUpon>
     </Compile>
@@ -116,6 +119,9 @@
     <Compile Include="CreditRequestCreditPolicy.cs">
       <DependentUpon>Modelsgsc.tt</DependentUpon>
     </Compile>
+    <Compile Include="CreditRequestDocument.cs">
+      <DependentUpon>Modelsgsc.tt</DependentUpon>
+    </Compile>
     <Compile Include="Customer.cs">
       <DependentUpon>Modelsgsc.tt</DependentUpon>
     </Compile>
@@ -126,6 +132,9 @@
       <DependentUpon>Modelsgsc.tt</DependentUpon>
     </Compile>
     <Compile Include="Document.cs">
+      <DependentUpon>Modelsgsc.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DomicilePaymentsAuth.cs">
       <DependentUpon>Modelsgsc.tt</DependentUpon>
     </Compile>
     <Compile Include="Employee.cs">

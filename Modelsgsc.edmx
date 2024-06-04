@@ -203,6 +203,95 @@
           <Property Name="Customer_CustomerId" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'sgsc.dbo.CreditOpeningForm' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CreditOpeningForm">
+          <Key>
+            <PropertyRef Name="PaymentsInterval" />
+            <PropertyRef Name="CreditRequestId" />
+          </Key>
+          <Property Name="Amount" Type="float" />
+          <Property Name="InterestRate" Type="float" />
+          <Property Name="AmountRequested" Type="float" />
+          <Property Name="PaymentsInterval" Type="int" Nullable="false" />
+          <Property Name="PaymentsAmount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="CreditRequestId" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'sgsc.dbo.CreditRequestDocument' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CreditRequestDocument">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Genre" />
+            <PropertyRef Name="BirthDate" />
+            <PropertyRef Name="CivilStatus" />
+            <PropertyRef Name="Colony" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="Relationship" />
+            <PropertyRef Name="PromotionName" />
+          </Key>
+          <Property Name="FileNumber" Type="nvarchar(max)" />
+          <Property Name="Amount" Type="float" />
+          <Property Name="Purpose" Type="nvarchar(max)" />
+          <Property Name="InterestRate" Type="float" />
+          <Property Name="CreationDate" Type="datetime" />
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="InterbankCode" Type="nvarchar(max)" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CustomerName" Type="nvarchar(max)" />
+          <Property Name="FirstSurname" Type="nvarchar(max)" />
+          <Property Name="SecondSurname" Type="nvarchar(max)" />
+          <Property Name="Curp" Type="nvarchar(max)" />
+          <Property Name="Rfc" Type="nvarchar(max)" />
+          <Property Name="Genre" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="BirthDate" Type="datetime" Nullable="false" />
+          <Property Name="CivilStatus" Type="int" Nullable="false" />
+          <Property Name="Street" Type="nvarchar(max)" />
+          <Property Name="ZipCode" Type="nvarchar(max)" />
+          <Property Name="InternalNumber" Type="nvarchar(max)" />
+          <Property Name="ExternalNumber" Type="nvarchar(max)" />
+          <Property Name="Colony" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="State" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CenterName" Type="nvarchar" MaxLength="60" />
+          <Property Name="WorkCenterStreet" Type="nvarchar" MaxLength="60" />
+          <Property Name="WorkCenterColony" Type="nvarchar" MaxLength="60" />
+          <Property Name="InnerNumber" Type="int" />
+          <Property Name="OutsideNumber" Type="int" />
+          <Property Name="WorkCenterZipCode" Type="int" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="ContactName" Type="nvarchar(max)" />
+          <Property Name="ContactFirstSurname" Type="nvarchar(max)" />
+          <Property Name="ContactSecondSurname" Type="nvarchar(max)" />
+          <Property Name="Relationship" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ContactPhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber1" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber2" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="PromotionName" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'sgsc.dbo.DomicilePaymentsAuth' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DomicilePaymentsAuth">
+          <Key>
+            <PropertyRef Name="BankName" />
+            <PropertyRef Name="CreditRequestId" />
+          </Key>
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="FirstSurname" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber1" Type="nvarchar(max)" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="InterbankCode" Type="nvarchar(max)" />
+          <Property Name="CardNumber" Type="nvarchar(max)" />
+          <Property Name="BankName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="FileNumber" Type="nvarchar(max)" />
+          <Property Name="CreationDate" Type="datetime" />
+          <Property Name="TimePeriod" Type="int" />
+          <Property Name="EmployeeName" Type="nvarchar(max)" />
+          <Property Name="EmployeeFirstSurname" Type="nvarchar(max)" />
+          <Property Name="EmployeeSecondSurname" Type="nvarchar(max)" />
+          <Property Name="CreditRequestId" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'sgsc.dbo.LayoutPayment' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="LayoutPayment">
           <Key>
@@ -425,6 +514,76 @@ warning 6002: The table/view 'sgsc.dbo.LayoutPayment' does not have a primary ke
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Payments" EntityType="Self.Payments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WorkCenters" EntityType="Self.WorkCenters" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CreditOpeningForm" EntityType="Self.CreditOpeningForm" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CreditOpeningForm].[Amount] AS [Amount], 
+    [CreditOpeningForm].[InterestRate] AS [InterestRate], 
+    [CreditOpeningForm].[AmountRequested] AS [AmountRequested], 
+    [CreditOpeningForm].[PaymentsInterval] AS [PaymentsInterval], 
+    [CreditOpeningForm].[PaymentsAmount] AS [PaymentsAmount], 
+    [CreditOpeningForm].[CreditRequestId] AS [CreditRequestId]
+    FROM [dbo].[CreditOpeningForm] AS [CreditOpeningForm]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="CreditRequestDocument" EntityType="Self.CreditRequestDocument" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CreditRequestDocument].[FileNumber] AS [FileNumber], 
+    [CreditRequestDocument].[Amount] AS [Amount], 
+    [CreditRequestDocument].[Purpose] AS [Purpose], 
+    [CreditRequestDocument].[InterestRate] AS [InterestRate], 
+    [CreditRequestDocument].[CreationDate] AS [CreationDate], 
+    [CreditRequestDocument].[EmployeeId] AS [EmployeeId], 
+    [CreditRequestDocument].[InterbankCode] AS [InterbankCode], 
+    [CreditRequestDocument].[Name] AS [Name], 
+    [CreditRequestDocument].[CustomerName] AS [CustomerName], 
+    [CreditRequestDocument].[FirstSurname] AS [FirstSurname], 
+    [CreditRequestDocument].[SecondSurname] AS [SecondSurname], 
+    [CreditRequestDocument].[Curp] AS [Curp], 
+    [CreditRequestDocument].[Rfc] AS [Rfc], 
+    [CreditRequestDocument].[Genre] AS [Genre], 
+    [CreditRequestDocument].[BirthDate] AS [BirthDate], 
+    [CreditRequestDocument].[CivilStatus] AS [CivilStatus], 
+    [CreditRequestDocument].[Street] AS [Street], 
+    [CreditRequestDocument].[ZipCode] AS [ZipCode], 
+    [CreditRequestDocument].[InternalNumber] AS [InternalNumber], 
+    [CreditRequestDocument].[ExternalNumber] AS [ExternalNumber], 
+    [CreditRequestDocument].[Colony] AS [Colony], 
+    [CreditRequestDocument].[State] AS [State], 
+    [CreditRequestDocument].[CenterName] AS [CenterName], 
+    [CreditRequestDocument].[WorkCenterStreet] AS [WorkCenterStreet], 
+    [CreditRequestDocument].[WorkCenterColony] AS [WorkCenterColony], 
+    [CreditRequestDocument].[InnerNumber] AS [InnerNumber], 
+    [CreditRequestDocument].[OutsideNumber] AS [OutsideNumber], 
+    [CreditRequestDocument].[WorkCenterZipCode] AS [WorkCenterZipCode], 
+    [CreditRequestDocument].[PhoneNumber] AS [PhoneNumber], 
+    [CreditRequestDocument].[ContactName] AS [ContactName], 
+    [CreditRequestDocument].[ContactFirstSurname] AS [ContactFirstSurname], 
+    [CreditRequestDocument].[ContactSecondSurname] AS [ContactSecondSurname], 
+    [CreditRequestDocument].[Relationship] AS [Relationship], 
+    [CreditRequestDocument].[ContactPhoneNumber] AS [ContactPhoneNumber], 
+    [CreditRequestDocument].[PhoneNumber1] AS [PhoneNumber1], 
+    [CreditRequestDocument].[PhoneNumber2] AS [PhoneNumber2], 
+    [CreditRequestDocument].[Email] AS [Email], 
+    [CreditRequestDocument].[PromotionName] AS [PromotionName]
+    FROM [dbo].[CreditRequestDocument] AS [CreditRequestDocument]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DomicilePaymentsAuth" EntityType="Self.DomicilePaymentsAuth" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DomicilePaymentsAuth].[Name] AS [Name], 
+    [DomicilePaymentsAuth].[FirstSurname] AS [FirstSurname], 
+    [DomicilePaymentsAuth].[PhoneNumber1] AS [PhoneNumber1], 
+    [DomicilePaymentsAuth].[Amount] AS [Amount], 
+    [DomicilePaymentsAuth].[InterbankCode] AS [InterbankCode], 
+    [DomicilePaymentsAuth].[CardNumber] AS [CardNumber], 
+    [DomicilePaymentsAuth].[BankName] AS [BankName], 
+    [DomicilePaymentsAuth].[FileNumber] AS [FileNumber], 
+    [DomicilePaymentsAuth].[CreationDate] AS [CreationDate], 
+    [DomicilePaymentsAuth].[TimePeriod] AS [TimePeriod], 
+    [DomicilePaymentsAuth].[EmployeeName] AS [EmployeeName], 
+    [DomicilePaymentsAuth].[EmployeeFirstSurname] AS [EmployeeFirstSurname], 
+    [DomicilePaymentsAuth].[EmployeeSecondSurname] AS [EmployeeSecondSurname], 
+    [DomicilePaymentsAuth].[CreditRequestId] AS [CreditRequestId]
+    FROM [dbo].[DomicilePaymentsAuth] AS [DomicilePaymentsAuth]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="LayoutPayment" EntityType="Self.LayoutPayment" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [LayoutPayment].[FileNumber] AS [FileNumber], 
@@ -790,6 +949,9 @@ warning 6002: The table/view 'sgsc.dbo.LayoutPayment' does not have a primary ke
             <End Role="CreditRequest" EntitySet="CreditRequests" />
           </AssociationSet>
           <EntitySet Name="LayoutPayments" EntityType="sgscModel.LayoutPayment" />
+          <EntitySet Name="CreditOpeningForms" EntityType="sgscModel.CreditOpeningForm" />
+          <EntitySet Name="CreditRequestDocuments" EntityType="sgscModel.CreditRequestDocument" />
+          <EntitySet Name="DomicilePaymentsAuths" EntityType="sgscModel.DomicilePaymentsAuth" />
         </EntityContainer>
         <Association Name="CreditRequestBankAccount">
           <End Type="sgscModel.CreditRequest" Role="CreditRequest" Multiplicity="*" />
@@ -904,6 +1066,89 @@ warning 6002: The table/view 'sgsc.dbo.LayoutPayment' does not have a primary ke
           <Property Name="Amount" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="InterbankCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="CreditOpeningForm">
+          <Key>
+            <PropertyRef Name="PaymentsInterval" />
+            <PropertyRef Name="CreditRequestId" />
+          </Key>
+          <Property Name="Amount" Type="Double" />
+          <Property Name="InterestRate" Type="Double" />
+          <Property Name="AmountRequested" Type="Double" />
+          <Property Name="PaymentsInterval" Type="Int32" Nullable="false" />
+          <Property Name="PaymentsAmount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CreditRequestId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CreditRequestDocument">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Genre" />
+            <PropertyRef Name="BirthDate" />
+            <PropertyRef Name="CivilStatus" />
+            <PropertyRef Name="Colony" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="Relationship" />
+            <PropertyRef Name="PromotionName" />
+          </Key>
+          <Property Name="FileNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Double" />
+          <Property Name="Purpose" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InterestRate" Type="Double" />
+          <Property Name="CreationDate" Type="DateTime" Precision="3" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="InterbankCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FirstSurname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecondSurname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Curp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Rfc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Genre" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CivilStatus" Type="Int32" Nullable="false" />
+          <Property Name="Street" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ZipCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InternalNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ExternalNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Colony" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CenterName" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="WorkCenterStreet" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="WorkCenterColony" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="InnerNumber" Type="Int32" />
+          <Property Name="OutsideNumber" Type="Int32" />
+          <Property Name="WorkCenterZipCode" Type="Int32" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ContactName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ContactFirstSurname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ContactSecondSurname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Relationship" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ContactPhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PromotionName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DomicilePaymentsAuth">
+          <Key>
+            <PropertyRef Name="BankName" />
+            <PropertyRef Name="CreditRequestId" />
+          </Key>
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FirstSurname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="InterbankCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CardNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BankName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FileNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreationDate" Type="DateTime" Precision="3" />
+          <Property Name="TimePeriod" Type="Int32" />
+          <Property Name="EmployeeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EmployeeFirstSurname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EmployeeSecondSurname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreditRequestId" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1205,6 +1450,82 @@ warning 6002: The table/view 'sgsc.dbo.LayoutPayment' does not have a primary ke
                 <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="FileNumber" ColumnName="FileNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CreditOpeningForms">
+            <EntityTypeMapping TypeName="sgscModel.CreditOpeningForm">
+              <MappingFragment StoreEntitySet="CreditOpeningForm">
+                <ScalarProperty Name="CreditRequestId" ColumnName="CreditRequestId" />
+                <ScalarProperty Name="PaymentsAmount" ColumnName="PaymentsAmount" />
+                <ScalarProperty Name="PaymentsInterval" ColumnName="PaymentsInterval" />
+                <ScalarProperty Name="AmountRequested" ColumnName="AmountRequested" />
+                <ScalarProperty Name="InterestRate" ColumnName="InterestRate" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CreditRequestDocuments">
+            <EntityTypeMapping TypeName="sgscModel.CreditRequestDocument">
+              <MappingFragment StoreEntitySet="CreditRequestDocument">
+                <ScalarProperty Name="PromotionName" ColumnName="PromotionName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PhoneNumber2" ColumnName="PhoneNumber2" />
+                <ScalarProperty Name="PhoneNumber1" ColumnName="PhoneNumber1" />
+                <ScalarProperty Name="ContactPhoneNumber" ColumnName="ContactPhoneNumber" />
+                <ScalarProperty Name="Relationship" ColumnName="Relationship" />
+                <ScalarProperty Name="ContactSecondSurname" ColumnName="ContactSecondSurname" />
+                <ScalarProperty Name="ContactFirstSurname" ColumnName="ContactFirstSurname" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="WorkCenterZipCode" ColumnName="WorkCenterZipCode" />
+                <ScalarProperty Name="OutsideNumber" ColumnName="OutsideNumber" />
+                <ScalarProperty Name="InnerNumber" ColumnName="InnerNumber" />
+                <ScalarProperty Name="WorkCenterColony" ColumnName="WorkCenterColony" />
+                <ScalarProperty Name="WorkCenterStreet" ColumnName="WorkCenterStreet" />
+                <ScalarProperty Name="CenterName" ColumnName="CenterName" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Colony" ColumnName="Colony" />
+                <ScalarProperty Name="ExternalNumber" ColumnName="ExternalNumber" />
+                <ScalarProperty Name="InternalNumber" ColumnName="InternalNumber" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="CivilStatus" ColumnName="CivilStatus" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="Genre" ColumnName="Genre" />
+                <ScalarProperty Name="Rfc" ColumnName="Rfc" />
+                <ScalarProperty Name="Curp" ColumnName="Curp" />
+                <ScalarProperty Name="SecondSurname" ColumnName="SecondSurname" />
+                <ScalarProperty Name="FirstSurname" ColumnName="FirstSurname" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="InterbankCode" ColumnName="InterbankCode" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="InterestRate" ColumnName="InterestRate" />
+                <ScalarProperty Name="Purpose" ColumnName="Purpose" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="FileNumber" ColumnName="FileNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DomicilePaymentsAuths">
+            <EntityTypeMapping TypeName="sgscModel.DomicilePaymentsAuth">
+              <MappingFragment StoreEntitySet="DomicilePaymentsAuth">
+                <ScalarProperty Name="CreditRequestId" ColumnName="CreditRequestId" />
+                <ScalarProperty Name="EmployeeSecondSurname" ColumnName="EmployeeSecondSurname" />
+                <ScalarProperty Name="EmployeeFirstSurname" ColumnName="EmployeeFirstSurname" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="TimePeriod" ColumnName="TimePeriod" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="FileNumber" ColumnName="FileNumber" />
+                <ScalarProperty Name="BankName" ColumnName="BankName" />
+                <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
+                <ScalarProperty Name="InterbankCode" ColumnName="InterbankCode" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="PhoneNumber1" ColumnName="PhoneNumber1" />
+                <ScalarProperty Name="FirstSurname" ColumnName="FirstSurname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
