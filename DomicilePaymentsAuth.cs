@@ -17,7 +17,7 @@ namespace SGSC
         public string Name { get; set; }
         public string FirstSurname { get; set; }
         public string PhoneNumber1 { get; set; }
-        public Nullable<decimal> Amount { get; set; }
+        public Nullable<decimal> PaymentAmount { get; set; }
         public string InterbankCode { get; set; }
         public string CardNumber { get; set; }
         public string BankName { get; set; }
@@ -28,5 +28,7 @@ namespace SGSC
         public string EmployeeFirstSurname { get; set; }
         public string EmployeeSecondSurname { get; set; }
         public int CreditRequestId { get; set; }
+        public int PaymentsInterval { get; set; }
+        public string SecondSurname { get; set; }
     }
 }

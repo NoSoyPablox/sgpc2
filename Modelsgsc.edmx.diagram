@@ -43,10 +43,10 @@
         <EntityTypeShape EntityType="sgscModel.CreditPromotion" Width="1.5" PointX="10.5" PointY="1" />
         <EntityTypeShape EntityType="sgscModel.Document" Width="1.5" PointX="3" PointY="2.625" />
         <AssociationConnector Association="sgscModel.DocumentCreditRequest" />
-        <EntityTypeShape EntityType="sgscModel.LayoutPayment" Width="1.5" PointX="10.375" PointY="7.75" />
-        <EntityTypeShape EntityType="sgscModel.CreditOpeningForm" Width="1.5" PointX="13.25" PointY="4.875" />
-        <EntityTypeShape EntityType="sgscModel.CreditRequestDocument" Width="1.5" PointX="13.25" PointY="7.5" />
-        <EntityTypeShape EntityType="sgscModel.DomicilePaymentsAuth" Width="1.5" PointX="15.5" PointY="5.375" />
+        <EntityTypeShape EntityType="sgscModel.CreditOpeningForm" Width="1.5" PointX="15.125" PointY="3.625" />
+        <EntityTypeShape EntityType="sgscModel.CreditRequestDocument" Width="1.5" PointX="12.75" PointY="5.125" />
+        <EntityTypeShape EntityType="sgscModel.DomicilePaymentsAuth" Width="1.5" PointX="15" PointY="7.375" />
+        <EntityTypeShape EntityType="sgscModel.LayoutPayment" Width="1.5" PointX="10.125" PointY="8.625" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

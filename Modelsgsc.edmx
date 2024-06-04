@@ -215,13 +215,17 @@ warning 6002: The table/view 'sgsc.dbo.CreditOpeningForm' does not have a primar
           <Property Name="PaymentsInterval" Type="int" Nullable="false" />
           <Property Name="PaymentsAmount" Type="decimal" Precision="18" Scale="0" />
           <Property Name="CreditRequestId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="FirstSurname" Type="nvarchar(max)" />
+          <Property Name="SecondSurname" Type="nvarchar(max)" />
+          <Property Name="TimePeriod" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'sgsc.dbo.CreditRequestDocument' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CreditRequestDocument">
           <Key>
             <PropertyRef Name="EmployeeId" />
-            <PropertyRef Name="Name" />
+            <PropertyRef Name="BankName" />
             <PropertyRef Name="Genre" />
             <PropertyRef Name="BirthDate" />
             <PropertyRef Name="CivilStatus" />
@@ -234,10 +238,10 @@ warning 6002: The table/view 'sgsc.dbo.CreditRequestDocument' does not have a pr
           <Property Name="Amount" Type="float" />
           <Property Name="Purpose" Type="nvarchar(max)" />
           <Property Name="InterestRate" Type="float" />
-          <Property Name="CreationDate" Type="datetime" />
+          <Property Name="CreationDateRequest" Type="datetime" />
           <Property Name="EmployeeId" Type="int" Nullable="false" />
           <Property Name="InterbankCode" Type="nvarchar(max)" />
-          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="BankName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="CustomerName" Type="nvarchar(max)" />
           <Property Name="FirstSurname" Type="nvarchar(max)" />
           <Property Name="SecondSurname" Type="nvarchar(max)" />
@@ -255,10 +259,10 @@ warning 6002: The table/view 'sgsc.dbo.CreditRequestDocument' does not have a pr
           <Property Name="CenterName" Type="nvarchar" MaxLength="60" />
           <Property Name="WorkCenterStreet" Type="nvarchar" MaxLength="60" />
           <Property Name="WorkCenterColony" Type="nvarchar" MaxLength="60" />
-          <Property Name="InnerNumber" Type="int" />
-          <Property Name="OutsideNumber" Type="int" />
+          <Property Name="WorkCenterInnerNumber" Type="int" />
+          <Property Name="WorkCenterOutsideNumber" Type="int" />
           <Property Name="WorkCenterZipCode" Type="int" />
-          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="WorkCenterPhoneNumber" Type="nvarchar(max)" />
           <Property Name="ContactName" Type="nvarchar(max)" />
           <Property Name="ContactFirstSurname" Type="nvarchar(max)" />
           <Property Name="ContactSecondSurname" Type="nvarchar(max)" />
@@ -275,11 +279,12 @@ warning 6002: The table/view 'sgsc.dbo.DomicilePaymentsAuth' does not have a pri
           <Key>
             <PropertyRef Name="BankName" />
             <PropertyRef Name="CreditRequestId" />
+            <PropertyRef Name="PaymentsInterval" />
           </Key>
           <Property Name="Name" Type="nvarchar(max)" />
           <Property Name="FirstSurname" Type="nvarchar(max)" />
           <Property Name="PhoneNumber1" Type="nvarchar(max)" />
-          <Property Name="Amount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="PaymentAmount" Type="decimal" Precision="18" Scale="0" />
           <Property Name="InterbankCode" Type="nvarchar(max)" />
           <Property Name="CardNumber" Type="nvarchar(max)" />
           <Property Name="BankName" Type="nvarchar(max)" Nullable="false" />
@@ -290,6 +295,8 @@ warning 6002: The table/view 'sgsc.dbo.DomicilePaymentsAuth' does not have a pri
           <Property Name="EmployeeFirstSurname" Type="nvarchar(max)" />
           <Property Name="EmployeeSecondSurname" Type="nvarchar(max)" />
           <Property Name="CreditRequestId" Type="int" Nullable="false" />
+          <Property Name="PaymentsInterval" Type="int" Nullable="false" />
+          <Property Name="SecondSurname" Type="nvarchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'sgsc.dbo.LayoutPayment' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -521,7 +528,11 @@ warning 6002: The table/view 'sgsc.dbo.LayoutPayment' does not have a primary ke
     [CreditOpeningForm].[AmountRequested] AS [AmountRequested], 
     [CreditOpeningForm].[PaymentsInterval] AS [PaymentsInterval], 
     [CreditOpeningForm].[PaymentsAmount] AS [PaymentsAmount], 
-    [CreditOpeningForm].[CreditRequestId] AS [CreditRequestId]
+    [CreditOpeningForm].[CreditRequestId] AS [CreditRequestId], 
+    [CreditOpeningForm].[Name] AS [Name], 
+    [CreditOpeningForm].[FirstSurname] AS [FirstSurname], 
+    [CreditOpeningForm].[SecondSurname] AS [SecondSurname], 
+    [CreditOpeningForm].[TimePeriod] AS [TimePeriod]
     FROM [dbo].[CreditOpeningForm] AS [CreditOpeningForm]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="CreditRequestDocument" EntityType="Self.CreditRequestDocument" store:Type="Views" store:Schema="dbo">
@@ -530,10 +541,10 @@ warning 6002: The table/view 'sgsc.dbo.LayoutPayment' does not have a primary ke
     [CreditRequestDocument].[Amount] AS [Amount], 
     [CreditRequestDocument].[Purpose] AS [Purpose], 
     [CreditRequestDocument].[InterestRate] AS [InterestRate], 
-    [CreditRequestDocument].[CreationDate] AS [CreationDate], 
+    [CreditRequestDocument].[CreationDateRequest] AS [CreationDateRequest], 
     [CreditRequestDocument].[EmployeeId] AS [EmployeeId], 
     [CreditRequestDocument].[InterbankCode] AS [InterbankCode], 
-    [CreditRequestDocument].[Name] AS [Name], 
+    [CreditRequestDocument].[BankName] AS [BankName], 
     [CreditRequestDocument].[CustomerName] AS [CustomerName], 
     [CreditRequestDocument].[FirstSurname] AS [FirstSurname], 
     [CreditRequestDocument].[SecondSurname] AS [SecondSurname], 
@@ -551,10 +562,10 @@ warning 6002: The table/view 'sgsc.dbo.LayoutPayment' does not have a primary ke
     [CreditRequestDocument].[CenterName] AS [CenterName], 
     [CreditRequestDocument].[WorkCenterStreet] AS [WorkCenterStreet], 
     [CreditRequestDocument].[WorkCenterColony] AS [WorkCenterColony], 
-    [CreditRequestDocument].[InnerNumber] AS [InnerNumber], 
-    [CreditRequestDocument].[OutsideNumber] AS [OutsideNumber], 
+    [CreditRequestDocument].[WorkCenterInnerNumber] AS [WorkCenterInnerNumber], 
+    [CreditRequestDocument].[WorkCenterOutsideNumber] AS [WorkCenterOutsideNumber], 
     [CreditRequestDocument].[WorkCenterZipCode] AS [WorkCenterZipCode], 
-    [CreditRequestDocument].[PhoneNumber] AS [PhoneNumber], 
+    [CreditRequestDocument].[WorkCenterPhoneNumber] AS [WorkCenterPhoneNumber], 
     [CreditRequestDocument].[ContactName] AS [ContactName], 
     [CreditRequestDocument].[ContactFirstSurname] AS [ContactFirstSurname], 
     [CreditRequestDocument].[ContactSecondSurname] AS [ContactSecondSurname], 
@@ -571,7 +582,7 @@ warning 6002: The table/view 'sgsc.dbo.LayoutPayment' does not have a primary ke
     [DomicilePaymentsAuth].[Name] AS [Name], 
     [DomicilePaymentsAuth].[FirstSurname] AS [FirstSurname], 
     [DomicilePaymentsAuth].[PhoneNumber1] AS [PhoneNumber1], 
-    [DomicilePaymentsAuth].[Amount] AS [Amount], 
+    [DomicilePaymentsAuth].[PaymentAmount] AS [PaymentAmount], 
     [DomicilePaymentsAuth].[InterbankCode] AS [InterbankCode], 
     [DomicilePaymentsAuth].[CardNumber] AS [CardNumber], 
     [DomicilePaymentsAuth].[BankName] AS [BankName], 
@@ -581,7 +592,9 @@ warning 6002: The table/view 'sgsc.dbo.LayoutPayment' does not have a primary ke
     [DomicilePaymentsAuth].[EmployeeName] AS [EmployeeName], 
     [DomicilePaymentsAuth].[EmployeeFirstSurname] AS [EmployeeFirstSurname], 
     [DomicilePaymentsAuth].[EmployeeSecondSurname] AS [EmployeeSecondSurname], 
-    [DomicilePaymentsAuth].[CreditRequestId] AS [CreditRequestId]
+    [DomicilePaymentsAuth].[CreditRequestId] AS [CreditRequestId], 
+    [DomicilePaymentsAuth].[PaymentsInterval] AS [PaymentsInterval], 
+    [DomicilePaymentsAuth].[SecondSurname] AS [SecondSurname]
     FROM [dbo].[DomicilePaymentsAuth] AS [DomicilePaymentsAuth]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="LayoutPayment" EntityType="Self.LayoutPayment" store:Type="Views" store:Schema="dbo">
@@ -948,10 +961,10 @@ warning 6002: The table/view 'sgsc.dbo.LayoutPayment' does not have a primary ke
             <End Role="Document" EntitySet="Documents" />
             <End Role="CreditRequest" EntitySet="CreditRequests" />
           </AssociationSet>
-          <EntitySet Name="LayoutPayments" EntityType="sgscModel.LayoutPayment" />
           <EntitySet Name="CreditOpeningForms" EntityType="sgscModel.CreditOpeningForm" />
           <EntitySet Name="CreditRequestDocuments" EntityType="sgscModel.CreditRequestDocument" />
           <EntitySet Name="DomicilePaymentsAuths" EntityType="sgscModel.DomicilePaymentsAuth" />
+          <EntitySet Name="LayoutPayments" EntityType="sgscModel.LayoutPayment" />
         </EntityContainer>
         <Association Name="CreditRequestBankAccount">
           <End Type="sgscModel.CreditRequest" Role="CreditRequest" Multiplicity="*" />
@@ -1056,17 +1069,6 @@ warning 6002: The table/view 'sgsc.dbo.LayoutPayment' does not have a primary ke
           <End Type="sgscModel.Document" Role="Document" Multiplicity="*" />
           <End Type="sgscModel.CreditRequest" Role="CreditRequest" Multiplicity="0..1" />
         </Association>
-        <EntityType Name="LayoutPayment">
-          <Key>
-            <PropertyRef Name="Name" />
-          </Key>
-          <Property Name="FileNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Int32" />
-          <Property Name="PaymentDate" Type="DateTime" Precision="3" />
-          <Property Name="Amount" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="InterbankCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="CreditOpeningForm">
           <Key>
             <PropertyRef Name="PaymentsInterval" />
@@ -1078,11 +1080,15 @@ warning 6002: The table/view 'sgsc.dbo.LayoutPayment' does not have a primary ke
           <Property Name="PaymentsInterval" Type="Int32" Nullable="false" />
           <Property Name="PaymentsAmount" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="CreditRequestId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FirstSurname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecondSurname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TimePeriod" Type="Int32" />
         </EntityType>
         <EntityType Name="CreditRequestDocument">
           <Key>
             <PropertyRef Name="EmployeeId" />
-            <PropertyRef Name="Name" />
+            <PropertyRef Name="BankName" />
             <PropertyRef Name="Genre" />
             <PropertyRef Name="BirthDate" />
             <PropertyRef Name="CivilStatus" />
@@ -1095,10 +1101,10 @@ warning 6002: The table/view 'sgsc.dbo.LayoutPayment' does not have a primary ke
           <Property Name="Amount" Type="Double" />
           <Property Name="Purpose" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="InterestRate" Type="Double" />
-          <Property Name="CreationDate" Type="DateTime" Precision="3" />
+          <Property Name="CreationDateRequest" Type="DateTime" Precision="3" />
           <Property Name="EmployeeId" Type="Int32" Nullable="false" />
           <Property Name="InterbankCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BankName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CustomerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="FirstSurname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="SecondSurname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -1116,10 +1122,10 @@ warning 6002: The table/view 'sgsc.dbo.LayoutPayment' does not have a primary ke
           <Property Name="CenterName" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
           <Property Name="WorkCenterStreet" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
           <Property Name="WorkCenterColony" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
-          <Property Name="InnerNumber" Type="Int32" />
-          <Property Name="OutsideNumber" Type="Int32" />
+          <Property Name="WorkCenterInnerNumber" Type="Int32" />
+          <Property Name="WorkCenterOutsideNumber" Type="Int32" />
           <Property Name="WorkCenterZipCode" Type="Int32" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="WorkCenterPhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ContactName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ContactFirstSurname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ContactSecondSurname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -1134,11 +1140,12 @@ warning 6002: The table/view 'sgsc.dbo.LayoutPayment' does not have a primary ke
           <Key>
             <PropertyRef Name="BankName" />
             <PropertyRef Name="CreditRequestId" />
+            <PropertyRef Name="PaymentsInterval" />
           </Key>
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="FirstSurname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PhoneNumber1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Amount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="PaymentAmount" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="InterbankCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CardNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="BankName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -1149,6 +1156,19 @@ warning 6002: The table/view 'sgsc.dbo.LayoutPayment' does not have a primary ke
           <Property Name="EmployeeFirstSurname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="EmployeeSecondSurname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CreditRequestId" Type="Int32" Nullable="false" />
+          <Property Name="PaymentsInterval" Type="Int32" Nullable="false" />
+          <Property Name="SecondSurname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="LayoutPayment">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="FileNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="PaymentDate" Type="DateTime" Precision="3" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="InterbankCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1441,21 +1461,13 @@ warning 6002: The table/view 'sgsc.dbo.LayoutPayment' does not have a primary ke
       </EndProperty>
       <Condition ColumnName="CreditRequest_CreditRequestId" IsNull="false" />
     </AssociationSetMapping>
-          <EntitySetMapping Name="LayoutPayments">
-            <EntityTypeMapping TypeName="sgscModel.LayoutPayment">
-              <MappingFragment StoreEntitySet="LayoutPayment">
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="InterbankCode" ColumnName="InterbankCode" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="FileNumber" ColumnName="FileNumber" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="CreditOpeningForms">
             <EntityTypeMapping TypeName="sgscModel.CreditOpeningForm">
               <MappingFragment StoreEntitySet="CreditOpeningForm">
+                <ScalarProperty Name="TimePeriod" ColumnName="TimePeriod" />
+                <ScalarProperty Name="SecondSurname" ColumnName="SecondSurname" />
+                <ScalarProperty Name="FirstSurname" ColumnName="FirstSurname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="CreditRequestId" ColumnName="CreditRequestId" />
                 <ScalarProperty Name="PaymentsAmount" ColumnName="PaymentsAmount" />
                 <ScalarProperty Name="PaymentsInterval" ColumnName="PaymentsInterval" />
@@ -1477,10 +1489,10 @@ warning 6002: The table/view 'sgsc.dbo.LayoutPayment' does not have a primary ke
                 <ScalarProperty Name="ContactSecondSurname" ColumnName="ContactSecondSurname" />
                 <ScalarProperty Name="ContactFirstSurname" ColumnName="ContactFirstSurname" />
                 <ScalarProperty Name="ContactName" ColumnName="ContactName" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="WorkCenterPhoneNumber" ColumnName="WorkCenterPhoneNumber" />
                 <ScalarProperty Name="WorkCenterZipCode" ColumnName="WorkCenterZipCode" />
-                <ScalarProperty Name="OutsideNumber" ColumnName="OutsideNumber" />
-                <ScalarProperty Name="InnerNumber" ColumnName="InnerNumber" />
+                <ScalarProperty Name="WorkCenterOutsideNumber" ColumnName="WorkCenterOutsideNumber" />
+                <ScalarProperty Name="WorkCenterInnerNumber" ColumnName="WorkCenterInnerNumber" />
                 <ScalarProperty Name="WorkCenterColony" ColumnName="WorkCenterColony" />
                 <ScalarProperty Name="WorkCenterStreet" ColumnName="WorkCenterStreet" />
                 <ScalarProperty Name="CenterName" ColumnName="CenterName" />
@@ -1498,10 +1510,10 @@ warning 6002: The table/view 'sgsc.dbo.LayoutPayment' does not have a primary ke
                 <ScalarProperty Name="SecondSurname" ColumnName="SecondSurname" />
                 <ScalarProperty Name="FirstSurname" ColumnName="FirstSurname" />
                 <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="BankName" ColumnName="BankName" />
                 <ScalarProperty Name="InterbankCode" ColumnName="InterbankCode" />
                 <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
-                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="CreationDateRequest" ColumnName="CreationDateRequest" />
                 <ScalarProperty Name="InterestRate" ColumnName="InterestRate" />
                 <ScalarProperty Name="Purpose" ColumnName="Purpose" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
@@ -1512,6 +1524,8 @@ warning 6002: The table/view 'sgsc.dbo.LayoutPayment' does not have a primary ke
           <EntitySetMapping Name="DomicilePaymentsAuths">
             <EntityTypeMapping TypeName="sgscModel.DomicilePaymentsAuth">
               <MappingFragment StoreEntitySet="DomicilePaymentsAuth">
+                <ScalarProperty Name="SecondSurname" ColumnName="SecondSurname" />
+                <ScalarProperty Name="PaymentsInterval" ColumnName="PaymentsInterval" />
                 <ScalarProperty Name="CreditRequestId" ColumnName="CreditRequestId" />
                 <ScalarProperty Name="EmployeeSecondSurname" ColumnName="EmployeeSecondSurname" />
                 <ScalarProperty Name="EmployeeFirstSurname" ColumnName="EmployeeFirstSurname" />
@@ -1522,10 +1536,22 @@ warning 6002: The table/view 'sgsc.dbo.LayoutPayment' does not have a primary ke
                 <ScalarProperty Name="BankName" ColumnName="BankName" />
                 <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
                 <ScalarProperty Name="InterbankCode" ColumnName="InterbankCode" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="PaymentAmount" ColumnName="PaymentAmount" />
                 <ScalarProperty Name="PhoneNumber1" ColumnName="PhoneNumber1" />
                 <ScalarProperty Name="FirstSurname" ColumnName="FirstSurname" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LayoutPayments">
+            <EntityTypeMapping TypeName="sgscModel.LayoutPayment">
+              <MappingFragment StoreEntitySet="LayoutPayment">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="InterbankCode" ColumnName="InterbankCode" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="FileNumber" ColumnName="FileNumber" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

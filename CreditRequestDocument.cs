@@ -18,10 +18,10 @@ namespace SGSC
         public Nullable<double> Amount { get; set; }
         public string Purpose { get; set; }
         public Nullable<double> InterestRate { get; set; }
-        public Nullable<System.DateTime> CreationDate { get; set; }
+        public Nullable<System.DateTime> CreationDateRequest { get; set; }
         public int EmployeeId { get; set; }
         public string InterbankCode { get; set; }
-        public string Name { get; set; }
+        public string BankName { get; set; }
         public string CustomerName { get; set; }
         public string FirstSurname { get; set; }
         public string SecondSurname { get; set; }
@@ -39,10 +39,10 @@ namespace SGSC
         public string CenterName { get; set; }
         public string WorkCenterStreet { get; set; }
         public string WorkCenterColony { get; set; }
-        public Nullable<int> InnerNumber { get; set; }
-        public Nullable<int> OutsideNumber { get; set; }
+        public Nullable<int> WorkCenterInnerNumber { get; set; }
+        public Nullable<int> WorkCenterOutsideNumber { get; set; }
         public Nullable<int> WorkCenterZipCode { get; set; }
-        public string PhoneNumber { get; set; }
+        public string WorkCenterPhoneNumber { get; set; }
         public string ContactName { get; set; }
         public string ContactFirstSurname { get; set; }
         public string ContactSecondSurname { get; set; }

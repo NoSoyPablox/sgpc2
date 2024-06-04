@@ -20,5 +20,9 @@ namespace SGSC
         public int PaymentsInterval { get; set; }
         public Nullable<decimal> PaymentsAmount { get; set; }
         public int CreditRequestId { get; set; }
+        public string Name { get; set; }
+        public string FirstSurname { get; set; }
+        public string SecondSurname { get; set; }
+        public Nullable<int> TimePeriod { get; set; }
     }
 }
