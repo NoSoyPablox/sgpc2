@@ -221,7 +221,7 @@ namespace SGSC.Pages
             {
                 Filter = "PDF files (.pdf)|.pdf",
                 Title = "Guardar Documento de Solicitud de Crédito",
-                FileName = $"CreditRequestForm_{creditRequestDocument.FileNumber}_.pdf"
+                FileName = $"Solicitud de Crédito_{creditRequestDocument.FileNumber}_Pendiente de Firma.pdf"
             };
 
             bool? result = saveFileDialog.ShowDialog();
