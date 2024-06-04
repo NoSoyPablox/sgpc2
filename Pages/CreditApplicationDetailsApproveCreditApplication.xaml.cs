@@ -273,14 +273,7 @@ namespace SGSC.Pages
                     {
                         if (rbtAutorize.IsChecked == true)
                         {
-                            if (policies != totalPolicies)
-                            {
-                                MessageBox.Show("No se puede autorizar si no cumple con las politicas");
-                            }
-                            else
-                            {
-                                solicitud.Status = 4; // "Autorizado"
-                            }
+                            solicitud.Status = 4; // "Autorizado"
                         }
                         else if (rbtCorrect.IsChecked == true)
                         {
@@ -430,19 +423,28 @@ namespace SGSC.Pages
 
         public bool ValidateInputs()
         {
-            // Validar que al menos una política de crédito esté seleccionada
-            bool isCreditPolicySelected = false;
+            //get how many policies there are in total
+            int totalPolicies = 0;
+            foreach (var child in CreditPoliciesPanel.Children)
+            {
+                if (child is CheckBox cb)
+                {
+                    totalPolicies++;
+                }
+            }
+
+            int policies = 0;
             foreach (var child in CreditPoliciesPanel.Children)
             {
                 if (child is CheckBox cb && cb.IsChecked == true)
                 {
-                    isCreditPolicySelected = true;
-                    break;
+                    policies++;
                 }
             }
-            if (!isCreditPolicySelected)
+
+            if(rbtAutorize.IsChecked == true && policies != totalPolicies)
             {
-                lbErrorCreditPolicies.Content = "Debe seleccionar al menos una política de crédito.";
+                MessageBox.Show("Debe seleccionar todas las políticas de crédito para autorizar la solicitud.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
 
@@ -452,13 +454,29 @@ namespace SGSC.Pages
                 lbErrorDescription.Content = "El campo de observaciones no puede estar vacío.";
                 return false;
             }
+            else
+            {
+                return true;
+            }
 
-            return true;
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
             App.Current.MainFrame.Content = new HomePageCreditAnalyst();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var creditApplicacionDocumens = new CrediApplicationDocuments(requestId);
+            if (NavigationService != null)
+            {
+                NavigationService.Navigate(creditApplicacionDocumens);
+            }
+            else
+            {
+                ToastNotification notification = new ToastNotification("No se puede realizar la navegación en este momento. Por favor, inténtelo más tarde.", "Error");
+            }
         }
     }
 }

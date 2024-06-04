@@ -93,11 +93,11 @@ namespace SGSC.Pages
 
         private void BtnClicContinue(object sender, RoutedEventArgs e)
         {
-            var creditAprovePage = new CreditApplicationDetailsApproveCreditApplication(requestId);
 
-            if (NavigationService != null)
+            var creditApplicacionDocumens = new CrediApplicationDocuments(requestId);
+            if(NavigationService != null)
             {
-                NavigationService.Navigate(creditAprovePage);
+                NavigationService.Navigate(creditApplicacionDocumens);
             }
             else
             {
@@ -182,6 +182,19 @@ namespace SGSC.Pages
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
             App.Current.MainFrame.Content = new HomePageCreditAnalyst();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var creditApplicacionDocumens = new CrediApplicationDocuments(requestId);
+            if (NavigationService != null)
+            {
+                NavigationService.Navigate(creditApplicacionDocumens);
+            }
+            else
+            {
+                ToastNotification notification = new ToastNotification("No se puede realizar la navegación en este momento. Por favor, inténtelo más tarde.", "Error");
+            }
         }
     }
 }
