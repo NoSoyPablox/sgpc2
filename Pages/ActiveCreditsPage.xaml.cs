@@ -136,14 +136,14 @@ namespace SGSC.Pages
                     foreach (var item in activeCredits)
                     {
                         var efficiency = GetEfficiency(item.CreditRequestId);
-                        var pendingDebt = GetPendingDebt(item.CreditRequestId);
+                        //var pendingDebt = GetPendingDebt(item.CreditRequestId);
                         ActiveCredits.Add(new ActiveCredit
                         {
                             CreditPageNumber = item.FileNumber,
                             ClientFullName = item.Customer.FullName,
                             CreditPeriod = item.TimePeriod.HasValue ? item.TimePeriod.Value.ToString() : "N/A",
                             CreditAmount = $"$ {item.Amount}",
-                            CreditPendingDebt = $"$ {pendingDebt:F2}",
+                            CreditPendingDebt = $"Por calcular",
                             CreditEfficiency = $"{efficiency:F2}%",
                             CreditRequestId = item.CreditRequestId
                         });
