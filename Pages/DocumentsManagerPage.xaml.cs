@@ -123,12 +123,17 @@ namespace SGSC.Pages
             {
                 SaveFileDialog saveFileDialog = new SaveFileDialog
                 {
-                    FileName = document.FileName
+                    FileName = document.FileName,
+                    Filter = "PDF Files (*.pdf)|*.pdf" // Set the filter to save as PDF
                 };
 
                 if (saveFileDialog.ShowDialog() == true)
                 {
-                    File.WriteAllBytes(saveFileDialog.FileName, document.FileContent);
+                    using (FileStream fileStream = new FileStream(saveFileDialog.FileName, FileMode.Create))
+                    {
+                        fileStream.Write(document.FileContent, 0, document.FileContent.Length);
+                    }
+
                     MessageBox.Show("Documento descargado con éxito.");
                 }
             }
