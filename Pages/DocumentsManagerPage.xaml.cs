@@ -258,7 +258,7 @@ namespace SGSC.Pages
         private void GenerateDocumentDomicilePaymentsAuth(Document.DocumentTypes documentType)
         {
 
-            DomicilePaymentsAuth domicilePaymentsAuth = _context.DomicilePaymentsAuths.FirstOrDefault(crd => crd.CreditRequestId == creditRequestId);
+            DomicilePaymentsAuth domicilePaymentsAuth = _context.DomicilePaymentsAuths.FirstOrDefault(dad => dad.CreditRequestId == creditRequestId);
             if (domicilePaymentsAuth == null)
             {
                 MessageBox.Show("No se encontró la información necesaria para generar el documento.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);

@@ -73,6 +73,10 @@ namespace SGSC.Pages
             //if user session is analyst then activate button
             if (UserSession.Instance.Role == 2)
             {
+                tbStatus.Text = "Pendiente";
+                tbStatus.Visibility = Visibility.Hidden;
+                lbStatusFilter.Visibility = Visibility.Hidden;
+                
                 btnViewDetails.IsEnabled = true;
                 btnViewDetails.Visibility = Visibility.Visible;
             }
